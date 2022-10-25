@@ -9,16 +9,7 @@ export function SignUp(): JSX.Element {
   return(
     <div>
     <CustomHeader isLoggedIn={true} />
-    <Row>
-      <Col span={18}>
-        <AccountInfo/>
-        <AccountBar/>
-      </Col>
-      <Col span={6}>
-        <TrendingImages />
-        <TrendingTags />
-      </Col>
-    </Row>
+  <p> This is the sign up page :0</p>
   </div>
   )
 }
