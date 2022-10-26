@@ -33,7 +33,7 @@ function App () {
       {
         Username: username,
         Password: password,
-        Email: email,
+        Email: email
       }
     ])
   }
@@ -43,7 +43,7 @@ function App () {
     refreshPage()
   }
 
-  const updateUserName = name => {
+  const updateUserName = username => {
     Axios.put('http://localhost:3000/api/update', {
       Username: newUserName
     })
