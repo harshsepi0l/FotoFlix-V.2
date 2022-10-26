@@ -89,9 +89,9 @@ export class SignUp extends React.Component<SignUpProps, SignUpState>{
               <input type='text' name='fullName' onChange={this.handleChange} />
               {errors.personName.length > 0 && <span style={{ color: "red" }}>{errors.personName}</span>}
             </div>
-            <div className='userName'>
-              <label htmlFor="userName">Username</label>
-              <input type='text' name='userName' onChange={this.handleChange} />
+            <div className='username'>
+              <label htmlFor="username">Username</label>
+              <input type='text' name='username' onChange={this.handleChange} />
               {errors.username.length > 0 && <span style={{ color: "red" }}>{errors.username}</span>}
             </div>
           <div className='email'>
