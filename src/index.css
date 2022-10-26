@@ -1,0 +1,23 @@
+/* Define all variables */
+:root {
+  --darkpurple: #937DC2;
+  --midpurple: #C689C6;
+  --lightpurple: #A5A6F6;
+  --darkpink: #FFABE1;
+  --lightpink: #FFE6F7;
+  --white: #FFFFFF;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

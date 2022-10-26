@@ -1,0 +1,52 @@
+.Default-darkpurple {
+    background-color: var(--darkpurple);
+    border-color: var(--darkpurple);
+}
+
+.Default-darkpurple:hover,
+.Default-darkpurple:focus {
+    background-color: var(--darkpurple);
+    border-color: var(--darkpurple);
+}
+
+.Default-lightpurple {
+    background-color: var(--lightpurple);
+    border-color: var(--lightpurple);
+}
+
+.Default-lightpurple:hover,
+.Default-lightpurple:focus {
+    background-color: var(--darkpurple) !important;
+    border-color: var(--lightpurple);
+}
+
+.Default-white {
+    color: var(--darkpurple)
+}
+
+.Border-8 {
+    border-radius: 8px;
+}
+
+.Border-15 {
+    border-radius: 15px;
+}
+
+.Padding-20 {
+    padding: 20px;
+    background-color: var(--white);
+}
+
+.CustomSearch {
+    background-color: #F5F3FF;
+}
+
+.CustomSearch>input::placeholder,
+.CustomSearch>input::-ms-input-placeholder,
+.CustomSearch>input::-ms-input-placeholder {
+    color: var(--darkpurple);
+}
+
+.CustomSearch:hover {
+    background-color: var(--lightpink);
+}
