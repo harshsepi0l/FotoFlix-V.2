@@ -24,12 +24,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 
 app.post('/api/insert', (req,res) => {
-  const username = req.body.username
-  const email = req.body.email
-  const password = req.body.password
+  const Username = req.body.Username
+  const Email = req.body.Email
+  const Password = req.body.Password
 
-  const sqlInsert = "INSERT INTO flixers (username, email, password) VALUES (?,?,?)"
-  db.query(sqlInsert, [username, email, password], (err,result) => {
+  const sqlInsert = "INSERT INTO flixers (Username, Email, Password) VALUES (?,?,?)"
+  db.query(sqlInsert, [Username, Email, Password], (err,result) => {
     console.log(result)
   })
 })
