@@ -10,18 +10,20 @@ const db = mysql.createPool({
   database: 'flixers',
   password: 'Hxrsh295'
 })
+
+app.use(express.json());
+app.use(cors());
+
+
+app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/api/get',(req,res) => {
+    
   const sqlSelect = 'SELECT * FROM flixers'
 
   db.query(sqlSelect, (err,result) => {
     res.send(result)
   })
 })
-
-app.use(cors())
-app.use(express.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-
 
 app.post('/api/insert', (req,res) => {
   const Username = req.body.Username
@@ -31,7 +33,8 @@ app.post('/api/insert', (req,res) => {
   const sqlInsert = "INSERT INTO flixers (Username, Email, Password) VALUES (?,?,?)"
   db.query(sqlInsert, [Username, Email, Password], (err,result) => {
     console.log(result)
-  })
+  }
+  )
 })
 
 

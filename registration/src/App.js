@@ -6,10 +6,11 @@ function App () {
   const [username, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [usersList, setUsersList] = useState([])
   const [newUserName, setNewUserName] = useState('')
+  const [usersList, setUsersList] = useState([])
 
-  console.log(username, password);
+  
+  console.log(usersList.map);
 
   const refreshPage = () => {
     window.location.reload()
@@ -32,8 +33,8 @@ function App () {
       ...usersList,
       {
         Username: username,
-        Password: password,
-        Email: email
+        Email: email,
+        Password: password
       }
     ])
   }
@@ -52,44 +53,35 @@ function App () {
 
   return (
     <div className='App'>
-      <h1>React SQL Test App</h1>
+      <h1>FotoFlix Test Registration </h1>
 
       <div className='form'>
         
         <label>Username: </label>
-        <input
-          type='text'
-          name='username'
-          onChange={e => {
+        <input type='text' name='username' 
+        onChange={e => {
             setUserName(e.target.value)
           }}
         />
         <label>Email </label>
-        <input
-          type='text'
-          name='email'
-          onChange={e => {
+        <input type='text' name='email' 
+        onChange={e => {
             setEmail(e.target.value)
           }}
         />
         <label>Password: </label>
-        <input
-          type='text'
-          name='password'
+        <input type='text' name='password'
           onChange={e => {
             setPassword(e.target.value)
           }}
-        />
-        
-       
-        
+        />        
 
         <button onClick={submitLog}>Submit</button>
 
         {usersList.map(key => {
           return (
             <div className='users'>
-              <h1>{key.Name}</h1>
+              <h1>Username: {key.Username}</h1>
               <p>
                 UserName: {key.Username} | Email: {key.Email}{' '}
               </p>
@@ -100,19 +92,17 @@ function App () {
               >
                 Delete Account
               </button>
-              <input
-                type='text'
-                id='updateInput'
+              <input type='text' id='updateInput'
                 onChange={e => {
                   setNewUserName(e.target.value)
                 }}
               />
               <button
                 onClick={() => {
-                  updateUserName(key.Name)
+                  updateUserName(key.Username)
                 }}
               >
-                Update UserName
+                Update Username
               </button>
             </div>
           )
