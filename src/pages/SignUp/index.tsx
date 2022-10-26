@@ -8,10 +8,12 @@ interface SignUpProps {
   value?: any;
 }
 interface SignUpState {
+  personName: string,
   username: string,
   email: string,
   password: string,
   errors: {
+    personName: string,
     username: string,
     email: string,
     password: string
@@ -25,6 +27,9 @@ export class SignUp extends React.Component<SignUpProps, SignUpState>{
     const { name, value } = event.target;
     let errors = this.state.errors;
     switch (name) {
+      case 'personName':
+        errors.username = value.length < 1 ? 'Username must be at least 1 character long!' : '';
+        break;
       case 'username':
         errors.username = value.length < 5 ? 'Username must be 5 characters long!' : '';
         break;
@@ -57,10 +62,12 @@ export class SignUp extends React.Component<SignUpProps, SignUpState>{
   constructor(props: SignUpProps) {
     super(props);
     const initialState = {
+      personName: '',
       username: '',
       email: '',
       password: '',
       errors: {
+        personName: '',
         username: '',
         email: '',
         password: ''
@@ -77,12 +84,17 @@ export class SignUp extends React.Component<SignUpProps, SignUpState>{
         <div className='form-wrapper'>
           <h2>Sign Up</h2>
           <form onSubmit={this.handleSubmit} noValidate >
-            <div className='fullName'>
-              <label htmlFor="fullName">UserName</label>
+          <div className='fullName'>
+              <label htmlFor="fullName">Name</label>
               <input type='text' name='fullName' onChange={this.handleChange} />
+              {errors.personName.length > 0 && <span style={{ color: "red" }}>{errors.personName}</span>}
+            </div>
+            <div className='userName'>
+              <label htmlFor="userName">Username</label>
+              <input type='text' name='userName' onChange={this.handleChange} />
               {errors.username.length > 0 && <span style={{ color: "red" }}>{errors.username}</span>}
             </div>
-            <div className='email'>
+          <div className='email'>
               <label htmlFor="email">Email</label>
               <input type='email' name='email' onChange={this.handleChange} />
               {errors.email.length > 0 && <span style={{ color: "red" }}>{errors.email}</span>}
