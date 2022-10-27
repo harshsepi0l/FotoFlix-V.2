@@ -8,9 +8,8 @@ function App () {
   const [username, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [newUserName, setNewUserName] = useState('')
   const [usersList, setUsersList] = useState([])
-
+  const [newUsername, setNewUsername] = useState('')
   
   console.log(usersList.map);
 
@@ -26,8 +25,8 @@ function App () {
 
   const submitLog = () => {
     Axios.post('http://localhost:3000/api/insert', {
-      FirstName: firstname,
-      LastName: lastname,
+      Firstname: firstname,
+      Lastname: lastname,
       Username: username,
       Email: email,
       Password: password
@@ -36,7 +35,7 @@ function App () {
     setUsersList([
       ...usersList,
       {
-        FirstName: firstname,
+        Firstname: firstname,
         LastName: lastname,
         Username: username,
         Email: email,
@@ -45,21 +44,24 @@ function App () {
     ])
   }
 
-  const deleteAccount = username => {
-    Axios.delete(`http://localhost:3000/api/delete/${username}`)
+  const deleteAccount = Username => {
+    Axios.delete(`http://localhost:3000/api/delete/${Username}`)
     refreshPage()
   }
 
-  const updateUserName = username => {
-    Axios.put('http://localhost:3000/api/update', {
-      Username: newUserName
+  const updateUserName = firstname => {
+    Axios.put(`http://localhost:3000/api/update/`, {
+      
+      Username: username,
+      Firstname: newUsername,
     })
-    setNewUserName('')
+    
+    setNewUsername('')
   }
 
   return (
     <div className='App'>
-      <h1>FotoFlix Test Registration </h1>
+      <h1>FotoFlix Test Registration Form </h1>
 
       <div className='form'>
 
@@ -70,7 +72,7 @@ function App () {
           }}
         />
 
-<label>Lastname </label>
+      <label>Lastname </label>
         <input type='text' name='lastname' 
         onChange={e => {
             setLastname(e.target.value)
@@ -101,7 +103,7 @@ function App () {
         {usersList.map(key => {
           return (
             <div className='users'>
-              <h1>Hey!{key.FirstName} </h1>
+              <h1>Hey! {key.Firstname} </h1>
               <p>
                 UserName: {key.Username} | Email: {key.Email}{' '}
               </p>
@@ -114,12 +116,12 @@ function App () {
               </button>
               <input type='text' id='updateInput'
                 onChange={e => {
-                  setNewUserName(e.target.value)
+                  setNewUsername(e.target.value)
                 }}
               />
               <button
                 onClick={() => {
-                  updateUserName(key.Username)
+                  updateUserName(key.Firstname)
                 }}
               >
                 Update Username

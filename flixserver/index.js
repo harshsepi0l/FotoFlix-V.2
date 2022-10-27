@@ -49,9 +49,10 @@ app.delete('/api/delete/:Username', (req,res) => {
 
 app.put('/api/update', (req,res) => {
   const username = req.body.Username
-  const newUsername = req.body.newUsername
-  const sqlUpdate = 'UPDATE flixerinfo SET Username = ? WHERE Username = ?'
-  db.query(sqlUpdate, [newUsername, username], (err,result) => {
+  const firstname = req.body.Firstname
+  
+  const sqlUpdate = 'UPDATE flixerinfo SET Username = ? WHERE Firstname = ?'
+  db.query(sqlUpdate, [username,firstname], (err,result) => {
     if (err) console.log(err)
   })
 })
