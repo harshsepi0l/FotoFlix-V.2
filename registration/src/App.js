@@ -3,6 +3,8 @@ import './App.css'
 import Axios from 'axios'
 
 function App () {
+  const [firstname, setFirstname] = useState('')
+  const [lastname, setLastname] = useState('')
   const [username, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -24,6 +26,8 @@ function App () {
 
   const submitLog = () => {
     Axios.post('http://localhost:3000/api/insert', {
+      FirstName: firstname,
+      LastName: lastname,
       Username: username,
       Email: email,
       Password: password
@@ -32,6 +36,8 @@ function App () {
     setUsersList([
       ...usersList,
       {
+        FirstName: firstname,
+        LastName: lastname,
         Username: username,
         Email: email,
         Password: password
@@ -56,6 +62,20 @@ function App () {
       <h1>FotoFlix Test Registration </h1>
 
       <div className='form'>
+
+      <label>Firstname: </label>
+        <input type='text' name='firstname' 
+        onChange={e => {
+            setFirstname(e.target.value)
+          }}
+        />
+
+<label>Lastname </label>
+        <input type='text' name='lastname' 
+        onChange={e => {
+            setLastname(e.target.value)
+          }}
+        />
         
         <label>Username: </label>
         <input type='text' name='username' 
@@ -81,7 +101,7 @@ function App () {
         {usersList.map(key => {
           return (
             <div className='users'>
-              <h1>Username: {key.Username}</h1>
+              <h1>Hey!{key.FirstName} </h1>
               <p>
                 UserName: {key.Username} | Email: {key.Email}{' '}
               </p>
