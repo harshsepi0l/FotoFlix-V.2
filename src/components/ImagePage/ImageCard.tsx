@@ -6,7 +6,7 @@ function SingleImageCard(): JSX.Element {
   return (
     <Card
       hoverable
-      style={{ width: "200px", background: "var(--darkpurple)", color: "var(--white)" }}
+      style={{ width: "200px", background: "var(--darkpurple)", color: "var(--white)", alignItems: "center" }}
       cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
     >
       <Meta title="Europe Street beat" description="www.instagram.com" />

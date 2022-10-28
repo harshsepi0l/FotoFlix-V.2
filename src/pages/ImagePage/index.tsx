@@ -8,14 +8,14 @@ import { ImageCard } from "../../components/ImagePage/ImageCard";
 
 export function ImagePage(): JSX.Element {
   return (
-    <div>
+    <div style={{ backgroundColor: "var(--lightpink)" }}>
       <CustomHeader isLoggedIn={true} />
       <Row>
         <Col span={18}>
           <ImageCard/>
           <CommentSection />
         </Col>
-        <Col span={6}>
+        <Col span={6} >
           <TrendingImages />
           <TrendingTags />
         </Col>
