@@ -8,10 +8,10 @@ function App () {
   const [username, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [usersList, setUsersList] = useState([])
+  const [usersList, setUsersList] = useState([]);
   const [newUsername, setNewUsername] = useState('')
   
-  console.log(usersList.map);
+
 
   const refreshPage = () => {
     window.location.reload()
@@ -49,7 +49,7 @@ function App () {
     refreshPage()
   }
 
-  const updateUserName = firstname => {
+  const updateUserName = Firstname => {
     Axios.put(`http://localhost:3000/api/update/`, {
       
       Username: username,
