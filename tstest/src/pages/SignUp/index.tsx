@@ -90,7 +90,7 @@ export const SignUp = () => {
           }}
         />
 
-        <label>Lastname </label>
+        <label>Lastname: </label>
         <input
           type="text"
           name="lastname"
@@ -107,7 +107,7 @@ export const SignUp = () => {
             setUserName(e.target.value);
           }}
         />
-        <label>Email </label>
+        <label>Email: </label>
         <input
           type="text"
           name="email"
