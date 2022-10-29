@@ -72,7 +72,7 @@ export const SignUp =  () => {
           }}
         />
 
-      <label>Lastname </label>
+      <label>Lastname: </label>
         <input type='text' name='lastname' 
         onChange={e => {
             setLastname(e.target.value)
@@ -85,7 +85,7 @@ export const SignUp =  () => {
             setUserName(e.target.value)
           }}
         />
-        <label>Email </label>
+        <label>Email: </label>
         <input type='text' name='email' 
         onChange={e => {
             setEmail(e.target.value)
