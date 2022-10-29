@@ -8,7 +8,7 @@ const db = mysql.createPool({
   host: 'localhost',
   user: 'root',
   database: 'flixers',
-  password: 'Hxrsh295'
+  password: 'Mot+Mot=10'
 })
 
 
