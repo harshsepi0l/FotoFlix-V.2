@@ -49,13 +49,12 @@ export const SignUp =  () => {
     refreshPage()
   }
 
-  const updateUserName = (Firstname: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined) => {
+  const updateUserName = (firstname: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined) => {
     Axios.put(`http://localhost:3000/api/update/`, {
       
-      Username: username,
-      Firstname: newUsername,
+      Firstname: firstname,
+      Username: newUsername
     })
-    
     setNewUsername('')
   }
 
