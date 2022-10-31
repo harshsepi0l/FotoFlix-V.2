@@ -5,12 +5,12 @@ import { ImagePage } from "./pages/ImagePage";
 import { LandingPage } from "./pages/LandingPage";
 import { HomePage } from "./pages/HomePage";
 import { SignUp } from "./pages/SignUp";
-import { Login } from "./pages/Login";
+//import { Login } from "./pages/Login";
 
 function App() {
   return (
     <div className="App">
-      <Login />
+      <SignUp />
     </div>
   );
 }
