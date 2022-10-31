@@ -1,7 +1,14 @@
 import { Card, Col, Row } from "antd";
 import Meta from "antd/lib/card/Meta";
+import { Content } from "antd/lib/layout/layout";
 import { useState } from "react";
 
+interface CardProps {
+  title: string;
+  description: string;
+  image: any;
+  tags: string[];
+}
 function SingleImageCard(): JSX.Element {
   return (
     <Card
@@ -14,13 +21,12 @@ function SingleImageCard(): JSX.Element {
   );
 }
 
-function CardInfo(): JSX.Element {
+function CardInfo(props: CardProps): JSX.Element {
   return (
     <div className="site-card-border-less-wrapper">
-      <Card title="Card title" bordered={false} style={{ width: 300 }}>
-        <p>Card content</p>
-        <p>Card content</p>
-        <p>Card content</p>
+      <Card title={props.title} bordered={false} >
+        <p>{props.description}</p>
+        <p>{props.tags}</p>
       </Card>
     </div>
   );
@@ -34,7 +40,7 @@ export function ImageCard(): JSX.Element {
         <SingleImageCard />
       </Col>
       <Col flex={3}>
-        <CardInfo />
+        <CardInfo title="Demo Title" description={"abc"} image={undefined} tags={["dogs", "cats"]}/>
       </Col>
     </Row>
   )

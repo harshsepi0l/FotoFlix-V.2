@@ -19,7 +19,7 @@ export function CustomButton(props: ButtonProps): JSX.Element {
     props = { ...defaults, ...props };
 
     return (
-        <Button type={props.buttonType} className={`Default-${props.color} Border-${props.borderRadius}`}>
+        <Button type={props.buttonType} className={`Default-${props.color} Border-${props.borderRadius}`} >
             {props.title}
         </ Button >
     )

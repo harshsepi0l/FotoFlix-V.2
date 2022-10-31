@@ -1,3 +1,6 @@
+.mainHeader {
+    background-color: var(--darkpurple);
+}
 .Default-darkpurple {
     background-color: var(--darkpurple);
     border-color: var(--darkpurple);
