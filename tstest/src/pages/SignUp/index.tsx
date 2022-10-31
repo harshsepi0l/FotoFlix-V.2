@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./SignUp.css";
+import "./signUp.css";
 import Axios from "axios";
 
 export const SignUp = () => {

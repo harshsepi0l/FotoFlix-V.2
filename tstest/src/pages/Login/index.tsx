@@ -14,27 +14,27 @@ export function LoginList() {
 
   const refreshPage = window.location.reload();
 
+  useEffect(() => {
+    Axios.get("http://localhost:3000/api/get").then((response) => {
+      getUsersList(response.data);
+    });
+  }, []);
 
-useEffect(() => {
-  Axios.get("http://localhost:3000/api/get").then((response) => {
-    getUsersList(response.data);
-  });
-}, []);
-
-const submitLog = () => {
-  Axios.post("http://localhost:3000/api/insert", {
-    Username: username,
-    Password: password,
-  });
-
-  getUsersList([
-    ...usersList,
-    {
+  const submitLog = () => {
+    Axios.post("http://localhost:3000/api/insert", {
       Username: username,
       Password: password,
-    },
-  ]);
-};
+    });
+
+    getUsersList([
+      ...usersList,
+      {
+        Username: username,
+        Password: password,
+      },
+    ]);
+  };
+  /*
 usersList.map(
   (key: {
     Firstname:
@@ -102,3 +102,5 @@ export function Login(): JSX.Element {
       </div>
     </div>
   );
+*/
+}
