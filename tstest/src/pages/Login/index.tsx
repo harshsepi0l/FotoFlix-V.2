@@ -24,15 +24,16 @@ useEffect(() => {
 const submitLog = () => {
   Axios.post("http://localhost:3000/api/insert", {
     Username: username,
-    Password: password
+    Password: password,
   });
 
   getUsersList([
     ...usersList,
-    Username: username,
-    Password: password
-  ];
-  
+    {
+      Username: username,
+      Password: password,
+    },
+  ]);
 };
 usersList.map(
   (key: {
@@ -101,4 +102,3 @@ export function Login(): JSX.Element {
       </div>
     </div>
   );
-}
