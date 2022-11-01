@@ -7,7 +7,6 @@ import { TrendingTags } from "../../components/Common/TrendingTags";
 import { AccountBar } from "../../components/HomePage/AccountBar";
 import { AccountInfo } from "../../components/HomePage/AccountInfo";
 
-////////// FIX ERRORS HERE //////////
 export const Login = () => {
   const [username, checkUsername] = useState("");
   const [password, checkPassword] = useState("");
