@@ -1,5 +1,6 @@
 import { Col, Row } from "antd";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { CustomHeader } from "../../components/Common/CustomHeader";
 import { TrendingImages } from "../../components/Common/TrendingImages";
@@ -10,27 +11,26 @@ import { AccountInfo } from "../../components/HomePage/AccountInfo";
 export const Login = () => {
   const [username, checkUsername] = useState("");
   const [password, checkPassword] = useState("");
-  const [usersList, getUsersList] = useState<any>([]);
+  const [loginStatus, setLoginStatus] = useState("");
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    Axios.get("http://localhost:3000/api/get").then((response) => {
-      getUsersList(response.data);
-    });
-  }, []);
+  const sendToHomePage = () => {
+    // This will navigate to Login Page once user has logged in
+    navigate("/HomePage");
+  };
 
   const loginCheck = () => {
-    Axios.post("http://localhost:3001/insert", {
+    Axios.post("http://localhost:3000/api/login", {
       Username: username,
       Password: password,
+    }).then((response) => {
+      if (response.data.message) {
+        setLoginStatus(response.data.message);
+      } else {
+        setLoginStatus(response.data[0].Username);
+        sendToHomePage();
+      }
     });
-
-    getUsersList([
-      ...usersList,
-      {
-        Username: username,
-        Password: password,
-      },
-    ]);
   };
 
   return (
@@ -41,7 +41,7 @@ export const Login = () => {
       <div className="content">
         <div className="image"></div>
         <div className="form">
-          <div className="form-group">
+          <div className="login">
             <label htmlFor="username">Username: </label>
             <input
               type="text"
@@ -52,7 +52,7 @@ export const Login = () => {
               }}
             />
           </div>
-          <div className="form-group">
+          <div className="login">
             <label htmlFor="password">Password: </label>
             <input
               type="password"
@@ -65,8 +65,9 @@ export const Login = () => {
           </div>
         </div>
       </div>
-      <div className="footer">
+      <div className="login">
         <button type="button" className="btn" onClick={loginCheck} />
+        <h1>{loginStatus}</h1>
       </div>
     </div>
   );

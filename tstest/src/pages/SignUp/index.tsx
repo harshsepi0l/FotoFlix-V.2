@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./signUp.css";
 import Axios from "axios";
 
@@ -10,6 +11,12 @@ export const SignUp = () => {
   const [password, setPassword] = useState("");
   const [usersList, setUsersList] = useState<any>([]);
   const [newUsername, setNewUsername] = useState("");
+  const navigate = useNavigate();
+
+  const sendToLogin = () => {
+    // This will navigate to Login Page once user has signed up
+    navigate("/Login");
+  };
 
   const refreshPage = () => {
     window.location.reload();
@@ -40,6 +47,7 @@ export const SignUp = () => {
         Password: password,
       },
     ]);
+    sendToLogin();
   };
 
   const deleteAccount = (
