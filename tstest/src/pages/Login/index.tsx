@@ -7,12 +7,11 @@ import { TrendingTags } from "../../components/Common/TrendingTags";
 import { AccountBar } from "../../components/HomePage/AccountBar";
 import { AccountInfo } from "../../components/HomePage/AccountInfo";
 
-export function LoginList() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+////////// FIX ERRORS HERE //////////
+export const Login = () => {
+  const [username, checkUsername] = useState("");
+  const [password, checkPassword] = useState("");
   const [usersList, getUsersList] = useState<any>([]);
-
-  const refreshPage = window.location.reload();
 
   useEffect(() => {
     Axios.get("http://localhost:3000/api/get").then((response) => {
@@ -20,8 +19,8 @@ export function LoginList() {
     });
   }, []);
 
-  const submitLog = () => {
-    Axios.post("http://localhost:3000/api/insert", {
+  const loginCheck = () => {
+    Axios.post("http://localhost:3001/insert", {
       Username: username,
       Password: password,
     });
@@ -34,49 +33,7 @@ export function LoginList() {
       },
     ]);
   };
-  /*
-usersList.map(
-  (key: {
-    Firstname:
-      | string
-      | number
-      | boolean
-      | React.ReactElement<
-          any,
-          string | React.JSXElementConstructor<any>
-        >
-      | React.ReactFragment
-      | React.ReactPortal
-      | null
-      | undefined;
-    Username:
-      | string
-      | number
-      | boolean
-      | React.ReactElement<
-          any,
-          string | React.JSXElementConstructor<any>
-        >
-      | React.ReactFragment
-      | React.ReactPortal
-      | null
-      | undefined;
-    Email:
-      | string
-      | number
-      | boolean
-      | React.ReactElement<
-          any,
-          string | React.JSXElementConstructor<any>
-        >
-      | React.ReactFragment
-      | React.ReactPortal
-      | null
-      | undefined;
-  }) => {
 
-    ////////// FIX ERRORS HERE //////////
-export function Login(): JSX.Element {
   return (
     <div>
       <CustomHeader isLoggedIn={true} />
@@ -87,20 +44,31 @@ export function Login(): JSX.Element {
         <div className="form">
           <div className="form-group">
             <label htmlFor="username">Username: </label>
-            <input type="text" name="username" placeholder="username" />
+            <input
+              type="text"
+              name="username"
+              placeholder="username"
+              onChange={(e) => {
+                checkUsername(e.target.value);
+              }}
+            />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password: </label>
-            <input type="password" name="password" placeholder="password" />
+            <input
+              type="password"
+              name="password"
+              placeholder="password"
+              onChange={(e) => {
+                checkPassword(e.target.value);
+              }}
+            />
           </div>
         </div>
       </div>
       <div className="footer">
-        <button type="button" className="btn">
-          Login
-        </button>
+        <button type="button" className="btn" onClick={loginCheck} />
       </div>
     </div>
   );
-*/
-}
+};
