@@ -4,11 +4,11 @@ import { TrendingImages } from "../../components/Common/TrendingImages";
 import { TrendingTags } from "../../components/Common/TrendingTags";
 import { CommentSection } from "../../components/ImagePage/CommentSection";
 import { ImageCard } from "../../components/ImagePage/ImageCard";
-
+import "./index.css"
 
 export function ImagePage(): JSX.Element {
   return (
-    <div style={{ backgroundColor: "var(--lightpink)" }}>
+    <div className="Image-Page"> 
       <CustomHeader isLoggedIn={true} />
       <Row>
         <Col span={18}>

@@ -1,11 +1,4 @@
-.Image-Info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    width: 100%;
-    max-width: 600px;
-    
-    padding: 0 20px;
+.Card-Info {
+    background-color: var(--white);
+    size: 20px;
 }
