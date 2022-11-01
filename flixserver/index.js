@@ -4,6 +4,9 @@ const cors = require("cors");
 const app = express();
 const mysql = require("mysql2");
 
+const bcrypt = require("bcrypt"); // for hashing passwords
+const saltRounds = 10; // for hashing passwords
+
 const db = mysql.createPool({
 <<<<<<< HEAD
   host: 'localhost',
@@ -32,7 +35,7 @@ app.get("/api/get", (req, res) => {
   });
 });
 
-app.post("/api/insert", (req, res) => {
+app.post("/api/registration", (req, res) => {
   const Firstname = req.body.Firstname;
   const Lastname = req.body.Lastname;
   const Username = req.body.Username;
@@ -41,13 +44,19 @@ app.post("/api/insert", (req, res) => {
 
   const sqlInsert =
     "INSERT INTO flixerinfo (Firstname, Lastname, Username, Email, Password) VALUES (?,?,?,?,?)";
-  db.query(
-    sqlInsert,
-    [Firstname, Lastname, Username, Email, Password],
-    (err, result) => {
-      console.log(result);
+
+  bcrypt.hash(Password, saltRounds, (err, hash) => {
+    if (err) {
+      console.log(err);
     }
-  );
+    db.query(
+      sqlInsert,
+      [Firstname, Lastname, Username, Email, hash],
+      (err, result) => {
+        console.log(err);
+      }
+    );
+  });
 });
 
 app.delete("/api/delete/:Username", (req, res) => {
@@ -72,17 +81,22 @@ app.post("/api/login", (req, res) => {
   const username = req.body.Username;
   const password = req.body.Password;
 
-  const sqlSelect =
-    "SELECT * FROM flixerinfo WHERE Username = ? AND Password = ?";
-  db.query(sqlSelect, [username, password], (err, result) => {
+  const sqlSelect = "SELECT * FROM flixerinfo WHERE Username = ?";
+  db.query(sqlSelect, [username], (err, result) => {
     if (err) {
       res.send({ err: err });
     }
 
     if (result.length > 0) {
-      res.send(result);
+      bcrypt.compare(password, result[0].Password, (error, response) => {
+        if (response) {
+          res.send(result);
+        } else {
+          res.send({ message: "Wrong username/password combination!" });
+        }
+      });
     } else {
-      res.send({ message: "Wrong username/password combination!" });
+      res.send({ message: "User doesn't exist" });
     }
   });
 });

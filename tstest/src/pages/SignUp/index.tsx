@@ -30,7 +30,7 @@ export const SignUp = () => {
   }, []);
 
   const submitLog = () => {
-    Axios.post("http://localhost:3000/api/insert", {
+    Axios.post("http://localhost:3000/api/registration", {
       Firstname: firstname,
       Lastname: lastname,
       Username: username,
@@ -48,7 +48,7 @@ export const SignUp = () => {
         Password: password,
       },
     ]);
-    sendToLogin();
+    //  sendToLogin();
   };
 
   const deleteAccount = (
