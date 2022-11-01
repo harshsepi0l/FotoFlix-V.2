@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./signUp.css";
 import Axios from "axios";
@@ -13,8 +14,8 @@ export const SignUp = () => {
   const [newUsername, setNewUsername] = useState("");
   const navigate = useNavigate();
 
+  // This will navigate to Login Page once user has signed up
   const sendToLogin = () => {
-    // This will navigate to Login Page once user has signed up
     navigate("/Login");
   };
 
@@ -84,54 +85,69 @@ export const SignUp = () => {
   };
 
   return (
-    <div className="App">
-      <h1>FotoFlix Test Registration Form </h1>
+    <div className="Container">
+      <div className="App">
+        <h1 style={{ color: "#937DC2" }}>Sign up for a free account</h1>
+        <div className="SignUpContainer">
+          {/* This is a row */}
+          <div className="Column">
+            <div className="Row">
+              <div className="form">
+                <label>First name: </label>
+                <input
+                  type="text"
+                  name="firstname"
+                  onChange={(e) => {
+                    setFirstname(e.target.value);
+                  }}
+                />
 
-      <div className="form">
-        <label>Firstname: </label>
-        <input
-          type="text"
-          name="firstname"
-          onChange={(e) => {
-            setFirstname(e.target.value);
-          }}
-        />
+                <label> Last name: </label>
+                <input
+                  type="text"
+                  name="lastname"
+                  onChange={(e) => {
+                    setLastname(e.target.value);
+                  }}
+                />
+              </div>
+              {/* This is a column */}
+              <div className="Row">
+                <label>Username: </label>
+                <input
+                  type="text"
+                  name="username"
+                  onChange={(e) => {
+                    setUserName(e.target.value);
+                  }}
+                />
 
-        <label>Lastname: </label>
-        <input
-          type="text"
-          name="lastname"
-          onChange={(e) => {
-            setLastname(e.target.value);
-          }}
-        />
+                <label> Email: </label>
+                <input
+                  type="text"
+                  name="email"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+              </div>
+              <label>Password: </label>
+              <input
+                type="text"
+                name="password"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+            </div>
 
-        <label>Username: </label>
-        <input
-          type="text"
-          name="username"
-          onChange={(e) => {
-            setUserName(e.target.value);
-          }}
-        />
-        <label>Email: </label>
-        <input
-          type="text"
-          name="email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        <label>Password: </label>
-        <input
-          type="text"
-          name="password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
+            <NavLink onClick={sendToLogin} to={"/Login"}>
+              <p style={{ color: "#C689C6" }}>Already have an account?</p>
+            </NavLink>
+          </div>
 
-        <button onClick={submitLog}>Submit</button>
+          <button onClick={submitLog}>Register</button>
+        </div>
 
         {usersList.map(
           (key: {
