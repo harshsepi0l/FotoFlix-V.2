@@ -14,8 +14,8 @@ export const Login = () => {
   const [loginStatus, setLoginStatus] = useState("");
   const navigate = useNavigate();
 
+  // This will navigate to Login Page once user has logged in
   const sendToHomePage = () => {
-    // This will navigate to Login Page once user has logged in
     navigate("/HomePage");
   };
 
@@ -35,7 +35,6 @@ export const Login = () => {
 
   return (
     <div>
-      <CustomHeader isLoggedIn={true} />
       <p>This is the Login page</p>
       <div className="header">Login</div>
       <div className="content">

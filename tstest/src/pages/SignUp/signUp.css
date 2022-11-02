@@ -1,10 +1,36 @@
+body {
+  background-color: #ffe6f7;
+}
+
+.Container {
+  background-color: #fff;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  align-content: center;
+  max-width: 100%;
+  height: 100vh;
+  text-align: center;
+}
+
+.Row {
+  flex-direction: row;
+  align-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.Column {
+  flex-direction: column;
+}
+
 p,
 div {
   font-family: Lato;
 }
 
 .wrapper {
-  height: 97vh;
+  height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -19,7 +45,7 @@ div {
   width: 280px;
   max-width: 80%;
   min-width: 100px;
-  min-height: 400px;
+
   padding: 20px 40px;
   border-radius: 6px;
   box-shadow: 0px 8px 36px #222;
@@ -73,6 +99,7 @@ button {
   background-color: #a5a6f6;
   color: #fefefe;
 }
+
 button:hover {
   background-color: #937dc2;
   color: #fefefe;
