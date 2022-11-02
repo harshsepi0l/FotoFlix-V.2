@@ -28,7 +28,7 @@ export const Login = () => {
         setLoginStatus(response.data.message);
       } else {
         setLoginStatus(response.data[0].Username);
-        sendToHomePage();
+        // sendToHomePage();
       }
     });
   };
