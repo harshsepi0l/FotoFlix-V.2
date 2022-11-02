@@ -1,11 +1,38 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+
 const cors = require("cors");
 const app = express();
 const mysql = require("mysql2");
 
 const bcrypt = require("bcrypt"); // for hashing passwords
 const saltRounds = 10; // for hashing passwords
+
+app.use(express.json());
+app.use(
+  cors({
+    origin: ["http://localhost:3001/"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
+
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    key: "userId",
+    secret: "subscribe",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 60 * 60 * 24,
+    },
+  })
+);
 
 const db = mysql.createPool({
 <<<<<<< HEAD
@@ -24,9 +51,6 @@ const db = mysql.createPool({
 });
 >>>>>>> changed
 
-app.use(express.json());
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/api/get", (req, res) => {
   const sqlSelect = "SELECT * FROM flixerinfo";
 
@@ -90,6 +114,8 @@ app.post("/api/login", (req, res) => {
     if (result.length > 0) {
       bcrypt.compare(password, result[0].Password, (error, response) => {
         if (response) {
+          req.session.user = result;
+          console.log(req.session.user);
           res.send(result);
         } else {
           res.send({ message: "Wrong username/password combination!" });
