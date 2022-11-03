@@ -42,7 +42,7 @@ function CustomSearch(): JSX.Element {
     };
 
     return (
-        <div>
+        <div className="CustomSearchContainer">
             <Input
                 placeholder="Search"
                 allowClear
@@ -51,10 +51,14 @@ function CustomSearch(): JSX.Element {
                 className="Border-15 CustomSearch"
                 onChange={handleFilter}
             />
-            <div className="dataResult">
+            <div className="Border-15 DataResult">
                 {filteredData.slice(0, 15).map((value, key) => {
-                    return <a className="dataItem" href={value.link} target="_blank">
-                        <p> {value.title} </p>
+                    return <a className="DataItem" href={value.link} target="_blank">
+                        {filteredData.length !== 0 ? (
+                            <p> {value.title} </p>
+                        ) : (
+                            <p> No Value </p>
+                        )}
                     </a>
                 })}
             </div>

@@ -51,27 +51,37 @@
 }
 
 .CustomSearch:hover {
-    background-color: var(--lightpink);
+    background-color: var(--darkpurple);
 }
 
-.dataResult {
+.CustomSearchContainer .DataResult{
+    visibility: hidden;
+}
+
+.CustomSearchContainer:hover .DataResult {
+    visibility: visible;
+}
+.DataResult {
     margin-top: 5px;
-    background-color: var(--lightpink);
+    background-color: var(--darkpink);
     overflow: hidden;
     overflow-y: auto;
-    height: 200px;
+    height: auto;
+    max-height: 400px;
+    z-index: 100;
+    padding-top: 13px;
 }
 
-.dataResult::-webkit-scrollbar {
+.DataResult::-webkit-scrollbar {
     display: none;
 }
 
-.dataItem>p {
+.DataItem>p {
     padding: 5px;
     text-indent: 10px;
-    color: var(--darkpurple) !important
-}
-.dataItem>p:hover {
-    background-color: var(--darkpurple);
     color: var(--white) !important
+}
+.DataItem>p:hover {
+    background-color: var(--lightpink);
+    color: var(--darkpurple) !important
 }

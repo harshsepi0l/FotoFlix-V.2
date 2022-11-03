@@ -4,6 +4,7 @@ import { CustomCard } from "../../components/Common/CustomCard";
 import { CustomHeader } from "../../components/Common/CustomHeader";
 import { InfiniteScroll } from "../../components/Common/InfiniteScroll";
 import { RowImages } from "../../components/Common/RowImages";
+import "./index.css";
 
 const gutters: Record<string, number> = {};
 const vgutters: Record<string, number> = {};
@@ -21,7 +22,7 @@ const colCounts: Record<string, number> = {};
 
 export function LandingPage(): JSX.Element {
   return (
-    <div style={{ backgroundColor: "var(--lightpink)" }}>
+    <div className="LandingContainer">
       <CustomHeader isLoggedIn={true} />
       <Row>
         <Col span={6} order={4}>
