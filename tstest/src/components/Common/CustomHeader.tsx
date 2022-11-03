@@ -6,7 +6,8 @@ import { Input, Space } from 'antd';
 import { Avatar } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import "./index.css";
-import React from 'react';
+import React, { useState } from 'react';
+import data from "./Data.json";
 
 const { Search } = Input;
 
@@ -22,6 +23,24 @@ const suffix = (
 const onSearch = (value: string) => console.log(value);
 
 function CustomSearch(): JSX.Element {
+
+    const [filteredData, setFilteredData] = useState(data);
+    const [wordEntered, setWordEntered] = useState("");
+
+    const handleFilter = (event: { target: { value: any; }; }) => {
+        const searchWord = event.target.value;
+        setWordEntered(searchWord);
+        const newFilter = data.filter((value: { title: string; }) => {
+            return value.title.toLowerCase().includes(searchWord.toLowerCase());
+        });
+
+        if (searchWord === "") {
+            setFilteredData(data);
+        } else {
+            setFilteredData(newFilter);
+        }
+    };
+
     return (
         <div>
             <Input
@@ -30,7 +49,15 @@ function CustomSearch(): JSX.Element {
                 bordered={false}
                 suffix={suffix}
                 className="Border-15 CustomSearch"
+                onChange={handleFilter}
             />
+            <div className="dataResult">
+                {filteredData.slice(0, 15).map((value, key) => {
+                    return <a className="dataItem" href={value.link} target="_blank">
+                        <p> {value.title} </p>
+                    </a>
+                })}
+            </div>
         </div>
     )
 };

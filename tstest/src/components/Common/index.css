@@ -53,3 +53,25 @@
 .CustomSearch:hover {
     background-color: var(--lightpink);
 }
+
+.dataResult {
+    margin-top: 5px;
+    background-color: var(--lightpink);
+    overflow: hidden;
+    overflow-y: auto;
+    height: 200px;
+}
+
+.dataResult::-webkit-scrollbar {
+    display: none;
+}
+
+.dataItem>p {
+    padding: 5px;
+    text-indent: 10px;
+    color: var(--darkpurple) !important
+}
+.dataItem>p:hover {
+    background-color: var(--darkpurple);
+    color: var(--white) !important
+}
