@@ -3,17 +3,16 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
-const cors = require("cors");
 const app = express();
 const mysql = require("mysql2");
-
+const cors = require("cors");
 const bcrypt = require("bcrypt"); // for hashing passwords
-const saltRounds = 10; // for hashing passwords
+const saltRounds = 10;
 
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:3001/"],
+    origin: ["http://localhost:3000"],
     methods: ["GET", "POST"],
     credentials: true,
   })

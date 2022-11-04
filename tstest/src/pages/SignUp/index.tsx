@@ -22,13 +22,13 @@ export const SignUp = () => {
   const refreshPage = () => {
     window.location.reload();
   };
-  /*
+
   useEffect(() => {
     Axios.get("http://localhost:3000/api/get").then((response) => {
       setUsersList(response.data);
     });
   }, []);
-*/
+
   const submitLog = () => {
     Axios.post("http://localhost:3000/api/registration", {
       Firstname: firstname,
