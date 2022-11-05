@@ -45,8 +45,9 @@ export function ImageCard(): JSX.Element {
         {/* <CustomCard/> */}
       </Col>
       <Col span={16}>
-        <CardInfo title="Demo Title" description={"abc"} image={undefined} tags={["dogs", "cats"]} />
+        <CardInfo title="Demo Title" description={"abc"} image={undefined} tags={["#dogs", "#cats"]} />
       </Col>
     </Row>
   )
 }
+

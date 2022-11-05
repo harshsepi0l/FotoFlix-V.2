@@ -5,6 +5,7 @@ import { Avatar, Button, Comment, Form, Input, List, Tooltip } from 'antd';
 import moment from 'moment';
 
 // Allow user to put comment
+
 const { TextArea } = Input;
 
 interface CommentItem {
@@ -84,7 +85,7 @@ export function CommentSection(): JSX.Element {
           </ul>
         </InfiniteScroll >
       </div>
-      <PutComment/>
+      <PutComment />
     </div >
   )
 }
