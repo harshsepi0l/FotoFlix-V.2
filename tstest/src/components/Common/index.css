@@ -1,3 +1,6 @@
+.mainHeader {
+    background-color: var(--darkpurple);
+}
 .Default-darkpurple {
     background-color: var(--darkpurple);
     border-color: var(--darkpurple);
@@ -48,5 +51,37 @@
 }
 
 .CustomSearch:hover {
+    background-color: var(--darkpurple);
+}
+
+.CustomSearchContainer .DataResult{
+    visibility: hidden;
+}
+
+.CustomSearchContainer:hover .DataResult {
+    visibility: visible;
+}
+.DataResult {
+    margin-top: 5px;
+    background-color: var(--darkpink);
+    overflow: hidden;
+    overflow-y: auto;
+    height: auto;
+    max-height: 400px;
+    z-index: 100;
+    padding-top: 13px;
+}
+
+.DataResult::-webkit-scrollbar {
+    display: none;
+}
+
+.DataItem>p {
+    padding: 5px;
+    text-indent: 10px;
+    color: var(--white) !important
+}
+.DataItem>p:hover {
     background-color: var(--lightpink);
+    color: var(--darkpurple) !important
 }

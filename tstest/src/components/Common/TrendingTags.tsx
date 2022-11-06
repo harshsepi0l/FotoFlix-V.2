@@ -24,7 +24,8 @@ export function TrendingTags(): JSX.Element {
   };
   
   return (
-    <Card title="Trending Tags" >
+    <Card title="Trending Tags" 
+          style={{ textAlign: "center" }} >
       <div style={{
         height: 300, wordWrap: "break-word", overflowY: "scroll", scrollBehavior: "smooth"
       }}>

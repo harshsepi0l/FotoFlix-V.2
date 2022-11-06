@@ -25,7 +25,8 @@ export function TrendingImages(): JSX.Element {
   };
 
   return (
-    <Card title="Trending Images" >
+    <Card title="Trending Images"
+          style={{ textAlign: "center" }}>
       <div style={{
         height: 300, wordWrap: "break-word", overflowY: "scroll", scrollBehavior: "smooth"
       }}>
@@ -38,7 +39,7 @@ export function TrendingImages(): JSX.Element {
           < ul >
             {
               numbers.map(() => (
-                <CustomCard />
+                <CustomCard/>
             ))
             }
           </ul>
