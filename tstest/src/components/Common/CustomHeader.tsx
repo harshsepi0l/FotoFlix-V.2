@@ -58,6 +58,10 @@ function RightButtonsSection(): JSX.Element {
     <Row justify="end">
       <Col span={4}>
         <CustomButton
+          onClick={() => {
+            localStorage.removeItem("token");
+            window.location.reload();
+          }}
           buttonType={"default"}
           color={"white"}
           title={"Log Out"}
