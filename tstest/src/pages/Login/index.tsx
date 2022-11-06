@@ -1,6 +1,6 @@
 import { Col, Row } from "antd";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { CustomHeader } from "../../components/Common/CustomHeader";
 import { TrendingImages } from "../../components/Common/TrendingImages";
@@ -33,7 +33,7 @@ export const Login = () => {
         console.log(response.data);
         localStorage.setItem("token", response.data.token);
         setLoginStatus(true);
-        // sendToHomePage();
+        sendToHomePage();
       }
     });
   };
@@ -90,9 +90,6 @@ export const Login = () => {
       <div className="login">
         <button type="button" className="btn" onClick={loginCheck} />
       </div>
-      {loginStatus && (
-        <button onClick={userAuthenticated}> Check if Authenticated </button>
-      )}
     </div>
   );
 };
