@@ -1,7 +1,3 @@
 export function AccountBar(): JSX.Element {
-    return (
-      <div>
-        
-      </div>
-    )
-  }
+  return <div></div>;
+}
