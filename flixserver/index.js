@@ -9,10 +9,15 @@ const cors = require("cors");
 const bcrypt = require("bcrypt"); // for hashing passwords
 const saltRounds = 10;
 
+const jwt = require("jsonwebtoken");
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: [
+      "http://localhost:3000/Login",
+      "http://localhost:3001",
+      "http://localhost:3001/HomePage",
+    ],
     methods: ["GET", "POST"],
     credentials: true,
   })
@@ -90,6 +95,26 @@ app.delete("/api/delete/:Username", (req, res) => {
   });
 });
 
+const verifyJWT = (req, res, next) => {
+  const token = req.headers["x-access-token"];
+  if (!token) {
+    res.send("Yo, we need a token, please give it to us next time");
+  } else {
+    jwt.verify(token, "jwtSecret", (err, decoded) => {
+      if (err) {
+        res.json({ auth: false, message: "You failed to authenticate" });
+      } else {
+        req.userId = decoded.id;
+        next();
+      }
+    });
+  }
+};
+
+app.get("/isUserAuth", verifyJWT, (req, res) => {
+  res.send("You are authenticated");
+});
+
 app.put("/api/update", (req, res) => {
   const username = req.body.Username;
   const firstname = req.body.Firstname;
@@ -98,6 +123,14 @@ app.put("/api/update", (req, res) => {
   db.query(sqlUpdate, [username, firstname], (err, result) => {
     if (err) console.log(err);
   });
+});
+
+app.get("/api/login", (req, res) => {
+  if (req.session.user) {
+    res.send({ loggedIn: true, user: req.session.user });
+  } else {
+    res.send({ loggedIn: false });
+  }
 });
 
 app.post("/api/login", (req, res) => {
@@ -113,18 +146,26 @@ app.post("/api/login", (req, res) => {
     if (result.length > 0) {
       bcrypt.compare(password, result[0].Password, (error, response) => {
         if (response) {
+          const id = result[0].id; // id from database
+          const token = jwt.sign({ id }, "jwtSecret", {
+            expiresIn: 300,
+          });
           req.session.user = result;
-          console.log(req.session.user);
-          res.send(result);
+
+          res.json({ auth: true, token: token, result: result });
         } else {
-          res.send({ message: "Wrong username/password combination!" });
+          res.json({
+            auth: false,
+            message: "Wrong username/password combination!",
+          });
         }
       });
     } else {
-      res.send({ message: "User doesn't exist" });
+      res.json({ auth: false, message: "no user exists" });
     }
   });
 });
+
 app.listen(3000, () => {
   console.log("running on port 3000");
 });
