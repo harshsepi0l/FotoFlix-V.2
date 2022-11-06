@@ -1,6 +1,7 @@
 import { AndroidOutlined, AppleOutlined } from '@ant-design/icons';
 import { Tabs } from 'antd';
 import React from 'react';
+import "./index.css"
 
 // const Icon: { [text: string]: JSX.Element } = {
 //   "like": <LikeOutlined key="like" />,
@@ -17,16 +18,17 @@ import React from 'react';
 // )
 
 export function AccountBar(): JSX.Element {
-  var tabs[:string] = ["POSTS", "COMMENTS"];
+  let tabs: Array<string> = ["POSTS", "LIKED", "FAVOURITES", "SAVED"]
 
   return (
     <Tabs
+    className='AccountBar'
     defaultActiveKey="1"
     centered
-    items={new Array(3).fill("posts", "comments", "favorites").map((_, i) => {
+    items={tabs.map((_, i) => {
       const id = String(i + 1);
       return {
-        label: `Tab ${id}`,
+        label: `${tabs[i]}`,
         key: id,
         children: `Content of Tab Pane ${id}`,
       };

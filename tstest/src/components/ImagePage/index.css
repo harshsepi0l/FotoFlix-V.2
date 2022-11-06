@@ -1,4 +1,5 @@
 .Card-Info {
     background-color: var(--white);
     size: 20px;
+    height: 100%;
 }
