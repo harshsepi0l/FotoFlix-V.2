@@ -27,8 +27,8 @@ function SingleImageCard(): JSX.Element {
 
 function CardInfo(props: CardProps): JSX.Element {
   return (
-    <div className="Card-Info" style={{ backgroundColor: "var(--lightpurple)" }}>
-      <Card title={props.title} bordered={false} >
+    <div className="Card-Info">
+      <Card title={props.title} bordered={false} style={{ height: "100%"}}>
         <p>{props.description}</p>
         <p>{props.tags}</p>
       </Card>
@@ -39,7 +39,7 @@ function CardInfo(props: CardProps): JSX.Element {
 export function ImageCard(): JSX.Element {
 
   return (
-    <Row>
+    <Row align="stretch">
       <Col span={8}>
         <SingleImageCard />
         {/* <CustomCard/> */}

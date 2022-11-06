@@ -56,20 +56,25 @@
 
 .CustomSearchContainer .DataResult{
     visibility: hidden;
+    
 }
 
-.CustomSearchContainer:hover .DataResult {
+.CustomSearchContainer:hover .DataResult, 
+.CustomSearchContainer .ant-input-affix-wrapper-focused + .DataResult {
     visibility: visible;
 }
+
 .DataResult {
-    margin-top: 5px;
+    position: absolute;
     background-color: var(--darkpink);
     overflow: hidden;
     overflow-y: auto;
     height: auto;
     max-height: 400px;
+    width: 100%;
     z-index: 100;
     padding-top: 13px;
+    margin-top: 5px;
 }
 
 .DataResult::-webkit-scrollbar {
