@@ -30,6 +30,7 @@ export function CustomButton(props: ButtonProps): JSX.Element {
     <Button
       type={props.buttonType}
       className={`Default-${props.color} Border-${props.borderRadius}`}
+      onClick={props.onClick}
     >
       {props.title}
     </Button>
