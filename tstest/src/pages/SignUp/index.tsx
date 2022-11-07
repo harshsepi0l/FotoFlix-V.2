@@ -48,7 +48,6 @@ export const SignUp = () => {
         Password: password,
       },
     ]);
-    //  sendToLogin();
   };
 
   const deleteAccount = (

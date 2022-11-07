@@ -111,7 +111,7 @@ function RightButtonsSection(): JSX.Element {
         {isLoggedIn ? (
           <Avatar
             className="Avatar"
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+            src="https://www.publicdomainpictures.net/pictures/30000/velka/plain-white-background.jpg"
           />
         ) : (
           <Link to="/login">
