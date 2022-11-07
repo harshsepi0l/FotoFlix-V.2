@@ -106,7 +106,7 @@ function RightButtonsSection(): JSX.Element {
   };
 
   return (
-    <Row justify="end">
+    <Row justify="end" >
       <Col span={4}>
         {isLoggedIn ? (
           <Avatar
@@ -116,8 +116,8 @@ function RightButtonsSection(): JSX.Element {
         ) : (
           <Link to="/login">
             <CustomButton
-              buttonType={"primary"}
-              color={"darkpurple"}
+              buttonType={"default"}
+              color={"white"}
               title={"Login"}
             />
           </Link>
@@ -135,7 +135,7 @@ function RightButtonsSection(): JSX.Element {
           <Link to="/signup">
             <CustomButton
               buttonType={"primary"}
-              color={"darkpurple"}
+              color={"lightpurple"}
               title={"Sign Up"}
             />
           </Link>
