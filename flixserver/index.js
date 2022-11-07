@@ -156,6 +156,11 @@ app.post("/api/login", (req, res) => {
   });
 });
 
+app.set("view engline", "ejs");
+app.get("/api/upload", (req, res) => {
+  res.render("upload");
+});
+
 app.listen(3000, () => {
   console.log("running on port 3000");
 });
