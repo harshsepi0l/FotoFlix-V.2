@@ -1,42 +1,50 @@
 import { HeartOutlined, ContainerOutlined } from "@ant-design/icons";
-import { Tabs } from "antd";
+import { Col, Row, Tabs } from "antd";
 import React from "react";
+import { CustomHeader } from "../Common/CustomHeader";
+import { RowImages } from "../Common/RowImages";
 import "./index.css";
 
-// const Icon: { [text: string]: JSX.Element } = {
-//   "like": <LikeOutlined key="like" />,
-//   "dislike": <DislikeOutlined key="dislike" />,
-//   "popularity": <StarOutlined key="popularity" />,
-//   "tags": <TagsOutlined key="tags" />
-// }
 
-// return (
-//   <Space>
-//       {Icon[props.icon]}
-//       <div>{props.text}</div>
-//   </Space>
-// )
+function CardRow(): JSX.Element {
+  return (
+    <div className="LandingContainer">
+      <CustomHeader isLoggedIn={true} />
+      <Row>
+        <Col span={8} order={1}>
+          <RowImages />
+        </Col>
+        <Col span={8} order={2}>
+          <RowImages />
+        </Col>
+        <Col span={8} order={3}>
+          <RowImages />
+        </Col>
+      </Row>
+    </div>
+  )
+}
 
 export function AccountBar(): JSX.Element {
   let tabNames = ["POSTS", "FAVORITES"];
   return (
     <Tabs
-    defaultActiveKey="2"
-    centered
-    items={[ContainerOutlined, HeartOutlined].map((Icon, i) => {
-      const id = String(i + 1);
+      defaultActiveKey="2"
+      centered
+      items={[ContainerOutlined, HeartOutlined].map((Icon, i) => {
+        const id = String(i + 1);
 
-      return {
-        label: (
-          <span>
-            <Icon />
-            {tabNames[i]}
-          </span>
-        ),
-        key: id,
-        children: `Tab ${id}`,
-      };
-    })}
-  />
+        return {
+          label: (
+            <span>
+              <Icon />
+              {tabNames[i]}
+            </span>
+          ),
+          key: id,
+          children: `Tab ${id}`,
+        };
+      })}
+    />
   );
 }
