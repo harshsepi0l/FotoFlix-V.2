@@ -7,14 +7,14 @@ import { ChipsArray } from "./components/Tags";
 
 function App() {
   return (
-    // // <Router>
-    // //   <Routes>
-    // //     <Route path="/HomePage" element={<HomePage />} />
-    // //     <Route path="/Login" element={<Login />} />
-    // //     <Route path="/" element={<SignUp />} />
-    // //   </Routes>
-    // // </Router>
-    <ChipsArray />
+    <Router>
+      <Routes>
+        <Route path="/HomePage" element={<HomePage />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/" element={<LandingPage />} />
+      </Routes>
+    </Router>
   );
 }
 
