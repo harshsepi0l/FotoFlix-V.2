@@ -13,6 +13,7 @@ import data from "./Data.json";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "../../pages/Login";
 import { SignUp } from "../../pages/SignUp";
+import { ImageUpload } from "../../pages/ImageUpload";
 
 const { Search } = Input;
 
@@ -73,12 +74,27 @@ function CustomSearch(): JSX.Element {
 }
 
 function LeftSection(): JSX.Element {
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   return (
     <Row justify="start">
       <Space align="center">
         <Col span={4}>Fotoflix</Col>
       </Space>
+
       <Col span={4} offset={2}>
+        {isLoggedIn ? (
+          <Link to="/ImageUpload">Profile</Link>
+        ) : (
+          <Link to="/">Login</Link>
+        )}
         <CustomButton
           buttonType={"primary"}
           color={"darkpurple"}
