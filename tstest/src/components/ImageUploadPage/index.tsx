@@ -35,6 +35,10 @@ const ImageUpload: React.FC = () => (
     <br />
     <br />
     <ChipsArray />
+
+    <br />
+    <br />
+    <button> SUBMIT!</button>
   </div>
 );
 export default ImageUpload;
