@@ -106,7 +106,7 @@ function RightButtonsSection(): JSX.Element {
   };
 
   return (
-    <Row justify="end" >
+    <Row justify="end" align="middle" >
       <Col span={4}>
         {isLoggedIn ? (
           <Avatar
