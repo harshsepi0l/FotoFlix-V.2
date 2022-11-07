@@ -26,6 +26,7 @@ app.use(
 //app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+/*
 app.use(
   session({
     key: "userId",
@@ -37,7 +38,7 @@ app.use(
     },
   })
 );
-
+*/
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
@@ -115,13 +116,13 @@ app.put("/api/update", (req, res) => {
   });
 });
 
-app.get("/api/login", (req, res) => {
-  if (req.session.user) {
-    res.send({ loggedIn: true, user: req.session.user });
-  } else {
-    res.send({ loggedIn: false });
-  }
-});
+// app.get("/api/login", (req, res) => {
+//   if (req.session.user) {
+//     res.send({ loggedIn: true, user: req.session.user });
+//   } else {
+//     res.send({ loggedIn: false });
+//   }
+// });
 
 app.post("/api/login", (req, res) => {
   const username = req.body.Username;
@@ -140,7 +141,7 @@ app.post("/api/login", (req, res) => {
           const token = jwt.sign({ id }, "jwtSecret", {
             expiresIn: 300,
           });
-          req.session.user = result;
+          // req.session.user = result;
 
           res.json({ auth: true, token: token, result: result });
         } else {
