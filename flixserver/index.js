@@ -39,21 +39,11 @@ app.use(
 );
 
 const db = mysql.createPool({
-<<<<<<< HEAD
-  host: 'localhost',
-  user: 'root',
-  database: 'flixers',
-  password: 'Mot+Mot=10'
-})
-
-
-=======
   host: "localhost",
   user: "root",
   database: "flixers",
-  password: "Hxrsh295",
+  password: "runmommy",
 });
->>>>>>> changed
 
 app.get("/api/get", (req, res) => {
   const sqlSelect = "SELECT * FROM flixerinfo";
