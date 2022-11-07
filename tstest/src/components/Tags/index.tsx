@@ -12,10 +12,7 @@ const ListItem = styled("li")(({ theme }) => ({
 export const ChipsArray = () => {
   const [input, setInput] = React.useState("");
   const [chipData, setChipData] = React.useState<readonly ChipData[]>([
-    { key: 0, label: "Test1" },
-    { key: 1, label: "Test2" },
-    { key: 2, label: "Test3" },
-    { key: 4, label: "Test4" },
+    // How it works:  { key: 0, label: "Test1" }
   ]);
   const handleDelete = (chipToDelete: ChipData) => () => {
     setChipData((chips) =>

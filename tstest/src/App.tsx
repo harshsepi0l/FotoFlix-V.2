@@ -3,19 +3,18 @@ import "./App.css";
 import { HomePage } from "./pages/HomePage";
 import { Login } from "./pages/Login";
 import { SignUp } from "./pages/SignUp";
-import { LandingPage } from "./pages/LandingPage";
 import { ChipsArray } from "./components/Tags";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/HomePage" element={<HomePage />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/" element={<LandingPage />} />
-      </Routes>
-    </Router>
+    // // <Router>
+    // //   <Routes>
+    // //     <Route path="/HomePage" element={<HomePage />} />
+    // //     <Route path="/Login" element={<Login />} />
+    // //     <Route path="/" element={<SignUp />} />
+    // //   </Routes>
+    // // </Router>
+    <ChipsArray />
   );
 }
 
