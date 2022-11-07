@@ -9,15 +9,11 @@ import "./index.css";
 function CardRow(): JSX.Element {
   return (
     <div className="LandingContainer">
-      <CustomHeader isLoggedIn={true} />
       <Row>
-        <Col span={8} order={1}>
+        <Col span={12} order={1}>
           <RowImages />
         </Col>
-        <Col span={8} order={2}>
-          <RowImages />
-        </Col>
-        <Col span={8} order={3}>
+        <Col span={12} order={2}>
           <RowImages />
         </Col>
       </Row>
@@ -42,7 +38,7 @@ export function AccountBar(): JSX.Element {
             </span>
           ),
           key: id,
-          children: `Tab ${id}`,
+          children: <CardRow />,
         };
       })}
     />
