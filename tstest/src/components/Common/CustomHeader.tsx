@@ -115,7 +115,11 @@ function RightUserSection(): JSX.Element {
 interface isLoggedIn {
   isLoggedIn: boolean;
 }
+
 export function CustomHeader(props: isLoggedIn): JSX.Element {
+
+
+
   return (
     <div className="mainHeader Padding-20">
       <Row>
