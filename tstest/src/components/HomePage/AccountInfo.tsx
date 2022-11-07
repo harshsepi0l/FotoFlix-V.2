@@ -23,7 +23,7 @@ export function AccountInfo(): JSX.Element {
         </Col>
         <Col flex={5}>
           <Typography.Title editable level={2} className="HomePage-AccountInfo">
-            {user && user[0].Username}
+            {user[0].Username}
           </Typography.Title>
         </Col>
       </Row>
