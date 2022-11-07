@@ -4,6 +4,7 @@ import { HomePage } from "./pages/HomePage";
 import { Login } from "./pages/Login";
 import { SignUp } from "./pages/SignUp";
 import { ChipsArray } from "./components/Tags";
+import UploadImage  from "./components/ImageUploadPage";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
     // //     <Route path="/" element={<SignUp />} />
     // //   </Routes>
     // // </Router>
-    <ChipsArray />
+    <UploadImage />
   );
 }
 
