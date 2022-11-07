@@ -1,4 +1,4 @@
-import { AndroidOutlined, AppleOutlined } from "@ant-design/icons";
+import { HeartOutlined, ContainerOutlined } from "@ant-design/icons";
 import { Tabs } from "antd";
 import React from "react";
 import "./index.css";
@@ -18,5 +18,25 @@ import "./index.css";
 // )
 
 export function AccountBar(): JSX.Element {
-  return <div></div>;
+  let tabNames = ["POSTS", "FAVORITES"];
+  return (
+    <Tabs
+    defaultActiveKey="2"
+    centered
+    items={[ContainerOutlined, HeartOutlined].map((Icon, i) => {
+      const id = String(i + 1);
+
+      return {
+        label: (
+          <span>
+            <Icon />
+            {tabNames[i]}
+          </span>
+        ),
+        key: id,
+        children: `Tab ${id}`,
+      };
+    })}
+  />
+  );
 }
