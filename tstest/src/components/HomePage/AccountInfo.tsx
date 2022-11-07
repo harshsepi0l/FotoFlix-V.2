@@ -12,6 +12,7 @@ export function AccountInfo(): JSX.Element {
     });
   }, []);
 
+
   return (
     <div>
       <Row className="HomePage-Container">
@@ -22,8 +23,9 @@ export function AccountInfo(): JSX.Element {
           />
         </Col>
         <Col flex={5}>
-          <Typography.Title editable level={2} className="HomePage-AccountInfo">
+          <Typography.Title level={2} className="HomePage-AccountInfo">
             {user && user[0].Username}
+            {/* {editableStr} */}
           </Typography.Title>
         </Col>
       </Row>
