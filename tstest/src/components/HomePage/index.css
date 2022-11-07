@@ -49,3 +49,8 @@ html {
 .ant-typography-expand:hover, .ant-typography-edit:hover, .ant-typography-copy:hover {
     color: var(--lightpurple);
 }
+
+.ant-tabs-tab-btn:focus, .ant-tabs-tab-remove:focus
+.ant-tabs-tab-btn:active, .ant-tabs-tab-remove:active {
+    color: var(--darkpurple);
+}

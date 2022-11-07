@@ -1,115 +1,225 @@
-import React from "react";
-import './signUp.css';
+import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "./signUp.css";
+import Axios from "axios";
 
-const Regex = RegExp(/^\s?[A-Z0–9]+[A-Z0–9._+-]{0,}@[A-Z0–9._+-]+\.[A-Z0–9]{2,4}\s?$/i);
+export const SignUp = () => {
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [usersList, setUsersList] = useState<any>([]);
+  const [newUsername, setNewUsername] = useState("");
+  const navigate = useNavigate();
 
-interface SignUpProps {
-  name?: any;
-  value?: any;
-}
-interface SignUpState {
-  personName: string,
-  username: string,
-  email: string,
-  password: string,
-  errors: {
-    personName: string,
-    username: string,
-    email: string,
-    password: string
-  }
-}
+  // This will navigate to Login Page once user has signed up
+  const sendToLogin = () => {
+    navigate("/Login");
+  };
 
-export class SignUp extends React.Component<SignUpProps, SignUpState>{
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
-  handleChange = (event: any) => {
-    event.preventDefault();
-    const { name, value } = event.target;
-    let errors = this.state.errors;
-    switch (name) {
-      case 'personName':
-        errors.username = value.length < 1 ? 'Username must be at least 1 character long!' : '';
-        break;
-      case 'username':
-        errors.username = value.length < 5 ? 'Username must be 5 characters long!' : '';
-        break;
-      case 'email':
-        errors.email = Regex.test(value) ? '' : 'Email is not valid!';
-        break;
-      case 'password':
-        errors.password = value.length < 8 ? 'Password must be eight characters long!' : '';
-        break;
-      default:
-        break;
-    }
-    this.setState(Object.assign(this.state, { errors, [name]: value }));
-    console.log(this.state.errors);
-  }
+  useEffect(() => {
+    Axios.get("http://localhost:3000/api/get").then((response) => {
+      setUsersList(response.data);
+    });
+  }, []);
 
-  handleSubmit = (event: any) => {
-    event.preventDefault();
-    let validity = true;
-    Object.values(this.state.errors).forEach(
-      (val) => val.length > 0 && (validity = false)
-    );
-    if (validity == true) {
-      console.log("Registering can be done");
-    } else {
-      console.log("You cannot be registered!!!")
-    }
-  }
+  const submitLog = () => {
+    Axios.post("http://localhost:3000/api/registration", {
+      Firstname: firstname,
+      Lastname: lastname,
+      Username: username,
+      Email: email,
+      Password: password,
+    });
 
-  constructor(props: SignUpProps) {
-    super(props);
-    const initialState = {
-      personName: '',
-      username: '',
-      email: '',
-      password: '',
-      errors: {
-        personName: '',
-        username: '',
-        email: '',
-        password: ''
-      }
-    }
-    this.state = initialState;
-    this.handleChange = this.handleChange.bind(this);
-  }
+    setUsersList([
+      ...usersList,
+      {
+        Firstname: firstname,
+        LastName: lastname,
+        Username: username,
+        Email: email,
+        Password: password,
+      },
+    ]);
+    //  sendToLogin();
+  };
 
-  render() {
-    const { errors } = this.state
-    return (
-      <div className='wrapper'>
-        <div className='form-wrapper'>
-          <h2>Sign Up</h2>
-          <form onSubmit={this.handleSubmit} noValidate >
-          <div className='fullName'>
-              <label htmlFor="fullName">Name</label>
-              <input type='text' name='fullName' onChange={this.handleChange} />
-              {errors.personName.length > 0 && <span style={{ color: "red" }}>{errors.personName}</span>}
+  const deleteAccount = (
+    Username:
+      | string
+      | number
+      | boolean
+      | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+      | React.ReactFragment
+      | React.ReactPortal
+      | null
+      | undefined
+  ) => {
+    Axios.delete(`http://localhost:3000/api/delete/${Username}`);
+    refreshPage();
+  };
+
+  const updateUserName = (
+    firstname:
+      | string
+      | number
+      | boolean
+      | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+      | React.ReactFragment
+      | React.ReactPortal
+      | null
+      | undefined
+  ) => {
+    Axios.put(`http://localhost:3000/api/update/`, {
+      Firstname: firstname,
+      Username: newUsername,
+    });
+    setNewUsername("");
+  };
+
+  return (
+    <div className="Container">
+      <div className="App">
+        <h1 style={{ color: "#937DC2" }}>Sign up for a free account</h1>
+        <div className="SignUpContainer">
+          {/* This is a row */}
+          <div className="Column">
+            <div className="Row">
+              <div className="form">
+                <label>First name: </label>
+                <input
+                  type="text"
+                  name="firstname"
+                  onChange={(e) => {
+                    setFirstname(e.target.value);
+                  }}
+                />
+
+                <label> Last name: </label>
+                <input
+                  type="text"
+                  name="lastname"
+                  onChange={(e) => {
+                    setLastname(e.target.value);
+                  }}
+                />
+              </div>
+              {/* This is a column */}
+              <div className="Row">
+                <label>Username: </label>
+                <input
+                  type="text"
+                  name="username"
+                  onChange={(e) => {
+                    setUserName(e.target.value);
+                  }}
+                />
+
+                <label> Email: </label>
+                <input
+                  type="text"
+                  name="email"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+              </div>
+              <label>Password: </label>
+              <input
+                type="text"
+                name="password"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
             </div>
-            <div className='username'>
-              <label htmlFor="username">Username</label>
-              <input type='text' name='username' onChange={this.handleChange} />
-              {errors.username.length > 0 && <span style={{ color: "red" }}>{errors.username}</span>}
-            </div>
-          <div className='email'>
-              <label htmlFor="email">Email</label>
-              <input type='email' name='email' onChange={this.handleChange} />
-              {errors.email.length > 0 && <span style={{ color: "red" }}>{errors.email}</span>}
-            </div>
-            <div className='password'>
-              <label htmlFor="password">Password</label>
-              <input type='password' name='password' onChange={this.handleChange} />
-              {errors.password.length > 0 && <span style={{ color: "red" }}>{errors.password}</span>}
-            </div>
-            <div className='submit'>
-              <button>Register Me</button>
-            </div>
-          </form>
+
+            <NavLink onClick={sendToLogin} to={"/Login"}>
+              <p style={{ color: "#C689C6" }}>Already have an account?</p>
+            </NavLink>
+          </div>
+
+          <button onClick={submitLog}>Register</button>
         </div>
+
+        {usersList.map(
+          (key: {
+            Firstname:
+              | string
+              | number
+              | boolean
+              | React.ReactElement<
+                  any,
+                  string | React.JSXElementConstructor<any>
+                >
+              | React.ReactFragment
+              | React.ReactPortal
+              | null
+              | undefined;
+            Username:
+              | string
+              | number
+              | boolean
+              | React.ReactElement<
+                  any,
+                  string | React.JSXElementConstructor<any>
+                >
+              | React.ReactFragment
+              | React.ReactPortal
+              | null
+              | undefined;
+            Email:
+              | string
+              | number
+              | boolean
+              | React.ReactElement<
+                  any,
+                  string | React.JSXElementConstructor<any>
+                >
+              | React.ReactFragment
+              | React.ReactPortal
+              | null
+              | undefined;
+          }) => {
+            return (
+              <div className="users">
+                <h1>Hey! {key.Firstname} </h1>
+                <p>
+                  UserName: {key.Username} | Email: {key.Email}{" "}
+                </p>
+                <button
+                  onClick={() => {
+                    deleteAccount(key.Username);
+                  }}
+                >
+                  Delete Account
+                </button>
+                <input
+                  type="text"
+                  id="updateInput"
+                  onChange={(e) => {
+                    setNewUsername(e.target.value);
+                  }}
+                />
+                <button
+                  onClick={() => {
+                    updateUserName(key.Firstname);
+                  }}
+                >
+                  Update Username
+                </button>
+              </div>
+            );
+          }
+        )}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
