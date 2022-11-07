@@ -109,10 +109,7 @@ function RightButtonsSection(): JSX.Element {
     <Row justify="end">
       <Col span={4}>
         {isLoggedIn ? (
-          <Avatar
-            className="Avatar"
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-          />
+          <Avatar className="Avatar" src="" />
         ) : (
           <Link to="/login">
             <CustomButton
