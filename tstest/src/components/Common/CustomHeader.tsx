@@ -91,24 +91,55 @@ function LeftSection(): JSX.Element {
 
 function RightButtonsSection(): JSX.Element {
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("token") !== null) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    navigate("/");
+  };
 
   return (
     <Row justify="end">
       <Col span={4}>
-        <CustomButton
-          buttonType={"primary"}
-          color={"lightpurple"}
-          title={"Login"}
-          onClick={() => navigate("/Login")}
-        />
+        {isLoggedIn ? (
+          <Avatar
+            className="Avatar"
+            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+          />
+        ) : (
+          <Link to="/login">
+            <CustomButton
+              buttonType={"primary"}
+              color={"darkpurple"}
+              title={"Login"}
+            />
+          </Link>
+        )}
       </Col>
       <Col span={4}>
-        <CustomButton
-          buttonType={"primary"}
-          color={"lightpurple"}
-          title={"Sign Up"}
-          onClick={() => navigate("/SignUp")}
-        />
+        {isLoggedIn ? (
+          <CustomButton
+            buttonType={"primary"}
+            color={"darkpurple"}
+            title={"Logout"}
+            onClick={logout}
+          />
+        ) : (
+          <Link to="/signup">
+            <CustomButton
+              buttonType={"primary"}
+              color={"darkpurple"}
+              title={"Sign Up"}
+            />
+          </Link>
+        )}
       </Col>
     </Row>
   );
