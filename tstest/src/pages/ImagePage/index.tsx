@@ -4,22 +4,22 @@ import { TrendingImages } from "../../components/Common/TrendingImages";
 import { TrendingTags } from "../../components/Common/TrendingTags";
 import { CommentSection } from "../../components/ImagePage/CommentSection";
 import { ImageCard } from "../../components/ImagePage/ImageCard";
-import "./index.css"
+import "./index.css";
 
 export function ImagePage(): JSX.Element {
   return (
-    <div className="Image-Page"> 
+    <div className="Image-Page">
       <CustomHeader isLoggedIn={true} />
       <Row>
         <Col span={18}>
-          <ImageCard/>
+          <ImageCard />
           <CommentSection />
         </Col>
-        <Col span={6} >
+        <Col span={6}>
           <TrendingImages />
           <TrendingTags />
         </Col>
       </Row>
     </div>
-  )
+  );
 }

@@ -73,13 +73,24 @@ function CustomSearch(): JSX.Element {
 }
 
 function LeftSection(): JSX.Element {
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   return (
     <Row justify="start">
       <Space align="center">
         <Col span={4}>Fotoflix</Col>
       </Space>
+
       <Col span={4} offset={2}>
         <CustomButton
+          onClick={() => navigate("/ImagesFolder")}
           buttonType={"primary"}
           color={"darkpurple"}
           title={"New Post"}

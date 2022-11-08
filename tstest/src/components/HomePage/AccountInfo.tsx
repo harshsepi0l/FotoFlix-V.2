@@ -12,7 +12,6 @@ export function AccountInfo(): JSX.Element {
     });
   }, []);
 
-
   return (
     <div>
       <Row className="HomePage-Container">
