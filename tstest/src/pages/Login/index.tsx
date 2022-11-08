@@ -65,9 +65,10 @@ export const Login = () => {
   };
 
   return (
-    <div>
-      <p>This is the Login page</p>
-      <div className="header">Login</div>
+    <div className="Container">
+      <div className="App">
+      <p style={{ color: "#937DC2", fontSize: 24 }} >Login Form</p>
+    
       <div className="content">
         <div className="image"></div>
         <div className="form">
@@ -99,7 +100,7 @@ export const Login = () => {
         </div>
         <br />
         <NavLink onClick={sendToSignUp} to={"/SignUp"}>
-          <p style={{ color: "#C689C6" }}>Don’t have an account?</p>
+          <p style={{ color: "#C689C6" }}>Don't have an account?</p>
         </NavLink>
       </div>
       <div className="login">
@@ -110,6 +111,7 @@ export const Login = () => {
           onClick={loginCheck}
         />
       </div>
-    </div>
+      </div>
+      </div>
   );
 };
