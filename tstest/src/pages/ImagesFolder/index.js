@@ -8,8 +8,10 @@ export default function ImagesForm() {
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     previewFile(file);
+    setSelectedFile(file);
+    setFileInputState(e.target.value);
   };
-  const previewFile = () => {
+  const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {

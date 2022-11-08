@@ -8,14 +8,14 @@ import ImagesForm from "./pages/ImagesFolder";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/HomePage" element={<HomePage />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/" element={<SignUp />} />
-      </Routes>
-    </Router>
-    // <ImagesForm />
+    // <Router>
+    //   <Routes>
+    //     <Route path="/HomePage" element={<HomePage />} />
+    //     <Route path="/Login" element={<Login />} />
+    //     <Route path="/" element={<SignUp />} />
+    //   </Routes>
+    // </Router>
+    <ImagesForm />
   );
 }
 
