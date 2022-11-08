@@ -1,16 +1,20 @@
 const express = require("express");
+const app = express();
+const { cloudinary } = require("./utils/cloudinary");
+
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
-const app = express();
 const mysql = require("mysql2");
 const cors = require("cors");
 const bcrypt = require("bcrypt"); // for hashing passwords
 const saltRounds = 10;
 
 const jwt = require("jsonwebtoken");
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
+
 app.use(
   cors({
     origin: [
@@ -156,12 +160,32 @@ app.post("/api/login", (req, res) => {
     }
   });
 });
-
-app.set("view engline", "ejs");
-app.get("/api/upload", (req, res) => {
-  res.render("upload");
+//IMAGE UPLOADS
+app.get("/api/images", async (req, res) => {
+  const { resources } = await cloudinary.search
+    .expression("folder:flixerimages")
+    .sort_by("public_id", "desc")
+    .max_results(30)
+    .execute();
+  const publicIds = resources.map((file) => file.public_id);
+  res.send(publicIds);
 });
 
+app.post("/api/upload", async (req, res) => {
+  try {
+    const fileStr = req.body.data;
+    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+      upload_preset: "flixerimages",
+    });
+    console.log(uploadedResponse);
+    res.json({ msg: "YAYAYAY" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ err: "something went wrong" });
+  }
+});
+
+const PORT = process.env.PORT || 3000;
 app.listen(3000, () => {
-  console.log("running on port 3000");
+  console.log("running on port " + PORT);
 });
