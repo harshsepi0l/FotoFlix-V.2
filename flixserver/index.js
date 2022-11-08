@@ -15,6 +15,30 @@ const jwt = require("jsonwebtoken");
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
+/*
+// CSRF HTTP ONLY COOKIE
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+const csrfProtection = csrf({ cookie: true });
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    secret: "flixersecret",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      secure: true,
+      httpOnly: true,
+    },
+  })
+);
+
+app.get("/api/Login", csrfProtection, function (req, res) {
+  res.render("Login", { csrfToken: req.csrfToken() });
+});
+*/
+
 app.use(
   cors({
     origin: [
@@ -82,20 +106,12 @@ app.post("/api/registration", (req, res) => {
   });
 });
 
-app.delete("/api/delete/:Username", (req, res) => {
-  const username = req.params.Username;
-  const sqlDelete = "DELETE FROM flixerinfo WHERE Username = ?";
-  db.query(sqlDelete, username, (err, result) => {
-    if (err) console.log(err);
-  });
-});
-
 const verifyJWT = (req, res, next) => {
   const token = req.headers["x-access-token"];
   if (!token) {
     res.send("Yo, we need a token, please give it to us next time");
   } else {
-    jwt.verify(token, "jwtSecret", (err, decoded) => {
+    jwt.verify(token, "flixuser", (err, decoded) => {
       if (err) {
         res.json({ auth: false, message: "You failed to authenticate" });
       } else {
@@ -142,7 +158,7 @@ app.post("/api/login", (req, res) => {
       bcrypt.compare(password, result[0].Password, (error, response) => {
         if (response) {
           const id = result[0].id; // id from database
-          const token = jwt.sign({ id }, "jwtSecret", {
+          const token = jwt.sign({ id }, "flixuser", {
             expiresIn: 300,
           });
           // req.session.user = result;
