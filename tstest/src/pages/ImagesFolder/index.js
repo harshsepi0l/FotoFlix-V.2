@@ -9,10 +9,12 @@ export default function ImagesForm() {
     const file = e.target.files[0];
     previewFile(file);
   };
-  const previewFile = (file) => {
+  const previewFile = () => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = () => setPreviewSource(reader.result);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
   };
   const handleSubmitFile = (e) => {
     e.preventDefault();

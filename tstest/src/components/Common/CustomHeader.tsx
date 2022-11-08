@@ -89,12 +89,8 @@ function LeftSection(): JSX.Element {
       </Space>
 
       <Col span={4} offset={2}>
-        {isLoggedIn ? (
-          <Link to="/ImageUpload">Profile</Link>
-        ) : (
-          <Link to="/">Login</Link>
-        )}
         <CustomButton
+          onClick={() => navigate("/ImagesFolder")}
           buttonType={"primary"}
           color={"darkpurple"}
           title={"New Post"}
