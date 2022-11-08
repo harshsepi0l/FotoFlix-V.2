@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+
 import { Button, Input, Space } from "antd";
 import { CustomButton } from "../../components/Common/CustomButton";
 
@@ -39,6 +39,7 @@ export const SignUp = () => {
   }, []);
 
   const submitLog = () => {
+    
     Axios.post("http://localhost:3000/api/registration", {
       Firstname: firstname,
       Lastname: lastname,
@@ -58,6 +59,7 @@ export const SignUp = () => {
       },
     ]);
     //  sendToLogin();
+    
   };
 
   const deleteAccount = (
@@ -182,6 +184,7 @@ export const SignUp = () => {
               color={"darkpurple"}
               title={"Register"}
               onClick={submitLog}
+              
             />
 
             <div className="margin-Register-signup">
