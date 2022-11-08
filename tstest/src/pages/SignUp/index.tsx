@@ -103,23 +103,27 @@ export const SignUp = () => {
             <div className="Row">
               <div className="form">
                 <Input
-                  placeholder="First Name"
+                  placeholder="Username"
                   type="text"
-                  name="firstname"
+                  name="username"
                   style={{ borderRadius: "25px", height: "82.64px" }}
-                  onChange={(e) => {
-                    setFirstname(e.target.value);
+                  
+
+                   onChange={(e) => {
+                    setUserName(e.target.value);
                   }}
                 />
                 <br />
                 <br />
                 <Input
-                  placeholder="Last Name"
+                  placeholder="Email Address"
                   style={{ borderRadius: "25px", height: "82.64px" }}
                   type="text"
-                  name="lastname"
-                  onChange={(e) => {
-                    setLastname(e.target.value);
+                  name="email"
+                 
+
+                   onChange={(e) => {
+                    setEmail(e.target.value);
                   }}
                 />
               </div>
@@ -128,32 +132,36 @@ export const SignUp = () => {
               {/* This is a column */}
               <div className="Row">
                 <Input
-                  placeholder="Username"
+                  placeholder="First Name"
                   type="text"
-                  name="username"
+                  name="firstname"
                   style={{
                     borderRadius: "25px",
                     height: "82.64px",
                     width: "46vw",
                     marginRight: "40px",
                   }}
+                  
+
                   onChange={(e) => {
-                    setUserName(e.target.value);
+                    setFirstname(e.target.value);
                   }}
                 />
 
                 <Input
-                  placeholder="Email address"
+                  placeholder="Last Name"
                   type="text"
-                  name="email"
+                  name="lastname"
                   style={{
                     borderRadius: "25px",
                     height: "82.64px",
                     width: "49vw",
                     marginLeft: "16px",
                   }}
+               
+
                   onChange={(e) => {
-                    setEmail(e.target.value);
+                    setLastname(e.target.value);
                   }}
                 />
               </div>
@@ -177,21 +185,21 @@ export const SignUp = () => {
           </div>
 
           <div className="Button-SignUp">
-            {/* <NavLink onClick={sendToLogin} to={"/Login"}> */}
+          
               <CustomButton
                 buttonType={"primary"}
                 color={"darkpurple"}
                 title={"Register"}
                 onClick={submitLog}
               />
-            {/* </NavLink> */}
+            
             <div className="margin-Register-signup">
             <NavLink onClick={sendToLanding} to={"/"}>
               <CustomButton
                 buttonType={"primary"}
                 color={"red"}
                 title={"Cancel"}
-                onClick={submitLog}
+               
               />
             </NavLink>
             </div>  
