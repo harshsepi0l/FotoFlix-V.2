@@ -1,32 +1,34 @@
-body {
-  background-color: #ffe6f7;
-}
 
 .Container {
   background-color: #fff;
   border-radius: 10px;
   position: relative;
   overflow: hidden;
-  align-content: center;
+  align-content: left;
   max-width: 100%;
   height: 100vh;
-  text-align: center;
+  text-align: left;
+  margin-left: 10px;
+  
 }
 
 .Row {
   flex-direction: row;
   align-content: space-between;
   align-items: center;
-  padding: 20px;
+  
+  
 }
 
 .Column {
   flex-direction: column;
 }
 
+
 p,
 div {
   font-family: Lato;
+  
 }
 
 .wrapper {
@@ -100,7 +102,20 @@ button {
   color: #fefefe;
 }
 
+.Button-SignUp {
+  display: flex;
+ 
+  flex-direction: row;
+  width: 40vw;
+  
+}
+
+.margin-Register-signup {
+  margin-left: 10px;
+}
+
 button:hover {
+  
   background-color: #937dc2;
   color: #fefefe;
 }

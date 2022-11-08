@@ -27,6 +27,10 @@
     color: var(--darkpurple)
 }
 
+.Default-red {
+    background-color: red
+}
+
 .Default-white:hover,
 .Default-white:focus {
     color: var(--midpurple);

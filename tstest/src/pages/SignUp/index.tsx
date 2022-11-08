@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import { Button, Input, Space } from "antd";
+import { CustomButton } from "../../components/Common/CustomButton";
+
 import "./signUp.css";
 import Axios from "axios";
 
@@ -17,6 +21,11 @@ export const SignUp = () => {
   // This will navigate to Login Page once user has signed up
   const sendToLogin = () => {
     navigate("/Login");
+  };
+
+  // This will navigate to Login Page once user has signed up
+  const sendToLanding = () => {
+    navigate("/");
   };
 
   const refreshPage = () => {
@@ -48,6 +57,7 @@ export const SignUp = () => {
         Password: password,
       },
     ]);
+    //  sendToLogin();
   };
 
   const deleteAccount = (
@@ -92,17 +102,20 @@ export const SignUp = () => {
           <div className="Column">
             <div className="Row">
               <div className="form">
-                <label>First name: </label>
-                <input
+                <Input
+                  placeholder="First Name"
                   type="text"
                   name="firstname"
+                  style={{ borderRadius: "25px", height: "82.64px" }}
                   onChange={(e) => {
                     setFirstname(e.target.value);
                   }}
                 />
-
-                <label> Last name: </label>
-                <input
+                <br />
+                <br />
+                <Input
+                  placeholder="Last Name"
+                  style={{ borderRadius: "25px", height: "82.64px" }}
                   type="text"
                   name="lastname"
                   onChange={(e) => {
@@ -110,42 +123,79 @@ export const SignUp = () => {
                   }}
                 />
               </div>
+              <br />
+
               {/* This is a column */}
               <div className="Row">
-                <label>Username: </label>
-                <input
+                <Input
+                  placeholder="Username"
                   type="text"
                   name="username"
+                  style={{
+                    borderRadius: "25px",
+                    height: "82.64px",
+                    width: "46vw",
+                    marginRight: "40px",
+                  }}
                   onChange={(e) => {
                     setUserName(e.target.value);
                   }}
                 />
 
-                <label> Email: </label>
-                <input
+                <Input
+                  placeholder="Email address"
                   type="text"
                   name="email"
+                  style={{
+                    borderRadius: "25px",
+                    height: "82.64px",
+                    width: "49vw",
+                    marginLeft: "16px",
+                  }}
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
                 />
               </div>
-              <label>Password: </label>
-              <input
-                type="text"
-                name="password"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
+              <br />
+              <div>
+                <Space direction="vertical">
+                  <Input.Password
+                    placeholder="Create Password"
+                    style={{ borderRadius: "25px", height: "82.64px" }}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                  />
+                </Space>
+              </div>
             </div>
-
+            <br />
             <NavLink onClick={sendToLogin} to={"/Login"}>
               <p style={{ color: "#C689C6" }}>Already have an account?</p>
             </NavLink>
           </div>
 
-          <button onClick={submitLog}>Register</button>
+          <div className="Button-SignUp">
+            {/* <NavLink onClick={sendToLogin} to={"/Login"}> */}
+              <CustomButton
+                buttonType={"primary"}
+                color={"darkpurple"}
+                title={"Register"}
+                onClick={submitLog}
+              />
+            {/* </NavLink> */}
+            <div className="margin-Register-signup">
+            <NavLink onClick={sendToLanding} to={"/"}>
+              <CustomButton
+                buttonType={"primary"}
+                color={"red"}
+                title={"Cancel"}
+                onClick={submitLog}
+              />
+            </NavLink>
+            </div>  
+          </div>
         </div>
 
         {usersList.map(
