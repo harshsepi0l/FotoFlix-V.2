@@ -107,9 +107,7 @@ export const SignUp = () => {
                   type="text"
                   name="username"
                   style={{ borderRadius: "25px", height: "82.64px" }}
-                  
-
-                   onChange={(e) => {
+                  onChange={(e) => {
                     setUserName(e.target.value);
                   }}
                 />
@@ -120,9 +118,7 @@ export const SignUp = () => {
                   style={{ borderRadius: "25px", height: "82.64px" }}
                   type="text"
                   name="email"
-                 
-
-                   onChange={(e) => {
+                  onChange={(e) => {
                     setEmail(e.target.value);
                   }}
                 />
@@ -138,11 +134,9 @@ export const SignUp = () => {
                   style={{
                     borderRadius: "25px",
                     height: "82.64px",
-                    width: "46vw",
+                    width: "20vw",
                     marginRight: "40px",
                   }}
-                  
-
                   onChange={(e) => {
                     setFirstname(e.target.value);
                   }}
@@ -155,11 +149,9 @@ export const SignUp = () => {
                   style={{
                     borderRadius: "25px",
                     height: "82.64px",
-                    width: "49vw",
+                    width: "20vw",
                     marginLeft: "16px",
                   }}
-               
-
                   onChange={(e) => {
                     setLastname(e.target.value);
                   }}
@@ -185,28 +177,26 @@ export const SignUp = () => {
           </div>
 
           <div className="Button-SignUp">
-          
-              <CustomButton
-                buttonType={"primary"}
-                color={"darkpurple"}
-                title={"Register"}
-                onClick={submitLog}
-              />
-            
+            <CustomButton
+              buttonType={"primary"}
+              color={"darkpurple"}
+              title={"Register"}
+              onClick={submitLog}
+            />
+
             <div className="margin-Register-signup">
-            <NavLink onClick={sendToLanding} to={"/"}>
-              <CustomButton
-                buttonType={"primary"}
-                color={"red"}
-                title={"Cancel"}
-               
-              />
-            </NavLink>
-            </div>  
+              <NavLink onClick={sendToLanding} to={"/"}>
+                <CustomButton
+                  buttonType={"primary"}
+                  color={"red"}
+                  title={"Cancel"}
+                />
+              </NavLink>
+            </div>
           </div>
         </div>
 
-        {usersList.map(
+        {/* {usersList.map(
           (key: {
             Firstname:
               | string
@@ -275,7 +265,7 @@ export const SignUp = () => {
               </div>
             );
           }
-        )}
+        )} */}
       </div>
     </div>
   );
