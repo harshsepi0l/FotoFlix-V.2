@@ -67,51 +67,53 @@ export const Login = () => {
   return (
     <div className="Container">
       <div className="App">
-      <p style={{ color: "#937DC2", fontSize: 24 }} >Login Form</p>
-    
-      <div className="content">
-        <div className="image"></div>
-        <div className="form">
-          <div className="login">
-            <Input
-              style={{ borderRadius: "25px", height: "82.64px" }}
-              type="text"
-              name="username"
-              placeholder="Username"
-              onChange={(e) => {
-                checkUsername(e.target.value);
-              }}
-            />
-          </div>
-          <br />
-          <div className="login">
-            <Space direction="vertical">
-              <Input.Password
+        <p style={{ color: "#937DC2", fontSize: 24 }}>Login Form</p>
+
+        <div className="content">
+          <div className="image"></div>
+          <div className="form">
+            <div className="login">
+              <Input
                 style={{ borderRadius: "25px", height: "82.64px" }}
-                type="password"
-                name="password"
-                placeholder="Password"
+                type="text"
+                name="username"
+                placeholder="Username"
                 onChange={(e) => {
-                  checkPassword(e.target.value);
+                  checkUsername(e.target.value);
                 }}
               />
-            </Space>
+            </div>
+            <br />
+            <div className="login">
+              <Space direction="vertical">
+                <Input.Password
+                  style={{ borderRadius: "25px", height: "82.64px" }}
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={(e) => {
+                    checkPassword(e.target.value);
+                  }}
+                />
+              </Space>
+            </div>
+          </div>
+          <br />
+          <NavLink onClick={sendToSignUp} to={"/SignUp"}>
+            <p style={{ color: "#C689C6" }}>Don't have an account?</p>
+          </NavLink>
+        </div>
+        <div className="login">
+          <div>
+            <CustomButton
+              buttonType={"primary"}
+              color={"darkpurple"}
+              title={"Login"}
+              onClick={loginCheck}
+            />
           </div>
         </div>
-        <br />
-        <NavLink onClick={sendToSignUp} to={"/SignUp"}>
-          <p style={{ color: "#C689C6" }}>Don't have an account?</p>
-        </NavLink>
       </div>
-      <div className="login">
-        <CustomButton
-          buttonType={"primary"}
-          color={"darkpurple"}
-          title={"Login"}
-          onClick={loginCheck}
-        />
-      </div>
-      </div>
-      </div>
+    </div>
   );
 };
