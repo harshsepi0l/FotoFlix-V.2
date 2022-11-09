@@ -71,7 +71,7 @@ const db = mysql.createPool({
   host: "localhost",
   user: "root",
   database: "flixers",
-  password: "Hxrsh295",
+  password: "runmommy",
 });
 
 app.get("/api/get", (req, res) => {
@@ -152,9 +152,7 @@ app.post("/api/login", (req, res) => {
   db.query(sqlSelect, [username], (err, result) => {
     if (err) {
       res.send({ err: err });
-    }
-
-    if (result.length > 0) {
+    } else if (result.length > 0) {
       bcrypt.compare(password, result[0].Password, (error, response) => {
         if (response) {
           const id = result[0].id; // id from database
@@ -194,13 +192,26 @@ app.post("/api/upload", async (req, res) => {
       upload_preset: "flixerimages",
     });
     console.log(uploadedResponse);
-    const sqlInsert = "INSERT INTO flixerimages (Description, Dislikes, IsPublic, Likes, Height, Width, Title, Type, UserID, URL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    const sqlInsert =
+      "INSERT INTO flixerimages (Description, Dislikes, IsPublic, Likes, Height, Width, Title, Type, UserID, URL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     db.query(
       sqlInsert,
-      ["", 0, false, 0, uploadedResponse.height, uploadedResponse.width, "Untitled Image", uploadedResponse.format, 1, uploadedResponse.url], // Need to fix UserID
+      [
+        "",
+        0,
+        false,
+        0,
+        uploadedResponse.height,
+        uploadedResponse.width,
+        "Untitled Image",
+        uploadedResponse.format,
+        1,
+        uploadedResponse.url,
+      ], // Need to fix UserID
       (err, result) => {
         console.log(err);
-      });
+      }
+    );
     res.json({ msg: "YAYAYAY" });
   } catch (error) {
     console.error(error);
