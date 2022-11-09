@@ -19,6 +19,11 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
+  // This will navigate to Login Page once user has signed up
+  const sendToSignUp = () => {
+    navigate("/SignUp");
+  };
+
   // This will navigate to Login Page once user has logged in
   const sendToHomePage = () => {
     navigate("/HomePage");
