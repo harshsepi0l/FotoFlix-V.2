@@ -4,9 +4,6 @@ import { HomePage } from "./pages/HomePage";
 import { ImagesForm } from "./pages/ImagesFolder";
 import { Login } from "./pages/Login";
 import { SignUp } from "./pages/SignUp";
-import { ChipsArray } from "./components/Tags";
-import { LandingPage } from "./pages/LandingPage";
-import ImagesForm from "./pages/ImagesFolder";
 
 function App() {
   return (
