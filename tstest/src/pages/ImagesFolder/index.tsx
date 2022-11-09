@@ -1,29 +1,29 @@
-import React, { useState } from "react";
-import Axios from "axios";
+import React from "react";
+import { useState } from "react";
 
-export default function ImagesForm() {
+export const ImagesForm = () => {
   const [previewSource, setPreviewSource] = useState("");
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
-  const handleFileInputChange = (e) => {
+  const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
     previewFile(file);
     setSelectedFile(file);
     setFileInputState(e.target.value);
   };
-  const previewFile = (file) => {
+  const previewFile = (file: any) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setPreviewSource(reader.result);
+      setPreviewSource(reader?.result as string);
     };
   };
-  const handleSubmitFile = (e) => {
+  const handleSubmitFile = (e: any) => {
     e.preventDefault();
     if (!previewSource) return;
     uploadImage(previewSource);
   };
-  const uploadImage = async (base64EncodedImage) => {
+  const uploadImage = async (base64EncodedImage: any) => {
     try {
       await fetch("/api/upload", {
         method: "POST",
@@ -46,7 +46,6 @@ export default function ImagesForm() {
           className="form-input"
         />
         <button className="btn" type="submit">
-          {" "}
           Submit
         </button>
       </form>
@@ -55,4 +54,4 @@ export default function ImagesForm() {
       )}
     </div>
   );
-}
+};

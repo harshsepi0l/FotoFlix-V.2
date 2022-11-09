@@ -1,18 +1,10 @@
-import { Col, Row } from "antd";
-import { CustomButton } from "./CustomButton";
-import { BellOutlined } from "@ant-design/icons";
-import { AudioOutlined } from "@ant-design/icons";
-import { Input, Space } from "antd";
-import { Avatar } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
-import "./index.css";
-import React from "react";
+import { BellOutlined, SearchOutlined } from "@ant-design/icons";
+import { Avatar, Col, Input, Row, Space } from "antd";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { CustomButton } from "./CustomButton";
 import data from "./Data.json";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Login } from "../../pages/Login";
-import { SignUp } from "../../pages/SignUp";
+import "./index.css";
 
 const { Search } = Input;
 
