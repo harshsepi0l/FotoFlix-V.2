@@ -111,18 +111,6 @@ export const Login = () => {
               onClick={loginCheck}
             />
           </div>
-          <br />
-          <NavLink onClick={sendToSignUp} to={"/SignUp"}>
-            <p style={{ color: "#C689C6" }}>Don't have an account?</p>
-          </NavLink>
-        </div>
-        <div className="login">
-          <CustomButton
-            buttonType={"primary"}
-            color={"darkpurple"}
-            title={"Login"}
-            onClick={loginCheck}
-          />
         </div>
       </div>
     </div>
