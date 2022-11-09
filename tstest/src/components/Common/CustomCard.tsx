@@ -1,4 +1,4 @@
-import { LikeOutlined, DislikeOutlined, StarOutlined, TagsOutlined } from '@ant-design/icons';
+import { LikeOutlined, DislikeOutlined, StarOutlined, TagsOutlined, GlobalOutlined, LockOutlined } from '@ant-design/icons';
 import { Avatar, Card, Space } from 'antd';
 import React from 'react';
 
@@ -15,6 +15,7 @@ interface IAction {
     text?: any,
     icon: string,
     onClick?: () => {},
+    isPublic?: boolean,
 }
 
 function CustomAction(props: IAction): JSX.Element {
@@ -25,6 +26,8 @@ function CustomAction(props: IAction): JSX.Element {
         "tags": <TagsOutlined key="tags" />
     }
 
+    {props.isPublic ? Icon["status"]=<GlobalOutlined key="global" /> : Icon["status"]=<LockOutlined key="lock" />}
+
     return (
         <Space>
             {Icon[props.icon]}
@@ -33,7 +36,13 @@ function CustomAction(props: IAction): JSX.Element {
     )
 }
 
+interface isGlobal {
+    isGlobal: boolean;
+  }
+
 export function CustomCard(): JSX.Element {
+    let isGlobal = false;
+
     return (
         <Card
             style={{ width: 300, marginTop: 40}}
@@ -63,6 +72,10 @@ export function CustomCard(): JSX.Element {
                     text="Tags"
                 
                 />,
+                <CustomAction
+                    icon="status"
+                />
+
             ]}
         >
             <Meta

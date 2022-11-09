@@ -5,6 +5,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { CustomButton } from "./CustomButton";
 import data from "./Data.json";
 import "./index.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Login } from "../../pages/Login";
+import { SignUp } from "../../pages/SignUp";
+
 
 const { Search } = Input;
 
