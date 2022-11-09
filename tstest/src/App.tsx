@@ -4,12 +4,13 @@ import { HomePage } from "./pages/HomePage";
 import { ImagesForm } from "./pages/ImagesFolder";
 import { Login } from "./pages/Login";
 import { SignUp } from "./pages/SignUp";
+import { LandingPage } from "./pages/LandingPage";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<SignUp />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/HomePage" element={<HomePage />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/SignUp" element={<SignUp />} />
