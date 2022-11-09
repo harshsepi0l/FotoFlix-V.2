@@ -194,6 +194,7 @@ app.post("/api/upload", async (req, res) => {
       upload_preset: "flixerimages",
     });
     console.log(uploadedResponse);
+    // Insert the uploaded image into the database. The image itself is uploaded to Cloudinary, but our database has the URL for href.
     const sqlInsert = "INSERT INTO flixerimages (Description, Dislikes, IsPublic, Likes, Height, Width, Title, Type, UserID, URL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     db.query(
       sqlInsert,
