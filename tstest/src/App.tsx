@@ -14,7 +14,7 @@ function App() {
         <Route path="/HomePage" element={<HomePage />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/ImageFolder" element={<ImagesForm />} />
+        <Route path="/ImagesFolder" element={<ImagesForm />} />
       </Routes>
     </Router>
   );
