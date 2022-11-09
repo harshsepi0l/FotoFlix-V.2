@@ -71,7 +71,7 @@ const db = mysql.createPool({
   host: "localhost",
   user: "root",
   database: "flixers",
-  password: "runmommy",
+  password: "Hxrsh295",
 });
 
 app.get("/api/get", (req, res) => {
@@ -194,6 +194,13 @@ app.post("/api/upload", async (req, res) => {
       upload_preset: "flixerimages",
     });
     console.log(uploadedResponse);
+    const sqlInsert = "INSERT INTO flixerimages (Description, Dislikes, IsPublic, Likes, Height, Width, Title, Type, UserID, URL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    db.query(
+      sqlInsert,
+      ["", 0, false, 0, uploadedResponse.height, uploadedResponse.width, "Untitled Image", uploadedResponse.format, 1, uploadedResponse.url], // Need to fix UserID
+      (err, result) => {
+        console.log(err);
+      });
     res.json({ msg: "YAYAYAY" });
   } catch (error) {
     console.error(error);
