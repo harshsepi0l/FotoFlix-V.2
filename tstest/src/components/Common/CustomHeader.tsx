@@ -8,8 +8,11 @@ import { SearchOutlined } from "@ant-design/icons";
 import "./index.css";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useEffect } from "react";
 import data from "./Data.json";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Login } from "../../pages/Login";
+import { SignUp } from "../../pages/SignUp";
 
 const { Search } = Input;
 
@@ -25,57 +28,69 @@ const suffix = (
 const onSearch = (value: string) => console.log(value);
 
 function CustomSearch(): JSX.Element {
-
   const [filteredData, setFilteredData] = useState(data);
   const [wordEntered, setWordEntered] = useState("");
 
-  const handleFilter = (event: { target: { value: any; }; }) => {
-      const searchWord = event.target.value;
-      setWordEntered(searchWord);
-      const newFilter = data.filter((value: { title: string; }) => {
-          return value.title.toLowerCase().includes(searchWord.toLowerCase());
-      });
+  const handleFilter = (event: { target: { value: any } }) => {
+    const searchWord = event.target.value;
+    setWordEntered(searchWord);
+    const newFilter = data.filter((value: { title: string }) => {
+      return value.title.toLowerCase().includes(searchWord.toLowerCase());
+    });
 
-      if (searchWord === "") {
-          setFilteredData(data);
-      } else {
-          setFilteredData(newFilter);
-      }
+    if (searchWord === "") {
+      setFilteredData(data);
+    } else {
+      setFilteredData(newFilter);
+    }
   };
 
   return (
-      <div className="CustomSearchContainer">
-          <Input
-              placeholder="Search"
-              allowClear
-              bordered={false}
-              suffix={suffix}
-              className="Border-15 CustomSearch"
-              onChange={handleFilter}
-          />
-          <div className="Border-15 DataResult">
-              {filteredData.slice(0, 15).map((value, key) => {
-                  return <a className="DataItem" href={value.link} target="_blank">
-                      {filteredData.length !== 0 ? (
-                          <p> {value.title} </p>
-                      ) : (
-                          <p> No Value </p>
-                      )}
-                  </a>
-              })}
-          </div>
+    <div className="CustomSearchContainer">
+      <Input
+        placeholder="Search"
+        allowClear
+        bordered={false}
+        suffix={suffix}
+        className="Border-15 CustomSearch"
+        onChange={handleFilter}
+      />
+      <div className="Border-15 DataResult">
+        {filteredData.slice(0, 15).map((value, key) => {
+          return (
+            <a className="DataItem" href={value.link} target="_blank">
+              {filteredData.length !== 0 ? (
+                <p> {value.title} </p>
+              ) : (
+                <p> No Value </p>
+              )}
+            </a>
+          );
+        })}
       </div>
-  )
-};
+    </div>
+  );
+}
 
 function LeftSection(): JSX.Element {
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   return (
     <Row justify="start">
       <Space align="center">
         <Col span={4}>Fotoflix</Col>
       </Space>
+
       <Col span={4} offset={2}>
         <CustomButton
+          onClick={() => navigate("/ImagesFolder")}
           buttonType={"primary"}
           color={"darkpurple"}
           title={"New Post"}
@@ -86,18 +101,56 @@ function LeftSection(): JSX.Element {
 }
 
 function RightButtonsSection(): JSX.Element {
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("token") !== null) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    navigate("/");
+  };
+
   return (
-    <Row justify="end">
+    <Row justify="end" align="middle" >
       <Col span={4}>
-        <CustomButton
-          onClick={() => {
-            localStorage.removeItem("token");
-            window.location.reload();
-          }}
-          buttonType={"default"}
-          color={"white"}
-          title={"Log Out"}
-        />
+        {isLoggedIn ? (
+          <Avatar
+            className="Avatar"
+            src="https://www.publicdomainpictures.net/pictures/30000/velka/plain-white-background.jpg"
+          />
+        ) : (
+          <Link to="/login">
+            <CustomButton
+              buttonType={"default"}
+              color={"white"}
+              title={"Login"}
+            />
+          </Link>
+        )}
+      </Col>
+      <Col span={4}>
+        {isLoggedIn ? (
+          <CustomButton
+            buttonType={"primary"}
+            color={"darkpurple"}
+            title={"Logout"}
+            onClick={logout}
+          />
+        ) : (
+          <Link to="/signup">
+            <CustomButton
+              buttonType={"primary"}
+              color={"lightpurple"}
+              title={"Sign Up"}
+            />
+          </Link>
+        )}
       </Col>
     </Row>
   );
@@ -115,11 +168,7 @@ function RightUserSection(): JSX.Element {
 interface isLoggedIn {
   isLoggedIn: boolean;
 }
-
 export function CustomHeader(props: isLoggedIn): JSX.Element {
-
-
-
   return (
     <div className="mainHeader Padding-20">
       <Row>
