@@ -1,5 +1,5 @@
 import Axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Col, Row } from "antd";
 import { NavLink } from "react-router-dom";
@@ -36,14 +36,17 @@ export const Login = () => {
       Password: password,
     }).then((response) => {
       if (!response.data.auth) {
+        console.log(response.data);
         setLoginStatus(false);
       } else {
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("id", response.data.result[0].id);
         setLoginStatus(true);
         sendToHomePage();
       }
     });
   };
+
   /*
   useEffect(() => {
     Axios.get("http://localhost:3000/api/Login").then((response) => {

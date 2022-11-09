@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const { cloudinary } = require("./utils/cloudinary");
 
+const { useLocalStorage } = require("react-localstorage-hook");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
@@ -12,6 +13,7 @@ const bcrypt = require("bcrypt"); // for hashing passwords
 const saltRounds = 10;
 
 const jwt = require("jsonwebtoken");
+const { application } = require("express");
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
@@ -187,29 +189,31 @@ app.get("/api/images", async (req, res) => {
 
 app.post("/api/upload", async (req, res) => {
   try {
+    const item = useLocalStorage.getItem(key.id, "");
+
     const fileStr = req.body.data;
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
       upload_preset: "flixerimages",
     });
     console.log(uploadedResponse);
     const sqlInsert =
-      "INSERT INTO flixerimages (Description, Dislikes, IsPublic, Likes, Height, Width, Title, Type, UserID, URL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      "INSERT INTO flixerimages (UserID, Title, Description, Dislikes, Type, IsPublic, Likes, Height, Width, URL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     db.query(
       sqlInsert,
       [
-        "",
+        item,
+        "Testing Title",
+        "Testing Description",
         0,
+        uploadedResponse.format,
         false,
-        0,
+        10,
         uploadedResponse.height,
         uploadedResponse.width,
-        "Untitled Image",
-        uploadedResponse.format,
-        1,
         uploadedResponse.url,
-      ], // Need to fix UserID
+      ],
       (err, result) => {
-        console.log(err);
+        console.log(err, result);
       }
     );
     res.json({ msg: "YAYAYAY" });
