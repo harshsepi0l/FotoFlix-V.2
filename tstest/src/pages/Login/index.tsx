@@ -51,41 +51,53 @@ export const Login = () => {
   };
 
   return (
-    <div>
-      <p>This is the Login page</p>
-      {user_name && <h1>{user_name}</h1>}
-
-      <div className="header">Login</div>
+    <div className="Container">
+      <div className="App">
+      <p style={{ color: "#937DC2", fontSize: 24 }} >Login Form</p>
+    
       <div className="content">
         <div className="image"></div>
         <div className="form">
           <div className="login">
-            <label htmlFor="username">Username: </label>
-            <input
+            <Input
+              style={{ borderRadius: "25px", height: "82.64px" }}
               type="text"
               name="username"
-              placeholder="username"
+              placeholder="Username"
               onChange={(e) => {
                 checkUsername(e.target.value);
               }}
             />
           </div>
+          <br />
           <div className="login">
-            <label htmlFor="password">Password: </label>
-            <input
-              type="password"
-              name="password"
-              placeholder="password"
-              onChange={(e) => {
-                checkPassword(e.target.value);
-              }}
-            />
+            <Space direction="vertical">
+              <Input.Password
+                style={{ borderRadius: "25px", height: "82.64px" }}
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={(e) => {
+                  checkPassword(e.target.value);
+                }}
+              />
+            </Space>
           </div>
         </div>
+        <br />
+        <NavLink onClick={sendToSignUp} to={"/SignUp"}>
+          <p style={{ color: "#C689C6" }}>Don't have an account?</p>
+        </NavLink>
       </div>
       <div className="login">
-        <button type="button" className="btn" onClick={loginCheck} />
+        <CustomButton
+          buttonType={"primary"}
+          color={"darkpurple"}
+          title={"Login"}
+          onClick={loginCheck}
+        />
       </div>
-    </div>
+      </div>
+      </div>
   );
 };
