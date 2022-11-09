@@ -7,11 +7,13 @@ import { TrendingImages } from "../../components/Common/TrendingImages";
 import { TrendingTags } from "../../components/Common/TrendingTags";
 import { AccountBar } from "../../components/HomePage/AccountBar";
 import { AccountInfo } from "../../components/HomePage/AccountInfo";
+import { useContext } from "react";
 
 export const Login = () => {
   const [username, checkUsername] = useState("");
   const [password, checkPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState(false);
+  const [user_name, setUsername] = useState("");
 
   const navigate = useNavigate();
 
@@ -26,14 +28,13 @@ export const Login = () => {
       Username: username,
       Password: password,
     }).then((response) => {
-      console.log(response);
       if (!response.data.auth) {
         setLoginStatus(false);
       } else {
-        console.log(response.data);
+        setUsername(response?.data?.result[0]?.Username);
         localStorage.setItem("token", response.data.token);
         setLoginStatus(true);
-        sendToHomePage();
+        // sendToHomePage();
       }
     });
   };
@@ -52,13 +53,15 @@ export const Login = () => {
     Axios.get("http://localhost:3000/isUserAuth", {
       headers: { "x-access-token": localStorage.getItem("token") },
     }).then((response) => {
-      console.log(response);
+      // console.log(response);
     });
   };
 
   return (
     <div>
       <p>This is the Login page</p>
+      {user_name && <h1>{user_name}</h1>}
+
       <div className="header">Login</div>
       <div className="content">
         <div className="image"></div>
