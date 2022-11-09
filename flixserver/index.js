@@ -146,6 +146,7 @@ app.put("/api/update", (req, res) => {
 //   }
 // });
 
+//Bcrypt and Token Installer
 app.post("/api/login", (req, res) => {
   const username = req.body.Username;
   const password = req.body.Password;
@@ -189,19 +190,18 @@ app.get("/api/images", async (req, res) => {
 
 app.post("/api/upload", async (req, res) => {
   try {
-    const item = useLocalStorage.getItem(key.id, "");
-
     const fileStr = req.body.data;
+
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
       upload_preset: "flixerimages",
     });
     console.log(uploadedResponse);
     const sqlInsert =
-      "INSERT INTO flixerimages (UserID, Title, Description, Dislikes, Type, IsPublic, Likes, Height, Width, URL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      "INSERT INTO flixerimages (UserID, Title, Description, Dislikes, Type, IsPublic, Likes, Height, Width, URL, Tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
     db.query(
       sqlInsert,
       [
-        item,
+        "6",
         "Testing Title",
         "Testing Description",
         0,
@@ -211,6 +211,7 @@ app.post("/api/upload", async (req, res) => {
         uploadedResponse.height,
         uploadedResponse.width,
         uploadedResponse.url,
+        "#Test",
       ],
       (err, result) => {
         console.log(err, result);

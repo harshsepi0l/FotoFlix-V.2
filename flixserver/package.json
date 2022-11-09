@@ -23,6 +23,7 @@
     "msql": "^1.0.3",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.20",
-    "react-localstorage-hook": "^0.1.0"
+    "react-localstorage-hook": "^0.1.0",
+    "react-session-control": "^2.0.12"
   }
 }

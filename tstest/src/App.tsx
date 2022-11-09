@@ -9,15 +9,13 @@ import { ImagePage } from "./pages/ImagePage";
 
 function App() {
   return (
-   
-
     <Router>
       <Routes>
         <Route path="/ImagesFolder" element={<ImagesForm />} />
         <Route path="/HomePage" element={<HomePage />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/" element={<ImagePage />} />
+        <Route path="/" element={<LandingPage />} />
       </Routes>
     </Router>
     // <ImagesForm />

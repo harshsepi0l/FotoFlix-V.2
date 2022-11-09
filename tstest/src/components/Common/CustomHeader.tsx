@@ -69,7 +69,7 @@ function LeftSection(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (!localStorage.getItem("token")) {
       setIsLoggedIn(true);
     }
   }, []);
@@ -79,15 +79,18 @@ function LeftSection(): JSX.Element {
       <Space align="center">
         <Col span={4}>Fotoflix</Col>
       </Space>
-
-      <Col span={4} offset={2}>
-        <CustomButton
-          onClick={() => navigate("/ImagesFolder")}
-          buttonType={"primary"}
-          color={"darkpurple"}
-          title={"New Post"}
-        />
-      </Col>
+      {isLoggedIn ? (
+        <></>
+      ) : (
+        <Col span={4} offset={2}>
+          <CustomButton
+            onClick={() => navigate("/ImagesFolder")}
+            buttonType={"primary"}
+            color={"darkpurple"}
+            title={"New Post"}
+          />
+        </Col>
+      )}
     </Row>
   );
 }
@@ -109,13 +112,10 @@ function RightButtonsSection(): JSX.Element {
   };
 
   return (
-    <Row justify="end" align="middle" >
+    <Row justify="end" align="middle">
       <Col span={4}>
         {isLoggedIn ? (
-          <Avatar
-            className="Avatar"
-            src="https://www.publicdomainpictures.net/pictures/30000/velka/plain-white-background.jpg"
-          />
+          <></>
         ) : (
           <Link to="/login">
             <CustomButton

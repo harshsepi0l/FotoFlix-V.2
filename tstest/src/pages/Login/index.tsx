@@ -69,7 +69,7 @@ export const Login = () => {
   return (
     <div className="Container">
       <div className="App">
-        <p style={{ color: "#937DC2", fontSize: 24 }}>Login Form</p>
+        <p style={{ color: "#937DC2", fontSize: 24 }}>Login</p>
 
         <div className="content">
           <div className="image"></div>
