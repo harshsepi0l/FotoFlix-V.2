@@ -9,7 +9,7 @@ const session = require("express-session");
 
 const mysql = require("mysql2");
 const cors = require("cors");
-const bcrypt = require("bcrypt"); // for hashing passwords
+const bcrypt = require("bcryptjs"); // for hashing passwords
 const saltRounds = 10;
 
 const jwt = require("jsonwebtoken");

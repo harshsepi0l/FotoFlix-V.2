@@ -10,11 +10,12 @@ import { Avatar, Card, Space } from "antd";
 import Axios from "axios";
 import React from "react";
 
-interface CardProps {
-  image: string;
-  title: string;
-  description: string;
-  isScroll?: boolean;
+export interface CardProps {
+  URL?: string;
+  Title?: string;
+  Description?: string;
+  Tags?: string[];
+  Likes?: number;
 }
 
 const { Meta } = Card;
@@ -52,24 +53,11 @@ interface isGlobal {
   isGlobal: boolean;
 }
 
-export function CustomCard(): JSX.Element {
-  const [title, setTitle] = React.useState("");
-  const [description, setDescription] = React.useState("Description");
-  const [uploadDate, setUploadDate] = React.useState("Upload Date");
-  const [likes, setLikes] = React.useState(0);
-  const [dislikes, setDislikes] = React.useState(0);
-  const [link, setLink] = React.useState("Link");
-  const [tags, setTags] = React.useState("Tags");
-
+export const CustomCard = (props: CardProps) => {
   return (
     <Card
       style={{ width: 300, marginTop: 40 }}
-      cover={
-        <img
-          alt="example"
-          src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-        />
-      }
+      cover={<img alt="example" src={props.URL} />}
       actions={[
         <CustomAction icon="like" text={100} />,
         <CustomAction icon="dislike" text={100} />,
@@ -80,9 +68,9 @@ export function CustomCard(): JSX.Element {
     >
       <Meta
         avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-        title="Card title"
+        title={props.Title}
         description="This is the description"
       />
     </Card>
   );
-}
+};

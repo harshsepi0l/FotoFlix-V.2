@@ -49,6 +49,7 @@ export const ImagesForm = () => {
           Submit
         </button>
       </form>
+
       {previewSource && (
         <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
       )}

@@ -1,4 +1,6 @@
 import { Space } from "antd";
+import Axios from "axios";
+import React from "react";
 import { useState } from "react";
 import { CustomCard } from "./CustomCard";
 import { InfiniteScroll } from "./InfiniteScroll";
@@ -24,22 +26,38 @@ export function RowImages(): JSX.Element {
     }, 300);
   };
 
+  const [postData, setPostData] = React.useState([]);
+
+  const getPostData = () => {
+    Axios.get("http://localhost:3000/api/getimages").then((response: any) => {
+      setPostData(response.data);
+    });
+  };
+
+  React.useEffect(() => {
+    getPostData();
+  });
+
   return (
-    <div >
+    <div>
       <InfiniteScroll
         hasMoreData={hasMoreData}
         isLoading={loading}
         onBottomHit={loadMoreNumbers}
         loadOnMount={true}
       >
-        < ul >
-          {
-            numbers.map(() => (
-              <CustomCard />
-            ))
-          }
+        <ul>
+          {Object.values(postData).map((value: any) => (
+            <CustomCard
+              URL={value.URL}
+              Title={value.Title}
+              Description={value.Description}
+              Tags={value.Tags}
+              Likes={value.Likes}
+            />
+          ))}
         </ul>
-      </InfiniteScroll >
-    </div >
-  )
+      </InfiniteScroll>
+    </div>
+  );
 }
