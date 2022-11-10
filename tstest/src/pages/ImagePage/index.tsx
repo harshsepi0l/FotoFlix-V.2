@@ -11,12 +11,16 @@ export function ImagePage(): JSX.Element {
     <div className="Image-Page">
       <CustomHeader isLoggedIn={true} />
       <Row>
-        <Col span={18}>
+        <Col span={16}>
           <ImageCard />
           <CommentSection />
         </Col>
+        <Col span={1}>
+        </Col>
         <Col span={6}>
+          <br/>
           <TrendingImages />
+          <br/>
           <TrendingTags />
         </Col>
       </Row>

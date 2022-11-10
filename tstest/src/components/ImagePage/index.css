@@ -1,5 +1,17 @@
-.Card-Info {
-    background-color: var(--white);
+.CardInfo {
+    background-color: #FFE6F7;
     size: 20px;
     height: 100%;
+    left: 604px;
+}
+.SingleImageCard {
+    
+    position: absolute;
+    width: 527px;
+    height: 424px;
+    left: 49px;
+    top: 125px;
+}
+.ImageCard {
+    background-color: #FFE6F7;
 }
