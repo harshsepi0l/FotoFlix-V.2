@@ -1,4 +1,4 @@
-import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons';
+import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined,StarOutlined } from '@ant-design/icons';
 import React, { createElement, useState } from 'react';
 import { InfiniteScroll } from '../Common/InfiniteScroll';
 import { Avatar, Button, Comment, Form, Input, List, Tooltip } from 'antd';
@@ -37,7 +37,7 @@ const Editor = ({ onChange, onSubmit, submitting, value }: EditorProps) => (
       <TextArea rows={4} onChange={onChange} value={value} />
     </Form.Item>
     <Form.Item>
-      <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">
+      <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="primary" style={{backgroundColor:'#C689C6'}}>
         Add Comment
       </Button>
     </Form.Item>
@@ -66,9 +66,13 @@ export function CommentSection(): JSX.Element {
   };
 
   return (
+    
     <div title="Comment Section" >
+      <br/>
+      <br/>
+      <h1 style={{marginLeft:"50px", color:"#937DC2"}}>Comments</h1>
       <div style={{
-        height: 300, wordWrap: "break-word", overflowY: "scroll", scrollBehavior: "smooth"
+         height: 300, wordWrap: "break-word", overflowY: "scroll", scrollBehavior: "smooth"
       }}>
         <InfiniteScroll
           hasMoreData={hasMoreData}
@@ -158,25 +162,31 @@ export function CustomComment(): JSX.Element {
     <Tooltip key="comment-basic-like" title="Like">
       <span onClick={like}>
         {createElement(action === 'liked' ? LikeFilled : LikeOutlined)}
-        <span className="comment-action">{likes}</span>
       </span>
     </Tooltip>,
     <Tooltip key="comment-basic-dislike" title="Dislike">
       <span onClick={dislike}>
         {React.createElement(action === 'disliked' ? DislikeFilled : DislikeOutlined)}
-        <span className="comment-action">{dislikes}</span>
       </span>
     </Tooltip>,
+    <Tooltip key="comment-basic-popularity" title="Popularity">
+    <span>
+      {React.createElement(StarOutlined)}
+      
+      <span className="comment-action">0</span>
+    </span>
+  </Tooltip>,
     <span key="comment-basic-reply-to">Reply to</span>,
   ];
 
   return (
-    <Comment
+    <Comment 
+      style={{ backgroundColor:"#FFFFFF"}}
       actions={actions}
       author={<a>Han Solo</a>}
       avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
       content={
-        <p>
+        <p style={{ color:"#937DC2" }}>
           We supply a series of design principles, practical patterns and high quality design
           resources (Sketch and Axure), to help people create their product prototypes beautifully
           and efficiently.

@@ -25,8 +25,9 @@ export function TrendingImages(): JSX.Element {
   };
 
   return (
-    <Card title="Trending Images"
-          style={{ textAlign: "center" }}>
+    <Card 
+          style={{ textAlign: "center", fontFamily: "Open Sans", fontSize: "36px", color: "#937DC2", borderRadius: "25px 25px 0px 0px;",backgroundColor:" rgba(198, 137, 198, 0.35)" }}>
+          <p>Trending Images</p>
       <div style={{
         height: 300, wordWrap: "break-word", overflowY: "scroll", scrollBehavior: "smooth"
       }}>
