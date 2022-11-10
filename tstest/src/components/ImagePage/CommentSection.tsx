@@ -1,4 +1,4 @@
-import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined,StarOutlined } from '@ant-design/icons';
+import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined,StarOutlined , StarFilled} from '@ant-design/icons';
 import React, { createElement, useState } from 'react';
 import { InfiniteScroll } from '../Common/InfiniteScroll';
 import { Avatar, Button, Comment, Form, Input, List, Tooltip } from 'antd';
@@ -158,6 +158,10 @@ export function CustomComment(): JSX.Element {
     setAction('disliked');
   };
 
+  const popular = () => {
+    setAction('popular');
+  }
+
   const actions = [
     <Tooltip key="comment-basic-like" title="Like">
       <span onClick={like}>
@@ -170,8 +174,8 @@ export function CustomComment(): JSX.Element {
       </span>
     </Tooltip>,
     <Tooltip key="comment-basic-popularity" title="Popularity">
-    <span>
-      {React.createElement(StarOutlined)}
+    <span onClick={popular}>
+      {React.createElement(action === 'popular' ? StarFilled : StarOutlined)}
       
       <span className="comment-action">0</span>
     </span>
