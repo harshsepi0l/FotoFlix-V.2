@@ -26,3 +26,4 @@ flixserver/node_modules/bcrypt/test/promise.test.js
 flixserver/node_modules/bcrypt/test/repetitions.test.js
 flixserver/node_modules/bcrypt/test/sync.test.js
 flixserver/node_modules/bcrypt/test_alpine.sh
+tstest/package.json
