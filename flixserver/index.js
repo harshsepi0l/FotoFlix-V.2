@@ -225,14 +225,6 @@ app.post("/api/upload", async (req, res) => {
 });
 
 app.get("/api/getimages", (req, res) => {
-  const title = req.body.Title;
-  const description = req.body.Description;
-  const uploadDate = req.body.UploadDate;
-  const likes = req.body.Likes;
-  const dislikes = req.body.Dislikes;
-  const link = req.body.URL;
-  const tags = req.body.Tags;
-
   const sqlSelect = "SELECT * FROM flixerimages";
 
   db.query(sqlSelect, (err, result) => {
