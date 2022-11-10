@@ -196,9 +196,11 @@ app.post("/api/upload", async (req, res) => {
     console.log(uploadedResponse);
     // Insert the uploaded image into the database. The image itself is uploaded to Cloudinary, but our database has the URL for href.
     const sqlInsert = "INSERT INTO flixerimages (Description, Dislikes, IsPublic, Likes, Height, Width, Title, Type, UserID, URL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    const uid = jwt.decode(localStorage.getItem("token"));
+    console.log(uid);
     db.query(
       sqlInsert,
-      ["", 0, false, 0, uploadedResponse.height, uploadedResponse.width, "Untitled Image", uploadedResponse.format, 1, uploadedResponse.url], // Need to fix UserID
+      ["", 0, false, 0, uploadedResponse.height, uploadedResponse.width, "Untitled Image", uploadedResponse.format, uid, uploadedResponse.url], // Need to fix UserID
       (err, result) => {
         console.log(err);
       });
