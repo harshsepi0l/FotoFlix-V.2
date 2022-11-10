@@ -13,6 +13,7 @@ import data from "./Data.json";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "../../pages/Login";
 import { SignUp } from "../../pages/SignUp";
+import { HeaderDropdown } from "./HeaderDropdown";
 
 const { Search } = Input;
 
@@ -152,6 +153,9 @@ function RightButtonsSection(): JSX.Element {
           </Link>
         )}
       </Col>
+      {/* <Col>
+        <HeaderDropdown />
+      </Col> */}
     </Row>
   );
 }

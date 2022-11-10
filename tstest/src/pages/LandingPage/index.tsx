@@ -2,6 +2,7 @@ import { Card, Col, Row } from "antd";
 import { useState } from "react";
 import { CustomCard } from "../../components/Common/CustomCard";
 import { CustomHeader } from "../../components/Common/CustomHeader";
+import CustomMenu from "../../components/Common/CustomMenu";
 import { InfiniteScroll } from "../../components/Common/InfiniteScroll";
 import { RowImages } from "../../components/Common/RowImages";
 import "./index.css";
@@ -39,5 +40,11 @@ export function LandingPage(): JSX.Element {
         </Col>
       </Row>
     </div>
+<<<<<<< Updated upstream
   )
 }
+=======
+  );
+}
+
+>>>>>>> Stashed changes
