@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const { cloudinary } = require("./utils/cloudinary");
-
+const Cookies = require("js-cookie");
 const { useLocalStorage } = require("react-localstorage-hook");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -170,21 +170,6 @@ app.post("/api/login", (req, res) => {
 app.get("/api/logout", (req, res) => {
   res.clearCookie("token");
   res.json({ auth: false, token: null });
-});
-
-app.get("/api/isUserAuth", (req, res) => {
-  const token = req.cookies.token;
-  if (!token) {
-    res.send(false);
-  } else {
-    const validateToken = jwt.verify(token, "flixuser");
-    if (validateToken) {
-      req.authenticated = true;
-      res.send(true);
-    } else {
-      res.send(false);
-    }
-  }
 });
 
 //App.gets

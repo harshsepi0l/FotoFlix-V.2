@@ -73,11 +73,12 @@ function CustomSearch(): JSX.Element {
 function LeftSection(): JSX.Element {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
+    Axios.post("http://localhost:3000/api/login", {
+      withCredentials: true,
+    }).then((response) => {
       setIsLoggedIn(true);
-    }
+    });
   }, []);
 
   return (
@@ -86,8 +87,6 @@ function LeftSection(): JSX.Element {
         <Col span={4}>Fotoflix</Col>
       </Space>
       {isLoggedIn ? (
-        <></>
-      ) : (
         <Col span={4} offset={2}>
           <CustomButton
             onClick={() => navigate("/ImagesFolder")}
@@ -96,6 +95,8 @@ function LeftSection(): JSX.Element {
             title={"New Post"}
           />
         </Col>
+      ) : (
+        <></>
       )}
     </Row>
   );
@@ -106,20 +107,30 @@ function RightButtonsSection(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
 
-  const loggedIn = () => {
-    Axios.get("http://localhost:3000/isUserAuth", {}).then((response) => {
-      if (response.data.token != null) {
-        setIsLoggedIn(true);
-      }
+  // const loggedIn = () => {
+  //   Axios.get("http://localhost:3000/isUserAuth", {
+  //     withCredentials: true,
+  //   }).then((response) => {
+  //     if (response.data.token != null) {
+  //       setIsLoggedIn(true);
+  //     }
+  //   });
+  // };
+
+  useEffect(() => {
+    Axios.post("http://localhost:3000/api/login", {
+      withCredentials: true,
+    }).then((response) => {
+      setIsLoggedIn(true);
     });
-  };
+  }, []);
 
   const logout = () => {
     Axios.get("http://localhost:3000/api/logout", {
       withCredentials: true,
     }).then((response) => {
-      console.log(response.data);
       setIsLoggedIn(false);
+      navigate("/LandingPage");
     });
   };
 
