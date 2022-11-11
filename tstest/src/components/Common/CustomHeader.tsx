@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "../../pages/Login";
 import { SignUp } from "../../pages/SignUp";
 import Axios from "axios";
+import axios from "axios";
 Axios.defaults.withCredentials = true;
 
 const { Search } = Input;
@@ -102,7 +103,17 @@ function LeftSection(): JSX.Element {
 
 function RightButtonsSection(): JSX.Element {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState("");
+
+  const loggedIn = () => {
+    Axios.get("http://localhost:3000/isUserAuth", {}).then((response) => {
+      if (response.data.token != null) {
+        setIsLoggedIn(true);
+      }
+    });
+  };
+
   const logout = () => {
     Axios.get("http://localhost:3000/api/logout", {
       withCredentials: true,
@@ -111,6 +122,7 @@ function RightButtonsSection(): JSX.Element {
       setIsLoggedIn(false);
     });
   };
+
   return (
     <Row justify="end" align="middle">
       <Col span={4}>

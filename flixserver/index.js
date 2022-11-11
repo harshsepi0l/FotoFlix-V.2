@@ -172,6 +172,21 @@ app.get("/api/logout", (req, res) => {
   res.json({ auth: false, token: null });
 });
 
+app.get("/api/isUserAuth", (req, res) => {
+  const token = req.cookies.token;
+  if (!token) {
+    res.send(false);
+  } else {
+    const validateToken = jwt.verify(token, "flixuser");
+    if (validateToken) {
+      req.authenticated = true;
+      res.send(true);
+    } else {
+      res.send(false);
+    }
+  }
+});
+
 //App.gets
 
 //IMAGE UPLOADS
