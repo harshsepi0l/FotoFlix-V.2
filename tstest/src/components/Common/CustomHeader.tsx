@@ -86,7 +86,7 @@ function LeftSection(): JSX.Element {
   return (
     <Row justify="start">
       <Space align="center">
-        <Col span={4}>Fotoflix</Col>
+        <Col span={4}><img src="../images/logo-full.svg"/></Col>
       </Space>
 
       <Col span={4} offset={2}>

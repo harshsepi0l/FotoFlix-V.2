@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { 
-    getComments as getCommentsApi, 
+import {
+    getComments as getCommentsApi,
     createComment as createCommentApi,
     deleteComment as deleteCommentApi
 } from "../api";
@@ -22,13 +22,14 @@ export function Comments({ currentUserId }: any): JSX.Element {
             );
     }
 
-    const addComment = async(text: any, parentId: any) => {
+    const addComment = async (text: any, parentId: any) => {
         console.log('addComment', text, parentId);
         const comment = await createCommentApi(text, parentId);
         setBackendComments([comment, ...backendComments]);
+        setActiveComment(null);
     };
 
-    const deleteComment = async(commentId: any) => {
+    const deleteComment = async (commentId: any) => {
         if (window.confirm('Are you sure that you want to remove comment?')) {
             await deleteCommentApi();
             const updatedBackendComments = backendComments.filter(
@@ -36,7 +37,7 @@ export function Comments({ currentUserId }: any): JSX.Element {
             );
             setBackendComments(updatedBackendComments);
         }
-        
+
     }
 
     useEffect(() => {
@@ -48,18 +49,20 @@ export function Comments({ currentUserId }: any): JSX.Element {
         <div className="comments">
             <h3 className="comments__title">Comments</h3>
             <div className="comment-form-title">Write comment</div>
-            <CommentForm submitLabel="Write" handleSubmit={addComment}/>
+            <CommentForm 
+                submitLabel="Write" 
+                handleSubmit={addComment} />
             <div className="comments-container">
                 {rootComments.map((rootComment: any) => (
                     <Comment
                         key={rootComment.id}
                         comment={rootComment}
-                        replies={getReplies(rootComment.id)} 
-                        currentUserId={currentUserId}
-                        deleteComment={deleteComment}
+                        replies={getReplies(rootComment.id)}
                         activeComment={activeComment}
                         setActiveComment={setActiveComment}
                         addComment={addComment}
+                        deleteComment={deleteComment}
+                        currentUserId={currentUserId}
                     />
                 ))}
             </div>

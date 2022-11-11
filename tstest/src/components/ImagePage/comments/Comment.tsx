@@ -1,4 +1,4 @@
-import { deleteComment } from "../api";
+import { deleteComment, updateComment } from "../api";
 import "../index.css";
 import { CommentForm } from "./CommentForm";
 
@@ -11,10 +11,10 @@ export function Comment({ comment, replies, currentUserId, deleteComment, active
     const createdAt = new Date(comment.createdAt).toLocaleString();
     const isReplying =
         activeComment && activeComment.type === 'replying' &&
-        activeComment.commentId === comment.id;
+        activeComment.id === comment.id;
     const isEditing =
         activeComment && activeComment.type === 'editing' &&
-        activeComment.commentId === comment.id;
+        activeComment.id === comment.id;
     const replyId = parentId ? parentId : comment.id;
     return (
         <div className="comment">
@@ -26,12 +26,21 @@ export function Comment({ comment, replies, currentUserId, deleteComment, active
                     <div className="commment-author">{comment.username}</div>
                     <div>{createdAt}</div>
                 </div>
-                <div className="comment-text">{comment.body}</div>
+                {!isEditing && <div className="comment-text">{comment.body}</div>}
+                {isEditing && (
+                    <CommentForm 
+                        submitLabel="Update" 
+                        hasCancelButton 
+                        initialText={comment.body}
+                        handleSubmit={(text: any) => updateComment(text)} 
+                        handleCancel={() => setActiveComment(null)}
+                    />)}
                 <div className="comment-actions">
                     {canReply && (
                         <div
                             className="comment-action"
-                            onClick={() => setActiveComment({ id: comment.id, type: "replying" })}
+                            onClick={() => 
+                                setActiveComment({ id: comment.id, type: "replying" })}
                         >
                             Reply
                         </div>
@@ -56,17 +65,20 @@ export function Comment({ comment, replies, currentUserId, deleteComment, active
                         handleSubmit={(text: any) => addComment(text, replyId)}
                     />
                 )}
+    
                 {replies.length > 0 && (
                     <div className="replies">
                         {replies.map((reply: any) => (
                             <Comment
-                                key={reply.id}
-                                comment={reply}
-                                replies={[]}
-                                currentUserId={currentUserId}
-                                deleteComment={deleteComment}
-                                addComment={addComment}
-                                parentId={comment.id}
+                            comment={reply}
+                            key={reply.id}
+                            setActiveComment={setActiveComment}
+                            activeComment={activeComment}
+                            deleteComment={deleteComment}
+                            addComment={addComment}
+                            parentId={comment.id}
+                            replies={[]}
+                            currentUserId={currentUserId}
                             />
                         ))}
                     </div>
