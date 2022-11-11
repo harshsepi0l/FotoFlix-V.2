@@ -117,22 +117,21 @@ function RightButtonsSection(): JSX.Element {
   //   });
   // };
 
-  useEffect(() => {
-    Axios.post("http://localhost:3000/api/login", {
-      withCredentials: true,
-    }).then((response) => {
-      setIsLoggedIn(true);
-    });
-  }, []);
-
   const logout = () => {
     Axios.get("http://localhost:3000/api/logout", {
       withCredentials: true,
     }).then((response) => {
       setIsLoggedIn(false);
-      navigate("/LandingPage");
     });
   };
+
+  // const loggedIn = () => {
+  //   Axios.post("http://localhost:3000/api/login", {
+  //     withCredentials: true,
+  //   }).then((response) => {
+  //     setIsLoggedIn(true);
+  //   });
+  // };
 
   return (
     <Row justify="end" align="middle">

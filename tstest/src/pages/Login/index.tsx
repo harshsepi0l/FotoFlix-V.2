@@ -10,7 +10,6 @@ import { TrendingTags } from "../../components/Common/TrendingTags";
 import { AccountBar } from "../../components/HomePage/AccountBar";
 import { AccountInfo } from "../../components/HomePage/AccountInfo";
 import { CustomButton } from "../../components/Common/CustomButton";
-import { Cookies } from "react-cookie";
 
 export const Login = () => {
   const [username, checkUsername] = useState("");
