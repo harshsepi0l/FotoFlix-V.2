@@ -40,11 +40,5 @@ export function LandingPage(): JSX.Element {
         </Col>
       </Row>
     </div>
-<<<<<<< Updated upstream
   )
 }
-=======
-  );
-}
-
->>>>>>> Stashed changes
