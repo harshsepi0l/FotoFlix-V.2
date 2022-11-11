@@ -8,7 +8,8 @@ import "./index.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "../../pages/Login";
 import { SignUp } from "../../pages/SignUp";
-
+import Axios from "axios";
+Axios.defaults.withCredentials = true;
 
 const { Search } = Input;
 
@@ -101,20 +102,15 @@ function LeftSection(): JSX.Element {
 
 function RightButtonsSection(): JSX.Element {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    if (localStorage.getItem("token") !== null) {
-      setIsLoggedIn(true);
-    }
-  }, []);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const logout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-    navigate("/");
+    Axios.get("http://localhost:3000/api/logout", {
+      withCredentials: true,
+    }).then((response) => {
+      console.log(response.data);
+      setIsLoggedIn(false);
+    });
   };
-
   return (
     <Row justify="end" align="middle">
       <Col span={4}>

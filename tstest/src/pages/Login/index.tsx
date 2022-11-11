@@ -10,6 +10,7 @@ import { TrendingTags } from "../../components/Common/TrendingTags";
 import { AccountBar } from "../../components/HomePage/AccountBar";
 import { AccountInfo } from "../../components/HomePage/AccountInfo";
 import { CustomButton } from "../../components/Common/CustomButton";
+import { Cookies } from "react-cookie";
 
 export const Login = () => {
   const [username, checkUsername] = useState("");
@@ -35,11 +36,11 @@ export const Login = () => {
       Username: username,
       Password: password,
     }).then((response) => {
-      if (!response.data.auth) {
+      if (response.data.auth) {
         console.log(response.data);
+        sendToSignUp();
         setLoginStatus(false);
       } else {
-        localStorage.setItem("token", response.data.token);
         localStorage.setItem("id", response.data.result[0].id);
         setLoginStatus(true);
         sendToHomePage();
@@ -119,3 +120,6 @@ export const Login = () => {
     </div>
   );
 };
+function readCookie() {
+  throw new Error("Function not implemented.");
+}

@@ -108,26 +108,6 @@ app.post("/api/registration", (req, res) => {
   });
 });
 
-const verifyJWT = (req, res, next) => {
-  const token = req.headers["x-access-token"];
-  if (!token) {
-    res.send("Yo, we need a token, please give it to us next time");
-  } else {
-    jwt.verify(token, "flixuser", (err, decoded) => {
-      if (err) {
-        res.json({ auth: false, message: "You failed to authenticate" });
-      } else {
-        req.userId = decoded.id;
-        next();
-      }
-    });
-  }
-};
-
-app.get("/isUserAuth", verifyJWT, (req, res) => {
-  res.send("You are authenticated");
-});
-
 app.put("/api/update", (req, res) => {
   const username = req.body.Username;
   const firstname = req.body.Firstname;
@@ -163,8 +143,17 @@ app.post("/api/login", (req, res) => {
             expiresIn: 300,
           });
           // req.session.user = result;
-
-          res.json({ auth: true, token: token, result: result });
+          res.cookie("token", token, {
+            maxAge: 60 * 60 * 24 * 30 * 1000,
+            httpOnly: true,
+          });
+          const validateToken = jwt.verify(token, "flixuser");
+          if (validateToken) {
+            req.authenticated = true;
+            res.json({ authenticated: true, token: token, result: result });
+          } else {
+            return res.status(400).json({ error: err });
+          }
         } else {
           res.json({
             auth: false,
@@ -177,6 +166,14 @@ app.post("/api/login", (req, res) => {
     }
   });
 });
+
+app.get("/api/logout", (req, res) => {
+  res.clearCookie("token");
+  res.json({ auth: false, token: null });
+});
+
+//App.gets
+
 //IMAGE UPLOADS
 app.get("/api/images", async (req, res) => {
   const { resources } = await cloudinary.search

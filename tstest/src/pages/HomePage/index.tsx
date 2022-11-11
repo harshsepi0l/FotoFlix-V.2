@@ -10,12 +10,12 @@ import { AccountInfo } from "../../components/HomePage/AccountInfo";
 import "./index.css";
 
 export function HomePage(): JSX.Element {
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      navigate("/LandingPage");
-    }
-  }, []);
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   if (!localStorage.getItem("token")) {
+  //     navigate("/LandingPage");
+  //   }
+  // }, []);
 
   return (
     <div>
