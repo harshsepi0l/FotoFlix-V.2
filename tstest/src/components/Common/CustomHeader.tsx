@@ -8,6 +8,7 @@ import "./index.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "../../pages/Login";
 import { SignUp } from "../../pages/SignUp";
+import { HeaderDropdown } from "./HeaderDropdown";
 
 
 const { Search } = Input;
@@ -81,7 +82,7 @@ function LeftSection(): JSX.Element {
   return (
     <Row justify="start">
       <Space align="center">
-        <Col span={4}>Fotoflix</Col>
+        <Col span={4}><img src="../images/logo-full.svg"/></Col>
       </Space>
 
       <Col span={4} offset={2}>
@@ -148,6 +149,9 @@ function RightButtonsSection(): JSX.Element {
           </Link>
         )}
       </Col>
+      {/* <Col>
+        <HeaderDropdown />
+      </Col> */}
     </Row>
   );
 }
