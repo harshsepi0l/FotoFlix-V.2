@@ -46,38 +46,38 @@ export const SignUp = () => {
     //  sendToLogin();
   };
 
-  const deleteAccount = (
-    Username:
-      | string
-      | number
-      | boolean
-      | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-      | React.ReactFragment
-      | React.ReactPortal
-      | null
-      | undefined
-  ) => {
-    Axios.delete(`http://localhost:3000/api/delete/${Username}`);
-    refreshPage();
-  };
+  // const deleteAccount = (
+  //   Username:
+  //     | string
+  //     | number
+  //     | boolean
+  //     | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+  //     | React.ReactFragment
+  //     | React.ReactPortal
+  //     | null
+  //     | undefined
+  // ) => {
+  //   Axios.delete(`http://localhost:3000/api/delete/${Username}`);
+  //   refreshPage();
+  // };
 
-  const updateUserName = (
-    firstname:
-      | string
-      | number
-      | boolean
-      | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-      | React.ReactFragment
-      | React.ReactPortal
-      | null
-      | undefined
-  ) => {
-    Axios.put(`http://localhost:3000/api/update/`, {
-      Firstname: firstname,
-      Username: newUsername,
-    });
-    setNewUsername("");
-  };
+  // const updateUserName = (
+  //   firstname:
+  //     | string
+  //     | number
+  //     | boolean
+  //     | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+  //     | React.ReactFragment
+  //     | React.ReactPortal
+  //     | null
+  //     | undefined
+  // ) => {
+  //   Axios.put(`http://localhost:3000/api/update/`, {
+  //     Firstname: firstname,
+  //     Username: newUsername,
+  //   });
+  //   setNewUsername("");
+  // };
 
   return (
     <div className="Container">
@@ -144,7 +144,7 @@ export const SignUp = () => {
           <button onClick={submitLog}>Register</button>
         </div>
 
-        {usersList.map(
+        {/* {usersList.map(
           (key: {
             Firstname:
               | string
@@ -213,7 +213,7 @@ export const SignUp = () => {
               </div>
             );
           }
-        )}
+        )} */}
       </div>
     </div>
   );

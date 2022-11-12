@@ -11,8 +11,8 @@ const saltRounds = 10; // for hashing passwords
 const db = require("./models");
 
 // Routers
-const flixerinfoRouter = require("./routes/flixerinfo");
-app.use("/flixerinfo", flixerinfoRouter);
+const signUpRouter = require("./routes/flixerinfo");
+app.use("/SignUp", signUpRouter);
 
 db.sequelize.sync().then(() => {
   app.listen(3000, () => {

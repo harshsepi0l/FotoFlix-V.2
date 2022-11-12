@@ -20,15 +20,14 @@ export const Login = () => {
   };
 
   const loginCheck = () => {
-    Axios.post("http://localhost:3000/api/login", {
+    Axios.post("http://localhost:3000/SignUp/Login", {
       Username: username,
       Password: password,
     }).then((response) => {
-      if (response.data.message) {
-        setLoginStatus(response.data.message);
+      if (response.data.error) {
+        alert(response.data.error);
       } else {
-        setLoginStatus(response.data[0].Username);
-        sendToHomePage();
+        sessionStorage.setItem("accessToken", response.data);
       }
     });
   };
