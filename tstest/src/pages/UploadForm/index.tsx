@@ -25,7 +25,7 @@ export const UploadForm = () => {
   };
   const uploadImage = async (base64EncodedImage: any) => {
     try {
-      await fetch("/Cloudinary", {
+      await fetch("http://localhost:3000/Cloudinary", {
         method: "POST",
         body: JSON.stringify({ data: base64EncodedImage }),
         headers: { "Content-type": "application/json" },

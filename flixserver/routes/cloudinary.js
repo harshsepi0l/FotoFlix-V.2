@@ -17,14 +17,23 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const fileStr = req.body.data;
+
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
       upload_preset: "flixerimages",
     });
-    console.log(uploadedResponse);
-    res.json({ msg: "yay" });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ err: "Something went wrong" });
+
+    const { Title, Description, Image, Cloudinary_id } = req.body;
+    posts.create({
+      Title: Title,
+      Description: Description,
+      Image: Image,
+      Cloudinary_id: Cloudinary_id,
+    });
+
+    res.json({ message: "Image created!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ err: "something went wrong" });
   }
 });
 

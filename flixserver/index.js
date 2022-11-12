@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-app.use(express.json());
+app.use(express.json({ limit: "500mb" }));
 app.use(
   express.urlencoded({
     extended: true,
@@ -72,4 +72,42 @@ db.sequelize.sync().then(() => {
 //       res.send({ message: "User doesn't exist" });
 //     }
 //   });
+// });
+
+// app.get("/api/images", async (req, res) => {
+//   const { resources } = await cloudinary.search
+//     .expression("folder:flixerimages")
+//     .sort_by("public_id", "desc")
+//     .max_results(30)
+//     .execute();
+//   const publicIds = resources.map((file) => file.public_id);
+//   res.send(publicIds);
+// });
+
+// app.post("/api/upload", async (req, res) => {
+//   try {
+//     const fileStr = req.body.data;
+
+//     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+//       upload_preset: "flixerimages",
+//     });
+//     console.log(uploadedResponse);
+//     res.json({ msg: "YAYAYAY" });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ err: "something went wrong" });
+//   }
+// });
+
+// app.get("/api/getimages", (req, res) => {
+//   const sqlSelect = "SELECT * FROM flixerimages";
+
+//   db.query(sqlSelect, (err, result) => {
+//     res.send(result);
+//   });
+// });
+
+// const PORT = process.env.PORT || 3000;
+// app.listen(3000, () => {
+//   console.log("running on port " + PORT);
 // });
