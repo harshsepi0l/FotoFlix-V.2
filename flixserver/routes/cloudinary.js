@@ -21,16 +21,7 @@ router.post("/", async (req, res) => {
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
       upload_preset: "flixerimages",
     });
-
-    const { Title, Description, Image, Cloudinary_id } = req.body;
-    posts.create({
-      Title: Title,
-      Description: Description,
-      Image: Image,
-      Cloudinary_id: Cloudinary_id,
-    });
-
-    res.json({ message: "Image created!" });
+    console.log(uploadedResponse);
   } catch (error) {
     console.error(error);
     res.status(500).json({ err: "something went wrong" });
