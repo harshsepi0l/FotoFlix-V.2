@@ -198,7 +198,7 @@ app.post("/api/upload", async (req, res) => {
     const sqlInsert = "INSERT INTO flixerimages (Description, Dislikes, IsPublic, Likes, Height, Width, Title, Type, UserID, URL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     db.query(
       sqlInsert,
-      ["", 0, false, 0, uploadedResponse.height, uploadedResponse.width, "Untitled Image", uploadedResponse.format, 1, uploadedResponse.url], // Need to fix UserID
+      ["", 0, false, 0, uploadedResponse.height, uploadedResponse.width, "Untitled Image", uploadedResponse.format, 2, uploadedResponse.url], // Need to fix UserID
       (err, result) => {
         console.log(err);
       });

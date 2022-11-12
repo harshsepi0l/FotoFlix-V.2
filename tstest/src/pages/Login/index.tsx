@@ -40,6 +40,7 @@ export const Login = () => {
       } else {
         setUsername(response?.data?.result[0]?.Username);
         localStorage.setItem("token", response.data.token);
+        //localStorage.setItem("userid", response.data.result[0].id);
         setLoginStatus(true);
         sendToHomePage();
       }
