@@ -5,6 +5,7 @@
 .Default-darkpurple {
     background-color: var(--darkpurple);
     border-color: var(--darkpurple);
+    width: fit-content;
 }
 
 .Default-darkpurple:hover,
@@ -16,6 +17,7 @@
 .Default-lightpurple {
     background-color: var(--lightpurple);
     border-color: var(--lightpurple);
+    width: fit-content;
 }
 
 .Default-lightpurple:hover,
@@ -25,7 +27,12 @@
 }
 
 .Default-white {
-    color: var(--darkpurple)
+    color: var(--darkpurple);
+    width: fit-content;
+}
+
+.Default-red {
+    background-color: red
 }
 
 .Default-white:hover,

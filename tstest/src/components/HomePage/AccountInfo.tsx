@@ -1,7 +1,7 @@
 import { AntDesignOutlined } from "@ant-design/icons";
 import { Avatar, Col, Row, Typography } from "antd";
 import Axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 export function AccountInfo(): JSX.Element {
   const [user, setUser] = React.useState<any>(null);
@@ -11,7 +11,6 @@ export function AccountInfo(): JSX.Element {
       setUser(response.data);
     });
   }, []);
-
 
   return (
     <div>
@@ -24,7 +23,7 @@ export function AccountInfo(): JSX.Element {
         </Col>
         <Col flex={5}>
           <Typography.Title level={2} className="HomePage-AccountInfo">
-            {user && user[0].Username}
+            {user && user[1].Username}
             {/* {editableStr} */}
           </Typography.Title>
         </Col>

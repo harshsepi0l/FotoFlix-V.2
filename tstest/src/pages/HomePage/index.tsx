@@ -13,7 +13,7 @@ export function HomePage(): JSX.Element {
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("token")) {
-      navigate("/Login");
+      navigate("/LandingPage");
     }
   }, []);
 
