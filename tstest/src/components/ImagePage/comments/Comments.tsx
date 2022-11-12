@@ -93,8 +93,8 @@ export function Comments({ currentUserId }: any): JSX.Element {
     }, []);
     return (
         <div className="comments">
-            <h3 className="comments__title">Comments</h3>
-            <div className="comment-form-title">Write comment</div>
+            {/* <h3 className="comments__title">Comments</h3>
+            <div className="comment-form-title">Write comment</div> */}
             <CommentForm
                 submitLabel="Write"
                 handleSubmit={addComment} />
