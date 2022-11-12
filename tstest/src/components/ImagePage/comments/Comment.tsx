@@ -1,8 +1,18 @@
-import { deleteComment, updateComment } from "../api";
+import { deleteComment } from "../api";
 import "../index.css";
 import { CommentForm } from "./CommentForm";
 
-export function Comment({ comment, replies, currentUserId, deleteComment, activeComment, addComment, setActiveComment, parentId = null }: any): JSX.Element {
+export function Comment({ 
+    comment, 
+    replies, 
+    currentUserId, 
+    deleteComment, 
+    activeComment, 
+    addComment, 
+    updateComment,
+    setActiveComment, 
+    parentId = null 
+}: any): JSX.Element {
     const fiveminutes = 300000;
     const timePassed = new Date().getTime() - new Date(comment.createdAt).getTime() > fiveminutes;
     const canReply = Boolean(currentUserId);
@@ -32,7 +42,7 @@ export function Comment({ comment, replies, currentUserId, deleteComment, active
                         submitLabel="Update" 
                         hasCancelButton 
                         initialText={comment.body}
-                        handleSubmit={(text: any) => updateComment(text)} 
+                        handleSubmit={(text: any) => updateComment(text, comment.id)} 
                         handleCancel={() => setActiveComment(null)}
                     />)}
                 <div className="comment-actions">
@@ -48,7 +58,8 @@ export function Comment({ comment, replies, currentUserId, deleteComment, active
                     {canEdit && (
                         <div
                             className="comment-action"
-                            onClick={() => setActiveComment({ id: comment.id, type: "editing" })}
+                            onClick={() => 
+                                 setActiveComment({ id: comment.id, type: "editing" })}
                         >
                             Edit
                         </div>
@@ -74,6 +85,7 @@ export function Comment({ comment, replies, currentUserId, deleteComment, active
                             key={reply.id}
                             setActiveComment={setActiveComment}
                             activeComment={activeComment}
+                            updateComment={updateComment}
                             deleteComment={deleteComment}
                             addComment={addComment}
                             parentId={comment.id}

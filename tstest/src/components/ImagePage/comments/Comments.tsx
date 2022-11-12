@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import {
     getComments as getCommentsApi,
     createComment as createCommentApi,
-    deleteComment as deleteCommentApi
+    deleteComment as deleteCommentApi,
+    updateComment as updateCommentApi,
 } from "../api";
 import { Comment } from './Comment';
 import "../index.css";
@@ -40,6 +41,21 @@ export function Comments({ currentUserId }: any): JSX.Element {
 
     }
 
+    const updateComment = async (text: any, commentId: any) => {
+        await updateCommentApi(text);
+        const updatedBackendComments = backendComments.map((backendComment: { id: any; }) => {
+            if (backendComment.id === commentId) {
+                return {
+                    ...backendComment,
+                    body: text,
+                }
+            }
+            return backendComment;
+        });
+        setBackendComments(updatedBackendComments);
+        setActiveComment(null);
+    };
+
     useEffect(() => {
         getCommentsApi().then((data: any) => {
             setBackendComments(data);
@@ -49,8 +65,8 @@ export function Comments({ currentUserId }: any): JSX.Element {
         <div className="comments">
             <h3 className="comments__title">Comments</h3>
             <div className="comment-form-title">Write comment</div>
-            <CommentForm 
-                submitLabel="Write" 
+            <CommentForm
+                submitLabel="Write"
                 handleSubmit={addComment} />
             <div className="comments-container">
                 {rootComments.map((rootComment: any) => (
@@ -62,6 +78,7 @@ export function Comments({ currentUserId }: any): JSX.Element {
                         setActiveComment={setActiveComment}
                         addComment={addComment}
                         deleteComment={deleteComment}
+                        updateComment={updateComment}
                         currentUserId={currentUserId}
                     />
                 ))}
