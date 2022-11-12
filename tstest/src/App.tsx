@@ -8,6 +8,7 @@ import { LandingPage } from "./pages/LandingPage";
 import { HomePage } from "./pages/HomePage";
 import { SignUp } from "./pages/SignUp";
 import { Login } from "./pages/Login";
+import { UploadForm } from "./pages/UploadForm";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/HomePage" element={<HomePage />} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/" element={<SignUp />} />
+        <Route path="/UploadForm" element={<UploadForm />} />
       </Routes>
     </Router>
   );
