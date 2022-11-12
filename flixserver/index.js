@@ -1,8 +1,16 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+    limit: "500mb",
+  })
+);
+app.use(bodyParser.json());
 app.use(cors());
 
 const bcrypt = require("bcrypt"); // for hashing passwords
@@ -15,8 +23,8 @@ const db = require("./models");
 const signUpRouter = require("./routes/flixerinfo");
 app.use("/SignUp", signUpRouter);
 
-const postsRouter = require("./routes/cloudinary.js");
-app.use("/Posts", postsRouter);
+const cloudinaryRouter = require("./routes/cloudinary");
+app.use("/Cloudinary", cloudinaryRouter);
 
 db.sequelize.sync().then(() => {
   app.listen(3000, () => {

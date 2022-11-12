@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { Posts } = require("../models");
+const bodyParser = require("body-parser");
+const { posts } = require("../models");
 const { cloudinary } = require("../utils/cloudinary");
 
 router.get("/", async (req, res) => {
@@ -15,20 +16,15 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const { Title, Description, Image, Cloudinary_id } = req.body;
-    const result = await cloudinary.uploader.upload(Image, {
-      upload_preset: "flixserver",
+    const fileStr = req.body.data;
+    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+      upload_preset: "flixerimages",
     });
-    const post = await Posts.create({
-      Title,
-      Description,
-      Image: result.secure_url,
-      Cloudinary_id: result.public_id,
-    });
-    res.json(post);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
+    console.log(uploadedResponse);
+    res.json({ msg: "yay" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ err: "Something went wrong" });
   }
 });
 
