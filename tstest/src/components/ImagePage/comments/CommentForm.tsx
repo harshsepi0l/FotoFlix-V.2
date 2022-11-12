@@ -15,7 +15,7 @@ export function CommentForm({
         setText("");
     }
     return (
-        <form onSubmit={onSubmit}>
+        <form className="comment-form-container" onSubmit={onSubmit}>
             <textarea
                 className="comment-form-textarea"
                 value={text}

@@ -4,6 +4,7 @@ import {
     createComment as createCommentApi,
     deleteComment as deleteCommentApi,
     updateComment as updateCommentApi,
+    updateLikesDislikes as updateLikesDislikesApi,
 } from "../api";
 import { Comment } from './Comment';
 import "../index.css";
@@ -14,6 +15,7 @@ export function Comments({ currentUserId }: any): JSX.Element {
     const [activeComment, setActiveComment] = useState<any>(null)
     const rootComments = backendComments.filter((backendComment: any) => backendComment.parentId === null);
     console.log("backendComments", backendComments);
+    const [alreadyLiked, setAlreadyLiked] = useState(false);
 
     const getReplies = (commentId: any) => {
         return backendComments
@@ -56,6 +58,34 @@ export function Comments({ currentUserId }: any): JSX.Element {
         setActiveComment(null);
     };
 
+    const updateLikes = async (commentId: any, likes: number) => {
+        await updateLikesDislikesApi();
+        const updatedBackendComments = backendComments.map((backendComment: { id: any}) => {
+            if (backendComment.id === commentId) {
+                return {
+                    ...backendComment,
+                    likes: likes + 1,
+                }
+            }
+            return backendComment;
+        });
+        setBackendComments(updatedBackendComments);
+    }
+
+    const updateDislikes = async (commentId: any, dislikes: number) => {
+        await updateLikesDislikesApi();
+        const updatedBackendComments = backendComments.map((backendComment: { id: any}) => {
+            if (backendComment.id === commentId) {
+                return {
+                    ...backendComment,
+                    dislikes: dislikes + 1,
+                }
+            }
+            return backendComment;
+        });
+        setBackendComments(updatedBackendComments);
+    }
+
     useEffect(() => {
         getCommentsApi().then((data: any) => {
             setBackendComments(data);
@@ -80,6 +110,8 @@ export function Comments({ currentUserId }: any): JSX.Element {
                         deleteComment={deleteComment}
                         updateComment={updateComment}
                         currentUserId={currentUserId}
+                        updateLikes={updateLikes}
+                        updateDislikes={updateDislikes}
                     />
                 ))}
             </div>
