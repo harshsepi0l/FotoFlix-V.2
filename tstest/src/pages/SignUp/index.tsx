@@ -23,14 +23,8 @@ export const SignUp = () => {
     window.location.reload();
   };
 
-  useEffect(() => {
-    Axios.get("http://localhost:3000/api/get").then((response) => {
-      setUsersList(response.data);
-    });
-  }, []);
-
-  const submitLog = () => {
-    Axios.post("http://localhost:3000/api/registration", {
+  const submitLog = (data: any) => {
+    Axios.post("http://localhost:3000/SignUp", {
       Firstname: firstname,
       Lastname: lastname,
       Username: username,
@@ -48,6 +42,7 @@ export const SignUp = () => {
         Password: password,
       },
     ]);
+    console.log(data);
     //  sendToLogin();
   };
 
