@@ -82,6 +82,7 @@ export const SignUp = () => {
   return (
     <div className="Container">
       <div className="App">
+       
         <h1 style={{ color: "#937DC2" }}>Sign up for a free account</h1>
         <div className="SignUpContainer">
           {/* This is a row */}
