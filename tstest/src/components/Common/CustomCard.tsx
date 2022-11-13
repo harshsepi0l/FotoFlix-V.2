@@ -36,7 +36,7 @@ function CustomAction(props: IAction): JSX.Element {
 export function CustomCard(): JSX.Element {
     return (
         <Card
-            style={{ width: 250, marginTop: 40}}
+            style={{ width: 300, marginTop: 40}}
             cover={
                 <img
                     alt="example"
