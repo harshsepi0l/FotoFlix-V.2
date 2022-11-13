@@ -4,7 +4,7 @@ import { Chip, Paper } from "@mui/material";
 import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
 
-interface ChipData {
+export interface ChipData {
   key: number;
   label: string;
 }

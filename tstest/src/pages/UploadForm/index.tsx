@@ -9,7 +9,6 @@ import {
   FormikValues,
 } from "formik";
 import { ChipsArray } from "../../components/Tag";
-import {TagData} from "../../components/Tag";
 
 export const UploadForm = () => {
   const [previewSource, setPreviewSource] = useState("");
