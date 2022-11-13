@@ -8,7 +8,7 @@ import {
   FormikHelpers,
   FormikValues,
 } from "formik";
-// import ChipsArray from "./components/Tags/index.tsx";
+import { ChipsArray } from "../../components/Tag";
 
 export const UploadForm = () => {
   const [previewSource, setPreviewSource] = useState("");
@@ -17,30 +17,29 @@ export const UploadForm = () => {
   const [imageTitle, setImageTitle] = useState(""); // Control title of image
   const [imageDesc, setImageDesc] = useState(""); // Control image description
   const [imageVis, setImageVis] = useState(1); // Control public (0) vs. private (1)
-  const [imageTags, setImageTags] = useState(""); // tags
+  //const [imageTags, setImageTags] = useState(""); // tags
 
-  const handleImageTitleChange = (e: any) => {
-    // This updates every single time anything is typed
+  const handleImageTitleChange = (e: any) => { // This updates every single time anything is typed
     const title = e.target.value;
     setImageTitle(title);
-  };
+  }
   const handleImageDescChange = (e: any) => {
     const desc = e.target.value;
     setImageDesc(desc);
-  };
-  const handleImageVisChange = (e: any) => {
-    // Public or private
+  }
+  const handleImageVisChange = (e: any) => {// Public or private
     const vis = e.target.value;
-    if (vis == "public") {
+    if (vis == "public"){
       setImageVis(0);
-    } else {
+    }
+    else {
       setImageVis(1);
     }
-  };
-  const handleTagsChange = (e: any) => {
-    const tags = e.target.value;
-    setImageTags(tags);
-  };
+  }
+  // const handleTagsChange = (e: any) => {
+  //   const tags = e.target.value;
+  //   setImageTags(tags);
+  // }
 
   const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
@@ -64,12 +63,12 @@ export const UploadForm = () => {
     try {
       await fetch("http://localhost:3000/Cloudinary", {
         method: "POST",
-        body: JSON.stringify({
+        body: JSON.stringify({ 
           data: base64EncodedImage,
           Title: imageTitle,
           Description: imageDesc,
           PublicOrPrivate: imageVis,
-          Tags: imageTags,
+          Tags: TagData
         }),
         headers: { "Content-type": "application/json" },
       });
@@ -99,8 +98,7 @@ export const UploadForm = () => {
       <div>
         <h1>Upload </h1>
         <form onSubmit={handleSubmitFile} className="form">
-          <h3>Upload your image!</h3>
-          <br />
+          <h3>Upload your image!</h3><br />
           <input
             type="file"
             name="image "
@@ -108,55 +106,35 @@ export const UploadForm = () => {
             value={fileInputState}
             className="form-input"
           />
-          <br />
-          <h3>Image Title</h3>
+          <br /><h3>Image Title</h3>
           <input
             type="text"
             name="Image Title"
             onChange={handleImageTitleChange}
             className="form-input"
           />
-          <br />
-          <h3>Image Description</h3>
-          <input
+          <br /><h3>Image Description</h3>
+          <input 
             type="text"
             name="Image Description"
             onChange={handleImageDescChange}
             className="form-input"
           />
-          <br />
-          <h3>Public or private?</h3>
-          <input
-            type="radio"
-            value="public"
-            id="public"
-            onChange={handleImageVisChange}
-            name="vis"
-          />
+          <br /><h3>Public or private?</h3>
+          <input type="radio" value="public" id="public"
+                onChange={handleImageVisChange} name="vis" />
           <label htmlFor="public">Public</label>
           <br />
-          <input
-            type="radio"
-            value="private"
-            id="private"
-            onChange={handleImageVisChange}
-            name="vis"
-          />
+          <input type="radio" value="private" id="private"
+            onChange={handleImageVisChange} name="vis"/>
           <label htmlFor="private">Private</label>
 
           <br />
-          <h3>Tags (Use a # for each tag)</h3>
-          <input
-            type="text"
-            name="Tags"
-            onChange={handleTagsChange}
-            className="form-input"
-          />
-
+          <ChipsArray />
+         
           <button className="btn" type="submit">
             Submit
           </button>
-          {/* <ChipsArray /> */}
         </form>
         {previewSource && (
           <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
