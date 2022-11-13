@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { ChipsArray } from "../../components/Tags";
 
 export const ImagesForm = () => {
   const [previewSource, setPreviewSource] = useState("");
@@ -52,6 +53,11 @@ export const ImagesForm = () => {
       {previewSource && (
         <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
       )}
+      <br />
+      <ChipsArray />
     </div>
+
+        
+   
   );
 };
