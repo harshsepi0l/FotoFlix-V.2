@@ -20,6 +20,11 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
+   // This will navigate to Login Page once user has signed up
+   const sendToLanding = () => {
+    navigate("/");
+  };
+
   // This will navigate to Login Page once user has signed up
   const sendToSignUp = () => {
     navigate("/SignUp");
@@ -112,14 +117,27 @@ export const Login = () => {
             </NavLink>
           </div>
           <div className="login">
-            <div>
-              <CustomButton
-                buttonType={"primary"}
-                color={"darkpurple"}
-                title={"Login"}
-                onClick={loginCheck}
+
+            <div className="Button-SignUp">
+            <CustomButton
+              buttonType={"primary"}
+              color={"darkpurple"}
+              title={"Login"}
+              onClick={loginCheck}
+              
               />
-            </div>
+              
+
+            <div className="margin-Register-signup">
+              <NavLink onClick={sendToLanding} to={"/"}>
+                <CustomButton
+                  buttonType={"primary"}
+                  color={"red"}
+                  title={"Cancel"}
+                />
+              </NavLink>
+              </div>
+              </div>
           </div>
         </div>
       </div>
