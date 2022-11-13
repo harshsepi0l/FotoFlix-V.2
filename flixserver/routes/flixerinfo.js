@@ -44,4 +44,13 @@ router.post("/Login", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const flixerinfo = await flixerinfo.findAll();
+    res.json(flixerinfo);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 module.exports = router;

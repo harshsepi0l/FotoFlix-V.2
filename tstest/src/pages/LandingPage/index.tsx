@@ -5,6 +5,7 @@ import { CustomHeader } from "../../components/Common/CustomHeader";
 import CustomMenu from "../../components/Common/CustomMenu";
 import { InfiniteScroll } from "../../components/Common/InfiniteScroll";
 import { RowImages } from "../../components/Common/RowImages";
+
 import "./index.css";
 
 const gutters: Record<string, number> = {};

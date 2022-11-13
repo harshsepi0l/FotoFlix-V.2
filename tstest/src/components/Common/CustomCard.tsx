@@ -59,8 +59,8 @@ interface isGlobal {
 }
 
 interface isGlobal {
-    isGlobal: boolean;
-  }
+  isGlobal: boolean;
+}
 
 export function CustomCard(): JSX.Element {
   let isGlobal = false;

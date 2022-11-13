@@ -7,7 +7,7 @@ export function AccountInfo(): JSX.Element {
   const [user, setUser] = React.useState<any>(null);
 
   useEffect(() => {
-    Axios.get("http://localhost:3000/api/get").then((response) => {
+    Axios.get("http://localhost:3000/SignUp").then((response) => {
       setUser(response.data);
     });
   }, []);

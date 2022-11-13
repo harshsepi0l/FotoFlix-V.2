@@ -10,7 +10,6 @@ import { Login } from "../../pages/Login";
 import { SignUp } from "../../pages/SignUp";
 import { HeaderDropdown } from "./HeaderDropdown";
 
-
 const { Search } = Input;
 
 const suffix = (
@@ -82,12 +81,14 @@ function LeftSection(): JSX.Element {
   return (
     <Row justify="start">
       <Space align="center">
-        <Col span={4}><img src="../images/logo-full.svg"/></Col>
+        <Col span={4}>
+          <img src="../images/logo-full.svg" />
+        </Col>
       </Space>
 
       <Col span={4} offset={2}>
         <CustomButton
-          onClick={() => navigate("/ImagesFolder")}
+          onClick={() => navigate("/UploadForm")}
           buttonType={"primary"}
           color={"darkpurple"}
           title={"New Post"}
@@ -114,7 +115,7 @@ function RightButtonsSection(): JSX.Element {
   };
 
   return (
-    <Row justify="end" align="middle" >
+    <Row justify="end" align="middle">
       <Col span={4}>
         {isLoggedIn ? (
           <Avatar
