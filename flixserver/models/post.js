@@ -1,5 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define("flixerimages", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     ImageType: {
       type: DataTypes.STRING,
       allowNull: false,

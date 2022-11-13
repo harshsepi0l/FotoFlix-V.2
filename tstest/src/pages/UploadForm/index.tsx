@@ -1,6 +1,13 @@
 import React from "react";
 import { useState } from "react";
-
+import {
+  Formik,
+  Form,
+  Field,
+  ErrorMessage,
+  FormikHelpers,
+  FormikValues,
+} from "formik";
 export const UploadForm = () => {
   const [previewSource, setPreviewSource] = useState("");
   const [fileInputState, setFileInputState] = useState("");
@@ -36,22 +43,26 @@ export const UploadForm = () => {
   };
   return (
     <div>
-      <h1>Upload </h1>
-      <form onSubmit={handleSubmitFile} className="form">
-        <input
-          type="file"
-          name="image "
-          onChange={handleFileInputChange}
-          value={fileInputState}
-          className="form-input"
-        />
-        <button className="btn" type="submit">
-          Submit
-        </button>
-      </form>
-      {previewSource && (
-        <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
-      )}
+      {" "}
+      <div>
+        <h1>Upload </h1>
+        <form onSubmit={handleSubmitFile} className="form">
+          <input
+            type="file"
+            name="image "
+            onChange={handleFileInputChange}
+            value={fileInputState}
+            className="form-input"
+          />
+
+          <button className="btn" type="submit">
+            Submit
+          </button>
+        </form>
+        {previewSource && (
+          <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
+        )}
+      </div>
     </div>
   );
 };
