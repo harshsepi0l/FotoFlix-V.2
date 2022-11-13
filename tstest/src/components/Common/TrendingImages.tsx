@@ -41,8 +41,8 @@ export function TrendingImages(): JSX.Element {
           < ul >
             {
               numbers.map(() => (
-                <CustomCard/>
-            ))
+                <CustomCard  />
+              ))
             }
           </ul>
         </InfiniteScroll >

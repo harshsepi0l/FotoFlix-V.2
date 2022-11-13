@@ -1,5 +1,4 @@
 import { Col, Row } from "antd";
-import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { CustomHeader } from "../../components/Common/CustomHeader";
@@ -7,9 +6,9 @@ import { TrendingImages } from "../../components/Common/TrendingImages";
 import { TrendingTags } from "../../components/Common/TrendingTags";
 import { AccountBar } from "../../components/HomePage/AccountBar";
 import { AccountInfo } from "../../components/HomePage/AccountInfo";
-import "./index.css";
 
 export function HomePage(): JSX.Element {
+<<<<<<< HEAD
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -17,6 +16,8 @@ export function HomePage(): JSX.Element {
     }
   }, []);
 
+=======
+>>>>>>> main
   return (
     <div className="Home-Page">
       <CustomHeader isLoggedIn={true} />

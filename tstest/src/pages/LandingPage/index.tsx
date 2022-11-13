@@ -25,20 +25,7 @@ export function LandingPage(): JSX.Element {
   return (
     <div className="LandingContainer">
       <CustomHeader isLoggedIn={true} />
-      <Row>
-        <Col span={6} order={4}>
-          <RowImages />
-        </Col>
-        <Col span={6} order={3}>
-          <RowImages />
-        </Col>
-        <Col span={6} order={2}>
-          <RowImages />
-        </Col>
-        <Col span={6} order={1}>
-          <RowImages />
-        </Col>
-      </Row>
+      <RowImages />
     </div>
   );
 }
