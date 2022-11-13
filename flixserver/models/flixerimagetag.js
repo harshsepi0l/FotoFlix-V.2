@@ -1,5 +1,8 @@
+const flixerimages = require("./post");
+const flixertags = require("./flixertags");
+
 module.exports = (sequelize, DataTypes) => {
-    const FlixerInfo = sequelize.define("flixerimagetag", {
+    const FlixerImageTag = sequelize.define("flixerimagetag", {
         ImageID: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -17,5 +20,5 @@ module.exports = (sequelize, DataTypes) => {
             }
           }
     });
-    return FlixerInfo;
+    return FlixerImageTag;
   };

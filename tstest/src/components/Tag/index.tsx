@@ -11,8 +11,13 @@ interface ChipData {
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.5),
 }));
-export const ChipsArray = () => {
 
+// export const TagData = ({tags: string}) => {
+//   const [imageTags, setImageTags] = useState(""); // tags
+//   setImageTags(tags);
+// }
+
+export const ChipsArray = () => {
   const [imageTags, setImageTags] = useState(""); // tags
   const handleTagsChange = (e: any) => {
     const tags = e.target.value;
@@ -35,7 +40,7 @@ export const ChipsArray = () => {
     setInput("");
   };
 
-  console.log(chipData);
+  //console.log(chipData);
   return (
     <Box>
       <Box>

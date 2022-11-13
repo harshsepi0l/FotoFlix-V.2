@@ -9,6 +9,7 @@ import {
   FormikValues,
 } from "formik";
 import { ChipsArray } from "../../components/Tag";
+import {TagData} from "../../components/Tag";
 
 export const UploadForm = () => {
   const [previewSource, setPreviewSource] = useState("");
@@ -17,7 +18,7 @@ export const UploadForm = () => {
   const [imageTitle, setImageTitle] = useState(""); // Control title of image
   const [imageDesc, setImageDesc] = useState(""); // Control image description
   const [imageVis, setImageVis] = useState(1); // Control public (0) vs. private (1)
-  const [imageTags, setImageTags] = useState(""); // tags
+  //const [imageTags, setImageTags] = useState(""); // tags
 
   const handleImageTitleChange = (e: any) => { // This updates every single time anything is typed
     const title = e.target.value;
@@ -36,10 +37,10 @@ export const UploadForm = () => {
       setImageVis(1);
     }
   }
-  const handleTagsChange = (e: any) => {
-    const tags = e.target.value;
-    setImageTags(tags);
-  }
+  // const handleTagsChange = (e: any) => {
+  //   const tags = e.target.value;
+  //   setImageTags(tags);
+  // }
 
   const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
@@ -68,7 +69,7 @@ export const UploadForm = () => {
           Title: imageTitle,
           Description: imageDesc,
           PublicOrPrivate: imageVis,
-          Tags: imageTags
+          Tags: TagData
         }),
         headers: { "Content-type": "application/json" },
       });
@@ -129,18 +130,12 @@ export const UploadForm = () => {
             onChange={handleImageVisChange} name="vis"/>
           <label htmlFor="private">Private</label>
 
-          <br /><h3>Tags (Use a # for each tag)</h3>
-          <input
-            type="text"
-            name="Tags"
-            onChange={handleTagsChange}
-            className="form-input"
-          />
+          <br />
+          <ChipsArray />
          
           <button className="btn" type="submit">
             Submit
           </button>
-          <ChipsArray />
         </form>
         {previewSource && (
           <img src={previewSource} alt="chosen" style={{ height: "300px" }} />

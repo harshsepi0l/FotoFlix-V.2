@@ -4,6 +4,8 @@ const router = express.Router();
 const { DataTypes } = require("sequelize");
 const post = require("../models/post")(sequelize, DataTypes);
 const bodyParser = require("body-parser");
+const imagetags = require("../models/flixerimagetag");
+const tags = require("../models/flixertags");
 
 const { cloudinary } = require("../utils/cloudinary");
 
@@ -36,6 +38,9 @@ router.post("/", async (req, res) => {
     Dislikes: 0,
     UploadDate: uploadedResponse.created_at,
   });
+
+  // Upload the tags
+  console.log(Tags);
 
   res.json({ message: "Image created!" });
 });
