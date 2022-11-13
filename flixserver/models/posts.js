@@ -1,21 +1,18 @@
 module.exports = (sequelize, DataTypes) => {
-  const Cloudinary = sequelize.define("flixerimages", {
-    ImageFormat: {
+  const Posts = sequelize.define("flixerimages", {
+    ImageType: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    cloudinaryID: {
+    PostType: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    accessMode: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    url: {
+    Url: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   });
-  return Cloudinary;
+
+  return Posts;
 };
