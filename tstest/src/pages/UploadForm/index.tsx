@@ -8,6 +8,7 @@ export const UploadForm = () => {
   const [imageTitle, setImageTitle] = useState(""); // Control title of image
   const [imageDesc, setImageDesc] = useState(""); // Control image description
   const [imageVis, setImageVis] = useState(""); // Control public vs. private
+  const [imageTags, setImageTags] = useState(""); // tags
   const handleImageTitleChange = (e: any) => { // This updates every single time anything is typed
     const title = e.target.value;
     setImageTitle(title);
@@ -16,11 +17,13 @@ export const UploadForm = () => {
     const desc = e.target.value;
     setImageDesc(desc);
   }
-  // Public or private -------------------------------------------
-  const handleImageVisChange = (e: any) => {
+  const handleImageVisChange = (e: any) => {// Public or private
     const vis = e.target.value;
     setImageVis(vis);
-    console.log(vis);
+  }
+  const handleTagsChange = (e: any) => {
+    const tags = e.target.value;
+    setImageTags(tags);
   }
   const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
@@ -40,6 +43,7 @@ export const UploadForm = () => {
     if (!previewSource) return;
     uploadImage(previewSource);
     // Upload title, desc, etc using their own function!
+    uploadImageInfo();
   };
   const uploadImage = async (base64EncodedImage: any) => {
     try {
@@ -52,6 +56,16 @@ export const UploadForm = () => {
       console.error(err);
     }
   };
+  const uploadImageInfo = async () => {
+    try {
+      await fetch("http://localhost:3000/Cloudinary", {
+        
+        
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }
   return (
     <div>
       <h1>Upload </h1>
@@ -86,7 +100,14 @@ export const UploadForm = () => {
         <input type="radio" value="private" id="private"
           onChange={handleImageVisChange} name="vis"/>
         <label htmlFor="private">Private</label>
-        <br />
+
+        <br /><h3>Tags (Use a # for each tag)</h3>
+        <input
+          type="text"
+          name="Tags"
+          onChange={handleTagsChange}
+          className="form-input"
+        />
         <button className="btn" type="submit">
           Submit
         </button>
