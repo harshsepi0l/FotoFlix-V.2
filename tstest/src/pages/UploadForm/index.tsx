@@ -8,6 +8,8 @@ import {
   FormikHelpers,
   FormikValues,
 } from "formik";
+import { ChipsArray } from "../../components/Tag";
+
 export const UploadForm = () => {
   const [previewSource, setPreviewSource] = useState("");
   const [fileInputState, setFileInputState] = useState("");
@@ -107,9 +109,11 @@ export const UploadForm = () => {
             onChange={handleTagsChange}
             className="form-input"
           />
+         
           <button className="btn" type="submit">
             Submit
           </button>
+          <ChipsArray />
         </form>
         {previewSource && (
           <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
