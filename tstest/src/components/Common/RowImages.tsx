@@ -25,21 +25,19 @@ export function RowImages(): JSX.Element {
   };
 
   return (
-    <div >
+    <div>
       <InfiniteScroll
         hasMoreData={hasMoreData}
         isLoading={loading}
         onBottomHit={loadMoreNumbers}
         loadOnMount={true}
       >
-        < ul >
-          {
-            numbers.map(() => (
-              <CustomCard />
-            ))
-          }
+        <ul>
+          {numbers.map(() => (
+            <CustomCard />
+          ))}
         </ul>
-      </InfiniteScroll >
-    </div >
-  )
+      </InfiniteScroll>
+    </div>
+  );
 }

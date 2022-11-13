@@ -38,8 +38,8 @@ export const InfiniteScroll: React.FC<Props> = ({
         onBottomHit();
       }
     };
-    document.addEventListener('scroll', onScroll);
-    return () => document.removeEventListener('scroll', onScroll);
+    document.addEventListener("scroll", onScroll);
+    return () => document.removeEventListener("scroll", onScroll);
   }, [onBottomHit, isLoading, hasMoreData]);
 
   return <div ref={contentRef}>{children}</div>;
