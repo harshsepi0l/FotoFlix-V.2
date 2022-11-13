@@ -5,6 +5,11 @@ export const UploadForm = () => {
   const [previewSource, setPreviewSource] = useState("");
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
+  const [imageTitle, setImageTitle] = useState("");
+  const handleImageTitleChange = (e: any) => { // This updates every single time anything is typed
+    const title = e.target.value;
+    setImageTitle(title);
+  }
   const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
     previewFile(file);
@@ -38,6 +43,7 @@ export const UploadForm = () => {
     <div>
       <h1>Upload </h1>
       <form onSubmit={handleSubmitFile} className="form">
+        <h3>Image</h3>
         <input
           type="file"
           name="image "
@@ -45,6 +51,14 @@ export const UploadForm = () => {
           value={fileInputState}
           className="form-input"
         />
+        <br /><h3>Image Title</h3>
+        <input
+          type="text"
+          name="Image Title"
+          onChange={handleImageTitleChange}
+          className="form-input"
+        />
+        <br />
         <button className="btn" type="submit">
           Submit
         </button>
