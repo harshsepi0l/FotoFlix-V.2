@@ -1,5 +1,6 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import {
   Formik,
   Form,
@@ -12,6 +13,12 @@ export const UploadForm = () => {
   const [previewSource, setPreviewSource] = useState("");
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
+  const [values, setValues] = useState("");
+  useEffect(() => {
+    axios.get("http://localhost:3000/Cloudinary").then((response) => {
+      setValues(response.data);
+    });
+  }, []);
   const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
     previewFile(file);
