@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
-import { Button, Input, Space } from "antd";
-import { CustomButton } from "../../components/Common/CustomButton";
-
 import "./signUp.css";
 import Axios from "axios";
 
@@ -23,24 +19,12 @@ export const SignUp = () => {
     navigate("/Login");
   };
 
-  // This will navigate to Login Page once user has signed up
-  const sendToLanding = () => {
-    navigate("/");
-  };
-
   const refreshPage = () => {
     window.location.reload();
   };
 
-  useEffect(() => {
-    Axios.get("http://localhost:3000/api/get").then((response) => {
-      setUsersList(response.data);
-    });
-  }, []);
-
-  const submitLog = () => {
-    
-    Axios.post("http://localhost:3000/api/registration", {
+  const submitLog = (data: any) => {
+    Axios.post("http://localhost:3000/SignUp", {
       Firstname: firstname,
       Lastname: lastname,
       Username: username,
@@ -58,42 +42,42 @@ export const SignUp = () => {
         Password: password,
       },
     ]);
+    console.log(data);
     //  sendToLogin();
-    
   };
 
-  const deleteAccount = (
-    Username:
-      | string
-      | number
-      | boolean
-      | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-      | React.ReactFragment
-      | React.ReactPortal
-      | null
-      | undefined
-  ) => {
-    Axios.delete(`http://localhost:3000/api/delete/${Username}`);
-    refreshPage();
-  };
+  // const deleteAccount = (
+  //   Username:
+  //     | string
+  //     | number
+  //     | boolean
+  //     | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+  //     | React.ReactFragment
+  //     | React.ReactPortal
+  //     | null
+  //     | undefined
+  // ) => {
+  //   Axios.delete(`http://localhost:3000/api/delete/${Username}`);
+  //   refreshPage();
+  // };
 
-  const updateUserName = (
-    firstname:
-      | string
-      | number
-      | boolean
-      | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-      | React.ReactFragment
-      | React.ReactPortal
-      | null
-      | undefined
-  ) => {
-    Axios.put(`http://localhost:3000/api/update/`, {
-      Firstname: firstname,
-      Username: newUsername,
-    });
-    setNewUsername("");
-  };
+  // const updateUserName = (
+  //   firstname:
+  //     | string
+  //     | number
+  //     | boolean
+  //     | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+  //     | React.ReactFragment
+  //     | React.ReactPortal
+  //     | null
+  //     | undefined
+  // ) => {
+  //   Axios.put(`http://localhost:3000/api/update/`, {
+  //     Firstname: firstname,
+  //     Username: newUsername,
+  //   });
+  //   setNewUsername("");
+  // };
 
   return (
     <div className="Container">
@@ -104,20 +88,37 @@ export const SignUp = () => {
           <div className="Column">
             <div className="Row">
               <div className="form">
-                <Input
-                  placeholder="Username"
+                <label>First name: </label>
+                <input
+                  type="text"
+                  name="firstname"
+                  onChange={(e) => {
+                    setFirstname(e.target.value);
+                  }}
+                />
+
+                <label> Last name: </label>
+                <input
+                  type="text"
+                  name="lastname"
+                  onChange={(e) => {
+                    setLastname(e.target.value);
+                  }}
+                />
+              </div>
+              {/* This is a column */}
+              <div className="Row">
+                <label>Username: </label>
+                <input
                   type="text"
                   name="username"
-                  style={{ borderRadius: "25px", height: "82.64px" }}
                   onChange={(e) => {
                     setUserName(e.target.value);
                   }}
                 />
-                <br />
-                <br />
-                <Input
-                  placeholder="Email Address"
-                  style={{ borderRadius: "25px", height: "82.64px" }}
+
+                <label> Email: </label>
+                <input
                   type="text"
                   name="email"
                   onChange={(e) => {
@@ -125,78 +126,22 @@ export const SignUp = () => {
                   }}
                 />
               </div>
-              <br />
-
-              {/* This is a column */}
-              <div className="Row">
-                <Input
-                  placeholder="First Name"
-                  type="text"
-                  name="firstname"
-                  style={{
-                    borderRadius: "25px",
-                    height: "82.64px",
-                    width: "20vw",
-                    marginRight: "40px",
-                  }}
-                  onChange={(e) => {
-                    setFirstname(e.target.value);
-                  }}
-                />
-
-                <Input
-                  placeholder="Last Name"
-                  type="text"
-                  name="lastname"
-                  style={{
-                    borderRadius: "25px",
-                    height: "82.64px",
-                    width: "20vw",
-                    marginLeft: "16px",
-                  }}
-                  onChange={(e) => {
-                    setLastname(e.target.value);
-                  }}
-                />
-              </div>
-              <br />
-              <div>
-                <Space direction="vertical">
-                  <Input.Password
-                    placeholder="Create Password"
-                    style={{ borderRadius: "25px", height: "82.64px" }}
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                    }}
-                  />
-                </Space>
-              </div>
+              <label>Password: </label>
+              <input
+                type="text"
+                name="password"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
             </div>
-            <br />
+
             <NavLink onClick={sendToLogin} to={"/Login"}>
               <p style={{ color: "#C689C6" }}>Already have an account?</p>
             </NavLink>
           </div>
 
-          <div className="Button-SignUp">
-            <CustomButton
-              buttonType={"primary"}
-              color={"darkpurple"}
-              title={"Register"}
-              onClick={submitLog}
-              
-            />
-
-            <div className="margin-Register-signup">
-              <NavLink onClick={sendToLanding} to={"/"}>
-                <CustomButton
-                  buttonType={"primary"}
-                  color={"red"}
-                  title={"Cancel"}
-                />
-              </NavLink>
-            </div>
-          </div>
+          <button onClick={submitLog}>Register</button>
         </div>
 
         {/* {usersList.map(

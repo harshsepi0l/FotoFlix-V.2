@@ -16,12 +16,6 @@ export function RowImages(): JSX.Element {
         <Motion
           component={
             <CustomCard
-              image="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-              title="Title"
-              description="This is description"
-              like={10}
-              didslike={10}
-              popularity={11}
             />}
           key={card.title + key}
         />
