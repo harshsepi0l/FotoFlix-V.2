@@ -29,6 +29,7 @@ export const Login = () => {
       } else {
         sessionStorage.setItem("accessToken", response.data);
       }
+      sendToHomePage();
     });
   };
 

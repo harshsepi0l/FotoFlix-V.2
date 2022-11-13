@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 body { font-family: Lato;
 box-sizing: border-box;
 background-color: #FFE6F7;
@@ -81,7 +81,7 @@ button:hover {
      width: 100%;
   }
 }
-=======
+
 body {
   background-color: #ffe6f7;
 }
@@ -203,4 +203,4 @@ button:hover {
   display: flex;
   flex-wrap: wrap;
 }
->>>>>>> windows-harsha
+
