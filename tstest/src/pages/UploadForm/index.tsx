@@ -32,6 +32,7 @@ export const UploadForm = () => {
     e.preventDefault();
     if (!previewSource) return;
     uploadImage(previewSource);
+    // Upload title, desc, etc using their own function!
   };
   const uploadImage = async (base64EncodedImage: any) => {
     try {
