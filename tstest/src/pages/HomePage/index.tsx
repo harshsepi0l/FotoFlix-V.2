@@ -1,5 +1,8 @@
 import { Col, Row } from "antd";
+<<<<<<< HEAD
 import { useEffect } from "react";
+=======
+>>>>>>> windows-harsha
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { CustomHeader } from "../../components/Common/CustomHeader";
@@ -10,6 +13,7 @@ import { AccountInfo } from "../../components/HomePage/AccountInfo";
 import "./index.css";
 
 export function HomePage(): JSX.Element {
+<<<<<<< HEAD
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -17,6 +21,8 @@ export function HomePage(): JSX.Element {
     }
   }, []);
 
+=======
+>>>>>>> windows-harsha
   return (
     <div>
       <CustomHeader isLoggedIn={true} />
