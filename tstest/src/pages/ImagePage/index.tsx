@@ -12,7 +12,8 @@ export function ImagePage(): JSX.Element {
       <CustomHeader isLoggedIn={true} />
       <Row>
         <Col span={18}>
-          <ImageCard />
+          <ImageCard
+           />
           <CommentSection />
         </Col>
         <Col span={6}>

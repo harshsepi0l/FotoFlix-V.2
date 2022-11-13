@@ -25,28 +25,29 @@ export function TrendingImages(): JSX.Element {
   };
 
   return (
-    <Card title="Trending Images"
-          style={{ textAlign: "center"}}>
-      <div style={{
-        
-        height: 300 , wordWrap: "break-word", overflowY: "scroll", scrollBehavior: "smooth"
-      }}>
+    <Card title="Trending Images">
+      <div
+        style={{
+          overflow: "hidden",
+          height: 300,
+          wordWrap: "break-word",
+          overflowY: "scroll",
+          scrollBehavior: "smooth",
+        }}
+      >
         <InfiniteScroll
-          
           hasMoreData={hasMoreData}
           isLoading={loading}
           onBottomHit={loadMoreNumbers}
           loadOnMount={true}
         >
-          < ul >
-            {
-              numbers.map(() => (
-                <CustomCard/>
-            ))
-            }
+          <ul>
+            {numbers.map(() => (
+              <CustomCard />
+            ))}
           </ul>
-        </InfiniteScroll >
+        </InfiniteScroll>
       </div>
-    </Card >
-  )
+    </Card>
+  );
 }
