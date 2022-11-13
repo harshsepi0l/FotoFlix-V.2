@@ -14,7 +14,7 @@ export const UploadForm = () => {
   const [selectedFile, setSelectedFile] = useState("");
   const [imageTitle, setImageTitle] = useState(""); // Control title of image
   const [imageDesc, setImageDesc] = useState(""); // Control image description
-  const [imageVis, setImageVis] = useState(""); // Control public vs. private
+  const [imageVis, setImageVis] = useState(1); // Control public (0) vs. private (1)
   const [imageTags, setImageTags] = useState(""); // tags
 
   const handleImageTitleChange = (e: any) => { // This updates every single time anything is typed
@@ -27,7 +27,12 @@ export const UploadForm = () => {
   }
   const handleImageVisChange = (e: any) => {// Public or private
     const vis = e.target.value;
-    setImageVis(vis);
+    if (vis == "public"){
+      setImageVis(0);
+    }
+    else {
+      setImageVis(1);
+    }
   }
   const handleTagsChange = (e: any) => {
     const tags = e.target.value;
@@ -56,13 +61,35 @@ export const UploadForm = () => {
     try {
       await fetch("http://localhost:3000/Cloudinary", {
         method: "POST",
-        body: JSON.stringify({ data: base64EncodedImage }),
+        body: JSON.stringify({ 
+          data: base64EncodedImage,
+          Title: imageTitle,
+          Description: imageDesc,
+          PublicOrPrivate: imageVis,
+          Tags: imageTags
+        }),
         headers: { "Content-type": "application/json" },
       });
     } catch (err) {
       console.error(err);
     }
   };
+  // const uploadData =async (data:any) => {
+  //   try {
+  //     await fetch("", {
+  //       method: "POST",
+  //       body: JSON.stringify({
+  //         "Title": imageTitle,
+  //         "Description": imageDesc,
+  //         "PublicOrPrivate": imageVis,
+  //         "Tags": imageTags
+  //       }),
+  //       headers: { "Content-type": "application/json" },
+  //     });
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // }
   return (
     <div>
       {" "}

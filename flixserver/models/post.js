@@ -1,3 +1,5 @@
+const flixerinfo = require("./flixerinfo");
+
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define("flixerimages", {
     id: {
@@ -29,6 +31,29 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-  });
+    Likes: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    Dislikes: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    UploadDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    UserID: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: flixerinfo,
+        key: 'id',
+      }
+    }
+  },{
+    timestamps: false,
+  }
+  );
   return Post;
 };

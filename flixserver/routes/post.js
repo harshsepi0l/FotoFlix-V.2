@@ -28,6 +28,13 @@ router.post("/", async (req, res) => {
     ImageType: uploadedResponse.format,
     PostType: uploadedResponse.resource_type,
     Url: uploadedResponse.url,
+    Title: req.body.Title,
+    Description: req.body.Description,
+    PublicOrPrivate: req.body.PublicOrPrivate,
+    UserID: 2,
+    Likes: 0,
+    Dislikes: 0,
+    UploadDate: uploadedResponse.created_at,
   });
 
   res.json({ message: "Image created!" });
