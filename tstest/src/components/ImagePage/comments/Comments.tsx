@@ -9,6 +9,7 @@ import {
 import { Comment } from './Comment';
 import "../index.css";
 import { CommentForm } from "./CommentForm";
+import {Col} from "antd"
 
 export function Comments({ currentUserId }: any): JSX.Element {
     const [backendComments, setBackendComments] = useState<any>([]);
@@ -92,8 +93,11 @@ export function Comments({ currentUserId }: any): JSX.Element {
         });
     }, []);
     return (
-        <div className="comments">
+        <div className="comments" >
+            <Col>
             <h3 className="comments__title">Comments</h3>
+            <button style={{ width:"100px", background:"var(--darkpurple)"}}type="button">Sort By Popularity</button>
+            </Col>
             <div className="comment-form-title">Write comment</div>
             <CommentForm
                 submitLabel="Write"

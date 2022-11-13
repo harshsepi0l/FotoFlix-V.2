@@ -13,12 +13,12 @@ export function HomePage(): JSX.Element {
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("token")) {
-      navigate("/LandingPage");
+      navigate("/HomePage");
     }
   }, []);
 
   return (
-    <div>
+    <div className="Home-Page">
       <CustomHeader isLoggedIn={true} />
       <Row>
         <Col span={18}>

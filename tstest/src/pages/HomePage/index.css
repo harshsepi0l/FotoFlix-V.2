@@ -1,4 +1,6 @@
-.HomePage {
+.Home-Page {
     background-color: var(--lightpink);
+    margin-left: 25px;
+    margin-right: 25px;
 }
 

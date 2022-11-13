@@ -17,6 +17,7 @@ export function CommentForm({
     return (
         <form className="comment-form-container" onSubmit={onSubmit}>
             <textarea
+                title="comment"
                 className="comment-form-textarea"
                 value={text}
                 onChange={(event) => setText(event.target.value)}

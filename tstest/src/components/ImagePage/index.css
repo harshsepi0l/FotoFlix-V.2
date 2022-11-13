@@ -1,5 +1,8 @@
+body{
+    background-color: #FFE6F7;
+    margin-left: 25px;
+}
 .Card-Info {
-    background-color: var(--white);
     size: 20px;
     height: 100%;
 }

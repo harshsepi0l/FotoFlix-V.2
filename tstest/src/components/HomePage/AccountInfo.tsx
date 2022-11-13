@@ -20,6 +20,9 @@ export function AccountInfo(): JSX.Element {
             size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
             icon={<AntDesignOutlined />}
           />
+          <p> </p>
+          <p style={{color:"var(--darkpurple)"}}> Username </p>
+          <p style={{color:"var(--darkpurple)"}}> Joined: </p>
         </Col>
         <Col flex={5}>
           <Typography.Title level={2} className="HomePage-AccountInfo">
