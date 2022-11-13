@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
 import { Button, Input, Space } from "antd";
 import { CustomButton } from "../../components/Common/CustomButton";
 
@@ -96,8 +96,16 @@ export const SignUp = () => {
   };
 
   return (
+    <div  style={{ marginTop: 5}}>
+     
     <div className="Container">
-      <div className="App">
+        <div className="App">
+        <img
+        style={{ color: "#937DC2", width: 200, height: 90}}
+        src={fotoLogo}
+        alt="error"
+          />
+          
         <h1 style={{ color: "#937DC2" }}>Sign up for a free account</h1>
         <div className="SignUpContainer">
           {/* This is a row */}
@@ -197,7 +205,8 @@ export const SignUp = () => {
               </NavLink>
             </div>
           </div>
-        </div>
+          </div>
+          </div>
 
         {/* {usersList.map(
           (key: {

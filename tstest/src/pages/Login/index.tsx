@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Col, Row } from "antd";
 import { NavLink } from "react-router-dom";
 import { Button, Input, Space } from "antd";
+import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
 import { CustomHeader } from "../../components/Common/CustomHeader";
 import { TrendingImages } from "../../components/Common/TrendingImages";
 import { TrendingTags } from "../../components/Common/TrendingTags";
@@ -65,53 +66,63 @@ export const Login = () => {
   };
 
   return (
-    <div className="Container">
-      <div className="App">
-      <p style={{ color: "#937DC2", fontSize: 24 }} >Login Form</p>
-    
-      <div className="content">
-        <div className="image"></div>
-        <div className="form">
-          <div className="login">
-            <Input
-              style={{ borderRadius: "25px", height: "82.64px" }}
-              type="text"
-              name="username"
-              placeholder="Username"
-              onChange={(e) => {
-                checkUsername(e.target.value);
-              }}
-            />
+    <div  style={{ marginTop: 50}}>
+      
+      <div className="Container">
+        <div className="App">
+        <img
+        style={{ color: "#937DC2", width: 200, height: 90}}
+        src={fotoLogo}
+        alt="error"
+      />
+          <p style={{ color: "#937DC2", fontSize: 24 }}>Login Form</p>
+
+          <div className="content">
+            <div className="image"></div>
+            <div className="form">
+              <div className="login">
+                <Input
+                  style={{ borderRadius: "25px", height: "82.64px" }}
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  onChange={(e) => {
+                    checkUsername(e.target.value);
+                  }}
+                />
+              </div>
+              <br />
+              <div className="login">
+                <Space direction="vertical">
+                  <Input.Password
+                    style={{ borderRadius: "25px", height: "82.64px" }}
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={(e) => {
+                      checkPassword(e.target.value);
+                    }}
+                  />
+                </Space>
+              </div>
+            </div>
+            <br />
+            <NavLink onClick={sendToSignUp} to={"/SignUp"}>
+              <p style={{ color: "#C689C6" }}>Don't have an account?</p>
+            </NavLink>
           </div>
-          <br />
           <div className="login">
-            <Space direction="vertical">
-              <Input.Password
-                style={{ borderRadius: "25px", height: "82.64px" }}
-                type="password"
-                name="password"
-                placeholder="Password"
-                onChange={(e) => {
-                  checkPassword(e.target.value);
-                }}
+            <div>
+              <CustomButton
+                buttonType={"primary"}
+                color={"darkpurple"}
+                title={"Login"}
+                onClick={loginCheck}
               />
-            </Space>
+            </div>
           </div>
         </div>
-        <br />
-        <NavLink onClick={sendToSignUp} to={"/SignUp"}>
-          <p style={{ color: "#C689C6" }}>Don't have an account?</p>
-        </NavLink>
       </div>
-      <div className="login">
-        <CustomButton
-          buttonType={"primary"}
-          color={"darkpurple"}
-          title={"Login"}
-          onClick={loginCheck}
-        />
-      </div>
-      </div>
-      </div>
+    </div>
   );
 };
