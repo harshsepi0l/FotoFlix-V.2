@@ -133,3 +133,43 @@ input[type=password]:focus .CustomSearchContainer+.CustomSearch {
 .site-layout .site-layout-background {
     background: #fff;
 }
+
+/* Row Images */
+
+.OurMembers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--lightpink);
+    gap: 40px;
+}
+
+.OurMembers-CategoryButtons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+}
+
+.CardsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+
+}    
+
+.OurMembers-Cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 100%;
+}

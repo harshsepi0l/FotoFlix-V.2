@@ -171,14 +171,14 @@ interface isLoggedIn {
 export function CustomHeader(props: isLoggedIn): JSX.Element {
   return (
     <div className="mainHeader Padding-20">
-      <Row>
-        <Col span={8}>
+      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+        <Col className="gutter-row" span={8}>
           <LeftSection />
         </Col>
-        <Col span={8}>
+        <Col className="gutter-row" span={8}>
           <CustomSearch />
         </Col>
-        <Col span={8}>
+        <Col className="gutter-row" span={8}>
           {props.isLoggedIn ? <RightButtonsSection /> : <RightUserSection />}
         </Col>
       </Row>
