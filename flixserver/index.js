@@ -23,7 +23,7 @@ const db = require("./models");
 const signUpRouter = require("./routes/flixerinfo");
 app.use("/SignUp", signUpRouter);
 
-const cloudinaryRouter = require("./routes/posts");
+const cloudinaryRouter = require("./routes/post");
 app.use("/Cloudinary", cloudinaryRouter);
 
 db.sequelize.sync().then(() => {

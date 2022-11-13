@@ -1,7 +1,9 @@
 const express = require("express");
 const { sequelize } = require("../models");
 const router = express.Router();
-const { posts } = require("../models");
+const { post } = require("../models");
+const bodyParser = require("body-parser");
+
 const { cloudinary } = require("../utils/cloudinary");
 
 router.get("/uploaded", async (req, res) => {
@@ -22,11 +24,12 @@ router.post("/", async (req, res) => {
   console.log(uploadedResponse);
   const { format, access_mode, url } = uploadedResponse;
 
-  posts.create({
-    ImageType: "image",
-    PostType: "image",
-    url: "url",
+  post.create({
+    ImageType: format,
+    PostType: access_mode,
+    url: url,
   });
+
   res.json({ message: "Image created!" });
   console.log(format, access_mode, url);
   res.send({ msg: "YAYAYAY" });
