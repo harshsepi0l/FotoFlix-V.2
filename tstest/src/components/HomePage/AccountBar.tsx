@@ -9,14 +9,7 @@ import "./index.css";
 function CardRow(): JSX.Element {
   return (
     <div className="LandingContainer">
-      <Row>
-        <Col span={12} order={1}>
-          <RowImages />
-        </Col>
-        <Col span={12} order={2}>
-          <RowImages />
-        </Col>
-      </Row>
+      <RowImages />
     </div>
   )
 }

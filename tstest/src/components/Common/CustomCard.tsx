@@ -21,6 +21,7 @@ interface CardProps {
   Like: number;
   Tags: string;
   Favorite: number;
+  key: any;
 }
 
 const { Meta } = Card;
@@ -59,52 +60,44 @@ interface isGlobal {
 }
 
 interface isGlobal {
-    isGlobal: boolean;
-  }
+  isGlobal: boolean;
+}
 
-export function CustomCard(): JSX.Element {
+export function CustomCard(props: any): JSX.Element {
   let isGlobal = false;
-  const [values, setValues] = React.useState<CardProps[]>([]);
-  useEffect(() => {
-    axios.get("http://localhost:3000/Cloudinary").then((response) => {
-      setValues(response.data);
-    });
-  }, []);
 
   return (
     <div>
-      {values.map((value, key) => (
-        <Card
-          key={key}
-          style={{ width: 300 }}
-          cover={<img alt="example" src={value.Url} />}
-          actions={[
-            <CustomAction icon="like" text={value.Like} isPublic={isGlobal} />,
-            <CustomAction
-              icon="dislike"
-              text={value.Dislike}
-              isPublic={isGlobal}
-            />,
-            <CustomAction
-              icon="popularity"
-              text={value.Favorite}
-              isPublic={isGlobal}
-            />,
-            <CustomAction icon="tags" text={value.Tags} isPublic={isGlobal} />,
-            <CustomAction
-              icon="status"
-              text={value.PublicOrPrivate}
-              isPublic={isGlobal}
-            />,
-          ]}
-        >
-          <Meta
-            avatar={<Avatar src={value.Avatar} />}
-            title={value.Title}
-            description={value.Description}
-          />
-        </Card>
-      ))}
+      <Card
+        key={props.key}
+        style={{ width: 300 }}
+        cover={<img alt="example" src={props.Url} />}
+        actions={[
+          <CustomAction icon="like" text={props.Like} isPublic={isGlobal} />,
+          <CustomAction
+            icon="dislike"
+            text={props.Dislike}
+            isPublic={isGlobal}
+          />,
+          <CustomAction
+            icon="popularity"
+            text={props.Favorite}
+            isPublic={isGlobal}
+          />,
+          <CustomAction icon="tags" text={props.Tags} isPublic={isGlobal} />,
+          <CustomAction
+            icon="status"
+            text={props.PublicOrPrivate}
+            isPublic={isGlobal}
+          />,
+        ]}
+      >
+        <Meta
+          avatar={<Avatar src={props.Avatar} />}
+          title={props.Title}
+          description={props.Description}
+        />
+      </Card>
     </div>
   );
 }
