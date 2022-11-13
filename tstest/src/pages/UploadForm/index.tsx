@@ -7,6 +7,7 @@ export const UploadForm = () => {
   const [selectedFile, setSelectedFile] = useState("");
   const [imageTitle, setImageTitle] = useState(""); // Control title of image
   const [imageDesc, setImageDesc] = useState(""); // Control image description
+  const [imageVis, setImageVis] = useState(""); // Control public vs. private
   const handleImageTitleChange = (e: any) => { // This updates every single time anything is typed
     const title = e.target.value;
     setImageTitle(title);
@@ -14,6 +15,12 @@ export const UploadForm = () => {
   const handleImageDescChange = (e: any) => {
     const desc = e.target.value;
     setImageDesc(desc);
+  }
+  // Public or private -------------------------------------------
+  const handleImageVisChange = (e: any) => {
+    const vis = e.target.value;
+    setImageVis(vis);
+    console.log(vis);
   }
   const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
@@ -71,6 +78,15 @@ export const UploadForm = () => {
           onChange={handleImageDescChange}
           className="form-input"
         />
+        <br /><h3>Public or private?</h3>
+        <input type="radio" value="public" id="public"
+               onChange={handleImageVisChange} name="vis" />
+        <label htmlFor="public">Public</label>
+        <br />
+        <input type="radio" value="private" id="private"
+          onChange={handleImageVisChange} name="vis"/>
+        <label htmlFor="private">Private</label>
+        <br />
         <button className="btn" type="submit">
           Submit
         </button>
