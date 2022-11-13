@@ -6,6 +6,9 @@ interface CardProps {
     image: string,
     title: string,
     description: string,
+    like: any,
+    didslike: any,
+    popularity: any,
     isScroll?: boolean;
 }
 
@@ -40,7 +43,7 @@ interface isGlobal {
     isGlobal: boolean;
   }
 
-export function CustomCard(): JSX.Element {
+export function CustomCard(props: CardProps): JSX.Element {
     let isGlobal = false;
 
     return (
@@ -49,7 +52,8 @@ export function CustomCard(): JSX.Element {
             cover={
                 <img
                     alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                    // src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                    src={props.image}
                 />
             }
            
@@ -57,15 +61,15 @@ export function CustomCard(): JSX.Element {
                 
                 <CustomAction
                     icon="like"
-                    text={100}
+                    text={props.like}
                 />,
                 <CustomAction
                     icon="dislike"
-                    text={100}
+                    text={props.didslike}
                 />,
                 <CustomAction
                     icon="popularity"
-                    text={100}
+                    text={props.popularity}
                 />,
                 <CustomAction
                     icon="tags"
@@ -81,8 +85,8 @@ export function CustomCard(): JSX.Element {
             <Meta
                 
                 avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                title="Card title"
-                description="This is the description"
+                title={ props.title }
+                description={props.description}
             />
         </Card >
     )

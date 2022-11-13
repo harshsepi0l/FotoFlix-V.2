@@ -26,7 +26,7 @@ export function TrendingImages(): JSX.Element {
 
   return (
     <Card title="Trending Images"
-          style={{ textAlign: "center" }}>
+      style={{ textAlign: "center" }}>
       <div style={{
         height: 300, wordWrap: "break-word", overflowY: "scroll", scrollBehavior: "smooth"
       }}>
@@ -39,8 +39,14 @@ export function TrendingImages(): JSX.Element {
           < ul >
             {
               numbers.map(() => (
-                <CustomCard/>
-            ))
+                <CustomCard 
+                image="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                title="title"
+                description="description" 
+                like={11} 
+                didslike={12} 
+                popularity={13} />
+              ))
             }
           </ul>
         </InfiniteScroll >
