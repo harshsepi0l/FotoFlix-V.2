@@ -1,16 +1,9 @@
-import { Col, Row } from "antd";
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Input, Space } from "antd";
 import Axios from "axios";
-import { CustomHeader } from "../../components/Common/CustomHeader";
-import { TrendingImages } from "../../components/Common/TrendingImages";
-import { TrendingTags } from "../../components/Common/TrendingTags";
-import { AccountBar } from "../../components/HomePage/AccountBar";
-import { AccountInfo } from "../../components/HomePage/AccountInfo";
-import { NavLink } from "react-router-dom";
-import { Button, Input, Space } from "antd";
-import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { CustomButton } from "../../components/Common/CustomButton";
+import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
 
 export const Login = () => {
   const [username, checkUsername] = useState("");
