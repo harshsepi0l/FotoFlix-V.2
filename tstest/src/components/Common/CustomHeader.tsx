@@ -1,10 +1,11 @@
 import { BellOutlined, SearchOutlined } from "@ant-design/icons";
-import { Avatar, Col, Dropdown, Input, MenuProps, Row, Space } from "antd";
+import { Avatar, Col, Input, Row, Space } from "antd";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { CustomButton } from "./CustomButton";
 import data from "./Data.json";
 import { useMediaQuery } from "react-responsive";
+
 import "./index.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "../../pages/Login";
@@ -12,9 +13,8 @@ import { SignUp } from "../../pages/SignUp";
 import { HeaderDropdown } from "./HeaderDropdown";
 import Axios from "axios";
 import fotoLogo from "../ImageLogo/fotoLogo.svg";
+import logo from "../ImageLogo/logo.svg";
 import "./index.css";
-import { CustomMenu } from "./CustomMenu";
-import { SmileOutlined, DownOutlined } from "@ant-design/icons";
 
 const { Search } = Input;
 
@@ -32,17 +32,6 @@ const onSearch = (value: string) => console.log(value);
 function CustomSearch(): JSX.Element {
   const [filteredData, setFilteredData] = useState(data);
   const [wordEntered, setWordEntered] = useState("");
-  const isDesktop = useMediaQuery({
-    query: "(min-width: 1224px)"
-  });
-
-  const isTablet = useMediaQuery({
-    query: "(max-width: 1224px)"
-  });
-
-  const isMobile = useMediaQuery({
-    query: "(max-width: 786px)"
-  });
 
   const handleFilter = (event: { target: { value: any } }) => {
     const searchWord = event.target.value;
@@ -89,51 +78,55 @@ function LeftSection(): JSX.Element {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const isMobile = useMediaQuery({
-    query: "(max-width: 786px)"
-  });
-
   useEffect(() => {
-    if (sessionStorage.getItem("acessRoken")) {
+    if (sessionStorage.getItem("acessToken")) {
       setIsLoggedIn(true);
     }
   }, []);
 
-  const [listOfPosts, setListOfPosts] = useState([]);
-  let { id } = useParams();
-
-  useEffect(() => {
-    Axios.get(`http://localhost:3000/Cloudinary/ById/${id}`).then(
-      (response) => {
-        setListOfPosts(response.data);
-      }
-    );
-  }, []);
+  const isMobile = useMediaQuery({
+    query: "(max-width: 786px)"
+  });
 
   return (
     <Row justify="start">
       <Space align="center">
         <Col span={4}>
-          <img src="../images/logo-full.svg" />
+          <Link to="/">
+            {isMobile ? (
+              <img
+                style={{ color: "#937DC2", width: 20, height: 20 }}
+                src={logo}
+                alt="logo"
+              />
+            ) : (
+              <img
+                style={{ color: "#937DC2", width: 100, height: 50 }}
+                src={fotoLogo}
+                alt="logo"
+              />
+            )}
+          </Link>
         </Col>
       </Space>
 
       <Col span={4} offset={2}>
         {isMobile ? (
           <CustomButton
-            onClick={() => navigate(`/UploadForm/${id}`)}
+            onClick={() => navigate(`/UploadForm`)}
             buttonType={"primary"}
             color={"darkpurple"}
             title={"+"}
           />
         ) : (
           <CustomButton
-            onClick={() => navigate(`/UploadForm/${id}`)}
+            onClick={() => navigate(`/UploadForm`)}
             buttonType={"primary"}
             color={"darkpurple"}
             title={"New Post"}
           />
         )}
+
       </Col>
     </Row>
   );
@@ -143,35 +136,6 @@ function RightButtonsSection(): JSX.Element {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    if (sessionStorage.getItem("acessRoken")) {
-      setIsLoggedIn(true);
-    }
-  }, []);
-
-  const [listOfPosts, setListOfPosts] = useState([]);
-  let { id } = useParams();
-
-  useEffect(() => {
-    Axios.get(`http://localhost:3000/Cloudinary/ById/${id}`).then(
-      (response) => {
-        setListOfPosts(response.data);
-      }
-    );
-  }, []);
-
-
-  const isDesktop = useMediaQuery({
-    query: "(min-width: 1224px)"
-  });
-
-  const isTablet = useMediaQuery({
-    query: "(max-width: 1224px)"
-  });
-
-  const isMobile = useMediaQuery({
-    query: "(max-width: 786px)"
-  });
   useEffect(() => {
     if (sessionStorage.getItem("accessToken") !== null) {
       setIsLoggedIn(true);
@@ -184,110 +148,59 @@ function RightButtonsSection(): JSX.Element {
     navigate("/");
   };
 
-  const items: MenuProps['items'] = [
-    {
-      key: '1',
-      label: (
-        <Link to="/login">
-          <CustomButton
-            buttonType={"default"}
-            color={"white"}
-            title={"Login"}
-          />
-        </Link>
-      ),
-    },
-    {
-      key: '2',
-      label: (
-        <CustomButton
-          buttonType={"primary"}
-          color={"lightpurple"}
-          title={"Sign Up"}
-        />
-      ),
-    },
-    // {
-    //   key: '3',
-    //   label: <CustomButton
-    //     onClick={() => navigate(`/UploadForm/${id}`)}
-    //     buttonType={"primary"}
-    //     color={"darkpurple"}
-    //     title={"New Post"}
-    //   />,
-    // },
-  ];
+  const isDesktop = useMediaQuery({
+    query: "(min-width: 1224px)"
+  });
+
+  const isTablet = useMediaQuery({
+    query: "(max-width: 1224px)"
+  });
+
+  const isMobile = useMediaQuery({
+    query: "(max-width: 786px)"
+  });
+
 
   return (
     <Row justify="end" align="middle" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-      {
-        !isMobile ? (
-          <div>
-            <Col className="gutter-row" span={4}>
-              {isLoggedIn ? (
-                <Avatar
-                  className="Avatar"
-                  src="https://www.publicdomainpictures.net/pictures/30000/velka/plain-white-background.jpg"
-                />
-              ) : (
-                <Link to="/login">
-                  <CustomButton
-                    buttonType={"default"}
-                    color={"white"}
-                    title={"Login"}
-                  />
-                </Link>
-              )}
-            </Col>
-            <Col className="gutter-row" span={4}>
-              {isLoggedIn ? (
+      <Col className="gutter-row" span={4}>
+        {isLoggedIn ? (
+          <Avatar
+            className="Avatar"
+            src="https://www.publicdomainpictures.net/pictures/30000/velka/plain-white-background.jpg"
+          />
+        ) : (
+          <Link to="/login">
+            <CustomButton
+              buttonType={"default"}
+              color={"white"}
+              title={"Login"}
+            />
+          </Link>
+        )}
+      </Col>
+      <Col className="gutter-row" span={4}>
+        {isLoggedIn ? (
+          <CustomButton
+            buttonType={"primary"}
+            color={"darkpurple"}
+            title={"Logout"}
+            onClick={logout}
+          />
+        ) : (
+          <Link to="/signup">
+            {
+              isDesktop && (
                 <CustomButton
                   buttonType={"primary"}
-                  color={"darkpurple"}
-                  title={"Logout"}
-                  onClick={logout}
-                />
-              ) : (
-                <Link to="/signup">
-                  {
-                    isDesktop && (
-                      <CustomButton
-                        buttonType={"primary"}
-                        color={"lightpurple"}
-                        title={"Sign Up"}
-                      />)
-                  }
+                  color={"lightpurple"}
+                  title={"Sign Up"}
+                />)
+            }
 
-                </Link>
-              )}
-            </Col>
-          </div>
-        ) :
-          (
-            <div>
-              {isLoggedIn ? (
-                <CustomButton
-                  buttonType={"primary"}
-                  color={"darkpurple"}
-                  title={"Logout"}
-                  onClick={logout}
-                />
-              ) : (
-                <Dropdown menu={{ items }} className="Custom-Menu">
-                  <a onClick={e => e.preventDefault()}>
-                    <Space style={{}}>
-                      Menu
-                      <DownOutlined />
-                    </Space>
-                  </a>
-                </Dropdown>
-              )}
-
-            </div>
-          )
-
-      }
-
+          </Link>
+        )}
+      </Col>
     </Row>
   );
 }
@@ -311,10 +224,10 @@ export function CustomHeader(props: isLoggedIn): JSX.Element {
         <Col span={8} className="gutter-row">
           <LeftSection />
         </Col>
-        <Col span={8} className="Header-SearchBar">
+        <Col span={8} className="gutter-row">
           <CustomSearch />
         </Col>
-        <Col span={8} className="Header-RightButtons">
+        <Col span={8} className="gutter-row">
           {props.isLoggedIn ? <RightButtonsSection /> : <RightUserSection />}
         </Col>
       </Row>
