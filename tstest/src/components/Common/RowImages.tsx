@@ -8,50 +8,57 @@ import { Motion } from "./Motion";
 import { PaginationApplicator } from "./pagination/PaginationApplicator";
 import data from "./rowData.json";
 
-export function RowImages(): JSX.Element {
-  const [cards, setCards] = useState(sortCards("Member"));
+interface CardProps {
+  PublicOrPrivate: number;
+  Url: string;
+  Title: string;
+  Description: string;
+  Dislike: number;
+  isScroll?: boolean;
+  Avatar: string;
+  Like: number;
+  Tags: string;
+  Favorite: number;
+  key: any;
+}
 
-  const [values, setValues] = React.useState<[]>([]);
+export function RowImages(): JSX.Element {
+  const [values, setValues] = React.useState<CardProps[]>([]);
   useEffect(() => {
     axios.get("http://localhost:3000/Cloudinary").then((response) => {
       setValues(response.data);
     });
   }, []);
 
-  function sortCards(tag: string): JSX.Element {
-    let newCards: JSX.Element[] = [];
-    values.map(function (value, key) {
-      newCards.push(
-        <Motion
-          component={
-            <CustomCard
-              key={undefined}
-              PublicOrPrivate={0}
-              Url={""}
-              Title={""}
-              Description={""}
-              Dislike={0}
-              Avatar={""}
-              Like={0}
-              Tags={""}
-              Favorite={0} />}
-          key={"123" + key}
-        />
-      )
-    });
-    return <PaginationApplicator
-      key={Math.random()}       //DON'T TOUCH. This is needed to actually re-render while sorting.
-      data={newCards}
-      class="OurMembers-Cards"
-      pageSize={6}
-    />;
-  }
+  let newCards: JSX.Element[] = [];
+  values.map((value, key) => {
+    newCards.push(
+      <Motion
+        component={
+          <CustomCard
+            key={value.key}
+            PublicOrPrivate={value.PublicOrPrivate}
+            Url={value.Url}
+            Title={value.Title}
+            Description={value.Description}
+            Dislike={value.Dislike}
+            Avatar={value.Avatar}
+            Like={value.Like}
+            Tags={value.Tags}
+            Favorite={value.Favorite} />}
+        key={value.key}
+      />
+    )
+  });
+  return <div className="OurMembers">
+    <div className="CardsContainer">
+      <PaginationApplicator
+        key={Math.random()}       //DON'T TOUCH. This is needed to actually re-render while sorting.
+        data={newCards}
+        class="OurMembers-Cards"
+        pageSize={6}
+      />;
+    </div>
+  </div >
 
-  return (
-    <div className="OurMembers">
-      <div className="CardsContainer">
-        {cards}
-      </div>
-    </div >
-  )
 }

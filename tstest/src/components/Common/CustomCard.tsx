@@ -63,7 +63,7 @@ interface isGlobal {
   isGlobal: boolean;
 }
 
-export function CustomCard(props: any): JSX.Element {
+export function CustomCard(props: CardProps): JSX.Element {
   let isGlobal = false;
 
   return (
