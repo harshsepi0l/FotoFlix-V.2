@@ -49,12 +49,12 @@ export function RowImages(): JSX.Element {
       />
     )
   });
-  return <div className="OurMembers">
+  return <div className="RowImages">
     <div className="CardsContainer">
       <PaginationApplicator
         key={Math.random()}       //DON'T TOUCH. This is needed to actually re-render while sorting.
         data={newCards}
-        class="OurMembers-Cards"
+        class="RowImages-Cards"
         pageSize={6}
       />;
     </div>
