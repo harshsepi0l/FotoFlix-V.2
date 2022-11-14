@@ -55,5 +55,15 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
   }
   );
+    UserId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    TagsId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+  });
+
   return Post;
 };

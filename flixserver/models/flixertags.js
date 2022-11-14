@@ -1,10 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
-    const FlixerTags = sequelize.define("flixertags", {
-      Tag: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      }
-    });
-    return FlixerTags;
-  };
-  
+  const Tags = sequelize.define("flixertags", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    Tag: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  });
+
+  return Tags;
+};

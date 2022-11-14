@@ -1,6 +1,11 @@
+.mainHeader {
+    background-color: var(--darkpurple);
+}
+
 .Default-darkpurple {
     background-color: var(--darkpurple);
     border-color: var(--darkpurple);
+    width: fit-content;
 }
 
 .Default-darkpurple:hover,
@@ -12,6 +17,7 @@
 .Default-lightpurple {
     background-color: var(--lightpurple);
     border-color: var(--lightpurple);
+    width: fit-content;
 }
 
 .Default-lightpurple:hover,
@@ -21,7 +27,18 @@
 }
 
 .Default-white {
-    color: var(--darkpurple)
+    color: var(--darkpurple);
+    width: fit-content;
+}
+
+.Default-red {
+    background-color: red
+}
+
+.Default-white:hover,
+.Default-white:focus {
+    color: var(--midpurple);
+    border-color: var(--midpurple);
 }
 
 .Border-8 {
@@ -37,6 +54,7 @@
     background-color: var(--white);
 }
 
+
 .CustomSearch {
     background-color: #F5F3FF;
 }
@@ -48,5 +66,110 @@
 }
 
 .CustomSearch:hover {
+    background-color: var(--darkpurple);
+}
+
+.CustomSearchContainer .DataResult {
+    visibility: hidden;
+
+}
+
+.CustomSearchContainer:hover .DataResult,
+.CustomSearchContainer .ant-input-affix-wrapper-focused+.DataResult {
+    visibility: visible;
+}
+
+input[type=text]:focus,
+input[type=password]:focus .CustomSearchContainer+.CustomSearch {
+    background-color: none;
+}
+
+.DataResult {
+    position: absolute;
+    background-color: var(--darkpink);
+    overflow: hidden;
+    overflow-y: auto;
+    height: auto;
+    max-height: 400px;
+    width: 100%;
+    z-index: 100;
+    padding-top: 13px;
+    margin-top: 5px;
+}
+
+.DataResult::-webkit-scrollbar {
+    display: none;
+}
+
+.DataItem>p {
+    padding: 5px;
+    text-indent: 10px;
+    color: var(--white) !important
+}
+
+.DataItem>p:hover {
     background-color: var(--lightpink);
+    color: var(--darkpurple) !important
+}
+
+#components-layout-demo-custom-trigger .trigger {
+    padding: 0 24px;
+    font-size: 18px;
+    line-height: 64px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+    color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+    height: 32px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+    background: #fff;
+}
+
+/* Row Images */
+
+.OurMembers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--lightpink);
+    gap: 40px;
+}
+
+.OurMembers-CategoryButtons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+}
+
+.CardsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+
+}    
+
+.OurMembers-Cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 100%;
 }

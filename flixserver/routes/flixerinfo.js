@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { flixerinfo } = require("../models");
+const { sequelize } = require("../models");
+const { DataTypes } = require("sequelize");
+
 const bcrypt = require("bcrypt"); // for hashing passwords
+
+const flixerinfo = require("../models/flixerinfo")(sequelize, DataTypes);
 
 const { sign } = require("jsonwebtoken");
 

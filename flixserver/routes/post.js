@@ -3,6 +3,7 @@ const { sequelize } = require("../models");
 const router = express.Router();
 const { DataTypes } = require("sequelize");
 const post = require("../models/post")(sequelize, DataTypes);
+
 const bodyParser = require("body-parser");
 const imagetags = require("../models/flixerimagetag");
 const tags = require("../models/flixertags");
@@ -10,12 +11,9 @@ const tags = require("../models/flixertags");
 const { cloudinary } = require("../utils/cloudinary");
 const flixertags = require("../models/flixertags");
 
-router.get("/uploaded", async (req, res) => {
-  const all_image = await cloudinary.api.resources();
-  console.log(all_image);
-  all_image.resources.forEach((image) => {
-    res.json(all_image);
-  });
+router.get("/", async (req, res) => {
+  const posts = await post.findAll();
+  res.json(posts);
 });
 
 router.post("/", async (req, res) => {
@@ -28,6 +26,9 @@ router.post("/", async (req, res) => {
   console.log(uploadedResponse);
 
   await post.create({
+    Title: "test",
+    Description: "test",
+    PublicOrPrivate: "1",
     ImageType: uploadedResponse.format,
     PostType: uploadedResponse.resource_type,
     Url: uploadedResponse.url,

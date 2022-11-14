@@ -2,44 +2,38 @@ import { Space } from "antd";
 import { useState } from "react";
 import { CustomCard } from "./CustomCard";
 import { InfiniteScroll } from "./InfiniteScroll";
+import { Motion } from "./Motion";
+import { PaginationApplicator } from "./pagination/PaginationApplicator";
+import data from "./rowData.json";
 
 export function RowImages(): JSX.Element {
-  const NUMBERS_PER_PAGE = 100;
+  const [cards, setCards] = useState(sortCards("Member"));
 
-  const [numbers, setNumbers] = useState<number[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(0);
-
-  const hasMoreData = numbers.length < 1000;
-
-  const loadMoreNumbers = () => {
-    setPage((page) => page + 1);
-    setLoading(true);
-    setTimeout(() => {
-      const newNumbers = new Array(NUMBERS_PER_PAGE)
-        .fill(1)
-        .map((_, i) => page * NUMBERS_PER_PAGE + i);
-      setNumbers((nums) => [...nums, ...newNumbers]);
-      setLoading(false);
-    }, 300);
-  };
+  function sortCards(tag: string): JSX.Element {
+    let newCards: JSX.Element[] = [];
+    data.items.map(function (card, key) {
+      card.tags.includes(tag) ? newCards.push(
+        <Motion
+          component={
+            <CustomCard
+            />}
+          key={card.title + key}
+        />
+      ) : <></>
+    });
+    return <PaginationApplicator
+      key={Math.random()}       //DON'T TOUCH. This is needed to actually re-render while sorting.
+      data={newCards}
+      class="OurMembers-Cards"
+      pageSize={6}
+    />;
+  }
 
   return (
-    <div >
-      <InfiniteScroll
-        hasMoreData={hasMoreData}
-        isLoading={loading}
-        onBottomHit={loadMoreNumbers}
-        loadOnMount={true}
-      >
-        < ul >
-          {
-            numbers.map(() => (
-              <CustomCard />
-            ))
-          }
-        </ul>
-      </InfiniteScroll >
+    <div className="OurMembers">
+      <div className="CardsContainer">
+        {cards}
+      </div>
     </div >
   )
 }
