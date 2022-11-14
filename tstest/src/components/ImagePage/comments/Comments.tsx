@@ -93,18 +93,12 @@ export function Comments({ currentUserId }: any): JSX.Element {
         });
     }, []);
     return (
-<<<<<<< HEAD
         <div className="comments" >
             <Col>
             <h3 className="comments__title">Comments</h3>
             <button style={{ width:"100px", background:"var(--darkpurple)"}}type="button">Sort By Popularity</button>
             </Col>
             <div className="comment-form-title">Write comment</div>
-=======
-        <div className="comments">
-            {/* <h3 className="comments__title">Comments</h3>
-            <div className="comment-form-title">Write comment</div> */}
->>>>>>> main
             <CommentForm
                 submitLabel="Write"
                 handleSubmit={addComment} />
