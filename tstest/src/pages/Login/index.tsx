@@ -127,13 +127,13 @@ export const Login = () => {
               </div>
             </div>
           </div>
-          <div className="login">
+          {/* <div className="login">
             <button
               type="button"
               className="btn"
               onClick={() => LoginCheck()}
             />
-          </div>
+          </div> */}
           <h1>{loginStatus}</h1>
         </div>
       </div>
