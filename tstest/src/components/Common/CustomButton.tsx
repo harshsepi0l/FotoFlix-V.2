@@ -16,7 +16,7 @@ interface ButtonProps {
   buttonType: ButtonType;
   color: string;
   borderRadius?: number;
-  onClick?: () => void;
+  onClick?: any;
 }
 
 export function CustomButton(props: ButtonProps): JSX.Element {
