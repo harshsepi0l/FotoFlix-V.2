@@ -12,28 +12,27 @@ export function RowImages(): JSX.Element {
   function sortCards(tag: string): JSX.Element {
     let newCards: JSX.Element[] = [];
     data.items.map(function (card, key) {
-      card.tags.includes(tag) ? newCards.push(
-        <Motion
-          component={
-            <CustomCard
-            />}
-          key={card.title + key}
-        />
-      ) : <></>
+      card.tags.includes(tag) ? (
+        newCards.push(
+          <Motion component={<CustomCard />} key={card.title + key} />
+        )
+      ) : (
+        <></>
+      );
     });
-    return <PaginationApplicator
-      key={Math.random()}       //DON'T TOUCH. This is needed to actually re-render while sorting.
-      data={newCards}
-      class="OurMembers-Cards"
-      pageSize={6}
-    />;
+    return (
+      <PaginationApplicator
+        key={Math.random()} //DON'T TOUCH. This is needed to actually re-render while sorting.
+        data={newCards}
+        class="OurMembers-Cards"
+        pageSize={6}
+      />
+    );
   }
 
   return (
     <div className="OurMembers">
-      <div className="CardsContainer">
-        {cards}
-      </div>
-    </div >
-  )
+      <div className="CardsContainer">{cards}</div>
+    </div>
+  );
 }

@@ -1,12 +1,7 @@
-import { Col, Row } from "antd";
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Axios from "axios";
-import { CustomHeader } from "../../components/Common/CustomHeader";
-import { TrendingImages } from "../../components/Common/TrendingImages";
-import { TrendingTags } from "../../components/Common/TrendingTags";
-import { AccountBar } from "../../components/HomePage/AccountBar";
-import { AccountInfo } from "../../components/HomePage/AccountInfo";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { idText } from "typescript";
 
 export const Login = () => {
   const [username, checkUsername] = useState("");
@@ -15,11 +10,7 @@ export const Login = () => {
   const navigate = useNavigate();
 
   // This will navigate to Login Page once user has logged in
-  const sendToHomePage = () => {
-    navigate("/HomePage");
-  };
-
-  const loginCheck = () => {
+  const LoginCheck = () => {
     Axios.post("http://localhost:3000/SignUp/Login", {
       Username: username,
       Password: password,
@@ -28,10 +19,10 @@ export const Login = () => {
         alert(response.data.error);
       } else {
         sessionStorage.setItem("accessToken", response.data);
+        navigate(`/HomePage/${username}`);
       }
     });
   };
-
   return (
     <div>
       <p>This is the Login page</p>
@@ -64,7 +55,7 @@ export const Login = () => {
         </div>
       </div>
       <div className="login">
-        <button type="button" className="btn" onClick={loginCheck} />
+        <button type="button" className="btn" onClick={() => LoginCheck()} />
         <h1>{loginStatus}</h1>
       </div>
     </div>

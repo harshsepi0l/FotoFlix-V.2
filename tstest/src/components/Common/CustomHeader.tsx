@@ -1,7 +1,7 @@
 import { BellOutlined, SearchOutlined } from "@ant-design/icons";
 import { Avatar, Col, Input, Row, Space } from "antd";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { CustomButton } from "./CustomButton";
 import data from "./Data.json";
 import "./index.css";
@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "../../pages/Login";
 import { SignUp } from "../../pages/SignUp";
 import { HeaderDropdown } from "./HeaderDropdown";
-
+import Axios from "axios";
 
 const { Search } = Input;
 
@@ -74,20 +74,33 @@ function LeftSection(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (sessionStorage.getItem("acessRoken")) {
       setIsLoggedIn(true);
     }
+  }, []);
+
+  const [listOfPosts, setListOfPosts] = useState([]);
+  let { id } = useParams();
+
+  useEffect(() => {
+    Axios.get(`http://localhost:3000/Cloudinary/ById/${id}`).then(
+      (response) => {
+        setListOfPosts(response.data);
+      }
+    );
   }, []);
 
   return (
     <Row justify="start">
       <Space align="center">
-        <Col span={4}><img src="../images/logo-full.svg"/></Col>
+        <Col span={4}>
+          <img src="../images/logo-full.svg" />
+        </Col>
       </Space>
 
       <Col span={4} offset={2}>
         <CustomButton
-          onClick={() => navigate("/ImagesFolder")}
+          onClick={() => navigate(`/UploadForm${id}`)}
           buttonType={"primary"}
           color={"darkpurple"}
           title={"New Post"}
@@ -102,19 +115,19 @@ function RightButtonsSection(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("token") !== null) {
+    if (sessionStorage.getItem("accessToken") !== null) {
       setIsLoggedIn(true);
     }
   }, []);
 
   const logout = () => {
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("accessToken");
     setIsLoggedIn(false);
     navigate("/");
   };
 
   return (
-    <Row justify="end" align="middle" >
+    <Row justify="end" align="middle">
       <Col span={4}>
         {isLoggedIn ? (
           <Avatar

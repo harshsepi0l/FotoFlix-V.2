@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import {
   Formik,
@@ -8,9 +8,12 @@ import {
   FormikHelpers,
   FormikValues,
 } from "formik";
+import Axios from "axios";
+import { useParams } from "react-router-dom";
 // import ChipsArray from "./components/Tags/index.tsx";
 
 export const UploadForm = () => {
+  let { id } = useParams();
   const [previewSource, setPreviewSource] = useState("");
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
@@ -55,6 +58,7 @@ export const UploadForm = () => {
       setPreviewSource(reader?.result as string);
     };
   };
+
   const handleSubmitFile = (e: any) => {
     e.preventDefault();
     if (!previewSource) return;
