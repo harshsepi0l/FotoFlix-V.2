@@ -1,0 +1,8 @@
+.input-field:focus {
+    border-color: var(--darkpurple);
+}
+
+.input-field:hover {
+    border-color: var(--midpurple);
+}
+
