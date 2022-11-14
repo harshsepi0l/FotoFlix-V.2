@@ -4,7 +4,6 @@ import { useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { CustomButton } from "../../components/Common/CustomButton";
 import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
-import "./index.css";
 
 export const Login = () => {
   const [username, checkUsername] = useState("");
@@ -56,7 +55,6 @@ export const Login = () => {
                   <div className="login">
                     <Input
                       style={{ borderRadius: "25px", height: "82.64px" }}
-                      className="input-field"
                       type="text"
                       name="username"
                       placeholder="Username"
@@ -70,7 +68,6 @@ export const Login = () => {
                     <Space direction="vertical">
                       <Input.Password
                         style={{ borderRadius: "25px", height: "82.64px" }}
-                        className="input-field"
                         type="password"
                         name="password"
                         placeholder="Password"
@@ -108,13 +105,7 @@ export const Login = () => {
               </div>
             </div>
           </div>
-          {/* <div className="login">
-            <button
-              type="button"
-              className="btn"
-              onClick={() => LoginCheck()}
-            />
-          </div> */}
+
           <h1>{loginStatus}</h1>
         </div>
       </div>
