@@ -3,6 +3,7 @@ const { sequelize } = require("../models");
 const router = express.Router();
 const { DataTypes } = require("sequelize");
 const post = require("../models/post")(sequelize, DataTypes);
+
 const bodyParser = require("body-parser");
 
 const { cloudinary } = require("../utils/cloudinary");
