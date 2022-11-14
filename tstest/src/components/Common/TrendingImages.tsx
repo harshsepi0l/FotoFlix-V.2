@@ -26,13 +26,13 @@ export function TrendingImages(): JSX.Element {
 
   return (
     <Card title="Trending Images"
-          style={{ textAlign: "center"}}>
+      style={{ textAlign: "center" }}>
       <div style={{
-        
-        height: 300 , wordWrap: "break-word", overflowY: "scroll", scrollBehavior: "smooth"
+
+        height: 300, wordWrap: "break-word", overflowY: "scroll", scrollBehavior: "smooth"
       }}>
         <InfiniteScroll
-          
+
           hasMoreData={hasMoreData}
           isLoading={loading}
           onBottomHit={loadMoreNumbers}
@@ -41,7 +41,14 @@ export function TrendingImages(): JSX.Element {
           < ul >
             {
               numbers.map(() => (
-                <CustomCard  />
+                <CustomCard
+                  key={undefined}
+                  PublicOrPrivate={0}
+                  Url={""} Title={""}
+                  Description={""} Dislike={0}
+                  Avatar={""} Like={0}
+                  Tags={""}
+                  Favorite={0} />
               ))
             }
           </ul>
