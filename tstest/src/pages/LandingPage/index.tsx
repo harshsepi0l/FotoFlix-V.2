@@ -1,10 +1,6 @@
-import { Card, Col, Row } from "antd";
-import { useState } from "react";
-import { CustomCard } from "../../components/Common/CustomCard";
 import { CustomHeader } from "../../components/Common/CustomHeader";
-import CustomMenu from "../../components/Common/CustomMenu";
-import { InfiniteScroll } from "../../components/Common/InfiniteScroll";
 import { RowImages } from "../../components/Common/RowImages";
+import Footer from "../../components/Common/footer/Footer";
 import "./index.css";
 
 const gutters: Record<string, number> = {};
@@ -26,6 +22,7 @@ export function LandingPage(): JSX.Element {
     <div className="LandingContainer">
       <CustomHeader isLoggedIn={true} />
       <RowImages />
+      <Footer />
     </div>
   );
 }

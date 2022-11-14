@@ -6,6 +6,7 @@ import { TrendingImages } from "../../components/Common/TrendingImages";
 import { TrendingTags } from "../../components/Common/TrendingTags";
 import { AccountBar } from "../../components/HomePage/AccountBar";
 import { AccountInfo } from "../../components/HomePage/AccountInfo";
+import Footer from "../../components/Common/footer/Footer";
 
 export function HomePage(): JSX.Element {
   return (
@@ -21,6 +22,7 @@ export function HomePage(): JSX.Element {
           <TrendingTags />
         </Col>
       </Row>
+      <Footer />
     </div>
   );
 }

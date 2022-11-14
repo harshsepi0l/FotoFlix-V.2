@@ -10,6 +10,8 @@ import { Login } from "../../pages/Login";
 import { SignUp } from "../../pages/SignUp";
 import { HeaderDropdown } from "./HeaderDropdown";
 import Axios from "axios";
+import fotoLogo from "../ImageLogo/fotoLogo.svg";
+import "./index.css";
 
 const { Search } = Input;
 

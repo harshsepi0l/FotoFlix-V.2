@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 
 import { Pagination } from './Pagination';
 

@@ -11,6 +11,7 @@ interface CardProps {
   description: string;
   image: any;
   tags: string[];
+  views: string;
   // height: number | string;
   // width?: number | string;
 }
@@ -80,6 +81,7 @@ function CardInfo(props: CardProps): JSX.Element {
   return (
     <div className="Card-Info">
       <Card title={props.title} bordered={false} className="Card-Info">
+       
         <p>{props.description}</p>
         <p>{props.tags}</p>
       </Card>
@@ -96,7 +98,7 @@ export function ImageCard(): JSX.Element {
         {/* <CustomCard/> */}
       </Col>
       <Col span={14}>
-        <CardInfo title="Demo Title" description={"abc"} image={undefined} tags={["#dogs", "#cats"]} />
+        <CardInfo title="Demo Title" views="200" description={"abc"} image={undefined} tags={["#dogs", "#cats"]} />
       </Col>
     </Row>
   )
