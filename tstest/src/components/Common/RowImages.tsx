@@ -1,7 +1,5 @@
-import { Space } from "antd";
 import { useState } from "react";
 import { CustomCard } from "./CustomCard";
-import { InfiniteScroll } from "./InfiniteScroll";
 import { Motion } from "./Motion";
 import { PaginationApplicator } from "./pagination/PaginationApplicator";
 import data from "./rowData.json";

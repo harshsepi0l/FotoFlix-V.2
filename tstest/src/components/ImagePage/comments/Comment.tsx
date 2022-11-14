@@ -1,10 +1,8 @@
+import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons';
 import { Tooltip } from "antd";
-import { createElement, useState } from "react";
-import { deleteComment } from "../api";
+import React, { useState } from "react";
 import "../index.css";
 import { CommentForm } from "./CommentForm";
-import { DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons';
-import React from "react";
 
 export function Comment({
     comment,
