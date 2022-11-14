@@ -3,6 +3,7 @@ import axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
 import { CustomCard } from "./CustomCard";
+import "./index.css"
 
 interface CardProps {
   PublicOrPrivate: number;
@@ -29,11 +30,12 @@ export function TrendingImages(): JSX.Element {
 
   return (
     <Card title="Trending Images"
-      style={{ textAlign: "center" }}>
+      className="Trending Trending-Images">
       <div style={{
 
         height: 300, wordWrap: "break-word", overflowY: "scroll", scrollBehavior: "smooth"
-      }}>
+      }} 
+      className="Trending-Scroll">
 
         {
           values.map((value) => (

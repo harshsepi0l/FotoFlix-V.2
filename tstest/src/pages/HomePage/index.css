@@ -2,3 +2,14 @@
     background-color: var(--lightpink);
 }
 
+.Sticky {
+    /* border-width:1;
+    position: absolute;
+    bottom: 0;
+    align-self: flex-end; */
+    /* bottom: 0;
+    align-self: flex-end;
+    position: fixed;
+    z-index: 100; */
+
+}
