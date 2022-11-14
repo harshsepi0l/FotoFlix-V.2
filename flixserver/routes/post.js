@@ -3,8 +3,7 @@ const { sequelize } = require("../models");
 const router = express.Router();
 const { DataTypes } = require("sequelize");
 const post = require("../models/post")(sequelize, DataTypes);
-
-
+const { validateToken } = require("../middlewares/AuthMiddleware");
 const bodyParser = require("body-parser");
 const tags = require("../models/flixertags");
 
@@ -32,7 +31,7 @@ router.post("/", async (req, res) => {
   //   await flixertags.create({
   //     Tag: t.label
   //   });
-    
+
   // }
   // Get ids of tags
   // const tagIds=[];
@@ -68,12 +67,12 @@ router.post("/", async (req, res) => {
   // Add tags
   // get current postid
   const currentPost = await post.findOne({
-    where: {Url: uploadedResponse.url}
+    where: { Url: uploadedResponse.url },
   });
-  for (let t of req.body.Tags){
+  for (let t of req.body.Tags) {
     flixertags.create({
       imageID: currentPost.id,
-      Tag: t.label
+      Tag: t.label,
     });
   }
 
