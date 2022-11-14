@@ -162,8 +162,8 @@ function RightButtonsSection(): JSX.Element {
 
 
   return (
-    <Row justify="end" align="middle" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-      <Col className="gutter-row" span={4}>
+    <Row justify="end" align="middle">
+      <Col  span={4}>
         {isLoggedIn ? (
           <Avatar
             className="Avatar"
@@ -179,7 +179,7 @@ function RightButtonsSection(): JSX.Element {
           </Link>
         )}
       </Col>
-      <Col className="gutter-row" span={4}>
+      <Col  span={4}>
         {isLoggedIn ? (
           <CustomButton
             buttonType={"primary"}
@@ -220,14 +220,14 @@ interface isLoggedIn {
 export function CustomHeader(props: isLoggedIn): JSX.Element {
   return (
     <div className="mainHeader Padding-20">
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} >
-        <Col span={8} className="gutter-row">
+      <Row  >
+        <Col span={8} >
           <LeftSection />
         </Col>
-        <Col span={8} className="gutter-row">
+        <Col span={8} >
           <CustomSearch />
         </Col>
-        <Col span={8} className="gutter-row">
+        <Col span={8} >
           {props.isLoggedIn ? <RightButtonsSection /> : <RightUserSection />}
         </Col>
       </Row>
