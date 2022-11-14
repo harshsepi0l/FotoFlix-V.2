@@ -1,4 +1,6 @@
 import { Col, Row } from "antd";
+import { NavLink } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CustomHeader } from "../../components/Common/CustomHeader";
 import { TrendingImages } from "../../components/Common/TrendingImages";
 import { TrendingTags } from "../../components/Common/TrendingTags";

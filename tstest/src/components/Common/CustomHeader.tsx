@@ -1,10 +1,17 @@
 import { BellOutlined, SearchOutlined } from "@ant-design/icons";
 import { Avatar, Col, Input, Row, Space } from "antd";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import fotoLogo from "../ImageLogo/fotoLogo.svg";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { CustomButton } from "./CustomButton";
 import data from "./Data.json";
+import { useMediaQuery } from "react-responsive";
+import "./index.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Login } from "../../pages/Login";
+import { SignUp } from "../../pages/SignUp";
+import { HeaderDropdown } from "./HeaderDropdown";
+import Axios from "axios";
+import fotoLogo from "../ImageLogo/fotoLogo.svg";
 import "./index.css";
 
 const { Search } = Input;
@@ -70,28 +77,33 @@ function LeftSection(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (sessionStorage.getItem("acessRoken")) {
       setIsLoggedIn(true);
     }
+  }, []);
+
+  const [listOfPosts, setListOfPosts] = useState([]);
+  let { id } = useParams();
+
+  useEffect(() => {
+    Axios.get(`http://localhost:3000/Cloudinary/ById/${id}`).then(
+      (response) => {
+        setListOfPosts(response.data);
+      }
+    );
   }, []);
 
   return (
     <Row justify="start">
       <Space align="center">
         <Col span={4}>
-          <Link to="/">
-            <img
-              style={{ color: "#937DC2", width: 100, height: 50 }}
-              src={fotoLogo}
-              alt="logo"
-            />
-          </Link>
+          <img src="../images/logo-full.svg" />
         </Col>
       </Space>
 
       <Col span={4} offset={2}>
         <CustomButton
-          onClick={() => navigate("/UploadForm")}
+          onClick={() => navigate(`/UploadForm/${id}`)}
           buttonType={"primary"}
           color={"darkpurple"}
           title={"New Post"}
@@ -106,20 +118,33 @@ function RightButtonsSection(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("token") !== null) {
+    if (sessionStorage.getItem("accessToken") !== null) {
       setIsLoggedIn(true);
     }
   }, []);
 
   const logout = () => {
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("accessToken");
     setIsLoggedIn(false);
     navigate("/");
   };
 
+  const isDesktop = useMediaQuery({
+    query: "(min-width: 1224px)"
+  });
+
+  const isTablet = useMediaQuery({
+    query: "(max-width: 1224px)"
+  });
+
+  const isMobile = useMediaQuery({
+    query: "(max-width: 786px)"
+  });
+
+
   return (
-    <Row justify="end" align="middle">
-      <Col span={4}>
+    <Row justify="end" align="middle" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+      <Col className="gutter-row" span={4}>
         {isLoggedIn ? (
           <Avatar
             className="Avatar"
@@ -135,7 +160,7 @@ function RightButtonsSection(): JSX.Element {
           </Link>
         )}
       </Col>
-      <Col span={4}>
+      <Col className="gutter-row" span={4}>
         {isLoggedIn ? (
           <CustomButton
             buttonType={"primary"}
@@ -145,11 +170,15 @@ function RightButtonsSection(): JSX.Element {
           />
         ) : (
           <Link to="/signup">
-            <CustomButton
-              buttonType={"primary"}
-              color={"lightpurple"}
-              title={"Sign Up"}
-            />
+            {
+              isDesktop && (
+                <CustomButton
+                  buttonType={"primary"}
+                  color={"lightpurple"}
+                  title={"Sign Up"}
+                />)
+            }
+
           </Link>
         )}
       </Col>
@@ -175,14 +204,14 @@ interface isLoggedIn {
 export function CustomHeader(props: isLoggedIn): JSX.Element {
   return (
     <div className="mainHeader Padding-20">
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-        <Col className="gutter-row" span={8}>
+      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} >
+        <Col span={8} className="gutter-row">
           <LeftSection />
         </Col>
-        <Col className="gutter-row" span={8}>
+        <Col span={8} className="gutter-row">
           <CustomSearch />
         </Col>
-        <Col className="gutter-row" span={8}>
+        <Col span={8} className="gutter-row">
           {props.isLoggedIn ? <RightButtonsSection /> : <RightUserSection />}
         </Col>
       </Row>

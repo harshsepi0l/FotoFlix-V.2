@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { flixerinfo } = require("../models");
+const { sequelize } = require("../models");
+const { DataTypes } = require("sequelize");
+
 const bcrypt = require("bcrypt"); // for hashing passwords
+
+const flixerinfo = require("../models/flixerinfo")(sequelize, DataTypes);
 
 const { sign } = require("jsonwebtoken");
 
@@ -19,6 +23,12 @@ router.post("/", async (req, res) => {
     });
     res.json({ message: "User created!" });
   });
+});
+
+router.get("/byId/:id", async (req, res) => {
+  const id = req.params.id;
+  const flixers = await flixerinfo.findByPk(id);
+  res.json(flixers);
 });
 
 router.post("/Login", async (req, res) => {

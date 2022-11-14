@@ -8,7 +8,18 @@ import {
   FormikHelpers,
   FormikValues,
 } from "formik";
-// import ChipsArray from "./components/Tags/index.tsx";
+//import { ChipsArray } from "../../components/Tag";
+import { styled } from "@mui/material/styles";
+import { Chip, Paper } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
+
+export interface ChipData {
+  key: number;
+  label: string;
+}
+const ListItem = styled("li")(({ theme }) => ({
+  margin: theme.spacing(0.5),
+}));
 
 export const UploadForm = () => {
   const [previewSource, setPreviewSource] = useState("");
@@ -18,6 +29,27 @@ export const UploadForm = () => {
   const [imageDesc, setImageDesc] = useState(""); // Control image description
   const [imageVis, setImageVis] = useState(1); // Control public (0) vs. private (1)
   const [imageTags, setImageTags] = useState(""); // tags
+
+  const handleTagsChange = (e: any) => {
+    const tags = e.target.value;
+    setImageTags(tags);
+  };
+  const [input, setInput] = React.useState("");
+  const [chipData, setChipData] = React.useState<readonly ChipData[]>([
+    // How it works:  { key: 0, label: "Test1" }
+  ]);
+  const handleDelete = (chipToDelete: ChipData) => () => {
+    setChipData((chips) =>
+      chips.filter((chip) => chip.key !== chipToDelete.key)
+    );
+  };
+  const handleClick = () => {
+    setChipData([
+      ...chipData,
+      { key: chipData.length + 1, label: `#${input}` },
+    ]);
+    setInput("");
+  };
 
   const handleImageTitleChange = (e: any) => {
     // This updates every single time anything is typed
@@ -37,10 +69,10 @@ export const UploadForm = () => {
       setImageVis(1);
     }
   };
-  const handleTagsChange = (e: any) => {
-    const tags = e.target.value;
-    setImageTags(tags);
-  };
+  // const handleTagsChange = (e: any) => {
+  //   const tags = e.target.value;
+  //   setImageTags(tags);
+  // }
 
   const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
@@ -69,7 +101,7 @@ export const UploadForm = () => {
           Title: imageTitle,
           Description: imageDesc,
           PublicOrPrivate: imageVis,
-          Tags: imageTags,
+          Tags: chipData,
         }),
         headers: { "Content-type": "application/json" },
       });
@@ -145,18 +177,46 @@ export const UploadForm = () => {
           <label htmlFor="private">Private</label>
 
           <br />
-          <h3>Tags (Use a # for each tag)</h3>
-          <input
-            type="text"
-            name="Tags"
-            onChange={handleTagsChange}
-            className="form-input"
-          />
-
+          <Box>
+            <Box>
+              <TextField
+                placeholder="tag name"
+                value={input}
+                onChange={(e: {
+                  target: { value: React.SetStateAction<string> };
+                }) => setInput(e.target.value)}
+              />
+              <Button onClick={handleClick}> Save tag</Button>
+            </Box>
+            <Paper
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap",
+                listStyle: "none",
+                p: 0.5,
+                m: 0,
+              }}
+              component="ul"
+            >
+              {chipData.map((data) => {
+                let icon;
+                return (
+                  <ListItem key={data.key}>
+                    <Chip
+                      icon={icon}
+                      label={data.label}
+                      onDelete={handleDelete(data)}
+                      onChange={handleTagsChange}
+                    />
+                  </ListItem>
+                );
+              })}
+            </Paper>
+          </Box>
           <button className="btn" type="submit">
             Submit
           </button>
-          {/* <ChipsArray /> */}
         </form>
         {previewSource && (
           <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
