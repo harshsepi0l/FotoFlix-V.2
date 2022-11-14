@@ -18,6 +18,7 @@
 .footer-item-link {
     width: 50%
 }
+
 .footer-link {
     color: var(--lightpink);
 }
@@ -35,5 +36,14 @@
 
     .footer-item {
         width: auto;
+    }
+
+    .footer-link-container {
+        display: flex;
+        /* justify-content: center; */
+        /* align-items: center; */
+        /* flex-direction: column; */
+        color: white;
+        gap: 10px;
     }
 }
