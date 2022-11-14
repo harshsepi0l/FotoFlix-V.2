@@ -1,5 +1,6 @@
 import { CustomHeader } from "../../components/Common/CustomHeader";
 import { RowImages } from "../../components/Common/RowImages";
+import Footer from "../../components/Common/footer/Footer";
 import "./index.css";
 
 const gutters: Record<string, number> = {};
@@ -21,6 +22,7 @@ export function LandingPage(): JSX.Element {
     <div className="LandingContainer">
       <CustomHeader isLoggedIn={true} />
       <RowImages />
+      <Footer />
     </div>
   );
 }
