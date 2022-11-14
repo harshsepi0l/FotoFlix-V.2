@@ -5,11 +5,14 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
+    imageID: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     Tag: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   });
-
   return Tags;
 };
