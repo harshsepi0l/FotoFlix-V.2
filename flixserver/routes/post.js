@@ -15,6 +15,13 @@ router.get("/", async (req, res) => {
   res.json(posts);
 });
 
+router.get("/byId/:id", async (req, res) => {
+  const post = await post.findOne({
+    where: {id : id}
+});
+  res.json(post);
+});
+
 router.post("/", async (req, res) => {
   const fileStr = req.body.data;
 

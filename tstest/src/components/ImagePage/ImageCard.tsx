@@ -2,15 +2,17 @@ import { Card, Col, Row, Space } from "antd";
 import Meta from "antd/lib/card/Meta";
 import { Content } from "antd/lib/layout/layout";
 import { useState } from "react";
+import React, { useEffect } from "react";
 import { CustomCard } from "../Common/CustomCard";
 import { LikeOutlined, DislikeOutlined, StarOutlined, TagsOutlined, GlobalOutlined, LockOutlined } from '@ant-design/icons';
 import "./index.css"
-
-interface CardProps {
-  title: string;
-  description: string;
+import axios from "axios";
+import { useParams } from "react-router-dom";
+export interface CardProps {
+  Title: string;
+  Description: string;
   image: any;
-  tags: string[];
+  Tags: string[];
   views: string;
   // height: number | string;
   // width?: number | string;
@@ -22,6 +24,12 @@ interface IAction {
   onClick?: () => {},
   isPublic?: boolean,
 }
+
+export function getData(): any {
+  
+};
+
+
 
 function CustomAction(props: IAction): JSX.Element {
   const Icon: { [text: string]: JSX.Element } = {
@@ -80,17 +88,33 @@ function SingleImageCard(): JSX.Element {
 function CardInfo(props: CardProps): JSX.Element {
   return (
     <div className="Card-Info">
-      <Card title={props.title} bordered={false} className="Card-Info">
+      <Card title={props.Title} bordered={false} className="Card-Info">
        
-        <p>{props.description}</p>
-        <p>{props.tags}</p>
+        <p>{props.Description}</p>
+        <p>{props.Tags}</p>
       </Card>
     </div>
   );
 }
 
 export function ImageCard(): JSX.Element {
-
+  const [values, setValues] = React.useState<CardProps[]>([]);
+  let {id} = useParams();
+  useEffect( () => {
+    axios.get(`http://localhost:3000/Cloudinary/byId/${id}`).then((response) => {
+      setValues(response.data);
+    });
+  }, []);
+  let card: JSX.Element[] = [];
+  values.map((value, key) => {
+      card.push(<CardInfo
+        Title={value.Title}
+        Description={value.Description}
+        image={value.image}
+        Tags={value.Tags}
+        views={value.views}
+         />)
+  });
   return (
     <Row align="stretch">
       <Col span={10}>
@@ -98,9 +122,14 @@ export function ImageCard(): JSX.Element {
         {/* <CustomCard/> */}
       </Col>
       <Col span={14}>
-        <CardInfo title="Demo Title" views="200" description={"abc"} image={undefined} tags={["#dogs", "#cats"]} />
+        {/* <CardInfo Title={props.Title} views="200" Description={props.Description} image={undefined} Tags={["#dogs", "#cats"]} /> */}
+        {card}
       </Col>
     </Row>
   )
+}
+
+function useParam(): { id: any; } {
+  throw new Error("Function not implemented.");
 }
 
