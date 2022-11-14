@@ -3,7 +3,7 @@ const router = express.Router();
 const { sequelize } = require("../models");
 const { DataTypes } = require("sequelize");
 
-const bcrypt = require("bcrypt"); // for hashing passwords
+const bcryptjs = require("bcryptjs"); // for hashing passwords
 
 const flixerinfo = require("../models/flixerinfo")(sequelize, DataTypes);
 
@@ -13,7 +13,7 @@ const { sign } = require("jsonwebtoken");
 
 router.post("/", async (req, res) => {
   const { Firstname, Lastname, Username, Email, Password } = req.body;
-  bcrypt.hash(Password, 10).then((hash) => {
+  bcryptjs.hash(Password, 10).then((hash) => {
     flixerinfo.create({
       Firstname: Firstname,
       Lastname: Lastname,
@@ -39,7 +39,7 @@ router.post("/Login", async (req, res) => {
   if (!user) {
     res.json({ error: "User Doesn't Exist" });
   } else {
-    bcrypt.compare(Password, user.Password).then((match) => {
+    bcryptjs.compare(Password, user.Password).then((match) => {
       if (!match) {
         res.json({ error: "Wrong Username And Password Combination" });
       } else {

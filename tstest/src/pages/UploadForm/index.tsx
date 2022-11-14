@@ -94,7 +94,7 @@ export const UploadForm = () => {
   };
   const uploadImage = async (base64EncodedImage: any) => {
     try {
-      await fetch("http://localhost:3000/Cloudinary", {
+      await fetch("https://full-stack-fotoflix.herokuapp.com/:3000/Cloudinary", {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,

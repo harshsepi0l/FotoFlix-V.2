@@ -24,7 +24,7 @@ export function TrendingImages(): JSX.Element {
 
   const [values, setValues] = React.useState<CardProps[]>([]);
   useEffect(() => {
-    axios.get("http://localhost:3000/Cloudinary").then((response) => {
+    axios.get("https://full-stack-fotoflix.herokuapp.com/:3000/Cloudinary").then((response) => {
       setValues(response.data);
     });
   }, []);
