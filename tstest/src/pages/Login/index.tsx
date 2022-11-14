@@ -1,7 +1,7 @@
 import { Input, Space } from "antd";
 import Axios from "axios";
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { CustomButton } from "../../components/Common/CustomButton";
 import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
 
@@ -13,10 +13,6 @@ export const Login = () => {
 
   // This will navigate to Login Page once user has logged in
   const LoginCheck = () => {
-    const sendToHomePage = () => {
-      navigate("/HomePage");
-    };
-
     // This will navigate to Landing Page once user has logged in
     const sendToLanding = () => {
       navigate("/");
@@ -27,8 +23,20 @@ export const Login = () => {
       navigate("/SignUp");
     };
 
+    // function ListItem() {
+    //   let { id } = useParams();
+    //   useEffect(() => {
+    //     Axios.get(`http://localhost:3000/SignUp/byId/${id}`).then(
+    //       (response) => {
+    //         setLoginStatus(response.data);
+    //         navigate(`/HomePage/:${id}`);
+    //       }
+    //     );
+    //   }, []);
+    // }
+
     const loginCheck = () => {
-      Axios.post("http://localhost:3000/SignUp/Login", {
+      Axios.post(`http://localhost:3000/SignUp/Login/`, {
         Username: username,
         Password: password,
       }).then((response) => {
@@ -36,11 +44,21 @@ export const Login = () => {
           alert(response.data.error);
         } else {
           sessionStorage.setItem("accessToken", response.data);
-          navigate(`/HomePage/${username}`);
+          navigate(`/HomePage/:${username}`);
         }
-        sendToHomePage();
       });
     };
+
+    // let { id } = useParams();
+    // useEffect(() => {
+    //   {
+    //     Axios.get(`http://localhost:3000/SignUp/Login/ById/${id}`).then(
+    //       (response) => {
+    //         setLoginStatus(response.data);
+    //       }
+    //     );
+    //   }
+    // }, []);
     return (
       <div>
         <div style={{ marginTop: 50 }}>
@@ -123,3 +141,6 @@ export const Login = () => {
   };
   return <div>{LoginCheck()}</div>;
 };
+function useEffect(arg0: () => void, arg1: never[]) {
+  throw new Error("Function not implemented.");
+}
