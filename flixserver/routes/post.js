@@ -67,11 +67,11 @@ router.post("/", async (req, res) => {
   });
   // Add rest of tags
   // get current postid
-  await post.findOne({
-    
+  const currentPost = await post.findOne({
+    where: {Url: uploadedResponse.url}
   });
   for (let t = 1;  t < tagIds.length; t++){
-    
+    currentPost.TagsId = tagIds[t];
   }
 
   res.json({ message: "Image created!" });
