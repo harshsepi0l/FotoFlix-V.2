@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
   res.json(posts);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", validateToken, async (req, res) => {
   const fileStr = req.body.data;
 
   const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
