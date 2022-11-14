@@ -24,7 +24,7 @@ export const SignUp = () => {
   };
 
   const submitLog = (data: any) => {
-    Axios.post("https://full-stack-fotoflix.herokuapp.com/:3000/SignUp", {
+    Axios.post("https://full-stack-fotoflix.herokuapp.com/SignUp", {
       Firstname: firstname,
       Lastname: lastname,
       Username: username,
@@ -82,7 +82,6 @@ export const SignUp = () => {
   return (
     <div className="Container">
       <div className="App">
-       
         <h1 style={{ color: "#937DC2" }}>Sign up for a free account</h1>
         <div className="SignUpContainer">
           {/* This is a row */}
