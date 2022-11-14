@@ -1,4 +1,6 @@
 import { Card } from "antd";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { CustomCard } from "./CustomCard";
 import { InfiniteScroll } from "./InfiniteScroll";
@@ -24,6 +26,27 @@ export function TrendingImages(): JSX.Element {
     }, 300);
   };
 
+  interface CardProps {
+    PublicOrPrivate: number;
+    Url: string;
+    Title: string;
+    Description: string;
+    Dislike: number;
+    isScroll?: boolean;
+    Avatar: string;
+    Like: number;
+    Tags: string;
+    Favorite: number;
+    key: any,
+  }
+
+  const [values, setValues] = React.useState<CardProps[]>([]);
+  useEffect(() => {
+    axios.get("http://localhost:3000/Cloudinary").then((response) => {
+      setValues(response.data);
+    });
+  }, []);
+
   return (
     <Card title="Trending Images"
       style={{ textAlign: "center" }}>
@@ -31,7 +54,7 @@ export function TrendingImages(): JSX.Element {
 
         height: 300, wordWrap: "break-word", overflowY: "scroll", scrollBehavior: "smooth"
       }}>
-        <InfiniteScroll
+        {/* <InfiniteScroll
 
           hasMoreData={hasMoreData}
           isLoading={loading}
@@ -41,18 +64,23 @@ export function TrendingImages(): JSX.Element {
           < ul >
             {
               numbers.map(() => (
-                <CustomCard
-                  key={undefined}
-                  PublicOrPrivate={0}
-                  Url={""} Title={""}
-                  Description={""} Dislike={0}
-                  Avatar={""} Like={0}
-                  Tags={""}
-                  Favorite={0} />
+                <CustomCard />
               ))
             }
           </ul>
         </InfiniteScroll >
+        <div>{values.map(function (value, mykey) {
+            <CustomCard 
+            key={mykey} 
+            PublicOrPrivate={value.PublicOrPrivate} 
+            Url={value.Url} 
+            Title={value.Title} 
+            Description={value.Description} 
+            Dislike={value.Dislike} 
+            Avatar={value.Avatar} 
+            Like={value.Like} 
+            Tags={value.Tags} 
+            Favorite={value.Favorite} />})};</div> */}
       </div>
     </Card >
   )

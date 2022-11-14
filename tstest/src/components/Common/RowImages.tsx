@@ -1,7 +1,7 @@
 import { Space } from "antd";
 import axios from "axios";
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import { CustomCard } from "./CustomCard";
 import { Motion } from "./Motion";
 import { PaginationApplicator } from "./pagination/PaginationApplicator";
