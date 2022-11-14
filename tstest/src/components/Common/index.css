@@ -4,10 +4,11 @@
 
 @media screen and (max-width: 768px) {
     .ant-row-end {
-        margin-right: 20px !important;
+        /* margin-right: 20px !important; */
     }
 
 }
+
 .Default-darkpurple {
     background-color: var(--darkpurple);
     border-color: var(--darkpurple);
@@ -57,13 +58,17 @@
 
 .Padding-20 {
     padding: 20px;
-    padding-right: 60px;
     background-color: var(--white);
 }
 
 
 .CustomSearch {
     background-color: #F5F3FF;
+}
+
+.Header-SearchBar {
+    flex: 1;
+    text-align: center;
 }
 
 .CustomSearch>input::placeholder,
@@ -91,6 +96,18 @@ input[type=password]:focus .CustomSearchContainer+.CustomSearch {
     background-color: none;
 }
 
+/* Dropdown menu */
+.ant-dropdown-menu {
+    text-align: right;
+}
+
+.Custom-Menu {
+    color: var(--midpurple)
+}
+
+.Custom-Menu:hover {
+    color: var(--darkpurple)
+}
 .DataResult {
     position: absolute;
     background-color: var(--darkpink);
@@ -119,14 +136,18 @@ input[type=password]:focus .CustomSearchContainer+.CustomSearch {
     color: var(--darkpurple) !important
 }
 
+/* Right Buttons */
+.Header-RightButtons {
+    margin-left: auto;
+}
 /* Trending */
 .Trending {
     text-align: center;
 }
 
 .Trending-Scroll {
-    word-break: "break-word"; 
-    overflow-y: "scroll"; 
+    word-break: "break-word";
+    overflow-y: "scroll";
     scroll-behavior: "smooth";
     height: 300;
 }
@@ -161,7 +182,7 @@ input[type=password]:focus .CustomSearchContainer+.CustomSearch {
     margin-left: auto;
     margin-right: auto;
 
-}    
+}
 
 .RowImages-Cards {
     display: flex;
