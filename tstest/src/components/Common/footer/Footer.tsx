@@ -17,10 +17,10 @@ function Footer() {
       </Box>
       <Box className="footer-item">
         <p>Quick Links</p>
-        <Link to="/login"> Test 1</Link>
-        <Link to="/login"> Test 2</Link>
-        <Link to="/login"> Test 3</Link>
-        <Link to="/login"> Test 4</Link>
+        <Link to="/"> Landing Page</Link>
+        <Link to="/login"> Login </Link>
+        <Link to="/signup"> Sign Up</Link>
+        <Link to="/homepage"> Account Page</Link>
       </Box>
     </Box>
   );
