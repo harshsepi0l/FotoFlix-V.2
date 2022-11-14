@@ -19,6 +19,7 @@ interface CardProps {
   Tags: string;
   Favorite: number;
   key: any;
+  id: number;
 }
 
 export function RowImages(): JSX.Element {
@@ -26,6 +27,7 @@ export function RowImages(): JSX.Element {
   useEffect(() => {
     axios.get("http://localhost:3000/Cloudinary").then((response) => {
       setValues(response.data);
+      console.log(response.data.id);
     });
   }, []);
 
@@ -44,6 +46,7 @@ export function RowImages(): JSX.Element {
             Avatar={value.Avatar}
             Likes={value.Likes}
             Tags={value.Tags}
+            id={value.id}
             Favorite={value.Favorite} />}
         key={value.key}
       />

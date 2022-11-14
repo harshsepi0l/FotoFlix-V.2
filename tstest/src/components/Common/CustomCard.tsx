@@ -23,6 +23,7 @@ interface CardProps {
   Tags: string;
   Favorite: number;
   key: any;
+  id: number;
 }
 
 const { Meta } = Card;
@@ -67,7 +68,7 @@ export function CustomCard(props: CardProps): JSX.Element {
   const navigate = useNavigate();
 
   const handleOnClick = () => {
-    navigate("/image/" + props.key);
+    navigate("/image/" + props.id);
   }
 
   console.log(props.Likes);
