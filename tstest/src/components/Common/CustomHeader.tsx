@@ -13,6 +13,7 @@ import { SignUp } from "../../pages/SignUp";
 import { HeaderDropdown } from "./HeaderDropdown";
 import Axios from "axios";
 import fotoLogo from "../ImageLogo/fotoLogo.svg";
+import logo from "../ImageLogo/logo.svg";
 import "./index.css";
 
 const { Search } = Input;
@@ -83,27 +84,49 @@ function LeftSection(): JSX.Element {
     }
   }, []);
 
+  const isMobile = useMediaQuery({
+    query: "(max-width: 786px)"
+  });
+
   return (
     <Row justify="start">
       <Space align="center">
         <Col span={4}>
-        <Link to="/">
-            <img
-              style={{ color: "#937DC2", width: 100, height: 50 }}
-              src={fotoLogo}
-              alt="logo"
-            />
+          <Link to="/">
+            {isMobile ? (
+              <img
+                style={{ color: "#937DC2", width: 20, height: 20 }}
+                src={logo}
+                alt="logo"
+              />
+            ) : (
+              <img
+                style={{ color: "#937DC2", width: 100, height: 50 }}
+                src={fotoLogo}
+                alt="logo"
+              />
+            )}
           </Link>
         </Col>
       </Space>
 
       <Col span={4} offset={2}>
-        <CustomButton
-          onClick={() => navigate(`/UploadForm`)}
-          buttonType={"primary"}
-          color={"darkpurple"}
-          title={"New Post"}
-        />
+        {isMobile ? (
+          <CustomButton
+            onClick={() => navigate(`/UploadForm`)}
+            buttonType={"primary"}
+            color={"darkpurple"}
+            title={"+"}
+          />
+        ) : (
+          <CustomButton
+            onClick={() => navigate(`/UploadForm`)}
+            buttonType={"primary"}
+            color={"darkpurple"}
+            title={"New Post"}
+          />
+        )}
+
       </Col>
     </Row>
   );
@@ -178,9 +201,6 @@ function RightButtonsSection(): JSX.Element {
           </Link>
         )}
       </Col>
-      {/* <Col>
-        <HeaderDropdown />
-      </Col> */}
     </Row>
   );
 }
