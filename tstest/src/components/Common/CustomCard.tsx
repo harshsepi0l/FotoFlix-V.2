@@ -9,6 +9,7 @@ import {
 import { Avatar, Card, Space } from "antd";
 import axios from "axios";
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface CardProps {
   PublicOrPrivate: number;
@@ -55,23 +56,27 @@ function CustomAction(props: IAction): JSX.Element {
   );
 }
 
-interface isGlobal {
-  isGlobal: boolean;
-}
-
-interface isGlobal {
-  isGlobal: boolean;
-}
 
 export function CustomCard(props: CardProps): JSX.Element {
   let isGlobal = false;
+  if (props.PublicOrPrivate === 1) {
+    isGlobal = true;
+  }
+
+  const navigate = useNavigate();
+
+  const handleOnClick = () => {
+    navigate("/image/" + props.key);
+  }
 
   return (
     <div>
       <Card
+        hoverable
         key={props.key}
         style={{ width: 300 }}
-        cover={<img alt="example" src={props.Url} />}
+        cover={<img alt={props.Title} src={props.Url} />}
+        onClick={handleOnClick}
         actions={[
           <CustomAction icon="like" text={props.Like} isPublic={isGlobal} />,
           <CustomAction
@@ -87,7 +92,6 @@ export function CustomCard(props: CardProps): JSX.Element {
           <CustomAction icon="tags" text={props.Tags} isPublic={isGlobal} />,
           <CustomAction
             icon="status"
-            text={props.PublicOrPrivate}
             isPublic={isGlobal}
           />,
         ]}
