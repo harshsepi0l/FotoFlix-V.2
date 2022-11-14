@@ -51,6 +51,7 @@
 
 .Padding-20 {
     padding: 20px;
+    padding-right: 60px;
     background-color: var(--white);
 }
 

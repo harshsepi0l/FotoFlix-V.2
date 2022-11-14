@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { CustomButton } from "./CustomButton";
 import data from "./Data.json";
+import { useMediaQuery } from "react-responsive";
 import "./index.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "../../pages/Login";
@@ -128,6 +129,19 @@ function RightButtonsSection(): JSX.Element {
     navigate("/");
   };
 
+  const isDesktop = useMediaQuery({
+    query: "(min-width: 1224px)"
+  });
+
+  const isTablet = useMediaQuery({
+    query: "(max-width: 1224px)"
+  });
+
+  const isMobile = useMediaQuery({
+    query: "(max-width: 786px)"
+  });
+
+
   return (
     <Row justify="end" align="middle" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
       <Col className="gutter-row" span={4}>
@@ -156,11 +170,15 @@ function RightButtonsSection(): JSX.Element {
           />
         ) : (
           <Link to="/signup">
-            <CustomButton
-              buttonType={"primary"}
-              color={"lightpurple"}
-              title={"Sign Up"}
-            />
+            {
+              isDesktop && (
+                <CustomButton
+                  buttonType={"primary"}
+                  color={"lightpurple"}
+                  title={"Sign Up"}
+                />)
+            }
+
           </Link>
         )}
       </Col>
@@ -186,14 +204,14 @@ interface isLoggedIn {
 export function CustomHeader(props: isLoggedIn): JSX.Element {
   return (
     <div className="mainHeader Padding-20">
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-        <Col className="gutter-row" span={8}>
+      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} >
+        <Col span={8} className="gutter-row">
           <LeftSection />
         </Col>
-        <Col className="gutter-row" span={8}>
+        <Col span={8} className="gutter-row">
           <CustomSearch />
         </Col>
-        <Col className="gutter-row" span={8}>
+        <Col span={8} className="gutter-row">
           {props.isLoggedIn ? <RightButtonsSection /> : <RightUserSection />}
         </Col>
       </Row>
