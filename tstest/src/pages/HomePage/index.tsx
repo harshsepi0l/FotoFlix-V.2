@@ -9,11 +9,17 @@ import { AccountInfo } from "../../components/HomePage/AccountInfo";
 import Footer from "../../components/Common/footer/Footer";
 import { CustomButton } from "../../components/Common/CustomButton";
 import "./index.css";
+import { useMediaQuery } from "react-responsive";
+
 export function HomePage(): JSX.Element {
+  const isMobile = useMediaQuery({
+    query: "(max-width: 768px)"
+  });
+
   return (
     <div>
       <CustomHeader isLoggedIn={true} />
-      <Row>
+      {!isMobile ? (<Row>
         <Col span={18}>
           <AccountInfo />
           <AccountBar />
@@ -22,9 +28,16 @@ export function HomePage(): JSX.Element {
           <TrendingImages />
           <TrendingTags />
         </Col>
-      </Row>
-
-      {/* <CustomButton title={"test"} buttonType={"default"} color={"white"} className="Sticky" /> */}
+      </Row>)
+        :
+        (
+          <div>
+            <AccountInfo />
+            <AccountBar />
+            <TrendingImages />
+            <TrendingTags />
+          </div>
+        )}
       <Footer />
     </div>
   );
