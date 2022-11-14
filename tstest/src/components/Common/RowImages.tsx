@@ -56,7 +56,7 @@ export function RowImages(): JSX.Element {
         data={newCards}
         class="RowImages-Cards"
         pageSize={6}
-      />;
+      />
     </div>
   </div >
 
