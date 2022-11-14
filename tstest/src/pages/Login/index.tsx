@@ -4,7 +4,6 @@ import { useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { CustomButton } from "../../components/Common/CustomButton";
 import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
-import "./index.css";
 
 export const Login = () => {
   const [username, checkUsername] = useState("");
@@ -27,7 +26,7 @@ export const Login = () => {
     // function ListItem() {
     //   let { id } = useParams();
     //   useEffect(() => {
-    //     Axios.get(`https://full-stack-fotoflix.herokuapp.com/:3000/SignUp/byId/${id}`).then(
+    //     Axios.get(`http://localhost:3000/SignUp/byId/${id}`).then(
     //       (response) => {
     //         setLoginStatus(response.data);
     //         navigate(`/HomePage/:${id}`);
@@ -37,7 +36,7 @@ export const Login = () => {
     // }
 
     const loginCheck = () => {
-      Axios.post(`https://full-stack-fotoflix.herokuapp.com/SignUp/Login/`, {
+      Axios.post(`http://localhost:3000/SignUp/Login/`, {
         Username: username,
         Password: password,
       }).then((response) => {
@@ -53,7 +52,7 @@ export const Login = () => {
     // let { id } = useParams();
     // useEffect(() => {
     //   {
-    //     Axios.get(`https://full-stack-fotoflix.herokuapp.com/:3000/SignUp/Login/ById/${id}`).then(
+    //     Axios.get(`http://localhost:3000/SignUp/Login/ById/${id}`).then(
     //       (response) => {
     //         setLoginStatus(response.data);
     //       }
@@ -78,7 +77,6 @@ export const Login = () => {
                   <div className="login">
                     <Input
                       style={{ borderRadius: "25px", height: "82.64px" }}
-                      className="input-field"
                       type="text"
                       name="username"
                       placeholder="Username"
@@ -92,7 +90,6 @@ export const Login = () => {
                     <Space direction="vertical">
                       <Input.Password
                         style={{ borderRadius: "25px", height: "82.64px" }}
-                        className="input-field"
                         type="password"
                         name="password"
                         placeholder="Password"
@@ -130,13 +127,7 @@ export const Login = () => {
               </div>
             </div>
           </div>
-          {/* <div className="login">
-            <button
-              type="button"
-              className="btn"
-              onClick={() => LoginCheck()}
-            />
-          </div> */}
+        
           <h1>{loginStatus}</h1>
         </div>
       </div>
