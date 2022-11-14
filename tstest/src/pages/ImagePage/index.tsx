@@ -1,5 +1,6 @@
 import { Col, Row } from "antd";
 import { CustomHeader } from "../../components/Common/CustomHeader";
+import Footer from "../../components/Common/footer/Footer";
 import { TrendingImages } from "../../components/Common/TrendingImages";
 import { TrendingTags } from "../../components/Common/TrendingTags";
 import { CommentSection } from "../../components/ImagePage/CommentSection";
@@ -20,6 +21,7 @@ export function ImagePage(): JSX.Element {
           <TrendingTags />
         </Col>
       </Row>
+      <Footer />
     </div>
   );
 }

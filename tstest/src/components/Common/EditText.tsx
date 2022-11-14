@@ -1,5 +1,5 @@
-import { CheckOutlined, HighlightOutlined, SmileFilled, SmileOutlined } from '@ant-design/icons';
-import { Divider, Radio, Typography } from 'antd';
+import { HighlightOutlined } from '@ant-design/icons';
+import { Divider, Typography } from 'antd';
 import React, { useState } from 'react';
 
 const { Paragraph } = Typography;

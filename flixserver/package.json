@@ -16,6 +16,7 @@
     "cli": "^1.0.1",
     "cloudinary": "^1.32.0",
     "cloudinary-react": "^1.8.1",
+    "cookies": "^0.8.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
