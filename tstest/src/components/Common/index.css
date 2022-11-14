@@ -40,7 +40,15 @@
 }
 
 .Default-red {
-    background-color: red
+    background-color: rgb(211, 18, 18);
+    border-color: rgb(211, 18, 18);
+}
+
+.Default-red:hover,
+.Default-red:focus {
+    background: rgb(193, 13, 13);
+    border-color: rgb(193, 13, 13);
+    color: var(--white);
 }
 
 .Default-white:hover,

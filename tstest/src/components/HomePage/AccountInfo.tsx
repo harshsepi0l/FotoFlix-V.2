@@ -24,6 +24,7 @@ export function AccountInfo(): JSX.Element {
         <Col flex={5}>
           <Typography.Title level={2} className="HomePage-AccountInfo">
             {user && user[1].Username}
+          
             {/* {editableStr} */}
           </Typography.Title>
         </Col>
