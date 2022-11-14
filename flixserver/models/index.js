@@ -33,20 +33,6 @@ Object.keys(db).forEach(modelName => {
 });
 
 db.sequelize = sequelize;
-db.Sequelize = Sequelize;
 
-db.imagepost = require("./post.js")(sequelize, Sequelize);
-db.tag = require("./flixertags.js")(sequelize, Sequelize);
-
-db.tag.belongsToMany(db.imagepost, {
-  through: "image_tag",
-  as: "posts",
-  foreignKey: "id",
-});
-db.imagepost.belongsToMany(db.tag, {
-  through: "image_tag",
-  as: "tags",
-  foreignKey: "id",
-});
 
 module.exports = db;

@@ -4,6 +4,7 @@ const router = express.Router();
 const { DataTypes } = require("sequelize");
 const post = require("../models/post")(sequelize, DataTypes);
 
+
 const bodyParser = require("body-parser");
 const tags = require("../models/flixertags");
 
@@ -22,8 +23,8 @@ router.post("/", async (req, res) => {
     upload_preset: "flixerimages",
   });
 
-  console.log(uploadedResponse);
-  console.log(req.body.Tags);
+  // console.log(uploadedResponse);
+  // console.log(req.body.Tags);
 
   // Add tags to the database
   // for (let t of req.body.Tags)
@@ -34,19 +35,19 @@ router.post("/", async (req, res) => {
     
   // }
   // Get ids of tags
-  const tagIds=[];
-  for (let t of req.body.Tags){
-    await flixertags.findOrCreate({
-      where: {Tag: t.label},
-    }).then(([result, created]) => {});
-    flixertags.findOne({
-      where: {Tag: t.label},
-      attributes: ["id"]
-    }).then((foundResult) => {tagIds.push(foundResult)});
-  }
-  const tag1 = tagIds[0].id;
-  console.log("TAG 1:");
-  console.log(tag1);
+  // const tagIds=[];
+  // for (let t of req.body.Tags){
+  //   await flixertags.findOrCreate({
+  //     where: {Tag: t.label},
+  //   }).then(([result, created]) => {});
+  //   flixertags.findOne({
+  //     where: {Tag: t.label},
+  //     attributes: ["id"]
+  //   }).then((foundResult) => {tagIds.push(foundResult)});
+  // }
+  // const tag1 = tagIds[0].id;
+  // console.log("TAG 1:");
+  // console.log(tag1);
 
   // Post
   await post.create({
@@ -63,15 +64,17 @@ router.post("/", async (req, res) => {
     Likes: 0,
     Dislikes: 0,
     UploadDate: uploadedResponse.created_at,
-    TagsId: tag1 // Add the first tag now
   });
-  // Add rest of tags
+  // Add tags
   // get current postid
   const currentPost = await post.findOne({
     where: {Url: uploadedResponse.url}
   });
-  for (let t = 1;  t < tagIds.length; t++){
-    currentPost.TagsId = tagIds[t];
+  for (let t of req.body.Tags){
+    flixertags.create({
+      imageID: currentPost.id,
+      Tag: t.label
+    });
   }
 
   res.json({ message: "Image created!" });

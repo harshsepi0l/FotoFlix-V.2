@@ -1,4 +1,5 @@
 const flixerinfo = require("./flixerinfo");
+const flixertags = require("./flixertags");
 
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define("flixerimages", {
@@ -38,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     Dislikes: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
+    }
     // UserID: {
     //   type: DataTypes.INTEGER,
     //   allowNull: false,
@@ -47,10 +48,10 @@ module.exports = (sequelize, DataTypes) => {
     //     key: 'id',
     //   }
     // },
-    TagsId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
+    // TagsId: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    // },
   },{
     timestamps: true,
   }
