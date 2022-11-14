@@ -102,7 +102,7 @@ function LeftSection(): JSX.Element {
 
       <Col span={4} offset={2}>
         <CustomButton
-          onClick={() => navigate(`/UploadForm${id}`)}
+          onClick={() => navigate(`/UploadForm/${id}`)}
           buttonType={"primary"}
           color={"darkpurple"}
           title={"New Post"}
