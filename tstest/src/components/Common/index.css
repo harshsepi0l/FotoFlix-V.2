@@ -2,6 +2,12 @@
     background-color: var(--darkpurple);
 }
 
+@media screen and (max-width: 768px) {
+    .ant-row-end {
+        margin-right: 20px !important;
+    }
+
+}
 .Default-darkpurple {
     background-color: var(--darkpurple);
     border-color: var(--darkpurple);
@@ -113,6 +119,17 @@ input[type=password]:focus .CustomSearchContainer+.CustomSearch {
     color: var(--darkpurple) !important
 }
 
+/* Trending */
+.Trending {
+    text-align: center;
+}
+
+.Trending-Scroll {
+    word-break: "break-word"; 
+    overflow-y: "scroll"; 
+    scroll-behavior: "smooth";
+    height: 300;
+}
 
 /* Row Images */
 

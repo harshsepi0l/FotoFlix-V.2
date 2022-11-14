@@ -6,13 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
 function Footer() {
-  const isDesktop = useMediaQuery({
-    query: "(min-width: 1224px)"
-  });
-
-  const isTablet = useMediaQuery({
-    query: "(max-width: 1224px)"
-  });
 
   const isMobile = useMediaQuery({
     query: "(max-width: 768px)"
