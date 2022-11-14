@@ -39,31 +39,26 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    UploadDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    UserID: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: flixerinfo,
-        key: 'id',
-      }
-    }
-  },{
-    timestamps: false,
-  }
-  );
-    UserId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
+    // UserID: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   references: {
+    //     model: flixerinfo,
+    //     key: 'id',
+    //   }
+    // },
     TagsId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-  });
-
+  },{
+    timestamps: true,
+  }
+  );
+  Post.associate = (models) => {
+    Post.hasOne(models.flixerinfo, {
+      foreignKey: 'id'
+    });
+  }
   return Post;
 };

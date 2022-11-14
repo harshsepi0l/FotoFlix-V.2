@@ -12,15 +12,16 @@ import { UploadForm } from "./pages/UploadForm";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/HomePage" element={<HomePage />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/UploadForm" element={<UploadForm />} />
-        <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/" element={<LandingPage />} />
-      </Routes>
-    </Router>
+    // <Router>
+    //   <Routes>
+    //     <Route path="/HomePage" element={<HomePage />} />
+    //     <Route path="/Login" element={<Login />} />
+    //     <Route path="/UploadForm" element={<UploadForm />} />
+    //     <Route path="/SignUp" element={<SignUp />} />
+    //     <Route path="/" element={<LandingPage />} />
+    //   </Routes>
+    // </Router>
+    <UploadForm />
   );
 }
 

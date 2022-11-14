@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     Tag: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true, // Only one of each tag in the database 
     },
   });
 
