@@ -3,7 +3,7 @@ const { sequelize } = require("../models");
 const router = express.Router();
 const { DataTypes } = require("sequelize");
 const post = require("../models/post")(sequelize, DataTypes);
-
+const { validateToken } = require("../middlewares/AuthMiddleware");
 const bodyParser = require("body-parser");
 const tags = require("../models/flixertags");
 

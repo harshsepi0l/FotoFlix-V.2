@@ -76,20 +76,9 @@ function LeftSection(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem("acessRoken")) {
+    if (sessionStorage.getItem("acessToken")) {
       setIsLoggedIn(true);
     }
-  }, []);
-
-  const [listOfPosts, setListOfPosts] = useState([]);
-  let { id } = useParams();
-
-  useEffect(() => {
-    Axios.get(`http://localhost:3000/Cloudinary/ById/${id}`).then(
-      (response) => {
-        setListOfPosts(response.data);
-      }
-    );
   }, []);
 
   return (
@@ -102,7 +91,7 @@ function LeftSection(): JSX.Element {
 
       <Col span={4} offset={2}>
         <CustomButton
-          onClick={() => navigate(`/UploadForm/${id}`)}
+          onClick={() => navigate(`/UploadForm`)}
           buttonType={"primary"}
           color={"darkpurple"}
           title={"New Post"}
