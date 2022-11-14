@@ -1,3 +1,5 @@
+// This file is no longer used; use UploadForm/index instead!
+
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import { Chip, Paper } from "@mui/material";
@@ -16,6 +18,28 @@ const ListItem = styled("li")(({ theme }) => ({
 //   const [imageTags, setImageTags] = useState(""); // tags
 //   setImageTags(tags);
 // }
+
+const [imageTags, setImageTags] = useState(""); // tags
+  const handleTagsChange = (e: any) => {
+    const tags = e.target.value;
+    setImageTags(tags);
+  };
+  const [input, setInput] = React.useState("");
+  const [chipData, setChipData] = React.useState<readonly ChipData[]>([
+    // How it works:  { key: 0, label: "Test1" }
+  ]);
+  const handleDelete = (chipToDelete: ChipData) => () => {
+    setChipData((chips) =>
+      chips.filter((chip) => chip.key !== chipToDelete.key)
+    );
+  };
+  const handleClick = () => {
+    setChipData([
+      ...chipData,
+      { key: chipData.length + 1, label: `#${input}` },
+    ]);
+    setInput("");
+  };
 
 export const ChipsArray = () => {
   const [imageTags, setImageTags] = useState(""); // tags

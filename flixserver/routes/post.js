@@ -8,6 +8,7 @@ const imagetags = require("../models/flixerimagetag");
 const tags = require("../models/flixertags");
 
 const { cloudinary } = require("../utils/cloudinary");
+const flixertags = require("../models/flixertags");
 
 router.get("/uploaded", async (req, res) => {
   const all_image = await cloudinary.api.resources();
@@ -39,8 +40,10 @@ router.post("/", async (req, res) => {
     UploadDate: uploadedResponse.created_at,
   });
 
-  // Upload the tags
-  console.log(Tags);
+  console.log(req.body.Tags);
+  // await flixertags.create({
+
+  // });
 
   res.json({ message: "Image created!" });
 });
