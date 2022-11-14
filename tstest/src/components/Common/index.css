@@ -2,9 +2,10 @@
     background-color: var(--darkpurple);
 }
 
+
 @media screen and (max-width: 768px) {
-    .ant-row-end {
-        /* margin-right: 20px !important; */
+    .mainHeader > .ant-row {
+        margin-right: 30px !important;
     }
 
 }
