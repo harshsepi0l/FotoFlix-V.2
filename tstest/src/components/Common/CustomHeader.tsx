@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { CustomButton } from "./CustomButton";
 import data from "./Data.json";
 import { useMediaQuery } from "react-responsive";
+
 import "./index.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "../../pages/Login";
@@ -97,7 +98,13 @@ function LeftSection(): JSX.Element {
     <Row justify="start">
       <Space align="center">
         <Col span={4}>
-          <img src="../images/logo-full.svg" />
+        <Link to="/">
+            <img
+              style={{ color: "#937DC2", width: 100, height: 50 }}
+              src={fotoLogo}
+              alt="logo"
+            />
+          </Link>
         </Col>
       </Space>
 
