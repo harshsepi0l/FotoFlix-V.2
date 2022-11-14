@@ -5,7 +5,7 @@ const { DataTypes } = require("sequelize");
 
 const bcryptjs = require("bcryptjs"); // for hashing passwords
 
-const flixerinfo = require("../models/flixerinfo")(sequelize, DataTypes);
+const flixerinfo = require("../models/flixerinfo");
 
 const { sign } = require("jsonwebtoken");
 
