@@ -17,6 +17,7 @@ interface CardProps {
   Tags: string;
   Favorite: number;
   key: any;
+  id: number;
 }
 
 export function TrendingImages(): JSX.Element {
@@ -49,6 +50,7 @@ export function TrendingImages(): JSX.Element {
               Avatar={value.Avatar}
               Likes={value.Likes}
               Tags={value.Tags}
+              id={value.id}
               Favorite={value.Favorite} />
           ))
         }
