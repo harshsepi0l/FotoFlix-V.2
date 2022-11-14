@@ -12,10 +12,10 @@ interface CardProps {
   Url: string;
   Title: string;
   Description: string;
-  Dislike: number;
+  Dislikes: number;
   isScroll?: boolean;
   Avatar: string;
-  Like: number;
+  Likes: number;
   Tags: string;
   Favorite: number;
   key: any;
@@ -40,28 +40,24 @@ export function RowImages(): JSX.Element {
             Url={value.Url}
             Title={value.Title}
             Description={value.Description}
-            Dislike={value.Dislike}
+            Dislikes={value.Dislikes}
             Avatar={value.Avatar}
-            Like={value.Like}
+            Likes={value.Likes}
             Tags={value.Tags}
-            Favorite={value.Favorite}
-          />
-        }
+            Favorite={value.Favorite} />}
         key={value.key}
       />
-    );
+    )
   });
-  return (
-    <div className="RowImages">
-      <div className="CardsContainer">
-        <PaginationApplicator
-          key={Math.random()} //DON'T TOUCH. This is needed to actually re-render while sorting.
-          data={newCards}
-          class="RowImages-Cards"
-          pageSize={6}
-        />
-        ;
-      </div>
+  return <div className="RowImages">
+    <div className="CardsContainer">
+      <PaginationApplicator
+        key={Math.random()}       //DON'T TOUCH. This is needed to actually re-render while sorting.
+        data={newCards}
+        class="RowImages-Cards"
+        pageSize={6}
+      />
     </div>
-  );
+  </div >
+
 }

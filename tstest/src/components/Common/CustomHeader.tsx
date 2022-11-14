@@ -129,8 +129,8 @@ function RightButtonsSection(): JSX.Element {
   };
 
   return (
-    <Row justify="end" align="middle">
-      <Col span={4}>
+    <Row justify="end" align="middle" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+      <Col className="gutter-row" span={4}>
         {isLoggedIn ? (
           <Avatar
             className="Avatar"
@@ -146,7 +146,7 @@ function RightButtonsSection(): JSX.Element {
           </Link>
         )}
       </Col>
-      <Col span={4}>
+      <Col className="gutter-row" span={4}>
         {isLoggedIn ? (
           <CustomButton
             buttonType={"primary"}
