@@ -44,7 +44,7 @@ export const Login = () => {
           alert(response.data.error);
         } else {
           sessionStorage.setItem("accessToken", response.data);
-          navigate(`/HomePage/:${username}`);
+          navigate(`/HomePage/${username}`);
         }
       });
     };
