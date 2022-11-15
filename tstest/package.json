@@ -58,5 +58,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://full-stack-fotoflix.herokuapp.com/:3000"
+  "proxy": "https://full-stack-fotoflix.herokuapp.com "
 }

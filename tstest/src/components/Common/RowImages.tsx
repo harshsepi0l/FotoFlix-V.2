@@ -25,7 +25,7 @@ interface CardProps {
 export function RowImages(): JSX.Element {
   const [values, setValues] = React.useState<CardProps[]>([]);
   useEffect(() => {
-    axios.get("https://full-stack-fotoflix.herokuapp.com/:3000/Cloudinary").then((response) => {
+    axios.get("https://full-stack-fotoflix.herokuapp.com /Cloudinary").then((response) => {
       setValues(response.data);
       console.log(response.data.id);
     });
