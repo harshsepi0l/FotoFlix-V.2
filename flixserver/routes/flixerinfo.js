@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
+
 const { sequelize } = require("../models");
 const { DataTypes } = require("sequelize");
 
-const bcrypt = require("bcrypt"); // for hashing passwords
+const FlixerInfo = require("../models/FlixerInfo.js");
 
-const flixerinfo = require("../models/flixerinfo")(sequelize, DataTypes);
+const bcrypt = require("bcrypt"); // for hashing passwords
 
 const { sign } = require("jsonwebtoken");
 
@@ -14,7 +15,7 @@ const { sign } = require("jsonwebtoken");
 router.post("/", async (req, res) => {
   const { Firstname, Lastname, Username, Email, Password } = req.body;
   bcrypt.hash(Password, 10).then((hash) => {
-    flixerinfo.create({
+    FlixerInfo.create({
       Firstname: Firstname,
       Lastname: Lastname,
       Username: Username,
@@ -27,14 +28,14 @@ router.post("/", async (req, res) => {
 
 router.get("/byId/:id", async (req, res) => {
   const id = req.params.id;
-  const flixers = await flixerinfo.findByPk(id);
+  const flixers = await FlixerInfo.findByPk(id);
   res.json(flixers);
 });
 
 router.post("/Login", async (req, res) => {
   const { Username, Password } = req.body;
 
-  const user = await flixerinfo.findOne({ where: { Username: Username } });
+  const user = await FlixerInfo.findOne({ where: { Username: Username } });
 
   if (!user) {
     res.json({ error: "User Doesn't Exist" });

@@ -2,8 +2,9 @@ module.exports = (sequelize, DataTypes) => {
   const FlixerInfo = sequelize.define("flixerinfo", {
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true,
+      allowNull: false,
       autoIncrement: true,
+      primaryKey: true,
     },
     Firstname: {
       type: DataTypes.STRING,
@@ -16,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     Username: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey: true,
     },
     Email: {
       type: DataTypes.STRING,
@@ -24,7 +26,6 @@ module.exports = (sequelize, DataTypes) => {
     Password: {
       type: DataTypes.STRING,
       allowNull: false,
-      varchar: 500,
     },
   });
   return FlixerInfo;

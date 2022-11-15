@@ -1,5 +1,3 @@
-const flixerinfo = require("./flixerinfo");
-
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define(
     "flixerimages",
@@ -51,8 +49,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   Post.associate = (models) => {
-    Post.hasOne(models.flixerinfo, {
-      foreignKey: "id",
+    Post.belongsTo(models.flixerinfo, {
+      foreignKey: "UsernameSent",
     });
   };
   return Post;

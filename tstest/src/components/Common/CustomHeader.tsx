@@ -75,6 +75,7 @@ function CustomSearch(): JSX.Element {
 }
 
 function LeftSection(): JSX.Element {
+  let { Username } = useParams();
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -113,7 +114,7 @@ function LeftSection(): JSX.Element {
       <Col span={4} offset={2}>
         {isLoggedIn ? (
           <CustomButton
-            onClick={() => navigate(`/UploadForm`)}
+            onClick={() => navigate(`/UploadForm/${Username}`)}
             buttonType={"primary"}
             color={"darkpurple"}
             title={"New Post"}

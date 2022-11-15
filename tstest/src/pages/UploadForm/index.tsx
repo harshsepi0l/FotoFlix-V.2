@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+
 import {
   Formik,
   Form,
@@ -92,9 +94,11 @@ export const UploadForm = () => {
     if (!previewSource) return;
     uploadImage(previewSource);
   };
+  let { Username } = useParams();
+
   const uploadImage = async (base64EncodedImage: any) => {
     try {
-      await fetch("http://localhost:3000/Cloudinary", {
+      await fetch("http://localhost:3000/Cloudinary/", {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
@@ -103,7 +107,10 @@ export const UploadForm = () => {
           PublicOrPrivate: imageVis,
           Tags: chipData,
         }),
-        headers: { "Content-type": "application/json" },
+        headers: {
+          "Content-type": "application/json",
+          accessToken: sessionStorage.getItem("accessToken") as string,
+        },
       });
     } catch (err) {
       console.error(err);
@@ -225,3 +232,6 @@ export const UploadForm = () => {
     </div>
   );
 };
+function useParam() {
+  throw new Error("Function not implemented.");
+}
