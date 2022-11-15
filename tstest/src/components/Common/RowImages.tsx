@@ -23,12 +23,12 @@ interface CardProps {
 }
 
 export function RowImages(): JSX.Element {
-  const [values, setValues] = React.useState<CardProps[]>([]);
+  const [values, setValues] = useState<CardProps[]>([]);
   useEffect(() => {
     axios
-      .get("http://localhost:3000/Cloudinary/getposts", {
+      .get("http://localhost:3000/Cloudinary/", {
         headers: {
-          accessToken: sessionStorage.getItem("accessToken"),
+          accessToken: sessionStorage.getItem("accessToken") as string,
         },
       })
       .then((response) => {

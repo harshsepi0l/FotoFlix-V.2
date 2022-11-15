@@ -25,9 +25,7 @@ export function TrendingImages(): JSX.Element {
   useEffect(() => {
     axios
       .get("http://localhost:3000/Cloudinary", {
-        headers: {
-          accessToken: sessionStorage.getItem("accessToken"),
-        },
+        //get headers
       })
       .then((response) => {
         setValues(response.data);

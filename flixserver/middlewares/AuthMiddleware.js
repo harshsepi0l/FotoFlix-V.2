@@ -6,7 +6,10 @@ const validateToken = (req, res, next) => {
   if (!accessToken) return res.json({ error: "User not logged in!" });
 
   try {
-    const validToken = verify(accessToken, "flixerinfosecret");
+    const validToken = verify(
+      accessToken,
+      `${process.env.ACCESS_TOKEN_SECRET}`
+    );
     req.user(validToken);
     if (validToken) {
       return next();

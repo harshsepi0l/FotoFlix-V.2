@@ -17,25 +17,22 @@ router.get("/", validateToken, async (req, res) => {
   res.json(posts);
 });
 
-router.get("/getposts", validateToken, async (req, res) => {
-  const posts = await post.findAll();
-  res.json(posts);
-});
-
 router.post("/", validateToken, async (req, res) => {
-  // const fileStr = req.body.data
   const fileStr = req.body;
+  console.log(fileStr);
+
   const UID = req.user.UID;
-  fileStr.UID = UID;
+  flieStr.UID = UID;
 
   const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
     upload_preset: "flixerimages",
   });
+
   fileStr.ImageType = uploadedResponse.format;
   fileStr.Url = uploadedResponse.url;
   fileStr.PostType = uploadedResponse.resource_type;
 
   await post.create(fileStr);
-  res.json(fileStr);
 });
+
 module.exports = router;

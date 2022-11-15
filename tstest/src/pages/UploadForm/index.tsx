@@ -12,6 +12,7 @@ import {
 import { styled } from "@mui/material/styles";
 import { Chip, Paper } from "@mui/material";
 import { Box, Button, TextField } from "@mui/material";
+import { stringify } from "querystring";
 
 export interface ChipData {
   key: number;
@@ -94,18 +95,18 @@ export const UploadForm = () => {
   };
   const uploadImage = async (base64EncodedImage: any) => {
     try {
-      await fetch("http://localhost:3000/Cloudinary", {
+      await fetch("http://localhost:3000/Cloudinary/", {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
           Title: imageTitle,
           Description: imageDesc,
           PublicOrPrivate: imageVis,
-          // Tags: chipData,
+          Tags: chipData,
         }),
         headers: {
-          "Content-type": "application/json",
           accessToken: sessionStorage.getItem("accessToken") as string,
+          "Content-type": "application/json",
         },
       });
     } catch (err) {

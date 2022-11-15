@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { sequelize } = require("../models");
 const { DataTypes } = require("sequelize");
+require("dotenv").config();
 
 const bcryptjs = require("bcryptjs"); // for hashing passwords
 
@@ -48,8 +49,8 @@ router.post("/Login", async (req, res) => {
         res.json({ error: "Wrong Username And Password Combination" });
       } else {
         const accessToken = sign(
-          { Username: user.Username, id: user.id },
-          "flixerinfosecret"
+          { UID: user.UID },
+          `${process.env.ACCESS_TOKEN_SECRET}`
         );
 
         res.json(accessToken);
