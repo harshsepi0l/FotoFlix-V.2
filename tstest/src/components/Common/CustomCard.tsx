@@ -103,10 +103,14 @@ export function CustomCard(props: CardProps): JSX.Element {
         hoverable
         key={props.key}
         style={{ width: 300 }}
-        onClick={handleOnClick}
-        cover={<img alt={props.Title} src={props.Url} />}
+        cover={<img alt={props.Title} src={props.Url} onClick={handleOnClick} />}
         actions={[
-          <CustomAction icon="like" text={props.Likes} isPublic={isGlobal} />,
+          <CustomAction
+            icon="like"
+            text={props.Likes}
+            isPublic={isGlobal}
+            onClick={like}
+          />,
           <CustomAction
             icon="dislike"
             text={props.Dislikes}

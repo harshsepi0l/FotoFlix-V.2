@@ -2,13 +2,22 @@
     background-color: var(--darkpurple);
 }
 
-@media screen and (max-width: 768px) {
-    .ant-row-end {
-        /* margin-right: 20px !important; */
+
+@media screen and (max-width: 786px) {
+    .mainHeader>.ant-row {
+        margin-right: 30px !important;
     }
 
 }
+/* Header  */
+.ant-row {
+    width:100%;
+    height: 100%;
+}
 
+.ant-row-end {
+    padding-right: 70px;
+}
 .Default-darkpurple {
     background-color: var(--darkpurple);
     border-color: var(--darkpurple);
@@ -39,7 +48,15 @@
 }
 
 .Default-red {
-    background-color: red
+    background-color: rgb(211, 18, 18);
+    border-color: rgb(211, 18, 18);
+}
+
+.Default-red:hover,
+.Default-red:focus {
+    background: rgb(193, 13, 13);
+    border-color: rgb(193, 13, 13);
+    color: var(--white);
 }
 
 .Default-white:hover,
@@ -61,7 +78,21 @@
     background-color: var(--white);
 }
 
+/* Logo on Header */
+.header-logo {
+    color: var(--darkpurple);
+    width: 100px;
+    height: 50px;
+}
 
+@media screen and (max-width: 786px) {
+    .header-logo {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Search Bar on header */
 .CustomSearch {
     background-color: #F5F3FF;
 }
@@ -75,6 +106,15 @@
 .CustomSearch>input::-ms-input-placeholder,
 .CustomSearch>input::-ms-input-placeholder {
     color: var(--darkpurple);
+}
+
+.CustomSearchContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 .CustomSearch:hover {
@@ -108,6 +148,7 @@ input[type=password]:focus .CustomSearchContainer+.CustomSearch {
 .Custom-Menu:hover {
     color: var(--darkpurple)
 }
+
 .DataResult {
     position: absolute;
     background-color: var(--darkpink);
@@ -140,6 +181,7 @@ input[type=password]:focus .CustomSearchContainer+.CustomSearch {
 .Header-RightButtons {
     margin-left: auto;
 }
+
 /* Trending */
 .Trending {
     text-align: center;

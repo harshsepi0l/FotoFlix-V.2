@@ -21,7 +21,7 @@ function Footer() {
           alt="logo"
         />
       </Box>
-      {!isMobile && (
+      {!isMobile ? (
         <Box className="footer-item ">
           <p><b >Quick Links</b></p>
           <Link className="footer-link" to="/"> Landing Page</Link>
@@ -29,6 +29,12 @@ function Footer() {
           <Link className="footer-link" to="/signup"> Sign Up</Link>
           <Link className="footer-link" to="/homepage"> Account Page</Link>
         </Box>
+      ) : (
+        <div className="footer-link-container">
+          <p><b >Quick Links</b></p>
+          <Link className="footer-link" to="/"> Landing Page</Link>
+          <Link className="footer-link" to="/homepage"> Account Page</Link>
+        </div>
       )}
 
     </Box>
