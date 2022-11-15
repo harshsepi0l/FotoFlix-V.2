@@ -162,44 +162,45 @@ function RightButtonsSection(): JSX.Element {
   });
 
   return (
-    <Row justify="end" align="middle">
-      <Col span={4}>
-        {isLoggedIn ? (
-          <Avatar
-            className="Avatar"
-            src="https://www.publicdomainpictures.net/pictures/30000/velka/plain-white-background.jpg"
-          />
-        ) : (
-          <Link to="/login">
-            <CustomButton
-              buttonType={"default"}
-              color={"white"}
-              title={"Login"}
-            />
-          </Link>
-        )}
-      </Col>
-      <Col span={4}>
-        {isLoggedIn ? (
-          <CustomButton
-            buttonType={"primary"}
-            color={"darkpurple"}
-            title={"Logout"}
-            onClick={logout}
-          />
-        ) : (
-          <Link to="/signup">
-            {isDesktop && (
+    <div className="Header-RightButtons">
+      {isLoggedIn ? (
+        <CustomButton
+          buttonType={"primary"}
+          color={"darkpurple"}
+          title={"Logout"}
+          onClick={logout}
+        />
+      ) : (
+        <div>
+          {isDesktop ? (
+            <div className="Header-RightButtons-Desktop">
+              <Link to="/login">
+                <CustomButton
+                  buttonType={"default"}
+                  color={"white"}
+                  title={"Login"}
+                />
+              </Link>
+              <Link to="/signup">
+                <CustomButton
+                  buttonType={"primary"}
+                  color={"lightpurple"}
+                  title={"Sign Up"}
+                />
+              </Link>
+            </div>
+          ) : (
+            <Link to="/login">
               <CustomButton
-                buttonType={"primary"}
-                color={"lightpurple"}
-                title={"Sign Up"}
+                buttonType={"default"}
+                color={"white"}
+                title={"Login"}
               />
-            )}
-          </Link>
-        )}
-      </Col>
-    </Row>
+            </Link>
+          )}
+        </div>
+      )}
+    </div>
   );
 }
 
