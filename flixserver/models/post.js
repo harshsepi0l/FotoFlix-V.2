@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
+      UID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       Title: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -50,10 +54,5 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: true,
     }
   );
-  Post.associate = (models) => {
-    Post.hasOne(models.flixerinfo, {
-      foreignKey: "id",
-    });
-  };
   return Post;
 };

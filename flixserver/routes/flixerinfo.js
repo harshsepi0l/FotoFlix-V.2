@@ -5,7 +5,7 @@ const { DataTypes } = require("sequelize");
 
 const bcryptjs = require("bcryptjs"); // for hashing passwords
 
-const flixerinfo = require("../models/flixerinfo");
+const flixerinfo = require("../models/flixerinfo")(sequelize, DataTypes);
 
 const { sign } = require("jsonwebtoken");
 
@@ -25,10 +25,14 @@ router.post("/", async (req, res) => {
   });
 });
 
-router.get("/byId/:id", async (req, res) => {
-  const id = req.params.id;
-  const flixers = await flixerinfo.findByPk(id);
-  res.json(flixers);
+router.get("/byId", async (req, res) => {
+  const { UID } = req.body;
+  const flixer = await flixerinfo.findOne({
+    where: {
+      UID: UID,
+    },
+  });
+  res.json(flixer);
 });
 
 router.post("/Login", async (req, res) => {

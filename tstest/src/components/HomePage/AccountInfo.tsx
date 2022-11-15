@@ -6,14 +6,6 @@ import React, { useEffect } from "react";
 export function AccountInfo(): JSX.Element {
   const [user, setUser] = React.useState<any>(null);
 
-  useEffect(() => {
-    Axios.get("https://full-stack-fotoflix.herokuapp.com/api/get").then(
-      (response) => {
-        setUser(response.data);
-      }
-    );
-  }, []);
-
   return (
     <div>
       <Row className="HomePage-Container">

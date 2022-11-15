@@ -24,7 +24,7 @@ export const Login = () => {
     };
 
     const loginCheck = () => {
-      Axios.post("https://full-stack-fotoflix.herokuapp.com/SignUp/Login", {
+      Axios.post("http://localhost:3000/SignUp/Login", {
         Username: username,
         Password: password,
       }).then((response) => {
@@ -32,7 +32,7 @@ export const Login = () => {
           alert(response.data.error);
         } else {
           sessionStorage.setItem("accessToken", response.data);
-          navigate(`/HomePage/${username}`);
+          navigate(`/HomePage`);
         }
       });
     };

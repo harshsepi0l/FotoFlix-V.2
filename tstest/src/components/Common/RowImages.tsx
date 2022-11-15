@@ -26,36 +26,36 @@ export function RowImages(): JSX.Element {
   const [values, setValues] = React.useState<CardProps[]>([]);
   useEffect(() => {
     axios
-      .get("https://full-stack-fotoflix.herokuapp.com/Cloudinary")
+      .get("http://localhost:3000/Cloudinary/getposts", {
+        headers: {
+          accessToken: sessionStorage.getItem("accessToken"),
+        },
+      })
       .then((response) => {
         setValues(response.data);
-        console.log(response.data.id);
       });
   }, []);
 
   let newCards: JSX.Element[] = [];
-  values.map((value, key) => {
-    newCards.push(
-      <Motion
-        component={
-          <CustomCard
-            key={value.key}
-            PublicOrPrivate={value.PublicOrPrivate}
-            Url={value.Url}
-            Title={value.Title}
-            Description={value.Description}
-            Dislikes={value.Dislikes}
-            Avatar={value.Avatar}
-            Likes={value.Likes}
-            Tags={value.Tags}
-            id={value.id}
-            Favorite={value.Favorite}
-          />
-        }
-        key={value.key}
-      />
-    );
-  });
+  {
+    values.map((value, key) => {
+      newCards.push(
+        <CustomCard
+          key={key}
+          PublicOrPrivate={value.PublicOrPrivate}
+          Url={value.Url}
+          Title={value.Title}
+          Description={value.Description}
+          Dislikes={value.Dislikes}
+          Avatar={value.Avatar}
+          Likes={value.Likes}
+          Tags={value.Tags}
+          Favorite={value.Favorite}
+          id={value.id}
+        />
+      );
+    });
+  }
   return (
     <div className="RowImages">
       <div className="CardsContainer">
