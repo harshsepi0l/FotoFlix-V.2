@@ -71,8 +71,6 @@ export function CustomCard(props: CardProps): JSX.Element {
     navigate("/image/" + props.id);
   }
 
-<<<<<<< Updated upstream
-=======
   const buttonHandleOnClick = () => {
     navigate("/like" + props.id);
   }
@@ -98,7 +96,6 @@ export function CustomCard(props: CardProps): JSX.Element {
     setAction('disliked');
   };
 
->>>>>>> Stashed changes
   console.log(props.Likes);
   return (
     <div>
