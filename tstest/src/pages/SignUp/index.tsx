@@ -193,6 +193,8 @@ export const SignUp = () => {
                     title={"Cancel"}
                   />
                 </NavLink>
+                <div className="count">00</div>
+                <script src="views.js"></script>
               </div>
             </div>
           </div>
