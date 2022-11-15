@@ -8,6 +8,7 @@ import {
   FormikHelpers,
   FormikValues,
 } from "formik";
+import { useNavigate } from "react-router-dom";
 //import { ChipsArray } from "../../components/Tag";
 import { styled } from "@mui/material/styles";
 import { Chip, Paper } from "@mui/material";
@@ -51,6 +52,14 @@ export const UploadForm = () => {
     setInput("");
   };
 
+  const navigate = useNavigate();
+
+
+ // This will navigate to Landing Page once user has signed up
+ const sendToLanding = () => {
+  navigate("/");
+ };
+  
   const handleImageTitleChange = (e: any) => {
     // This updates every single time anything is typed
     const title = e.target.value;
@@ -94,7 +103,7 @@ export const UploadForm = () => {
   };
   const uploadImage = async (base64EncodedImage: any) => {
     try {
-      await fetch("https://full-stack-fotoflix.herokuapp.com /Cloudinary", {
+      await fetch("https://full-stack-fotoflix.herokuapp.com/Cloudinary", {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
@@ -214,7 +223,7 @@ export const UploadForm = () => {
               })}
             </Paper>
           </Box>
-          <button className="btn" type="submit">
+          <button className="btn" type="submit" onClick={sendToLanding} >
             Submit
           </button>
         </form>

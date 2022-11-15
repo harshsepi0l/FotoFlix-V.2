@@ -111,20 +111,15 @@ function LeftSection(): JSX.Element {
       </Space>
 
       <Col span={4} offset={2}>
-        {isMobile ? (
-          <CustomButton
-            onClick={() => navigate(`/UploadForm`)}
-            buttonType={"primary"}
-            color={"darkpurple"}
-            title={"+"}
-          />
-        ) : (
+        {isLoggedIn ? (
           <CustomButton
             onClick={() => navigate(`/UploadForm`)}
             buttonType={"primary"}
             color={"darkpurple"}
             title={"New Post"}
           />
+        ) : (
+          <></>
         )}
       </Col>
     </Row>
@@ -229,4 +224,7 @@ export function CustomHeader(props: isLoggedIn): JSX.Element {
       </Row>
     </div>
   );
+}
+function setIsLoggedIn(arg0: boolean) {
+  throw new Error("Function not implemented.");
 }

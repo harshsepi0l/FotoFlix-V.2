@@ -1,6 +1,7 @@
 const express = require("express");
 const { sequelize } = require("../models");
 const router = express.Router();
+const { validateToken } = require("../middlewares/AuthMiddleware");
 const { DataTypes } = require("sequelize");
 const post = require("../models/post")(sequelize, DataTypes);
 

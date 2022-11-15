@@ -25,10 +25,12 @@ interface CardProps {
 export function RowImages(): JSX.Element {
   const [values, setValues] = React.useState<CardProps[]>([]);
   useEffect(() => {
-    axios.get("https://full-stack-fotoflix.herokuapp.com /Cloudinary").then((response) => {
-      setValues(response.data);
-      console.log(response.data.id);
-    });
+    axios
+      .get("https://full-stack-fotoflix.herokuapp.com/Cloudinary")
+      .then((response) => {
+        setValues(response.data);
+        console.log(response.data.id);
+      });
   }, []);
 
   let newCards: JSX.Element[] = [];
@@ -47,20 +49,23 @@ export function RowImages(): JSX.Element {
             Likes={value.Likes}
             Tags={value.Tags}
             id={value.id}
-            Favorite={value.Favorite} />}
+            Favorite={value.Favorite}
+          />
+        }
         key={value.key}
       />
-    )
+    );
   });
-  return <div className="RowImages">
-    <div className="CardsContainer">
-      <PaginationApplicator
-        key={Math.random()}       //DON'T TOUCH. This is needed to actually re-render while sorting.
-        data={newCards}
-        class="RowImages-Cards"
-        pageSize={6}
-      />
+  return (
+    <div className="RowImages">
+      <div className="CardsContainer">
+        <PaginationApplicator
+          key={Math.random()} //DON'T TOUCH. This is needed to actually re-render while sorting.
+          data={newCards}
+          class="RowImages-Cards"
+          pageSize={6}
+        />
+      </div>
     </div>
-  </div >
-
+  );
 }

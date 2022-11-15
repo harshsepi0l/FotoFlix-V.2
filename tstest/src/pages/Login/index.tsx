@@ -23,20 +23,8 @@ export const Login = () => {
       navigate("/SignUp");
     };
 
-    // function ListItem() {
-    //   let { id } = useParams();
-    //   useEffect(() => {
-    //     Axios.get(`https://full-stack-fotoflix.herokuapp.com /SignUp/byId/${id}`).then(
-    //       (response) => {
-    //         setLoginStatus(response.data);
-    //         navigate(`/HomePage/:${id}`);
-    //       }
-    //     );
-    //   }, []);
-    // }
-
     const loginCheck = () => {
-      Axios.post(`https://full-stack-fotoflix.herokuapp.com /SignUp/Login/`, {
+      Axios.post("https://full-stack-fotoflix.herokuapp.com/SignUp/Login", {
         Username: username,
         Password: password,
       }).then((response) => {
@@ -127,13 +115,7 @@ export const Login = () => {
               </div>
             </div>
           </div>
-          {/* <div className="login">
-            <button
-              type="button"
-              className="btn"
-              onClick={() => LoginCheck()}
-            />
-          </div> */}
+
           <h1>{loginStatus}</h1>
         </div>
       </div>
