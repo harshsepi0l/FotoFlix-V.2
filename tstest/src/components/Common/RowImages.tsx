@@ -27,7 +27,7 @@ export function RowImages(): JSX.Element {
   useEffect(() => {
     axios.get("http://localhost:3000/Cloudinary").then((response) => {
       setValues(response.data);
-      console.log(response.data.id);
+      //console.log(response.data.id);
     });
   }, []);
 
