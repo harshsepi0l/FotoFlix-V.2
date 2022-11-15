@@ -71,6 +71,34 @@ export function CustomCard(props: CardProps): JSX.Element {
     navigate("/image/" + props.id);
   }
 
+<<<<<<< Updated upstream
+=======
+  const buttonHandleOnClick = () => {
+    navigate("/like" + props.id);
+  }
+
+  const handleAvatarOnClick = () => {
+    navigate("/user/" + props.Avatar);
+  }
+
+  const [likes, setLikes] = useState(props.Likes);
+  const [dislikes, setDislikes] = useState(props.Dislikes);
+  const [action, setAction] = useState<string | null>(null);
+
+
+  const like = () => {
+    setLikes(props.Likes + 1);
+    setDislikes(props.Dislikes);
+    setAction('liked');
+  };
+
+  const dislike = () => {
+    setLikes(props.Likes);
+    setDislikes(props.Dislikes + 1);
+    setAction('disliked');
+  };
+
+>>>>>>> Stashed changes
   console.log(props.Likes);
   return (
     <div>
@@ -100,7 +128,12 @@ export function CustomCard(props: CardProps): JSX.Element {
         ]}
       >
         <Meta
-          avatar={<Avatar src={props.Avatar} />}
+          avatar={
+            <Avatar
+              src={props.Avatar}
+              onClick={handleAvatarOnClick}
+              style={{ cursor: "pointer" }}
+            />}
           title={props.Title}
           description={props.Description}
         />
