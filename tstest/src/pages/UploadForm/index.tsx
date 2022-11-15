@@ -143,6 +143,7 @@ export const UploadForm = () => {
           <h3>Upload your image!</h3>
           <br />
           <input
+            title="file"
             type="file"
             name="image "
             onChange={handleFileInputChange}
@@ -152,6 +153,7 @@ export const UploadForm = () => {
           <br />
           <h3>Image Title</h3>
           <input
+            title="title"
             type="text"
             name="Image Title"
             onChange={handleImageTitleChange}
@@ -160,6 +162,7 @@ export const UploadForm = () => {
           <br />
           <h3>Image Description</h3>
           <input
+            title="description"
             type="text"
             name="Image Description"
             onChange={handleImageDescChange}
@@ -168,6 +171,7 @@ export const UploadForm = () => {
           <br />
           <h3>Public or private?</h3>
           <input
+            title="PubPriv"
             type="radio"
             value="public"
             id="public"
