@@ -15,6 +15,7 @@ import Axios from "axios";
 import fotoLogo from "../ImageLogo/fotoLogo.svg";
 import logo from "../ImageLogo/logo.svg";
 import "./index.css";
+import { CustomFab } from "./CustomFab";
 
 const { Search } = Input;
 
@@ -84,6 +85,14 @@ function LeftSection(): JSX.Element {
     }
   }, []);
 
+  const isDesktop = useMediaQuery({
+    query: "(min-width: 1224px)",
+  });
+
+  const isTablet = useMediaQuery({
+    query: "(max-width: 1224px)",
+  });
+
   const isMobile = useMediaQuery({
     query: "(max-width: 786px)",
   });
@@ -95,13 +104,13 @@ function LeftSection(): JSX.Element {
           <Link to="/">
             {isMobile ? (
               <img
-                style={{ color: "#937DC2", width: 20, height: 20 }}
+                className="header-logo"
                 src={logo}
                 alt="logo"
               />
             ) : (
               <img
-                style={{ color: "#937DC2", width: 100, height: 50 }}
+                className="header-logo"
                 src={fotoLogo}
                 alt="logo"
               />
@@ -111,15 +120,13 @@ function LeftSection(): JSX.Element {
       </Space>
 
       <Col span={4} offset={2}>
-        {isLoggedIn ? (
+        {isLoggedIn && !isMobile && (
           <CustomButton
             onClick={() => navigate(`/UploadForm`)}
             buttonType={"primary"}
             color={"darkpurple"}
             title={"New Post"}
           />
-        ) : (
-          <></>
         )}
       </Col>
     </Row>

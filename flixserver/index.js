@@ -29,12 +29,12 @@ const cloudinaryRouter = require("./routes/post");
 app.use("/Cloudinary", cloudinaryRouter);
 
 db.sequelize
-.sync()
-.then(() => {
-  app.listen(process.env.PORT || 3001, () => {
-    console.log("running on port 3001");
+  .sync()
+  .then(() => {
+    app.listen(process.env.PORT || 3001, () => {
+      console.log("running on port 3001");
+    });
   });
-});
 try {
 } catch (err) {
   console.log(err);

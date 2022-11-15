@@ -3,13 +3,21 @@
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 786px) {
     .mainHeader>.ant-row {
         margin-right: 30px !important;
     }
 
 }
+/* Header  */
+.ant-row {
+    width:100%;
+    height: 100%;
+}
 
+.ant-row-end {
+    padding-right: 70px;
+}
 .Default-darkpurple {
     background-color: var(--darkpurple);
     border-color: var(--darkpurple);
@@ -70,7 +78,21 @@
     background-color: var(--white);
 }
 
+/* Logo on Header */
+.header-logo {
+    color: var(--darkpurple);
+    width: 100px;
+    height: 50px;
+}
 
+@media screen and (max-width: 786px) {
+    .header-logo {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Search Bar on header */
 .CustomSearch {
     background-color: #F5F3FF;
 }
