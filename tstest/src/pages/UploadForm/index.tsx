@@ -1,18 +1,9 @@
-import React from "react";
-import { useState } from "react";
-import {
-  Formik,
-  Form,
-  Field,
-  ErrorMessage,
-  FormikHelpers,
-  FormikValues,
-} from "formik";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 //import { ChipsArray } from "../../components/Tag";
+import { Box, Button, Chip, Paper, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { Chip, Paper } from "@mui/material";
-import { Box, Button, TextField } from "@mui/material";
+
 
 export interface ChipData {
   key: number;
@@ -136,13 +127,15 @@ export const UploadForm = () => {
   //   }
   // }
   return (
+    
+  
+  
     <div>
-      {" "}
-      <div>
-        <h1>Upload </h1>
+        <h1 className="upload-items">Upload form </h1>
         <form onSubmit={handleSubmitFile} className="form">
+       
           <h3>Upload your image!</h3>
-          <br />
+       
           <input
             title="file"
             type="file"
@@ -151,7 +144,7 @@ export const UploadForm = () => {
             value={fileInputState}
             className="form-input"
           />
-          <br />
+        
           <h3>Image Title</h3>
           <input
             title="title"
@@ -160,7 +153,7 @@ export const UploadForm = () => {
             onChange={handleImageTitleChange}
             className="form-input"
           />
-          <br />
+       
           <h3>Image Description</h3>
           <input
             title="description"
@@ -169,7 +162,7 @@ export const UploadForm = () => {
             onChange={handleImageDescChange}
             className="form-input"
           />
-          <br />
+        
           <h3>Public or private?</h3>
           <input
             title="PubPriv"
@@ -180,7 +173,7 @@ export const UploadForm = () => {
             name="vis"
           />
           <label htmlFor="public">Public</label>
-          <br />
+        
           <input
             type="radio"
             value="private"
@@ -190,9 +183,9 @@ export const UploadForm = () => {
           />
           <label htmlFor="private">Private</label>
 
-          <br />
-          <Box>
-            <Box>
+         
+        
+            
               <TextField
                 placeholder="tag name"
                 value={input}
@@ -201,7 +194,7 @@ export const UploadForm = () => {
                 }) => setInput(e.target.value)}
               />
               <Button onClick={handleClick}> Save tag</Button>
-            </Box>
+           
             <Paper
               sx={{
                 display: "flex",
@@ -227,15 +220,17 @@ export const UploadForm = () => {
                 );
               })}
             </Paper>
-          </Box>
-          <button className="btn" type="submit" onClick={handleSubmitFile} >
+        
+          <button className="button" type="submit" onClick={handleSubmitFile} >
             Submit
           </button>
         </form>
         {previewSource && (
           <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
         )}
-      </div>
+   
+      
     </div>
+     
   );
 };
