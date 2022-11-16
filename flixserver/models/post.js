@@ -9,46 +9,46 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      UID: {
+      uid: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      Title: {
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      Description: {
+      description: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      PublicOrPrivate: {
+      publicOrPrivate: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      ImageType: {
+      imageType: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      PostType: {
+      postType: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      Url: {
+      url: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      // Likes: {
-      //   type: DataTypes.INTEGER,
-      //   allowNull: false,
-      // },
-      // Dislikes: {
-      //   type: DataTypes.INTEGER,
-      //   allowNull: false,
-      // },
-      // TagsId: {
-      //   type: DataTypes.INTEGER,
-      //   allowNull: false,
-      // },
+      likes: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      dislikes: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      tagsId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
     {
       timestamps: true,

@@ -5,19 +5,19 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    PostId: {
+    postId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    Likes: {
+    likes: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    Dislikes: {
+    dislikes: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    TagsId: {
+    tagsId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

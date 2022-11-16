@@ -200,7 +200,7 @@ function RightButtonsSection(): JSX.Element {
             />
           </Tooltip>
         ) : (
-          <Link to="/SignUp">
+          <Link to="/signUp">
             {isDesktop && (
               <CustomButton
                 buttonType={"primary"}

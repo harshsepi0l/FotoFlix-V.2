@@ -21,8 +21,8 @@ const db = require("./models");
 
 // Routers
 
-const signUpRouter = require("./routes/flixerinfo");
-app.use("/SignUp", signUpRouter);
+const flixerInfoRouter = require("./routes/flixerinfo");
+app.use("/", flixerInfoRouter);
 
 const cloudinaryRouter = require("./routes/post");
 app.use("/Cloudinary", cloudinaryRouter);

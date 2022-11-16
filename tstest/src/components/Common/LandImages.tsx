@@ -7,21 +7,7 @@ import { CustomCard } from "./CustomCard";
 import { Motion } from "./Motion";
 import { PaginationApplicator } from "./pagination/PaginationApplicator";
 import data from "./rowData.json";
-
-interface CardProps {
-  PublicOrPrivate: number;
-  Url: string;
-  Title: string;
-  Description: string;
-  Dislikes: number;
-  isScroll?: boolean;
-  Avatar: string;
-  Likes: number;
-  Tags: string;
-  Favorite: number;
-  key: any;
-  id: number;
-}
+import { CardProps } from "../../props/CardProps";
 
 export function LandImages(): JSX.Element {
   let { UID } = useParams();
@@ -44,17 +30,17 @@ export function LandImages(): JSX.Element {
       newCards.push(
         <CustomCard
           key={key}
-          PublicOrPrivate={value.PublicOrPrivate}
-          Url={value.Url}
-          Title={value.Title}
-          Description={value.Description}
-          Dislikes={value.Dislikes}
-          Avatar={value.Avatar}
-          Likes={value.Likes}
-          Tags={value.Tags}
-          Favorite={value.Favorite}
+          publicOrPrivate={value.publicOrPrivate}
+          url={value.url}
+          title={value.title}
+          description={value.description}
+          dislikes={value.dislikes}
+          avatar={value.avatar}
+          likes={value.likes}
+          tags={value.tags}
+          favorite={value.favorite}
           id={value.id}
-        />
+          uid={value.uid} />
       );
     });
   }

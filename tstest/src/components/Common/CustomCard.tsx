@@ -11,22 +11,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CloseCircleOutlined } from "@ant-design/icons";
-
-interface CardProps {
-  PublicOrPrivate: number;
-  Url: string;
-  Title: string;
-  Description: string;
-  Dislikes: number;
-  isScroll?: boolean;
-  Avatar?: string;
-  Likes: number;
-  Tags: string;
-  Favorite: number;
-  key: any;
-  id: number;
-  isCurrentUser?: boolean;
-}
+import { CardProps } from "../../props/CardProps";
 
 const { Meta } = Card;
 
@@ -61,7 +46,7 @@ function CustomAction(props: IAction): JSX.Element {
 
 export function CustomCard(props: CardProps): JSX.Element {
   let isGlobal = false;
-  if (props.PublicOrPrivate === 0) {
+  if (props.publicOrPrivate === 0) {
     isGlobal = true;
   }
 
@@ -76,22 +61,22 @@ export function CustomCard(props: CardProps): JSX.Element {
   };
 
   const handleAvatarOnClick = () => {
-    navigate("/user/" + props.Avatar);
+    navigate("/user/" + props.avatar);
   };
 
-  const [likes, setLikes] = useState(props.Likes);
-  const [dislikes, setDislikes] = useState(props.Dislikes);
+  const [likes, setLikes] = useState(props.likes);
+  const [dislikes, setDislikes] = useState(props.dislikes);
   const [action, setAction] = useState<string | null>(null);
 
   const like = () => {
-    setLikes(props.Likes + 1);
-    setDislikes(props.Dislikes);
+    setLikes(props.likes + 1);
+    setDislikes(props.dislikes);
     setAction("liked");
   };
 
   const dislike = () => {
-    setLikes(props.Likes);
-    setDislikes(props.Dislikes + 1);
+    setLikes(props.likes);
+    setDislikes(props.dislikes + 1);
     setAction("disliked");
   };
 
@@ -99,7 +84,7 @@ export function CustomCard(props: CardProps): JSX.Element {
     if (window.confirm("Are you sure that you want to remove card?")) {
     }
   };
-  console.log(props.Likes);
+  console.log(props.likes);
   return (
     <div>
       <Card
@@ -107,34 +92,34 @@ export function CustomCard(props: CardProps): JSX.Element {
         key={props.key}
         style={{ width: 300 }}
         cover={
-          <img alt={props.Title} src={props.Url} onClick={handleOnClick} />
+          <img alt={props.title} src={props.url} onClick={handleOnClick} />
         }
         actions={[
           <CustomAction
             icon="like"
-            text={props.Likes}
+            text={props.likes}
             isPublic={isGlobal}
             onClick={like}
           />,
           <CustomAction
             icon="dislike"
-            text={props.Dislikes}
+            text={props.dislikes}
             isPublic={isGlobal}
           />,
           <CustomAction
             icon="popularity"
-            text={props.Likes - props.Dislikes}
+            text={props.likes - props.dislikes}
             isPublic={isGlobal}
           />,
-          <CustomAction icon="tags" text={props.Tags} isPublic={isGlobal} />,
+          <CustomAction icon="tags" text={props.tags} isPublic={isGlobal} />,
           <CustomAction icon="status" isPublic={isGlobal} />,
         ]}
       >
         {/* <Avatar src={props.Avatar} /> */}
         <Meta
           avatar={<></>}
-          title={props.Title}
-          description={props.Description}
+          title={props.title}
+          description={props.description}
         />
       </Card>
     </div>
