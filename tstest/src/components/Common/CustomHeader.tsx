@@ -134,8 +134,9 @@ function RightButtonsSection(): JSX.Element {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    Axios.get("http://localhost:3000/Cloudinary/byUID")
-    .then((response) => {
+    Axios.get(
+      "https://full-stack-fotoflix.herokuapp.com/Cloudinary/byUID"
+    ).then((response) => {
       if (response.data.error) {
         setIsLoggedIn(false);
       } else {
