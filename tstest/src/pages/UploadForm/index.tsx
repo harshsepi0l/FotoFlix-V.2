@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { Chip, Paper } from "@mui/material";
 import { Box, Button, TextField } from "@mui/material";
+import { Card, Input } from 'antd';
+import "./index.css";
 
 export interface ChipData {
   key: number;
@@ -55,11 +57,11 @@ export const UploadForm = () => {
   const navigate = useNavigate();
 
 
- // This will navigate to Landing Page once user has signed up
- const sendToLanding = () => {
-  navigate("/");
- };
-  
+  // This will navigate to Landing Page once user has signed up
+  const sendToLanding = () => {
+    navigate("/");
+  };
+
   const handleImageTitleChange = (e: any) => {
     // This updates every single time anything is typed
     const title = e.target.value;
@@ -136,10 +138,10 @@ export const UploadForm = () => {
   //   }
   // }
   return (
-    <div>
+    <div className="Upload-Page">
       {" "}
-      <div>
-        <h1>Upload </h1>
+      <Card className="UploadForm-Container">
+        <h1 className="UploadForm-Title">Upload</h1>
         <form onSubmit={handleSubmitFile} className="form">
           <h3>Upload your image!</h3>
           <br />
@@ -151,9 +153,11 @@ export const UploadForm = () => {
             value={fileInputState}
             className="form-input"
           />
+
           <br />
           <h3>Image Title</h3>
-          <input
+          <Input
+            placeholder="Enter your Title here"
             title="title"
             type="text"
             name="Image Title"
@@ -162,7 +166,8 @@ export const UploadForm = () => {
           />
           <br />
           <h3>Image Description</h3>
-          <input
+          <Input
+            placeholder="Enter your Description here"
             title="description"
             type="text"
             name="Image Description"
@@ -228,14 +233,14 @@ export const UploadForm = () => {
               })}
             </Paper>
           </Box>
-          <button className="btn" type="submit" onClick={handleSubmitFile} >
+          <button className="btn UploadForm-submit-button" type="submit" onClick={handleSubmitFile} >
             Submit
           </button>
         </form>
         {previewSource && (
           <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
         )}
-      </div>
+      </Card>
     </div>
   );
 };
