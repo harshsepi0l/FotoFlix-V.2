@@ -40,6 +40,16 @@ export const Login = () => {
       });
     };
 
+    // let { id } = useParams();
+    // useEffect(() => {
+    //   {
+    //     Axios.get(`https://full-stack-fotoflix.herokuapp.com /SignUp/Login/ById/${id}`).then(
+    //       (response) => {
+    //         setLoginStatus(response.data);
+    //       }
+    //     );
+    //   }
+    // }, []);
     return (
       <div>
         <div style={{ marginTop: 50 }}>

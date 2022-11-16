@@ -16,6 +16,7 @@ import fotoLogo from "../ImageLogo/fotoLogo.svg";
 import logo from "../ImageLogo/logo.svg";
 import "./index.css";
 import { border, borderColor } from "@mui/system";
+import { CustomFab } from "./CustomFab";
 
 const { Search } = Input;
 
@@ -84,6 +85,14 @@ function LeftSection(): JSX.Element {
     }
   }, []);
 
+  const isDesktop = useMediaQuery({
+    query: "(min-width: 1224px)",
+  });
+
+  const isTablet = useMediaQuery({
+    query: "(max-width: 1224px)",
+  });
+
   const isMobile = useMediaQuery({
     query: "(max-width: 786px)",
   });
@@ -95,13 +104,13 @@ function LeftSection(): JSX.Element {
           <Link to="/">
             {isMobile ? (
               <img
-                style={{ color: "#937DC2", width: 20, height: 20 }}
+                className="header-logo"
                 src={logo}
                 alt="logo"
               />
             ) : (
               <img
-                style={{ color: "#937DC2", width: 100, height: 50 }}
+                className="header-logo"
                 src={fotoLogo}
                 alt="logo"
               />
@@ -111,15 +120,13 @@ function LeftSection(): JSX.Element {
       </Space>
 
       <Col span={4} offset={2}>
-        {isLoggedIn ? (
+        {isLoggedIn && !isMobile && (
           <CustomButton
             onClick={() => `/UploadForm`}
             buttonType={"primary"}
             color={"darkpurple"}
             title={"New Post"}
           />
-        ) : (
-          <></>
         )}
       </Col>
     </Row>
@@ -204,15 +211,15 @@ function RightButtonsSection(): JSX.Element {
           <Link to="/SignUp">
             {isDesktop && (
               <CustomButton
-                buttonType={"primary"}
-                color={"lightpurple"}
-                title={"Sign Up"}
+                buttonType={"default"}
+                color={"white"}
+                title={"Login"}
               />
-            )}
-          </Link>
-        )}
-      </Col>
-    </Row>
+            </Link>
+          )}
+        </div>
+      )}
+    </div>
   );
 }
 

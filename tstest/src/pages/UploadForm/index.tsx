@@ -1,19 +1,13 @@
-import React from "react";
-import { useState } from "react";
-import {
-  Formik,
-  Form,
-  Field,
-  ErrorMessage,
-  FormikHelpers,
-  FormikValues,
-} from "formik";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 //import { ChipsArray } from "../../components/Tag";
 import { styled } from "@mui/material/styles";
 import { Chip, Paper } from "@mui/material";
 import { Box, Button, TextField } from "@mui/material";
 import { stringify } from "querystring";
 import { useParams } from "react-router-dom";
+import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
+import "./UploadForm.css";
 
 export interface ChipData {
   key: number;
@@ -51,6 +45,13 @@ export const UploadForm = () => {
       { key: chipData.length + 1, label: `#${input}` },
     ]);
     setInput("");
+  };
+
+  const navigate = useNavigate();
+
+  // This will navigate to Landing Page once user has signed up
+  const sendToLanding = () => {
+    navigate("/");
   };
 
   const handleImageTitleChange = (e: any) => {
@@ -93,6 +94,7 @@ export const UploadForm = () => {
     e.preventDefault();
     if (!previewSource) return;
     uploadImage(previewSource);
+    sendToLanding();
   };
 
   const uploadImage = async (base64EncodedImage: any) => {
@@ -132,47 +134,62 @@ export const UploadForm = () => {
   //   }
   // }
   return (
-    <div>
-      {" "}
-      <div>
-        <h1>Upload </h1>
-        <form onSubmit={handleSubmitFile} className="form">
-          <h3>Upload your image!</h3>
-          <br />
+    <div className="upload-Container">
+      <form onSubmit={handleSubmitFile} className="form">
+        <img
+          style={{ color: "#937DC2", width: 200, height: 90 }}
+          src={fotoLogo}
+          alt="error"
+        />
+        <h1 style={{ color: "#937DC2" }}>Upload form </h1>
+        <h3>Upload image:</h3>
+
+        <input
+          title="file"
+          type="file"
+          name="image "
+          onChange={handleFileInputChange}
+          value={fileInputState}
+          className="form-input"
+        />
+        {previewSource && (
+          <img src={previewSource} alt="chosen" style={{ height: "80px" }} />
+        )}
+        <br />
+        <br />
+        <h3>Image title: </h3>
+        <input
+          title="title"
+          type="text"
+          name="Image Title"
+          onChange={handleImageTitleChange}
+          className="form-input"
+        />
+        <br />
+        <br />
+        <h3>Image Description: </h3>
+        <input
+          title="description"
+          type="text"
+          name="Image Description"
+          onChange={handleImageDescChange}
+          className="form-input"
+        />
+        <br />
+        <br />
+        <div className="upload-items">
+          <h3>Public or private: </h3>
           <input
-            type="file"
-            name="image "
-            onChange={handleFileInputChange}
-            value={fileInputState}
-            className="form-input"
-          />
-          <br />
-          <h3>Image Title</h3>
-          <input
-            type="text"
-            name="Image Title"
-            onChange={handleImageTitleChange}
-            className="form-input"
-          />
-          <br />
-          <h3>Image Description</h3>
-          <input
-            type="text"
-            name="Image Description"
-            onChange={handleImageDescChange}
-            className="form-input"
-          />
-          <br />
-          <h3>Public or private?</h3>
-          <input
+            title="PubPriv"
             type="radio"
             value="public"
             id="public"
             onChange={handleImageVisChange}
             name="vis"
           />
+
           <label htmlFor="public">Public</label>
-          <br />
+
           <input
             type="radio"
             value="private"
@@ -181,53 +198,65 @@ export const UploadForm = () => {
             name="vis"
           />
           <label htmlFor="private">Private</label>
+        </div>
 
-          <br />
-          <Box>
-            <Box>
-              <TextField
-                placeholder="tag name"
-                value={input}
-                onChange={(e: {
-                  target: { value: React.SetStateAction<string> };
-                }) => setInput(e.target.value)}
-              />
-              <Button onClick={handleClick}> Save tag</Button>
-            </Box>
-            <Paper
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                flexWrap: "wrap",
-                listStyle: "none",
-                p: 0.5,
-                m: 0,
-              }}
-              component="ul"
-            >
-              {chipData.map((data) => {
-                let icon;
-                return (
-                  <ListItem key={data.key}>
-                    <Chip
-                      icon={icon}
-                      label={data.label}
-                      onDelete={handleDelete(data)}
-                      onChange={handleTagsChange}
-                    />
-                  </ListItem>
-                );
-              })}
-            </Paper>
-          </Box>
-          <button className="btn" type="submit">
-            Submit
-          </button>
-        </form>
-        {previewSource && (
-          <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
-        )}
-      </div>
+        <br />
+        <h3>Add a hashtag: </h3>
+        <TextField
+          placeholder="tag name"
+          value={input}
+          onChange={(e: { target: { value: React.SetStateAction<string> } }) =>
+            setInput(e.target.value)
+          }
+        />
+        <br />
+        <br />
+        <Button
+          onClick={handleClick}
+          style={{ color: "#937DC2" }}
+          className="buttonTag"
+        >
+          {" "}
+          Save tag
+        </Button>
+
+        <Paper
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            listStyle: "none",
+            m: 0,
+          }}
+          component="ul"
+        >
+          {chipData.map((data) => {
+            let icon;
+            return (
+              <ListItem key={data.key}>
+                <Chip
+                  icon={icon}
+                  label={data.label}
+                  onDelete={handleDelete(data)}
+                  onChange={handleTagsChange}
+                />
+              </ListItem>
+            );
+          })}
+        </Paper>
+        <br />
+        <br />
+        <button
+          className="buttonUpload"
+          type="submit"
+          onClick={handleSubmitFile}
+        >
+          Submit
+        </button>
+      </form>
+      {/* {previewSource && (
+        <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
+      )} */}
     </div>
   );
 };

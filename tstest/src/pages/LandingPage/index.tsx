@@ -2,6 +2,8 @@ import { CustomHeader } from "../../components/Common/CustomHeader";
 import Footer from "../../components/Common/footer/Footer";
 import "./index.css";
 import { LandImages } from "../../components/Common/LandImages";
+import { CustomFab } from "../../components/Common/CustomFab";
+import { useMediaQuery } from "react-responsive";
 
 const gutters: Record<string, number> = {};
 const vgutters: Record<string, number> = {};
@@ -18,11 +20,15 @@ const colCounts: Record<string, number> = {};
 });
 
 export function LandingPage(): JSX.Element {
+  const isMobile = useMediaQuery({
+    query: "(max-width: 786px)",
+  });
   return (
     <div className="LandingContainer">
       <CustomHeader isLoggedIn={true} />
       <LandImages />
       <Footer />
+      <CustomFab />
     </div>
   );
 }

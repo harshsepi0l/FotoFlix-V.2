@@ -1,4 +1,5 @@
-const flixerinfo = require("./flixerinfo");
+const flixerinfo = require("./FlixerInfo");
+const Comments = require("./Comments");
 
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define(

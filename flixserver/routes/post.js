@@ -1,12 +1,13 @@
 const express = require("express");
 const { sequelize } = require("../models");
-const router = express.Router();
+// const router = express.Router();
+let router = express.Router({ mergeParams: true });
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { DataTypes } = require("sequelize");
 const post = require("../models/post")(sequelize, DataTypes);
 
 const bodyParser = require("body-parser");
-const tags = require("../models/flixertags");
+const tags = require("../models/flixertags")(sequelize, DataTypes);
 
 const { cloudinary } = require("../utils/cloudinary");
 

@@ -26,7 +26,7 @@ function App() {
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/LandingPage" element={<LandingPage />} />
         <Route path="/" element={<LandingPage />} />
-        <Route path="ImagePage" element={<ImagePage />} />
+        <Route path="/ImagePage/:id" element={<ImagePage />} />
       </Routes>
     </Router>
   );
