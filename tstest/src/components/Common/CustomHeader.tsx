@@ -103,17 +103,9 @@ function LeftSection(): JSX.Element {
         <Col span={4}>
           <Link to="/">
             {isMobile ? (
-              <img
-                className="header-logo"
-                src={logo}
-                alt="logo"
-              />
+              <img className="header-logo" src={logo} alt="logo" />
             ) : (
-              <img
-                className="header-logo"
-                src={fotoLogo}
-                alt="logo"
-              />
+              <img className="header-logo" src={fotoLogo} alt="logo" />
             )}
           </Link>
         </Col>
@@ -216,14 +208,12 @@ function RightButtonsSection(): JSX.Element {
                 title={"Login"}
               />
             )}
-            </Link>
-          )}
-        </div>
-      
-    </div>
+          </Link>
+        )}
+      </Col>
+    </Row>
   );
 }
-
 
 function RightUserSection(): JSX.Element {
   return (

@@ -8,6 +8,21 @@ import "./index.css";
 export function AccountInfo(): JSX.Element {
   const [user, setUser] = React.useState<any>(null);
 
+  useEffect(() => {
+    Axios.get("http://localhost:3000/SignUp/byUsername", {}).then(
+      (response) => {
+        console.log(response.data);
+        setUser(response.data);
+      }
+    );
+  }, []);
+
+  const [isModalVisible, setIsModalVisible] = React.useState(false);
+
+  const toggleModal = () => {
+    setIsModalVisible((isModalVisible) => !isModalVisible);
+  };
+
   return (
     <div>
       <Row className="HomePage-Container">
@@ -19,8 +34,7 @@ export function AccountInfo(): JSX.Element {
         </Col>
         <Col flex={5}>
           <Typography.Title level={2} className="HomePage-AccountInfo">
-            {user && user[1].Username}
-            username
+            {user}
             {/* {editableStr} */}
           </Typography.Title>
 

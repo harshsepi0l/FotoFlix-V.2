@@ -9,6 +9,7 @@ const bcryptjs = require("bcryptjs"); // for hashing passwords
 const flixerinfo = require("../models/flixerinfo")(sequelize, DataTypes);
 
 const { sign } = require("jsonwebtoken");
+const { validateToken } = require("../middlewares/AuthMiddleware");
 
 // GET all flixerinfo
 
@@ -61,6 +62,16 @@ router.get("/Login/:byUID", async (req, res) => {
   const { UID } = req.params;
   const user = await flixerinfo.findOne({ where: { UID: UID } });
   res.json(user);
+});
+
+router.get("/byUsername", async (req, res) => {
+  const { Username } = req.body;
+  const flixer = await flixerinfo.findOne({
+    where: {
+      Username: Username,
+    },
+  });
+  res.json(flixer);
 });
 
 module.exports = router;
