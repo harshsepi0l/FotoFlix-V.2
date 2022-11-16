@@ -1,20 +1,11 @@
-import React from "react";
-import { useState } from "react";
-import {
-  Formik,
-  Form,
-  Field,
-  ErrorMessage,
-  FormikHelpers,
-  FormikValues,
-} from "formik";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 //import { ChipsArray } from "../../components/Tag";
+import { Box, Button, Chip, Paper, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { Chip, Paper } from "@mui/material";
-import { Box, Button, TextField } from "@mui/material";
 import { Card, Input } from 'antd';
 import "./index.css";
+import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
 
 export interface ChipData {
   key: number;
@@ -55,7 +46,6 @@ export const UploadForm = () => {
   };
 
   const navigate = useNavigate();
-
 
   // This will navigate to Landing Page once user has signed up
   const sendToLanding = () => {
@@ -184,8 +174,9 @@ export const UploadForm = () => {
             onChange={handleImageVisChange}
             name="vis"
           />
+
           <label htmlFor="public">Public</label>
-          <br />
+
           <input
             type="radio"
             value="private"
@@ -196,50 +187,55 @@ export const UploadForm = () => {
           <label htmlFor="private">Private</label>
 
           <br />
-          <Box>
-            <Box>
-              <TextField
-                placeholder="tag name"
-                value={input}
-                onChange={(e: {
-                  target: { value: React.SetStateAction<string> };
-                }) => setInput(e.target.value)}
-              />
-              <Button onClick={handleClick}> Save tag</Button>
-            </Box>
-            <Paper
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                flexWrap: "wrap",
-                listStyle: "none",
-                p: 0.5,
-                m: 0,
-              }}
-              component="ul"
-            >
-              {chipData.map((data) => {
-                let icon;
-                return (
-                  <ListItem key={data.key}>
-                    <Chip
-                      icon={icon}
-                      label={data.label}
-                      onDelete={handleDelete(data)}
-                      onChange={handleTagsChange}
-                    />
-                  </ListItem>
-                );
-              })}
-            </Paper>
-          </Box>
-          <button className="btn UploadForm-submit-button" type="submit" onClick={handleSubmitFile} >
+          <h3>Add a hashtag: </h3>
+          <TextField
+            placeholder="tag name"
+            value={input}
+            onChange={(e: { target: { value: React.SetStateAction<string> } }) =>
+              setInput(e.target.value)
+            }
+          />
+          <br />
+          <br />
+          <Button onClick={handleClick} style={{ color: "#937DC2" }} className="buttonTag"> Save tag</Button>
+
+          <Paper
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              listStyle: "none",
+              m: 0,
+            }}
+            component="ul"
+          >
+            {chipData.map((data) => {
+              let icon;
+              return (
+                <ListItem key={data.key}>
+                  <Chip
+                    icon={icon}
+                    label={data.label}
+                    onDelete={handleDelete(data)}
+                    onChange={handleTagsChange}
+                  />
+                </ListItem>
+              );
+            })}
+          </Paper>
+          <br />
+          <br />
+          <button
+            className="UploadForm-submit-button"
+            type="submit"
+            onClick={handleSubmitFile}
+          >
             Submit
           </button>
         </form>
-        {previewSource && (
-          <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
-        )}
+        {/* {previewSource && (
+        <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
+      )} */}
       </Card>
     </div>
   );

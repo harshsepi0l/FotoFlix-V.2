@@ -4,8 +4,9 @@ body {
   background-color: #ffe6f7;
   height: 100%;
   width: 100%;
-  margin: 0;
+  margin: 50;
   display: table;
+
 }
 
 input[type="text"]:focus,
@@ -21,7 +22,6 @@ hr {
 
 .Button-SignUp {
   display: flex;
-
   justify-content: center;
   align-items: center;
 }
