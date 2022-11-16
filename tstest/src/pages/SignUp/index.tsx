@@ -65,7 +65,7 @@ export const SignUp = () => {
   //     | null
   //     | undefined
   // ) => {
-  //   Axios.delete(`https://full-stack-fotoflix.herokuapp.com/api/delete/${Username}`);
+  //   Axios.delete(`https://full-stack-fotoflix.herokuapp.com /api/delete/${Username}`);
   //   refreshPage();
   // };
 

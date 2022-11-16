@@ -1,12 +1,13 @@
 const express = require("express");
 const { sequelize } = require("../models");
-const router = express.Router();
+// const router = express.Router();
+let router = express.Router({ mergeParams : true });
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { DataTypes } = require("sequelize");
 const post = require("../models/post")(sequelize, DataTypes);
 
 const bodyParser = require("body-parser");
-const tags = require("../models/flixertags");
+const tags = require("../models/flixertags")(sequelize, DataTypes);
 
 const { cloudinary } = require("../utils/cloudinary");
 
@@ -20,7 +21,26 @@ router.get("/byUID/:UID", validateToken, async (req, res) => {
 
   res.json(posts);
 });
-router.post("/byUID", validateToken, async (req, res) => {
+
+
+router.get("/byId/:id", async (req, res) => {
+  let id = req.params.id; // Get the id
+  const img = await post.findByPk(id);
+  res.json(img);
+});
+
+router.get("/tagsByid/:id", async (req, res) => {
+  let id = req.params.id; // Get the id
+  const t = await tags.findAll(
+    {
+      where: {ImageId: id},
+    }
+  );
+  console.log(`Backend tags: ${t}`);
+  res.json(t);
+});
+
+router.post("/", async (req, res) => {
   const fileStr = req.body.data;
 
   const UID = req.user.UID;

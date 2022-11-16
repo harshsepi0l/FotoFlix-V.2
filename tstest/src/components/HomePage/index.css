@@ -15,6 +15,17 @@
 .HomePage-AccountInfo {
 
 }
+
+.HomePage-EditButton {
+    color: var(--darkpurple);
+    border-color: var(--darkpurple);
+    width: fit-content;
+}
+
+.HomePage-EditButton:hover, .HomePage-EditButton:focus {
+    color: var(--midpurple);
+    border-color: var(--midpurple);
+}
 .AccountBar::selection {
     color: var(--darkpurple) !important;
 }

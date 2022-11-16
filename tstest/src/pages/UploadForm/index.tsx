@@ -8,6 +8,7 @@ import {
   FormikHelpers,
   FormikValues,
 } from "formik";
+import { useNavigate } from "react-router-dom";
 //import { ChipsArray } from "../../components/Tag";
 import { styled } from "@mui/material/styles";
 import { Chip, Paper } from "@mui/material";
@@ -53,6 +54,14 @@ export const UploadForm = () => {
     setInput("");
   };
 
+  const navigate = useNavigate();
+
+
+ // This will navigate to Landing Page once user has signed up
+ const sendToLanding = () => {
+  navigate("/");
+ };
+  
   const handleImageTitleChange = (e: any) => {
     // This updates every single time anything is typed
     const title = e.target.value;
@@ -93,6 +102,7 @@ export const UploadForm = () => {
     e.preventDefault();
     if (!previewSource) return;
     uploadImage(previewSource);
+    sendToLanding();
   };
 
   const uploadImage = async (base64EncodedImage: any) => {
@@ -140,6 +150,7 @@ export const UploadForm = () => {
           <h3>Upload your image!</h3>
           <br />
           <input
+            title="file"
             type="file"
             name="image "
             onChange={handleFileInputChange}
@@ -149,6 +160,7 @@ export const UploadForm = () => {
           <br />
           <h3>Image Title</h3>
           <input
+            title="title"
             type="text"
             name="Image Title"
             onChange={handleImageTitleChange}
@@ -157,6 +169,7 @@ export const UploadForm = () => {
           <br />
           <h3>Image Description</h3>
           <input
+            title="description"
             type="text"
             name="Image Description"
             onChange={handleImageDescChange}
@@ -165,6 +178,7 @@ export const UploadForm = () => {
           <br />
           <h3>Public or private?</h3>
           <input
+            title="PubPriv"
             type="radio"
             value="public"
             id="public"
@@ -220,7 +234,7 @@ export const UploadForm = () => {
               })}
             </Paper>
           </Box>
-          <button className="btn" type="submit">
+          <button className="btn" type="submit" onClick={handleSubmitFile} >
             Submit
           </button>
         </form>

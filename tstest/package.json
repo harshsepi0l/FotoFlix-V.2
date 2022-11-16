@@ -6,16 +6,18 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@firebase/app": "^0.8.4",
-    "@mui/material": "^5.10.13",
+    "@mui/icons-material": "^5.10.14",
+    "@mui/material": "^5.10.14",
     "@mui/styled-engine": "^5.10.8",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.11.68",
-    "@types/react": "^18.0.21",
+    "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
+    "@types/styled-components": "^5.1.26",
     "antd": "^4.24.0",
     "axios": "^1.1.3",
     "dotenv": "^16.0.3",
@@ -30,6 +32,7 @@
     "react-responsive": "^9.0.0",
     "react-router-dom": "^6.4.2",
     "react-scripts": "^5.0.1",
+    "styled-components": "^5.3.6",
     "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
   },
@@ -39,12 +42,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -58,5 +55,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://full-stack-fotoflix.herokuapp.com/"
+  "proxy": "https://full-stack-fotoflix.herokuapp.com "
 }

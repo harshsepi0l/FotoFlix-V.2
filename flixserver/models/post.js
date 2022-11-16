@@ -1,4 +1,5 @@
-const flixerinfo = require("./flixerinfo");
+const flixerinfo = require("./FlixerInfo");
+const Comments = require("./Comments");
 
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define(
@@ -54,5 +55,13 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: true,
     }
   );
+  Post.associate = (models) => {
+    Post.belongsTo(models.FlixerInfo, {
+      foreignKey: "UserID",
+    });
+    Post.hasMany(models.Comments, {
+      onDelete: "cascade", // Deleting a post deletes all associated comments
+    });
+  };
   return Post;
 };

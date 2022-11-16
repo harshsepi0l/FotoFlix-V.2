@@ -10,6 +10,7 @@ import { Avatar, Card, Space } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CloseCircleOutlined } from "@ant-design/icons";
 
 interface CardProps {
   PublicOrPrivate: number;
@@ -24,6 +25,7 @@ interface CardProps {
   Favorite: number;
   key: any;
   id: number;
+  isCurrentUser?: boolean;
 }
 
 const { Meta } = Card;
@@ -68,9 +70,40 @@ export function CustomCard(props: CardProps): JSX.Element {
   const navigate = useNavigate();
 
   const handleOnClick = () => {
-    navigate("/image/" + props.id);
+    navigate("/ImagePage/" + props.id);
   }
 
+  const buttonHandleOnClick = () => {
+    navigate("/like" + props.id);
+  }
+
+  const handleAvatarOnClick = () => {
+    navigate("/user/" + props.Avatar);
+  }
+
+  const [likes, setLikes] = useState(props.Likes);
+  const [dislikes, setDislikes] = useState(props.Dislikes);
+  const [action, setAction] = useState<string | null>(null);
+
+
+  const like = () => {
+    setLikes(props.Likes + 1);
+    setDislikes(props.Dislikes);
+    setAction('liked');
+  };
+
+  const dislike = () => {
+    setLikes(props.Likes);
+    setDislikes(props.Dislikes + 1);
+    setAction('disliked');
+  };
+
+  const deleteCard = () => {
+    if (window.confirm('Are you sure that you want to remove card?')) {
+
+    }
+
+  }
   console.log(props.Likes);
   return (
     <div>
@@ -78,10 +111,14 @@ export function CustomCard(props: CardProps): JSX.Element {
         hoverable
         key={props.key}
         style={{ width: 300 }}
-        onClick={handleOnClick}
-        cover={<img alt={props.Title} src={props.Url} />}
+        cover={<img alt={props.Title} src={props.Url} onClick={handleOnClick} />}
         actions={[
-          <CustomAction icon="like" text={props.Likes} isPublic={isGlobal} />,
+          <CustomAction
+            icon="like"
+            text={props.Likes}
+            isPublic={isGlobal}
+            onClick={like}
+          />,
           <CustomAction
             icon="dislike"
             text={props.Dislikes}
@@ -99,8 +136,21 @@ export function CustomCard(props: CardProps): JSX.Element {
           />,
         ]}
       >
+        {props.isCurrentUser &&
+          (
+            <CloseCircleOutlined
+              className="closeIcon"
+              onClick={deleteCard}
+            />
+          )
+        }
         <Meta
-          avatar={<Avatar src={props.Avatar} />}
+          avatar={
+            <Avatar
+              src={props.Avatar}
+              onClick={handleAvatarOnClick}
+              style={{ cursor: "pointer" }}
+            />}
           title={props.Title}
           description={props.Description}
         />

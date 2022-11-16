@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const FlixerInfo = sequelize.define("flixerinfo", {
-    UID: {
+  const FlixerInfo = sequelize.define("FlixerInfo", {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
