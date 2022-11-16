@@ -215,13 +215,15 @@ function RightButtonsSection(): JSX.Element {
                 color={"white"}
                 title={"Login"}
               />
+            )}
             </Link>
           )}
         </div>
-      )}
+      
     </div>
   );
 }
+
 
 function RightUserSection(): JSX.Element {
   return (
