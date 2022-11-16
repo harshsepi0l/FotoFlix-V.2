@@ -7,7 +7,7 @@
     "@emotion/styled": "^11.10.5",
     "@firebase/app": "^0.8.4",
     "@mui/icons-material": "^5.10.14",
-    "@mui/material": "^5.10.13",
+    "@mui/material": "^5.10.14",
     "@mui/styled-engine": "^5.10.8",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
