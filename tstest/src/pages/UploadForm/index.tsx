@@ -100,6 +100,7 @@ export const UploadForm = () => {
     e.preventDefault();
     if (!previewSource) return;
     uploadImage(previewSource);
+    sendToLanding();
   };
   const uploadImage = async (base64EncodedImage: any) => {
     try {
@@ -227,7 +228,7 @@ export const UploadForm = () => {
               })}
             </Paper>
           </Box>
-          <button className="btn" type="submit" onClick={sendToLanding} >
+          <button className="btn" type="submit" onClick={handleSubmitFile} >
             Submit
           </button>
         </form>
