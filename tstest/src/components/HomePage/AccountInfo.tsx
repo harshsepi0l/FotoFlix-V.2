@@ -8,7 +8,7 @@ export function AccountInfo(): JSX.Element {
   const [user, setUser] = React.useState<any>(null);
 
   // useEffect(() => {
-  //   Axios.get("http://localhost:3000/SignUp/byUsername", {}).then(
+  //   Axios.get("http://full-stack-fotoflix.herokuapp.com//SignUp/byUsername", {}).then(
   //     (response) => {
   //       console.log(response.data);
   //       setUser(response.data);
