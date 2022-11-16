@@ -16,8 +16,7 @@ interface ButtonProps {
   buttonType: ButtonType;
   color: string;
   borderRadius?: number;
-  onClick?: () => void;
-  className?: any;
+  onClick?: any;
 }
 
 export function CustomButton(props: ButtonProps): JSX.Element {
@@ -30,7 +29,7 @@ export function CustomButton(props: ButtonProps): JSX.Element {
   return (
     <Button
       type={props.buttonType}
-      className={`Default-${props.color} Border-${props.borderRadius} ${props.className}`}
+      className={`Default-${props.color} Border-${props.borderRadius}`}
       onClick={props.onClick}
     >
       {props.title}

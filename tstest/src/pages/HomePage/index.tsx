@@ -9,6 +9,7 @@ import { CustomButton } from "../../components/Common/CustomButton";
 import "./index.css";
 import { useMediaQuery } from "react-responsive";
 import { CustomHeader } from "../../components/Common/CustomHeader";
+import { CustomFab } from "../../components/Common/CustomFab";
 
 export function HomePage(): JSX.Element {
   const isMobile = useMediaQuery({
@@ -37,6 +38,7 @@ export function HomePage(): JSX.Element {
             <TrendingTags />
           </div>
         )}
+      <CustomFab />
       <Footer />
     </div>
   );

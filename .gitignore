@@ -1,5 +1,9 @@
 node_modules
 package-lock.json
+<<<<<<< HEAD
 flixserver/node_modules/bcrypt/lib/binding/napi-v3/bcrypt_lib.node
 flixserver/config/config.json
 flixserver/node_modules
+=======
+flixserver/node_modules/bcryptjs/lib/binding/napi-v3/bcrypt_lib.node
+>>>>>>> main
