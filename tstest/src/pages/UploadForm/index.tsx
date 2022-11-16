@@ -1,18 +1,9 @@
-import React from "react";
-import { useState } from "react";
-import {
-  Formik,
-  Form,
-  Field,
-  ErrorMessage,
-  FormikHelpers,
-  FormikValues,
-} from "formik";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 //import { ChipsArray } from "../../components/Tag";
+import { Box, Button, Chip, Paper, TextField } from "@mui/material";
+import Popper from '@mui/material/Popper';
 import { styled } from "@mui/material/styles";
-import { Chip, Paper } from "@mui/material";
-import { Box, Button, TextField } from "@mui/material";
 
 export interface ChipData {
   key: number;
@@ -30,6 +21,14 @@ export const UploadForm = () => {
   const [imageDesc, setImageDesc] = useState(""); // Control image description
   const [imageVis, setImageVis] = useState(1); // Control public (0) vs. private (1)
   const [imageTags, setImageTags] = useState(""); // tags
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
+
+
+  // This will navigate to Landing Page once user has signed up
+  const sendToLanding = () => {
+    navigate("/");
+  };
 
   const handleTagsChange = (e: any) => {
     const tags = e.target.value;
@@ -52,13 +51,12 @@ export const UploadForm = () => {
     setInput("");
   };
 
-  const navigate = useNavigate();
-
-
- // This will navigate to Landing Page once user has signed up
- const sendToLanding = () => {
-  navigate("/");
- };
+  const handleSubmitClick = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(anchorEl ? null : event.currentTarget);
+  };
+  
+  const open = Boolean(anchorEl);
+    const id = open ? 'simple-popper' : undefined;
   
   const handleImageTitleChange = (e: any) => {
     // This updates every single time anything is typed
@@ -113,6 +111,7 @@ export const UploadForm = () => {
           Tags: chipData,
         }),
         headers: { "Content-type": "application/json" },
+        
       });
     } catch (err) {
       console.error(err);
@@ -227,8 +226,17 @@ export const UploadForm = () => {
               })}
             </Paper>
           </Box>
-          <button className="btn" type="submit" onClick={sendToLanding} >
+
+          <button className="btn" type="submit" aria-describedby={id} onClick={handleSubmitClick}>
             Submit
+          </button>
+          <Popper id={id} open={open} anchorEl={anchorEl}>
+        <Box sx={{ border: 1, p: 1, bgcolor: 'background.paper' }}>
+          You uploaded, go back to landing page!
+        </Box>
+          </Popper>
+          <button className="btn" type="submit" onClick={sendToLanding}>
+            Landing Page
           </button>
         </form>
         {previewSource && (
@@ -238,3 +246,5 @@ export const UploadForm = () => {
     </div>
   );
 };
+
+

@@ -40,7 +40,9 @@ export function ImagePage(): JSX.Element {
 
       )}
       <CustomFab />
-      <Footer />
+      <div>
+        <Footer />
+        </div>
     </div>
   );
 }

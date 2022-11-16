@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Input, Space } from "antd";
+import Axios from "axios";
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { CustomButton } from "../../components/Common/CustomButton";
 import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
 import "./signUp.css";
-import Axios from "axios";
-import { CustomButton } from "../../components/Common/CustomButton";
-import { Input, Space } from "antd";
 
 export const SignUp = () => {
   const [firstname, setFirstname] = useState("");
@@ -193,8 +192,7 @@ export const SignUp = () => {
                     title={"Cancel"}
                   />
                 </NavLink>
-                <div className="count">00</div>
-                <script src="views.js"></script>
+             
               </div>
             </div>
           </div>
