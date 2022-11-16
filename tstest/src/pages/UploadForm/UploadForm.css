@@ -1,3 +1,17 @@
 .button {
-    color: pink
+    color: pink;
+    width: 20vw;
+    
+}
+
+.upload-Container {
+    height: 30vh;
+    background-color: #a68ae4c9;
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+}
+
+.upload-items {
+    color: purple;
 }

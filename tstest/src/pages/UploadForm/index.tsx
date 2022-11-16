@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 //import { ChipsArray } from "../../components/Tag";
 import { Box, Button, Chip, Paper, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import "./uploadForm.css";
 
 
 export interface ChipData {
@@ -130,8 +131,8 @@ export const UploadForm = () => {
     
   
   
-    <div>
-        <h1 className="upload-items">Upload form </h1>
+    <div className="upload-Container">
+        <h1>Upload form </h1>
         <form onSubmit={handleSubmitFile} className="form">
        
           <h3>Upload your image!</h3>
