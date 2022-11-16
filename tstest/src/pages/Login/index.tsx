@@ -33,7 +33,6 @@ export const Login = () => {
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          console.log(response.data);
           sessionStorage.setItem("accessToken", response.data);
           navigate("/LandingPage");
         }

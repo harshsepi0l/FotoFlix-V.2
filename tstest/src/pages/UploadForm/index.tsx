@@ -51,7 +51,8 @@ export const UploadForm = () => {
 
   // This will navigate to Landing Page once user has signed up
   const sendToLanding = () => {
-    navigate("/");
+    navigate("/LandingPage");
+    window.location.reload();
   };
 
   const handleImageTitleChange = (e: any) => {

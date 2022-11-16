@@ -37,14 +37,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      Likes: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      Dislikes: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
+      // Likes: {
+      //   type: DataTypes.INTEGER,
+      //   allowNull: false,
+      // },
+      // Dislikes: {
+      //   type: DataTypes.INTEGER,
+      //   allowNull: false,
+      // },
       // TagsId: {
       //   type: DataTypes.INTEGER,
       //   allowNull: false,

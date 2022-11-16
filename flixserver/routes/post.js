@@ -1,7 +1,7 @@
 const express = require("express");
 const { sequelize } = require("../models");
-// const router = express.Router();
-let router = express.Router({ mergeParams: true });
+const router = express.Router();
+
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { DataTypes } = require("sequelize");
 const post = require("../models/post")(sequelize, DataTypes);
@@ -21,16 +21,14 @@ router.get("/byUID", validateToken, async (req, res) => {
   res.json(posts);
 });
 
-router.get("/", validateToken, async (req, res) => {
+router.get("/", async (req, res) => {
   const posts = await post.findAll();
   res.json(posts);
 });
 
 router.post("/byUID", validateToken, async (req, res) => {
   const fileStr = req.body.data;
-
   const UID = req.user.UID;
-
   const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
     upload_preset: "flixerimages",
   });
@@ -43,11 +41,10 @@ router.post("/byUID", validateToken, async (req, res) => {
     Title: req.body.Title,
     Description: req.body.Description,
     PublicOrPrivate: req.body.PublicOrPrivate,
-    Likes: 0,
-    Dislikes: 0,
+    Tags: req.body.Tags,
   });
 
-  console.log(uploadedResponse);
+  res.json({ message: "Post created!" });
 });
 
 module.exports = router;

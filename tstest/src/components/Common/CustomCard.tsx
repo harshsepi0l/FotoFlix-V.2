@@ -68,7 +68,7 @@ export function CustomCard(props: CardProps): JSX.Element {
   const navigate = useNavigate();
 
   const handleOnClick = () => {
-    navigate("/image/" + props.id);
+    navigate("/ImagePage/" + props.id);
   };
 
   const buttonHandleOnClick = () => {

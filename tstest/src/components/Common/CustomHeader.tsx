@@ -16,7 +16,6 @@ import fotoLogo from "../ImageLogo/fotoLogo.svg";
 import logo from "../ImageLogo/logo.svg";
 import "./index.css";
 import { border, borderColor } from "@mui/system";
-import { CustomFab } from "./CustomFab";
 
 const { Search } = Input;
 
@@ -78,20 +77,13 @@ function CustomSearch(): JSX.Element {
 
 function LeftSection(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigateTo = useNavigate();
 
   useEffect(() => {
     if (sessionStorage.getItem("accessToken")) {
       setIsLoggedIn(true);
     }
   }, []);
-
-  const isDesktop = useMediaQuery({
-    query: "(min-width: 1224px)",
-  });
-
-  const isTablet = useMediaQuery({
-    query: "(max-width: 1224px)",
-  });
 
   const isMobile = useMediaQuery({
     query: "(max-width: 786px)",
@@ -103,22 +95,34 @@ function LeftSection(): JSX.Element {
         <Col span={4}>
           <Link to="/">
             {isMobile ? (
-              <img className="header-logo" src={logo} alt="logo" />
+              <img
+                style={{ color: "#937DC2", width: 20, height: 20 }}
+                src={logo}
+                alt="logo"
+              />
             ) : (
-              <img className="header-logo" src={fotoLogo} alt="logo" />
+              <img
+                style={{ color: "#937DC2", width: 100, height: 50 }}
+                src={fotoLogo}
+                alt="logo"
+              />
             )}
           </Link>
         </Col>
       </Space>
 
       <Col span={4} offset={2}>
-        {isLoggedIn && !isMobile && (
+        {isLoggedIn ? (
           <CustomButton
-            onClick={() => `/UploadForm`}
+            onClick={() => {
+              navigateTo("/UploadForm");
+            }}
             buttonType={"primary"}
             color={"darkpurple"}
             title={"New Post"}
           />
+        ) : (
+          <></>
         )}
       </Col>
     </Row>
@@ -127,15 +131,12 @@ function LeftSection(): JSX.Element {
 
 function RightButtonsSection(): JSX.Element {
   let navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    Axios.get("http://localhost:3000/Cloudinary/byUID", {
-      headers: {
-        accessToken: sessionStorage.getItem("accessToken"),
-      },
-    }).then((response) => {
+    Axios.get("http://localhost:3000/Cloudinary/byUID")
+    .then((response) => {
       if (response.data.error) {
         setIsLoggedIn(false);
       } else {
@@ -147,7 +148,7 @@ function RightButtonsSection(): JSX.Element {
   const logout = () => {
     sessionStorage.removeItem("accessToken");
     setIsLoggedIn(false);
-    navigate("/");
+    navigate("/LandingPage");
   };
 
   const isDesktop = useMediaQuery({
@@ -203,9 +204,9 @@ function RightButtonsSection(): JSX.Element {
           <Link to="/SignUp">
             {isDesktop && (
               <CustomButton
-                buttonType={"default"}
-                color={"white"}
-                title={"Login"}
+                buttonType={"primary"}
+                color={"lightpurple"}
+                title={"Sign Up"}
               />
             )}
           </Link>
