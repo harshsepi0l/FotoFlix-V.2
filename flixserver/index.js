@@ -27,9 +27,6 @@ app.use("/SignUp", signUpRouter);
 const cloudinaryRouter = require("./routes/post");
 app.use("/Cloudinary", cloudinaryRouter);
 
-const likesRouter = require("./routes/flixertaps");
-app.use("/Likes", likesRouter);
-
 db.sequelize.sync().then(() => {
   app.listen(process.env.PORT || 3000, () => {
     console.log("running on port 3000");
