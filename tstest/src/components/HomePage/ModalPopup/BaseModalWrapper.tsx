@@ -1,10 +1,10 @@
 import React from "react";
 import Modal from "./Modal";
 import {
-    DestopModalContainer,
+    DesktopModalContainer,
     Header,
-    CloseButton,
-    DesktopCloseButton
+    DesktopCloseButton,
+    CloseSign
 } from "./ModalPopup.styles";
 
 interface BaseModalWrapperProps {
@@ -20,10 +20,12 @@ const BaseModalWrapper: React.FC<BaseModalWrapperProps> = ({ onBackdropClick, is
 
     return (
         <Modal onBackdropClick={onBackdropClick}>
-            <DestopModalContainer >
-                <DesktopCloseButton />
+            <DesktopModalContainer >
+                {/* <DesktopCloseButton >
+                    <CloseSign />
+                </DesktopCloseButton> */}
                 <Header> {header} </Header>
-            </DestopModalContainer>
+            </DesktopModalContainer>
         </Modal>
     );
 }

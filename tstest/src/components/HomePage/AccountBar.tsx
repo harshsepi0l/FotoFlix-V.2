@@ -9,7 +9,7 @@ import "./index.css";
 function CardRow(): JSX.Element {
   return (
     <div className="LandingContainer">
-      <RowImages />
+      <RowImages/>
     </div>
   )
 }

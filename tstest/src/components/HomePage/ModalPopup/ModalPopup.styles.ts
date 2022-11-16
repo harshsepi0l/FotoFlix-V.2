@@ -1,4 +1,4 @@
-import styled from 'styled-components'  
+import styled from 'styled-components'
 
 const ModalContainer = styled.div`
     background-color: black;
@@ -8,7 +8,7 @@ const ModalContainer = styled.div`
     position: relative;
     `;
 
-export const DestopModalContainer = styled(ModalContainer)`
+export const DesktopModalContainer = styled(ModalContainer)`
     border-radius: 7px;
     box-shadow: 0 0 32px rbga(0, 0, 0, 0.5);
     padding: 40px;
@@ -16,34 +16,100 @@ export const DestopModalContainer = styled(ModalContainer)`
     font-size: 12px;
     `;
 
-export const Header = styled.h3 `
-    color: white;
+
+export const MobileModalContainer = styled(ModalContainer)`
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 16px;
+    min-height: 160px;
+    font-size: 26px;
+`;
+
+export const Header = styled.h3`
+    color: #323232;
     font-size: 20px;
     font-height: 24px;
     font-weight: 600;
     margin: 5px 0 10px;
     text-align: center;`
+export const CloseSign = styled.div`
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #323232;
+    &:before,
+    &:after {
+      position: absolute;
+      left: 19px;
+      top: 10px;
+      content: ' ';
+      height: 20px;
+      width: 2px;
+      background-color: #333;
+    }
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg)
+    }
+  `;
+
+
 
 const CLOSE_BUTTON_SIZE = 40;
 
-export const CloseButton = styled.div `
+const CloseButton = styled.div`
     position: absolute;
     width: ${CLOSE_BUTTON_SIZE}px;
-    high: ${CLOSE_BUTTON_SIZE}px;
+    height: ${CLOSE_BUTTON_SIZE}px;
     background-color: #c8c8c8;
     border-radius: 50%;
     cursor: pointer;
-
+    top: -${CLOSE_BUTTON_SIZE / 2}px;
     & > * {
-        opacity: 1;
+      opacity: 1;
     }
-
     &:hover > * {
-        opacity: 0.4;
+      opacity: 0.4;
     }
-`;
+  `;
 
 export const DesktopCloseButton = styled(CloseButton)`
-    top: -${CLOSE_BUTTON_SIZE / 2}px;
-    left: calc(100% - ${CLOSE_BUTTON_SIZE / 2}px);
-`;
+    left: calc(100% - ${CLOSE_BUTTON_SIZE / 2}px)
+  `;
+
+export const MobileCloseButton = styled(CloseButton)`
+    left: calc(100% - ${CLOSE_BUTTON_SIZE * 1.5 + 10}px)
+  `
+
+export const BottomContainer = styled.div`
+    padding-top: 10%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  `;
+
+export const Button = styled.div`
+      cursor: pointer;
+      border: 3px solid rgb(200, 0, 0);
+      font-size: 15px;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+      padding: 8px 16px;
+      line-height: 1em;
+      color: rgb(255, 255, 255);
+      background-color: rgb(200, 0, 0);
+      &:hover {
+        color: rgb(0, 0, 0);
+        background-color: rgb(255, 255, 255);
+        border-color: rgb(255, 255, 255);
+      }
+    `

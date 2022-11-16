@@ -1,8 +1,9 @@
 import { AntDesignOutlined } from "@ant-design/icons";
-import { Avatar, Col, Row, Typography } from "antd";
+import { Avatar, Button, Col, Row, Typography } from "antd";
 import Axios from "axios";
 import React, { useEffect } from "react";
 import BaseModalWrapper from "./ModalPopup/BaseModalWrapper";
+import "./index.css"
 
 export function AccountInfo(): JSX.Element {
   const [user, setUser] = React.useState<any>(null);
@@ -37,11 +38,17 @@ export function AccountInfo(): JSX.Element {
             {/* {editableStr} */}
           </Typography.Title>
 
-          <button onClick={toggleModal}>Show Modal</button>
+          <Button
+            size='large'
+            onClick={toggleModal}
+            className="HomePage-EditButton"
+          >
+            Delete Account
+          </Button>
           <BaseModalWrapper
             isModalVisible={isModalVisible}
-            onBackdropClick={toggleModal} 
-            header={"This is header"}          />
+            onBackdropClick={toggleModal}
+            header={"Deleted"} />
         </Col>
       </Row>
     </div>

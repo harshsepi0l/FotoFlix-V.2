@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import ReactDOM from 'react-dom';
 import styled from 'styled-components'
 
@@ -19,12 +19,20 @@ const Overlay = styled.div`
     justify-content: center;
 `;
 
+const stopPropagation: MouseEventHandler<HTMLDivElement> = e => {
+    e.persist();
+    e.stopPropagation();
+  };
+  
 const Modal: React.FC<ModalProps> = ({ onBackdropClick, children }) => {
-    return ReactDOM.createPortal(<Overlay onClick={onBackdropClick}>
-        <div onClick={e => e.stopPropagation()}>
-            {children}
-        </div>
-    </Overlay>, document.getElementById('modal-root')!)
+    return ReactDOM.createPortal(
+        <Overlay onClick={onBackdropClick}>
+            <div onClick={stopPropagation}>
+                {children}
+            </div>
+        </Overlay>,
+        document.getElementById('modal-root')!
+    );
 
 }
 

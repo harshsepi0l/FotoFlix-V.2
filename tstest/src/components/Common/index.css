@@ -226,6 +226,7 @@ input[type=password]:focus .CustomSearchContainer+.CustomSearch {
     gap: 24px;
 }
 
+/* Card */
 .CardsContainer {
     display: flex;
     justify-content: center;
@@ -236,6 +237,20 @@ input[type=password]:focus .CustomSearchContainer+.CustomSearch {
 
 }
 
+.closeIcon {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    color: var(--darkpurple);
+    cursor: pointer;    
+    background-color: var(--lightpink);
+    border-radius: 50%;
+}
+
+.closeIcon > svg {
+    width: 30px;
+    height: 30px;
+}
 .RowImages-Cards {
     display: flex;
     flex-direction: row;
