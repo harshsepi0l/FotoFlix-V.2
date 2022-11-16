@@ -13,7 +13,9 @@ import { SignUp } from "../../pages/SignUp";
 import { HeaderDropdown } from "./HeaderDropdown";
 import Axios from "axios";
 import fotoLogo from "../ImageLogo/fotoLogo.svg";
+import logo from "../ImageLogo/logo.svg";
 import "./index.css";
+import { CustomFab } from "./CustomFab";
 
 const { Search } = Input;
 
@@ -78,32 +80,54 @@ function LeftSection(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem("acessToken")) {
+    if (sessionStorage.getItem("accessToken")) {
       setIsLoggedIn(true);
     }
   }, []);
+
+  const isDesktop = useMediaQuery({
+    query: "(min-width: 1224px)",
+  });
+
+  const isTablet = useMediaQuery({
+    query: "(max-width: 1224px)",
+  });
+
+  const isMobile = useMediaQuery({
+    query: "(max-width: 786px)",
+  });
 
   return (
     <Row justify="start">
       <Space align="center">
         <Col span={4}>
-        <Link to="/">
-            <img
-              style={{ color: "#937DC2", width: 100, height: 50 }}
-              src={fotoLogo}
-              alt="logo"
-            />
+          <Link to="/">
+            {isMobile ? (
+              <img
+                className="header-logo"
+                src={logo}
+                alt="logo"
+              />
+            ) : (
+              <img
+                className="header-logo"
+                src={fotoLogo}
+                alt="logo"
+              />
+            )}
           </Link>
         </Col>
       </Space>
 
       <Col span={4} offset={2}>
-        <CustomButton
-          onClick={() => navigate(`/UploadForm`)}
-          buttonType={"primary"}
-          color={"darkpurple"}
-          title={"New Post"}
-        />
+        {isLoggedIn && !isMobile && (
+          <CustomButton
+            onClick={() => navigate(`/UploadForm`)}
+            buttonType={"primary"}
+            color={"darkpurple"}
+            title={"New Post"}
+          />
+        )}
       </Col>
     </Row>
   );
@@ -126,62 +150,57 @@ function RightButtonsSection(): JSX.Element {
   };
 
   const isDesktop = useMediaQuery({
-    query: "(min-width: 1224px)"
+    query: "(min-width: 1224px)",
   });
 
   const isTablet = useMediaQuery({
-    query: "(max-width: 1224px)"
+    query: "(max-width: 1224px)",
   });
 
   const isMobile = useMediaQuery({
-    query: "(max-width: 786px)"
+    query: "(max-width: 786px)",
   });
 
-
   return (
-    <Row justify="end" align="middle" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-      <Col className="gutter-row" span={4}>
-        {isLoggedIn ? (
-          <Avatar
-            className="Avatar"
-            src="https://www.publicdomainpictures.net/pictures/30000/velka/plain-white-background.jpg"
-          />
-        ) : (
-          <Link to="/login">
-            <CustomButton
-              buttonType={"default"}
-              color={"white"}
-              title={"Login"}
-            />
-          </Link>
-        )}
-      </Col>
-      <Col className="gutter-row" span={4}>
-        {isLoggedIn ? (
-          <CustomButton
-            buttonType={"primary"}
-            color={"darkpurple"}
-            title={"Logout"}
-            onClick={logout}
-          />
-        ) : (
-          <Link to="/signup">
-            {
-              isDesktop && (
+    <div className="Header-RightButtons">
+      {isLoggedIn ? (
+        <CustomButton
+          buttonType={"primary"}
+          color={"darkpurple"}
+          title={"Logout"}
+          onClick={logout}
+        />
+      ) : (
+        <div>
+          {isDesktop ? (
+            <div className="Header-RightButtons-Desktop">
+              <Link to="/login">
+                <CustomButton
+                  buttonType={"default"}
+                  color={"white"}
+                  title={"Login"}
+                />
+              </Link>
+              <Link to="/signup">
                 <CustomButton
                   buttonType={"primary"}
                   color={"lightpurple"}
                   title={"Sign Up"}
-                />)
-            }
-
-          </Link>
-        )}
-      </Col>
-      {/* <Col>
-        <HeaderDropdown />
-      </Col> */}
-    </Row>
+                />
+              </Link>
+            </div>
+          ) : (
+            <Link to="/login">
+              <CustomButton
+                buttonType={"default"}
+                color={"white"}
+                title={"Login"}
+              />
+            </Link>
+          )}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -200,17 +219,20 @@ interface isLoggedIn {
 export function CustomHeader(props: isLoggedIn): JSX.Element {
   return (
     <div className="mainHeader Padding-20">
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} >
-        <Col span={8} className="gutter-row">
+      <Row>
+        <Col span={8}>
           <LeftSection />
         </Col>
-        <Col span={8} className="gutter-row">
+        <Col span={8}>
           <CustomSearch />
         </Col>
-        <Col span={8} className="gutter-row">
+        <Col span={8}>
           {props.isLoggedIn ? <RightButtonsSection /> : <RightUserSection />}
         </Col>
       </Row>
     </div>
   );
+}
+function setIsLoggedIn(arg0: boolean) {
+  throw new Error("Function not implemented.");
 }

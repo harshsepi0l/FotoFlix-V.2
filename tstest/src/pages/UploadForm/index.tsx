@@ -8,13 +8,11 @@ import {
   FormikHelpers,
   FormikValues,
 } from "formik";
-//import { ChipsArray } from "../../components/Tag";
 import { useNavigate } from "react-router-dom";
+//import { ChipsArray } from "../../components/Tag";
 import { styled } from "@mui/material/styles";
 import { Chip, Paper } from "@mui/material";
 import { Box, Button, TextField } from "@mui/material";
-import { NavLink } from "react-router-dom";
-import { Alert } from "antd";
 
 export interface ChipData {
   key: number;
@@ -32,13 +30,6 @@ export const UploadForm = () => {
   const [imageDesc, setImageDesc] = useState(""); // Control image description
   const [imageVis, setImageVis] = useState(1); // Control public (0) vs. private (1)
   const [imageTags, setImageTags] = useState(""); // tags
-  const navigate = useNavigate();
-
-  // This will navigate to Landing Page once user has signed up
-  const sendToLanding = () => {
-    navigate("/");
-    // <Alert message="Success Text" type="success" />;
-  };
 
   const handleTagsChange = (e: any) => {
     const tags = e.target.value;
@@ -61,6 +52,14 @@ export const UploadForm = () => {
     setInput("");
   };
 
+  const navigate = useNavigate();
+
+
+ // This will navigate to Landing Page once user has signed up
+ const sendToLanding = () => {
+  navigate("/");
+ };
+  
   const handleImageTitleChange = (e: any) => {
     // This updates every single time anything is typed
     const title = e.target.value;
@@ -101,11 +100,10 @@ export const UploadForm = () => {
     e.preventDefault();
     if (!previewSource) return;
     uploadImage(previewSource);
-    navigate("/");
   };
   const uploadImage = async (base64EncodedImage: any) => {
     try {
-      await fetch("http://localhost:3000/Cloudinary", {
+      await fetch("https://full-stack-fotoflix.herokuapp.com/Cloudinary", {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
@@ -145,6 +143,7 @@ export const UploadForm = () => {
           <h3>Upload your image!</h3>
           <br />
           <input
+            title="file"
             type="file"
             name="image "
             onChange={handleFileInputChange}
@@ -154,6 +153,7 @@ export const UploadForm = () => {
           <br />
           <h3>Image Title</h3>
           <input
+            title="title"
             type="text"
             name="Image Title"
             onChange={handleImageTitleChange}
@@ -162,6 +162,7 @@ export const UploadForm = () => {
           <br />
           <h3>Image Description</h3>
           <input
+            title="description"
             type="text"
             name="Image Description"
             onChange={handleImageDescChange}
@@ -170,6 +171,7 @@ export const UploadForm = () => {
           <br />
           <h3>Public or private?</h3>
           <input
+            title="PubPriv"
             type="radio"
             value="public"
             id="public"
@@ -225,14 +227,9 @@ export const UploadForm = () => {
               })}
             </Paper>
           </Box>
-          <div>
-            <NavLink onClick={sendToLanding} to={"/"}>
-              <button className="btn" type="submit">
-                Submit
-              </button>
-             
-            </NavLink>
-          </div>
+          <button className="btn" type="submit" onClick={sendToLanding} >
+            Submit
+          </button>
         </form>
         {previewSource && (
           <img src={previewSource} alt="chosen" style={{ height: "300px" }} />

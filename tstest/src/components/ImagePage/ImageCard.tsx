@@ -1,19 +1,30 @@
 import { Card, Col, Row, Space } from "antd";
 import Meta from "antd/lib/card/Meta";
 import { Content } from "antd/lib/layout/layout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CustomCard } from "../Common/CustomCard";
 import { LikeOutlined, DislikeOutlined, StarOutlined, TagsOutlined, GlobalOutlined, LockOutlined } from '@ant-design/icons';
 import "./index.css"
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import React from "react";
 
 interface CardProps {
-  title: string;
-  description: string;
+  Title: string;
+  Description: string;
+  PublicOrPrivate: number;
   image: any;
   tags: string[];
   views: string;
+  id: any;
+  Url: string;
   // height: number | string;
   // width?: number | string;
+}
+interface singleImageProps {
+  Url: string;
+  Likes: number;
+  Dislikes: number;
 }
 
 interface IAction {
@@ -41,25 +52,26 @@ function CustomAction(props: IAction): JSX.Element {
   )
 }
 
-function SingleImageCard(): JSX.Element {
+function SingleImageCard(props: singleImageProps): JSX.Element {
+  const imgPopularity = props.Likes - props.Dislikes;
   return (
     <Card
       hoverable
       style={{ background: "var(--darkpurple)", color: "var(--white)", alignItems: "center" }}
-      cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+      cover={<img alt="example" src={props.Url} />}
       actions={[
                 
         <CustomAction
             icon="like"
-            text={100}
+            text={props.Likes}
         />,
         <CustomAction
             icon="dislike"
-            text={100}
+            text={props.Dislikes}
         />,
         <CustomAction
             icon="popularity"
-            text={100}
+            text={imgPopularity}
         />,
         <CustomAction
             icon="tags"
@@ -80,25 +92,48 @@ function SingleImageCard(): JSX.Element {
 function CardInfo(props: CardProps): JSX.Element {
   return (
     <div className="Card-Info">
-      <Card title={props.title} bordered={false} className="Card-Info">
+      <Card title={props.Title} bordered={false} className="Card-Info">
        
-        <p>{props.description}</p>
+        <p>{props.Description}</p>
         <p>{props.tags}</p>
       </Card>
     </div>
   );
 }
 
-export function ImageCard(): JSX.Element {
+export function ImageCard(id: any): JSX.Element { // This is the function ultimately sent to the image page
+  // Get image data based off the id passed in parameters
+  const [imgId, setImgId] = useState(id); // imgId.id returns the id itself!!
+  const [imagePost, setImagePost] = useState("");
+  useEffect(()=>{
+    async function fetchData(){
+    await axios.get(`http://localhost:3000/Cloudinary/byid/${imgId.id}`).then((response) => {
+      setImagePost(response.data); // response.data: all the image data
+    })};
+    fetchData();
+  }, []);
+  const imageJson = JSON.parse(JSON.stringify(imagePost));
+
+  // Get tags
+  const [imageTags, setImageTags] = useState("");
+  useEffect(()=>{
+    async function fetchData(){
+    await axios.get(`http://localhost:3000/Cloudinary/tagsByid/${imgId.id}`).then((response) => {
+      setImageTags(response.data); // response.data: all the image data
+    })};
+    fetchData();
+  }, []);
+  const tagsJson = JSON.parse(JSON.stringify(imageTags));
+  console.log(tagsJson);
 
   return (
     <Row align="stretch">
       <Col span={10}>
-        <SingleImageCard />
+        <SingleImageCard Url={imageJson.Url} Likes={imageJson.Likes} Dislikes={imageJson.Dislikes}/>
         {/* <CustomCard/> */}
       </Col>
       <Col span={14}>
-        <CardInfo title="Demo Title" views="200" description={"abc"} image={undefined} tags={["#dogs", "#cats"]} />
+        <CardInfo PublicOrPrivate={imageJson.PublicOrPrivate} id={imgId.id} Url={imageJson.Url} Title={imageJson.Title} views={imageJson.Views} Description={imageJson.Description} image={undefined} tags={["#dogs", "#cats"]} />
       </Col>
     </Row>
   )

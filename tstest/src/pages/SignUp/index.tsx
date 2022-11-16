@@ -32,7 +32,7 @@ export const SignUp = () => {
   };
 
   const submitLog = (data: any) => {
-    Axios.post("http://localhost:3000/SignUp", {
+    Axios.post("https://full-stack-fotoflix.herokuapp.com/SignUp", {
       Firstname: firstname,
       Lastname: lastname,
       Username: username,
@@ -65,7 +65,7 @@ export const SignUp = () => {
   //     | null
   //     | undefined
   // ) => {
-  //   Axios.delete(`http://localhost:3000/api/delete/${Username}`);
+  //   Axios.delete(`https://full-stack-fotoflix.herokuapp.com /api/delete/${Username}`);
   //   refreshPage();
   // };
 
@@ -80,7 +80,7 @@ export const SignUp = () => {
   //     | null
   //     | undefined
   // ) => {
-  //   Axios.put(`http://localhost:3000/api/update/`, {
+  //   Axios.put(`https://full-stack-fotoflix.herokuapp.com/api/update/`, {
   //     Firstname: firstname,
   //     Username: newUsername,
   //   });

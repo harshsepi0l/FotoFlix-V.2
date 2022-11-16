@@ -15,11 +15,11 @@ function App() {
     <Router>
       <Routes>
         <Route path="/HomePage/:id" element={<HomePage />} />
-        <Route path="/ImagePage" element={<ImagePage />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/UploadForm" element={<UploadForm />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/" element={<LandingPage />} />
+        <Route path="/ImagePage/:id" element={<ImagePage />} />
       </Routes>
     </Router>
   );

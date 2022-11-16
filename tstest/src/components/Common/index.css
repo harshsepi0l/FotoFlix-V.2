@@ -2,6 +2,22 @@
     background-color: var(--darkpurple);
 }
 
+
+@media screen and (max-width: 786px) {
+    .mainHeader>.ant-row {
+        margin-right: 30px !important;
+    }
+
+}
+/* Header  */
+.ant-row {
+    width:100%;
+    height: 100%;
+}
+
+.ant-row-end {
+    padding-right: 70px;
+}
 .Default-darkpurple {
     background-color: var(--darkpurple);
     border-color: var(--darkpurple);
@@ -32,7 +48,15 @@
 }
 
 .Default-red {
-    background-color: red
+    background-color: rgb(211, 18, 18);
+    border-color: rgb(211, 18, 18);
+}
+
+.Default-red:hover,
+.Default-red:focus {
+    background: rgb(193, 13, 13);
+    border-color: rgb(193, 13, 13);
+    color: var(--white);
 }
 
 .Default-white:hover,
@@ -51,19 +75,46 @@
 
 .Padding-20 {
     padding: 20px;
-    padding-right: 60px;
     background-color: var(--white);
 }
 
+/* Logo on Header */
+.header-logo {
+    color: var(--darkpurple);
+    width: 100px;
+    height: 50px;
+}
 
+@media screen and (max-width: 786px) {
+    .header-logo {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Search Bar on header */
 .CustomSearch {
     background-color: #F5F3FF;
+}
+
+.Header-SearchBar {
+    flex: 1;
+    text-align: center;
 }
 
 .CustomSearch>input::placeholder,
 .CustomSearch>input::-ms-input-placeholder,
 .CustomSearch>input::-ms-input-placeholder {
     color: var(--darkpurple);
+}
+
+.CustomSearchContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 .CustomSearch:hover {
@@ -83,6 +134,19 @@
 input[type=text]:focus,
 input[type=password]:focus .CustomSearchContainer+.CustomSearch {
     background-color: none;
+}
+
+/* Dropdown menu */
+.ant-dropdown-menu {
+    text-align: right;
+}
+
+.Custom-Menu {
+    color: var(--midpurple)
+}
+
+.Custom-Menu:hover {
+    color: var(--darkpurple)
 }
 
 .DataResult {
@@ -113,6 +177,32 @@ input[type=password]:focus .CustomSearchContainer+.CustomSearch {
     color: var(--darkpurple) !important
 }
 
+/* Right Buttons */
+.Header-RightButtons {
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    gap: 5px;
+}
+
+.Header-RightButtons-Desktop {
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    gap: 5px;
+}
+
+/* Trending */
+.Trending {
+    text-align: center;
+}
+
+.Trending-Scroll {
+    word-break: "break-word";
+    overflow-y: "scroll";
+    scroll-behavior: "smooth";
+    height: 300;
+}
 
 /* Row Images */
 
@@ -144,7 +234,7 @@ input[type=password]:focus .CustomSearchContainer+.CustomSearch {
     margin-left: auto;
     margin-right: auto;
 
-}    
+}
 
 .RowImages-Cards {
     display: flex;

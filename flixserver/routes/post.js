@@ -1,18 +1,37 @@
 const express = require("express");
 const { sequelize } = require("../models");
-const router = express.Router();
+// const router = express.Router();
+let router = express.Router({ mergeParams : true });
+const { validateToken } = require("../middlewares/AuthMiddleware");
 const { DataTypes } = require("sequelize");
 const post = require("../models/post")(sequelize, DataTypes);
-const { validateToken } = require("../middlewares/AuthMiddleware");
+
 const bodyParser = require("body-parser");
-const tags = require("../models/flixertags");
+const tags = require("../models/flixertags")(sequelize, DataTypes);
 
 const { cloudinary } = require("../utils/cloudinary");
-const flixertags = require("../models/flixertags")(sequelize, DataTypes);
 
 router.get("/", async (req, res) => {
   const posts = await post.findAll();
   res.json(posts);
+});
+
+
+router.get("/byId/:id", async (req, res) => {
+  let id = req.params.id; // Get the id
+  const img = await post.findByPk(id);
+  res.json(img);
+});
+
+router.get("/tagsByid/:id", async (req, res) => {
+  let id = req.params.id; // Get the id
+  const t = await tags.findAll(
+    {
+      where: {ImageId: id},
+    }
+  );
+  console.log(`Backend tags: ${t}`);
+  res.json(t);
 });
 
 router.post("/", async (req, res) => {
@@ -22,33 +41,8 @@ router.post("/", async (req, res) => {
     upload_preset: "flixerimages",
   });
 
-  // console.log(uploadedResponse);
-  // console.log(req.body.Tags);
+  console.log(uploadedResponse);
 
-  // Add tags to the database
-  // for (let t of req.body.Tags)
-  // {
-  //   await flixertags.create({
-  //     Tag: t.label
-  //   });
-
-  // }
-  // Get ids of tags
-  // const tagIds=[];
-  // for (let t of req.body.Tags){
-  //   await flixertags.findOrCreate({
-  //     where: {Tag: t.label},
-  //   }).then(([result, created]) => {});
-  //   flixertags.findOne({
-  //     where: {Tag: t.label},
-  //     attributes: ["id"]
-  //   }).then((foundResult) => {tagIds.push(foundResult)});
-  // }
-  // const tag1 = tagIds[0].id;
-  // console.log("TAG 1:");
-  // console.log(tag1);
-
-  // Post
   await post.create({
     Title: "test",
     Description: "test",
@@ -64,19 +58,10 @@ router.post("/", async (req, res) => {
     Dislikes: 0,
     UploadDate: uploadedResponse.created_at,
   });
-  // Add tags
-  // get current postid
-  const currentPost = await post.findOne({
-    where: { Url: uploadedResponse.url },
-  });
-  for (let t of req.body.Tags) {
-    flixertags.create({
-      imageID: currentPost.id,
-      Tag: t.label,
-    });
-  }
+  // await flixertags.create({
+
+  // });
 
   res.json({ message: "Image created!" });
 });
-
 module.exports = router;
