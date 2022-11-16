@@ -1,8 +1,8 @@
 const express = require("express");
 const { sequelize } = require("../models");
-const router = express.Router();
-
 const { validateToken } = require("../middlewares/AuthMiddleware");
+// const router = express.Router();
+let router = express.Router({ mergeParams : true });
 const { DataTypes } = require("sequelize");
 const post = require("../models/post")(sequelize, DataTypes);
 
@@ -23,7 +23,24 @@ router.get("/byUID", validateToken, async (req, res) => {
 
 router.get("/", async (req, res) => {
   const posts = await post.findAll();
-  res.json(posts);
+  res.json(posts);});
+
+router.get("/byId/:id", async (req, res) => {
+  let id = req.params.id; // Get the id
+  const img = await post.findByPk(id);
+  res.json(img);
+  console.log(json(img));
+});
+
+router.get("/tagsByid/:id", async (req, res) => {
+  let id = req.params.id; // Get the id
+  const t = await tags.findAll(
+    {
+      where: {ImageId: id},
+    }
+  );
+  console.log(`Backend tags: ${t}`);
+  res.json(t);
 });
 
 router.post("/byUID", validateToken, async (req, res) => {
@@ -45,6 +62,5 @@ router.post("/byUID", validateToken, async (req, res) => {
   });
 
   res.json({ message: "Post created!" });
-});
-
+  });
 module.exports = router;
