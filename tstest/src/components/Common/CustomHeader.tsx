@@ -14,7 +14,6 @@ import { HeaderDropdown } from "./HeaderDropdown";
 import Axios from "axios";
 import fotoLogo from "../ImageLogo/fotoLogo.svg";
 import logo from "../ImageLogo/logo.svg";
-import "./index.css";
 import { border, borderColor } from "@mui/system";
 
 const { Search } = Input;
