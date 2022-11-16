@@ -2,6 +2,7 @@ import { Card } from "antd";
 import axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { CustomCard } from "./CustomCard";
 import "./index.css";
 
@@ -21,12 +22,11 @@ interface CardProps {
 }
 
 export function TrendingImages(): JSX.Element {
+  let { UID } = useParams();
   const [values, setValues] = React.useState<CardProps[]>([]);
   useEffect(() => {
     axios
-      .get("http://localhost:3000/Cloudinary", {
-        //get headers
-      })
+      .get(`http://localhost:3000/Cloudinary/byUID}`, {})
       .then((response) => {
         setValues(response.data);
       });
@@ -43,7 +43,7 @@ export function TrendingImages(): JSX.Element {
         }}
         className="Trending-Scroll"
       >
-        {values.map((value) => (
+        {Array.from(values).map((value) => (
           <CustomCard
             key={value.key}
             PublicOrPrivate={value.PublicOrPrivate}

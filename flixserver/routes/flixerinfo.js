@@ -36,9 +36,8 @@ router.get("/byId", async (req, res) => {
   res.json(flixer);
 });
 
-router.post("/Login", async (req, res) => {
+router.post("/Login/", async (req, res) => {
   const { Username, Password } = req.body;
-
   const user = await flixerinfo.findOne({ where: { Username: Username } });
 
   if (!user) {
@@ -52,11 +51,16 @@ router.post("/Login", async (req, res) => {
           { UID: user.UID },
           `${process.env.ACCESS_TOKEN_SECRET}`
         );
-
         res.json(accessToken);
       }
     });
   }
+});
+
+router.get("/Login/:byUID", async (req, res) => {
+  const { UID } = req.params;
+  const user = await flixerinfo.findOne({ where: { UID: UID } });
+  res.json(user);
 });
 
 module.exports = router;

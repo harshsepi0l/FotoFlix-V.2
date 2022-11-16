@@ -2,6 +2,7 @@ import { Space } from "antd";
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { CustomCard } from "./CustomCard";
 import { Motion } from "./Motion";
 import { PaginationApplicator } from "./pagination/PaginationApplicator";
@@ -23,10 +24,11 @@ interface CardProps {
 }
 
 export function RowImages(): JSX.Element {
+  let { UID } = useParams();
   const [values, setValues] = useState<CardProps[]>([]);
   useEffect(() => {
     axios
-      .get("http://localhost:3000/Cloudinary/", {
+      .get(`http://localhost:3000/Cloudinary/byUID/${UID}`, {
         headers: {
           accessToken: sessionStorage.getItem("accessToken") as string,
         },
@@ -38,7 +40,7 @@ export function RowImages(): JSX.Element {
 
   let newCards: JSX.Element[] = [];
   {
-    values.map((value, key) => {
+    Array.from(values).map((value, key) => {
       newCards.push(
         <CustomCard
           key={key}

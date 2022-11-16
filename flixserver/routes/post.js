@@ -9,30 +9,39 @@ const bodyParser = require("body-parser");
 const tags = require("../models/flixertags");
 
 const { cloudinary } = require("../utils/cloudinary");
-const flixertags = require("../models/flixertags");
-const flixerinfo = require("../models/flixerinfo");
 
-router.get("/", validateToken, async (req, res) => {
-  const posts = await post.findAll();
+router.get("/byUID/:UID", validateToken, async (req, res) => {
+  const UID = req.user.UID;
+  const posts = await post.findAll({
+    where: {
+      UID: UID,
+    },
+  });
+
   res.json(posts);
 });
-
-router.post("/", validateToken, async (req, res) => {
-  const fileStr = req.body;
-  console.log(fileStr);
+router.post("/byUID", validateToken, async (req, res) => {
+  const fileStr = req.body.data;
 
   const UID = req.user.UID;
-  flieStr.UID = UID;
 
   const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
     upload_preset: "flixerimages",
   });
 
-  fileStr.ImageType = uploadedResponse.format;
-  fileStr.Url = uploadedResponse.url;
-  fileStr.PostType = uploadedResponse.resource_type;
+  await post.create({
+    UID: UID,
+    ImageType: uploadedResponse.format,
+    PostType: uploadedResponse.resource_type,
+    Url: uploadedResponse.url,
+    Title: req.body.Title,
+    Description: req.body.Description,
+    PublicOrPrivate: req.body.PublicOrPrivate,
+    Likes: 0,
+    Dislikes: 0,
+  });
 
-  await post.create(fileStr);
+  console.log(uploadedResponse);
 });
 
 module.exports = router;

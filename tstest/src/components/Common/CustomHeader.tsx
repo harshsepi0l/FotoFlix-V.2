@@ -1,5 +1,5 @@
-import { BellOutlined, SearchOutlined } from "@ant-design/icons";
-import { Avatar, Col, Input, Row, Space } from "antd";
+import { BellOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar, Button, Col, Input, Row, Space, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { CustomButton } from "./CustomButton";
@@ -15,6 +15,7 @@ import Axios from "axios";
 import fotoLogo from "../ImageLogo/fotoLogo.svg";
 import logo from "../ImageLogo/logo.svg";
 import "./index.css";
+import { border, borderColor } from "@mui/system";
 
 const { Search } = Input;
 
@@ -75,6 +76,7 @@ function CustomSearch(): JSX.Element {
 }
 
 function LeftSection(): JSX.Element {
+  let { UID } = useParams();
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -128,12 +130,21 @@ function LeftSection(): JSX.Element {
 
 function RightButtonsSection(): JSX.Element {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  let { UID } = useParams();
 
   useEffect(() => {
-    if (sessionStorage.getItem("accessToken") !== null) {
-      setIsLoggedIn(true);
-    }
+    Axios.get(`http://localhost:3000/Cloudinary/byUID/${UID}`, {
+      headers: {
+        accessToken: sessionStorage.getItem("accessToken"),
+      },
+    }).then((response) => {
+      if (response.data.error) {
+        setIsLoggedIn(false);
+      } else {
+        setIsLoggedIn(true);
+      }
+    });
   }, []);
 
   const logout = () => {
@@ -155,12 +166,14 @@ function RightButtonsSection(): JSX.Element {
   });
 
   return (
-    <Row justify="end" align="middle">
+    <Row justify="end" align="bottom">
       <Col span={4}>
         {isLoggedIn ? (
-          <Avatar
-            className="Avatar"
-            src="https://www.publicdomainpictures.net/pictures/30000/velka/plain-white-background.jpg"
+          <CustomButton
+            buttonType={"primary"}
+            color={"darkpurple"}
+            title={"Logout"}
+            onClick={logout}
           />
         ) : (
           <Link to="/login">
@@ -174,14 +187,21 @@ function RightButtonsSection(): JSX.Element {
       </Col>
       <Col span={4}>
         {isLoggedIn ? (
-          <CustomButton
-            buttonType={"primary"}
-            color={"darkpurple"}
-            title={"Logout"}
-            onClick={logout}
-          />
+          <Tooltip title="Homebase">
+            <Button
+              type="primary"
+              shape="circle"
+              size="large"
+              icon={<UserOutlined />}
+              style={{
+                backgroundColor: "var(--darkpurple)",
+                borderColor: "var(--darkpurple)",
+              }}
+              onClick={() => navigate(`/HomePage/${UID}`)}
+            />
+          </Tooltip>
         ) : (
-          <Link to="/signup">
+          <Link to="/SignUp">
             {isDesktop && (
               <CustomButton
                 buttonType={"primary"}

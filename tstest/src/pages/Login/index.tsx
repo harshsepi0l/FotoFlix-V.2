@@ -2,12 +2,14 @@ import { Input, Space } from "antd";
 import Axios from "axios";
 import { useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { InitOptions, IntegerDataType } from "sequelize";
 import { CustomButton } from "../../components/Common/CustomButton";
 import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
 
 export const Login = () => {
   const [username, checkUsername] = useState("");
   const [password, checkPassword] = useState("");
+  const [UID, setUID] = useState("");
   const [loginStatus, setLoginStatus] = useState("");
   const navigate = useNavigate();
 
@@ -24,15 +26,16 @@ export const Login = () => {
     };
 
     const loginCheck = () => {
-      Axios.post("http://localhost:3000/SignUp/Login", {
+      Axios.post(`http://localhost:3000/SignUp/Login/`, {
         Username: username,
         Password: password,
       }).then((response) => {
         if (response.data.error) {
           alert(response.data.error);
         } else {
+          console.log(response.data);
           sessionStorage.setItem("accessToken", response.data);
-          navigate(`/HomePage`);
+          navigate("/LandingPage");
         }
       });
     };

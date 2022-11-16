@@ -13,6 +13,7 @@ import { styled } from "@mui/material/styles";
 import { Chip, Paper } from "@mui/material";
 import { Box, Button, TextField } from "@mui/material";
 import { stringify } from "querystring";
+import { useParams } from "react-router-dom";
 
 export interface ChipData {
   key: number;
@@ -93,9 +94,10 @@ export const UploadForm = () => {
     if (!previewSource) return;
     uploadImage(previewSource);
   };
+
   const uploadImage = async (base64EncodedImage: any) => {
     try {
-      await fetch("http://localhost:3000/Cloudinary/", {
+      await fetch(`http://localhost:3000/Cloudinary/byUID/`, {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
