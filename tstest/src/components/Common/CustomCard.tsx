@@ -71,31 +71,6 @@ export function CustomCard(props: CardProps): JSX.Element {
     navigate("/ImagePage/" + props.id);
   }
 
-  const buttonHandleOnClick = () => {
-    navigate("/like" + props.id);
-  }
-
-  const handleAvatarOnClick = () => {
-    navigate("/user/" + props.Avatar);
-  }
-
-  const [likes, setLikes] = useState(props.Likes);
-  const [dislikes, setDislikes] = useState(props.Dislikes);
-  const [action, setAction] = useState<string | null>(null);
-
-
-  const like = () => {
-    setLikes(props.Likes + 1);
-    setDislikes(props.Dislikes);
-    setAction('liked');
-  };
-
-  const dislike = () => {
-    setLikes(props.Likes);
-    setDislikes(props.Dislikes + 1);
-    setAction('disliked');
-  };
-
   console.log(props.Likes);
   return (
     <div>
@@ -103,14 +78,10 @@ export function CustomCard(props: CardProps): JSX.Element {
         hoverable
         key={props.key}
         style={{ width: 300 }}
-        cover={<img alt={props.Title} src={props.Url} onClick={handleOnClick} />}
+        onClick={handleOnClick}
+        cover={<img alt={props.Title} src={props.Url} />}
         actions={[
-          <CustomAction
-            icon="like"
-            text={props.Likes}
-            isPublic={isGlobal}
-            onClick={like}
-          />,
+          <CustomAction icon="like" text={props.Likes} isPublic={isGlobal} />,
           <CustomAction
             icon="dislike"
             text={props.Dislikes}
@@ -129,12 +100,7 @@ export function CustomCard(props: CardProps): JSX.Element {
         ]}
       >
         <Meta
-          avatar={
-            <Avatar
-              src={props.Avatar}
-              onClick={handleAvatarOnClick}
-              style={{ cursor: "pointer" }}
-            />}
+          avatar={<Avatar src={props.Avatar} />}
           title={props.Title}
           description={props.Description}
         />

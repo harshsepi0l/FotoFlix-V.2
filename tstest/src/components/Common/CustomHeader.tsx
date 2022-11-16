@@ -15,7 +15,6 @@ import Axios from "axios";
 import fotoLogo from "../ImageLogo/fotoLogo.svg";
 import logo from "../ImageLogo/logo.svg";
 import "./index.css";
-import { CustomFab } from "./CustomFab";
 
 const { Search } = Input;
 
@@ -80,21 +79,13 @@ function LeftSection(): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem("accessToken")) {
+    if (sessionStorage.getItem("acessToken")) {
       setIsLoggedIn(true);
     }
   }, []);
 
-  const isDesktop = useMediaQuery({
-    query: "(min-width: 1224px)",
-  });
-
-  const isTablet = useMediaQuery({
-    query: "(max-width: 1224px)",
-  });
-
   const isMobile = useMediaQuery({
-    query: "(max-width: 786px)",
+    query: "(max-width: 786px)"
   });
 
   return (
@@ -104,13 +95,13 @@ function LeftSection(): JSX.Element {
           <Link to="/">
             {isMobile ? (
               <img
-                className="header-logo"
+                style={{ color: "#937DC2", width: 20, height: 20 }}
                 src={logo}
                 alt="logo"
               />
             ) : (
               <img
-                className="header-logo"
+                style={{ color: "#937DC2", width: 100, height: 50 }}
                 src={fotoLogo}
                 alt="logo"
               />
@@ -120,7 +111,14 @@ function LeftSection(): JSX.Element {
       </Space>
 
       <Col span={4} offset={2}>
-        {isLoggedIn && !isMobile && (
+        {isMobile ? (
+          <CustomButton
+            onClick={() => navigate(`/UploadForm`)}
+            buttonType={"primary"}
+            color={"darkpurple"}
+            title={"+"}
+          />
+        ) : (
           <CustomButton
             onClick={() => navigate(`/UploadForm`)}
             buttonType={"primary"}
@@ -128,6 +126,7 @@ function LeftSection(): JSX.Element {
             title={"New Post"}
           />
         )}
+
       </Col>
     </Row>
   );
@@ -150,57 +149,77 @@ function RightButtonsSection(): JSX.Element {
   };
 
   const isDesktop = useMediaQuery({
-    query: "(min-width: 1224px)",
+    query: "(min-width: 1224px)"
   });
 
   const isTablet = useMediaQuery({
-    query: "(max-width: 1224px)",
+    query: "(max-width: 1224px)"
   });
 
   const isMobile = useMediaQuery({
-    query: "(max-width: 786px)",
+    query: "(max-width: 786px)"
   });
 
+
   return (
-    <div className="Header-RightButtons">
-      {isLoggedIn ? (
-        <CustomButton
-          buttonType={"primary"}
-          color={"darkpurple"}
-          title={"Logout"}
-          onClick={logout}
-        />
-      ) : (
-        <div>
-          {isDesktop ? (
-            <div className="Header-RightButtons-Desktop">
-              <Link to="/login">
-                <CustomButton
-                  buttonType={"default"}
-                  color={"white"}
-                  title={"Login"}
-                />
-              </Link>
-              <Link to="/signup">
+    <Row justify="end" align="middle">
+<<<<<<< HEAD
+      <Col  span={4}>
+=======
+      <Col span={4}>
+>>>>>>> parent of 9408d0bb2 (Fix header)
+        {isLoggedIn ? (
+          <Avatar
+            className="Avatar"
+            src="https://www.publicdomainpictures.net/pictures/30000/velka/plain-white-background.jpg"
+          />
+        ) : (
+          <Link to="/login">
+            <CustomButton
+              buttonType={"default"}
+              color={"white"}
+              title={"Login"}
+            />
+          </Link>
+        )}
+      </Col>
+<<<<<<< HEAD
+      <Col  span={4}>
+=======
+      <Col span={4}>
+>>>>>>> parent of 9408d0bb2 (Fix header)
+        {isLoggedIn ? (
+          <CustomButton
+            buttonType={"primary"}
+            color={"darkpurple"}
+            title={"Logout"}
+            onClick={logout}
+          />
+        ) : (
+          <Link to="/signup">
+<<<<<<< HEAD
+            {
+              isDesktop && (
                 <CustomButton
                   buttonType={"primary"}
                   color={"lightpurple"}
                   title={"Sign Up"}
-                />
-              </Link>
-            </div>
-          ) : (
-            <Link to="/login">
+                />)
+            }
+
+=======
+            {isDesktop && (
               <CustomButton
-                buttonType={"default"}
-                color={"white"}
-                title={"Login"}
+                buttonType={"primary"}
+                color={"lightpurple"}
+                title={"Sign Up"}
               />
-            </Link>
-          )}
-        </div>
-      )}
-    </div>
+            )}
+>>>>>>> parent of 9408d0bb2 (Fix header)
+          </Link>
+        )}
+      </Col>
+    </Row>
   );
 }
 
@@ -219,20 +238,17 @@ interface isLoggedIn {
 export function CustomHeader(props: isLoggedIn): JSX.Element {
   return (
     <div className="mainHeader Padding-20">
-      <Row>
-        <Col span={8}>
+      <Row  >
+        <Col span={8} >
           <LeftSection />
         </Col>
-        <Col span={8}>
+        <Col span={8} >
           <CustomSearch />
         </Col>
-        <Col span={8}>
+        <Col span={8} >
           {props.isLoggedIn ? <RightButtonsSection /> : <RightUserSection />}
         </Col>
       </Row>
     </div>
   );
-}
-function setIsLoggedIn(arg0: boolean) {
-  throw new Error("Function not implemented.");
 }

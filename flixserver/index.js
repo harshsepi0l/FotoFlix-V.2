@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-require("dotenv").config();
 const bodyParser = require("body-parser");
 
 app.use(express.json({ limit: "500mb" }));
@@ -14,13 +13,12 @@ app.use(
 app.use(bodyParser.json());
 app.use(cors());
 
-const bcryptjs = require("bcryptjs"); // for hashing passwords
+const bcrypt = require("bcrypt"); // for hashing passwords
 const saltRounds = 10; // for hashing passwords
 
 const db = require("./models");
 
 // Routers
-
 
 const signUpRouter = require("./routes/flixerinfo");
 app.use("/SignUp", signUpRouter);
@@ -28,17 +26,11 @@ app.use("/SignUp", signUpRouter);
 const cloudinaryRouter = require("./routes/post");
 app.use("/Cloudinary", cloudinaryRouter);
 
-db.sequelize
-  .sync()
-  .then(() => {
-    app.listen(process.env.PORT || 3001, () => {
-      console.log("running on port 3001");
-    });
+db.sequelize.sync().then(() => {
+  app.listen(3000, () => {
+    console.log("running on port 3000");
   });
-try {
-} catch (err) {
-  console.log(err);
-};
+});
 
 // app.delete("/api/delete/:Username", (req, res) => {
 //   const username = req.params.Username;
@@ -69,7 +61,7 @@ try {
 //     }
 
 //     if (result.length > 0) {
-//       bcryptjs.compare(password, result[0].Password, (error, response) => {
+//       bcrypt.compare(password, result[0].Password, (error, response) => {
 //         if (response) {
 //           res.send(result);
 //         } else {

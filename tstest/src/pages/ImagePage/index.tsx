@@ -1,7 +1,6 @@
 import { Col, Row } from "antd";
 import { useMediaQuery } from "react-responsive";
 import { useParams } from "react-router-dom";
-import { CustomFab } from "../../components/Common/CustomFab";
 import { CustomHeader } from "../../components/Common/CustomHeader";
 import Footer from "../../components/Common/footer/Footer";
 import { TrendingImages } from "../../components/Common/TrendingImages";
@@ -39,7 +38,6 @@ export function ImagePage(): JSX.Element {
         </div>
 
       )}
-      <CustomFab />
       <Footer />
     </div>
   );

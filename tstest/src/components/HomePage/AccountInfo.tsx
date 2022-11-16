@@ -7,11 +7,9 @@ export function AccountInfo(): JSX.Element {
   const [user, setUser] = React.useState<any>(null);
 
   useEffect(() => {
-    Axios.get("https://full-stack-fotoflix.herokuapp.com/api/get").then(
-      (response) => {
-        setUser(response.data);
-      }
-    );
+    Axios.get("http://localhost:3000/api/get").then((response) => {
+      setUser(response.data);
+    });
   }, []);
 
   return (
@@ -26,7 +24,6 @@ export function AccountInfo(): JSX.Element {
         <Col flex={5}>
           <Typography.Title level={2} className="HomePage-AccountInfo">
             {user && user[1].Username}
-
             {/* {editableStr} */}
           </Typography.Title>
         </Col>
