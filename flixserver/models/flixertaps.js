@@ -18,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     tagsId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   });
   return FlixerTaps;

@@ -30,37 +30,37 @@ router.get("/", async (req, res) => {
 router.post("/byUID", validateToken, async (req, res) => {
   const fileStr = req.body.data;
   const uid = req.user.uid;
-  const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
-    upload_preset: "flixerimages",
-  });
-
-  const postResult = await post.create({
-    uid: uid,
-    imageType: uploadedResponse.format,
-    postType: uploadedResponse.resource_type,
-    url: uploadedResponse.url,
-    title: req.body.titile,
-    description: req.body.discription,
-    publicOrPrivate: req.body.publicOrPrivate,
-    tags: req.body.tags,
-  });
-
-
-  await Array.from(tags).forEach(tag => {
-    tagsModel.create({
-      tag: tag,
+  try {
+    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+      upload_preset: "flixerimages",
     });
-  });
 
-  await tapsModel.create({
-    postId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    likes: 0,
-    dislikes: 0,
-    tagsId: 0,
-  })
+    const postResult = await post.create({
+      uid: uid,
+      imageType: uploadedResponse.format,
+      postType: uploadedResponse.resource_type,
+      url: uploadedResponse.url,
+      title: req.body.title,
+      description: req.body.description,
+      publicOrPrivate: req.body.publicOrPrivate,
+      tags: req.body.tags,
+    });
+
+    await Array.from(tags).forEach(tag => {
+      tagsModel.create({
+        tag: tag,
+      });
+    });
+
+    await tapsModel.create({
+      postId: postResult.id,
+      likes: 0,
+      dislikes: 0,
+      tagsId: 0,
+    })
+  } catch (error) {
+    console.log(error)
+  }
 
   res.json({ message: "Post created!" });
 });
