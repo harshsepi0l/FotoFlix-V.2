@@ -10,6 +10,7 @@ import { Avatar, Card, Space } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CloseCircleOutlined } from "@ant-design/icons";
 
 interface CardProps {
   PublicOrPrivate: number;
@@ -24,6 +25,7 @@ interface CardProps {
   Favorite: number;
   key: any;
   id: number;
+  isCurrentUser?: boolean;
 }
 
 const { Meta } = Card;
@@ -96,6 +98,12 @@ export function CustomCard(props: CardProps): JSX.Element {
     setAction('disliked');
   };
 
+  const deleteCard = () => {
+    if (window.confirm('Are you sure that you want to remove card?')) {
+
+    }
+
+  }
   console.log(props.Likes);
   return (
     <div>
@@ -128,6 +136,14 @@ export function CustomCard(props: CardProps): JSX.Element {
           />,
         ]}
       >
+        {props.isCurrentUser &&
+          (
+            <CloseCircleOutlined
+              className="closeIcon"
+              onClick={deleteCard}
+            />
+          )
+        }
         <Meta
           avatar={
             <Avatar
