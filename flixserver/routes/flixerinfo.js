@@ -36,7 +36,7 @@ router.get("/byId", async (req, res) => {
   res.json(flixer);
 });
 
-router.post("/Login/", async (req, res) => {
+router.post("/Login", async (req, res) => {
   const { Username, Password } = req.body;
   const user = await flixerinfo.findOne({ where: { Username: Username } });
 

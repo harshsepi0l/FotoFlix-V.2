@@ -10,16 +10,21 @@ const tags = require("../models/flixertags");
 
 const { cloudinary } = require("../utils/cloudinary");
 
-router.get("/byUID/:UID", validateToken, async (req, res) => {
+router.get("/byUID", validateToken, async (req, res) => {
   const UID = req.user.UID;
   const posts = await post.findAll({
     where: {
       UID: UID,
     },
   });
-
   res.json(posts);
 });
+
+router.get("/", validateToken, async (req, res) => {
+  const posts = await post.findAll();
+  res.json(posts);
+});
+
 router.post("/byUID", validateToken, async (req, res) => {
   const fileStr = req.body.data;
 

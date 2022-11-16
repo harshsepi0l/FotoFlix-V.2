@@ -76,8 +76,6 @@ function CustomSearch(): JSX.Element {
 }
 
 function LeftSection(): JSX.Element {
-  let { UID } = useParams();
-  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -115,7 +113,7 @@ function LeftSection(): JSX.Element {
       <Col span={4} offset={2}>
         {isLoggedIn ? (
           <CustomButton
-            onClick={() => navigate(`/UploadForm`)}
+            onClick={() => `/UploadForm`}
             buttonType={"primary"}
             color={"darkpurple"}
             title={"New Post"}
@@ -129,12 +127,12 @@ function LeftSection(): JSX.Element {
 }
 
 function RightButtonsSection(): JSX.Element {
-  const navigate = useNavigate();
+  let navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  let { UID } = useParams();
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    Axios.get(`http://localhost:3000/Cloudinary/byUID/${UID}`, {
+    Axios.get("http://localhost:3000/Cloudinary/byUID", {
       headers: {
         accessToken: sessionStorage.getItem("accessToken"),
       },
@@ -197,7 +195,9 @@ function RightButtonsSection(): JSX.Element {
                 backgroundColor: "var(--darkpurple)",
                 borderColor: "var(--darkpurple)",
               }}
-              onClick={() => navigate(`/HomePage/${UID}`)}
+              onClick={() => {
+                navigate("/HomePage");
+              }}
             />
           </Tooltip>
         ) : (

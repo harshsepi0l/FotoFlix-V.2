@@ -13,12 +13,12 @@ interface CardProps {
   Description: string;
   Dislikes: number;
   isScroll?: boolean;
-  Avatar: string;
+  Avatar?: string;
   Likes: number;
   Tags: string;
   Favorite: number;
-  key: any;
-  id: number;
+  UID: any;
+  key?: any;
 }
 
 export function TrendingImages(): JSX.Element {
@@ -26,7 +26,11 @@ export function TrendingImages(): JSX.Element {
   const [values, setValues] = React.useState<CardProps[]>([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/Cloudinary/byUID}`, {})
+      .get("http://localhost:3000/Cloudinary/", {
+        headers: {
+          accessToken: sessionStorage.getItem("accessToken") as string,
+        },
+      })
       .then((response) => {
         setValues(response.data);
       });
@@ -43,19 +47,18 @@ export function TrendingImages(): JSX.Element {
         }}
         className="Trending-Scroll"
       >
-        {Array.from(values).map((value) => (
+        {Array.from(values).map((value, key) => (
           <CustomCard
-            key={value.key}
             PublicOrPrivate={value.PublicOrPrivate}
             Url={value.Url}
             Title={value.Title}
             Description={value.Description}
             Dislikes={value.Dislikes}
-            Avatar={value.Avatar}
             Likes={value.Likes}
             Tags={value.Tags}
-            id={value.id}
+            id={value.UID}
             Favorite={value.Favorite}
+            key={key}
           />
         ))}
       </div>

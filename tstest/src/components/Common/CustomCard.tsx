@@ -18,7 +18,7 @@ interface CardProps {
   Description: string;
   Dislikes: number;
   isScroll?: boolean;
-  Avatar: string;
+  Avatar?: string;
   Likes: number;
   Tags: string;
   Favorite: number;
@@ -36,7 +36,6 @@ interface IAction {
 }
 
 function CustomAction(props: IAction): JSX.Element {
-
   const Icon: { [text: string]: JSX.Element } = {
     like: <LikeOutlined key="like" />,
     dislike: <DislikeOutlined key="dislike" />,
@@ -58,7 +57,6 @@ function CustomAction(props: IAction): JSX.Element {
   );
 }
 
-
 export function CustomCard(props: CardProps): JSX.Element {
   let isGlobal = false;
   if (props.PublicOrPrivate === 0) {
@@ -69,7 +67,7 @@ export function CustomCard(props: CardProps): JSX.Element {
 
   const handleOnClick = () => {
     navigate("/image/" + props.id);
-  }
+  };
 
   console.log(props.Likes);
   return (
@@ -93,14 +91,12 @@ export function CustomCard(props: CardProps): JSX.Element {
             isPublic={isGlobal}
           />,
           <CustomAction icon="tags" text={props.Tags} isPublic={isGlobal} />,
-          <CustomAction
-            icon="status"
-            isPublic={isGlobal}
-          />,
+          <CustomAction icon="status" isPublic={isGlobal} />,
         ]}
       >
+        {/* <Avatar src={props.Avatar} /> */}
         <Meta
-          avatar={<Avatar src={props.Avatar} />}
+          avatar={<></>}
           title={props.Title}
           description={props.Description}
         />
