@@ -145,9 +145,9 @@ export const UploadForm = () => {
           value={fileInputState}
           className="form-input"
         />
-          {previewSource && (
-        <img src={previewSource} alt="chosen" style={{ height: "80px" }} />
-      )}
+        {previewSource && (
+          <img src={previewSource} alt="chosen" style={{ height: "80px" }} />
+        )}
         <br />
         <br />
         <h3>Image title: </h3>
@@ -171,30 +171,30 @@ export const UploadForm = () => {
         <br />
         <br />
         <div className="upload-items">
-        <h3>Public or private: </h3>
-        <input
-          title="PubPriv"
-          type="radio"
-          value="public"
-          id="public"
-          onChange={handleImageVisChange}
-          name="vis"
-        />
+          <h3>Public or private: </h3>
+          <input
+            title="PubPriv"
+            type="radio"
+            value="public"
+            id="public"
+            onChange={handleImageVisChange}
+            name="vis"
+          />
 
-        <label htmlFor="public">Public</label>
+          <label htmlFor="public">Public</label>
 
-        <input
-          type="radio"
-          value="private"
-          id="private"
-          onChange={handleImageVisChange}
-          name="vis"
-        />
+          <input
+            type="radio"
+            value="private"
+            id="private"
+            onChange={handleImageVisChange}
+            name="vis"
+          />
           <label htmlFor="private">Private</label>
-          </div>
-        
-        <br />
+        </div>
 
+        <br />
+        <h3>Add a hashtag: </h3>
         <TextField
           placeholder="tag name"
           value={input}
@@ -204,7 +204,7 @@ export const UploadForm = () => {
         />
         <br />
         <br />
-        <Button onClick={handleClick}> Save tag</Button>
+        <Button onClick={handleClick} style={{ color: "#937DC2" }} className="buttonTag"> Save tag</Button>
 
         <Paper
           sx={{
@@ -212,7 +212,6 @@ export const UploadForm = () => {
             justifyContent: "center",
             flexWrap: "wrap",
             listStyle: "none",
-            p: 0.5,
             m: 0,
           }}
           component="ul"
@@ -233,7 +232,11 @@ export const UploadForm = () => {
         </Paper>
         <br />
         <br />
-        <button className="buttonUpload" type="submit" onClick={handleSubmitFile}>
+        <button
+          className="buttonUpload"
+          type="submit"
+          onClick={handleSubmitFile}
+        >
           Submit
         </button>
       </form>

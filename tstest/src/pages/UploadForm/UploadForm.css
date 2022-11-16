@@ -2,7 +2,11 @@
     background-color: var(--darkpurple) !important;
     width: 20vw;
     border-radius: 20px;
-    
+}
+
+.buttonTag {
+    border: 10px solid #c689c6;
+    color: "#937DC2";
 }
 
 .upload-Container {
