@@ -22,13 +22,13 @@ export const Login = () => {
 
     // This will navigate to SignUp Page once user has signed up
     const sendToSignUp = () => {
-      navigate("/SignUp");
+      navigate("/signUp");
     };
 
     const loginCheck = () => {
-      Axios.post("full-stack-fotoflix.herokuapp.com//SignUp/Login/", {
-        Username: username,
-        Password: password,
+      Axios.post("http://localhost:3000/login", {
+        userName: username,
+        password: password,
       }).then((response) => {
         if (response.data.error) {
           alert(response.data.error);
@@ -91,7 +91,7 @@ export const Login = () => {
                   </div>
                 </div>
                 <br />
-                <NavLink onClick={sendToSignUp} to={"/SignUp"}>
+                <NavLink onClick={sendToSignUp} to={"/signUp"}>
                   <p style={{ color: "#C689C6" }}>Don't have an account?</p>
                 </NavLink>
               </div>

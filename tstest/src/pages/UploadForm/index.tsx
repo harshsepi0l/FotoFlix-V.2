@@ -105,10 +105,10 @@ export const UploadForm = () => {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
-          Title: imageTitle,
-          Description: imageDesc,
-          PublicOrPrivate: imageVis,
-          Tags: chipData,
+          title: imageTitle,
+          description: imageDesc,
+          publicOrPrivate: imageVis,
+          tags: chipData,
         }),
         headers: {
           accessToken: sessionStorage.getItem("accessToken") as string,
@@ -154,7 +154,7 @@ export const UploadForm = () => {
 
           <br />
           <h3>Image Title</h3>
-          <Input
+          <input
             placeholder="Enter your Title here"
             title="title"
             type="text"
@@ -164,7 +164,7 @@ export const UploadForm = () => {
           />
           <br />
           <h3>Image Description</h3>
-          <Input
+          <input
             placeholder="Enter your Description here"
             title="description"
             type="text"
@@ -194,25 +194,25 @@ export const UploadForm = () => {
           />
           <label htmlFor="private">Private</label>
 
-        <br />
-        <h3>Add a hashtag: </h3>
-        <TextField
-          placeholder="tag name"
-          value={input}
-          onChange={(e: { target: { value: React.SetStateAction<string> } }) =>
-            setInput(e.target.value)
-          }
-        />
-        <br />
-        <br />
-        <Button
-          onClick={handleClick}
-          style={{ color: "#937DC2" }}
-          className="buttonTag"
-        >
-          {" "}
-          Save tag
-        </Button>
+          <br />
+          <h3>Add a hashtag: </h3>
+          <TextField
+            placeholder="tag name"
+            value={input}
+            onChange={(e: { target: { value: React.SetStateAction<string> } }) =>
+              setInput(e.target.value)
+            }
+          />
+          <br />
+          <br />
+          <Button
+            onClick={handleClick}
+            style={{ color: "#937DC2" }}
+            className="buttonTag"
+          >
+            {" "}
+            Save tag
+          </Button>
 
           <Paper
             sx={{

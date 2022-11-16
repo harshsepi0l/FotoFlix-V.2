@@ -5,21 +5,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CustomCard } from "./CustomCard";
 import "./index.css";
-
-interface CardProps {
-  PublicOrPrivate: number;
-  Url: string;
-  Title: string;
-  Description: string;
-  Dislikes: number;
-  isScroll?: boolean;
-  Avatar?: string;
-  Likes: number;
-  Tags: string;
-  Favorite: number;
-  UID: any;
-  key?: any;
-}
+import { CardProps } from "../../props/CardProps";
 
 export function TrendingImages(): JSX.Element {
   let { UID } = useParams();
@@ -49,17 +35,18 @@ export function TrendingImages(): JSX.Element {
       >
         {Array.from(values).map((value, key) => (
           <CustomCard
-            PublicOrPrivate={value.PublicOrPrivate}
-            Url={value.Url}
-            Title={value.Title}
-            Description={value.Description}
-            Dislikes={value.Dislikes}
-            Likes={value.Likes}
-            Tags={value.Tags}
-            id={value.UID}
-            Favorite={value.Favorite}
+            publicOrPrivate={value.publicOrPrivate}
+            url={value.url}
+            title={value.title}
+            description={value.description}
+            dislikes={value.dislikes}
+            likes={value.likes}
+            tags={value.tags}
+            id={value.id}
+            favorite={value.favorite}
             key={key}
-          />
+            avatar={""}
+            uid={value.uid} />
         ))}
       </div>
     </Card>

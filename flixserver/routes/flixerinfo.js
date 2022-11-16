@@ -13,43 +13,43 @@ const { validateToken } = require("../middlewares/AuthMiddleware");
 
 // GET all flixerinfo
 
-router.post("/", async (req, res) => {
-  const { Firstname, Lastname, Username, Email, Password } = req.body;
-  bcryptjs.hash(Password, 10).then((hash) => {
+router.post("/signUp", async (req, res) => {
+  const { firstName, lastName, userName, email, password } = req.body;
+  bcryptjs.hash(password, 10).then((hash) => {
     flixerinfo.create({
-      Firstname: Firstname,
-      Lastname: Lastname,
-      Username: Username,
-      Email: Email,
-      Password: hash,
+      firstName: firstName,
+      lastName: lastName,
+      userName: userName,
+      email: email,
+      password: hash,
     });
     res.json({ message: "User created!" });
   });
 });
 
 router.get("/byId", async (req, res) => {
-  const { UID } = req.body;
+  const { uid } = req.body;
   const flixer = await flixerinfo.findOne({
     where: {
-      UID: UID,
+      uid: uid,
     },
   });
   res.json(flixer);
 });
 
-router.post("/Login", async (req, res) => {
-  const { Username, Password } = req.body;
-  const user = await flixerinfo.findOne({ where: { Username: Username } });
+router.post("/login", async (req, res) => {
+  const { userName, password } = req.body;
+  const user = await flixerinfo.findOne({ where: { userName: userName } });
 
   if (!user) {
     res.json({ error: "User Doesn't Exist" });
   } else {
-    bcryptjs.compare(Password, user.Password).then((match) => {
+    bcryptjs.compare(password, user.password).then((match) => {
       if (!match) {
         res.json({ error: "Wrong Username And Password Combination" });
       } else {
         const accessToken = sign(
-          { UID: user.UID },
+          { uid: user.uid },
           `${process.env.ACCESS_TOKEN_SECRET}`
         );
         res.json(accessToken);
@@ -58,17 +58,17 @@ router.post("/Login", async (req, res) => {
   }
 });
 
-router.get("/Login/:byUID", async (req, res) => {
-  const { UID } = req.params;
-  const user = await flixerinfo.findOne({ where: { UID: UID } });
+router.get("/login/:byUID", async (req, res) => {
+  const { uid } = req.params;
+  const user = await flixerinfo.findOne({ where: { uid: uid } });
   res.json(user);
 });
 
 router.get("/byUsername", async (req, res) => {
-  const { Username } = req.body;
+  const { userName } = req.body;
   const flixer = await flixerinfo.findOne({
     where: {
-      Username: Username,
+      userName: userName,
     },
   });
   res.json(flixer);

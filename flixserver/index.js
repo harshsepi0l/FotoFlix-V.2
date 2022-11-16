@@ -21,19 +21,21 @@ const db = require("./models");
 
 // Routers
 
-const signUpRouter = require("./routes/flixerinfo");
-app.use("/SignUp", signUpRouter);
+const flixerInfoRouter = require("./routes/flixerinfo");
+app.use("/", flixerInfoRouter);
 
 const cloudinaryRouter = require("./routes/post");
 app.use("/Cloudinary", cloudinaryRouter);
 
-db.sequelize.sync().then(() => {
-  app.listen(process.env.PORT || 3000, () => {
-    console.log("running on port 3000");
-  });
-});
+const likesRouter = require("./routes/flixertaps");
+app.use("/Likes", likesRouter);
 
 try {
+  db.sequelize.sync().then(() => {
+    app.listen(process.env.PORT || 3000, () => {
+      console.log("running on port 3000");
+    });
+  });
 } catch (err) {
   console.log(err);
 }

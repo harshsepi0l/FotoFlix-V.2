@@ -5,21 +5,21 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    PostId: {
+    postId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    Likes: {
+    likes: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    Dislikes: {
+    dislikes: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    TagsId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+    tagsId: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   });
   return FlixerTaps;

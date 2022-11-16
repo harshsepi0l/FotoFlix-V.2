@@ -7,15 +7,16 @@ const { DataTypes } = require("sequelize");
 const post = require("../models/post")(sequelize, DataTypes);
 
 const bodyParser = require("body-parser");
-const tags = require("../models/flixertags")(sequelize, DataTypes);
+const tagsModel = require("../models/flixertags")(sequelize, DataTypes);
+const tapsModel = require("../models/flixertaps")(sequelize, DataTypes);
 
 const { cloudinary } = require("../utils/cloudinary");
 
 router.get("/byUID", validateToken, async (req, res) => {
-  const UID = req.user.UID;
+  const uid = req.user.uid;
   const posts = await post.findAll({
     where: {
-      UID: UID,
+      uid: uid,
     },
   });
   res.json(posts);
@@ -45,21 +46,38 @@ router.get("/tagsByid/:id", async (req, res) => {
 
 router.post("/byUID", validateToken, async (req, res) => {
   const fileStr = req.body.data;
-  const UID = req.user.UID;
-  const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
-    upload_preset: "flixerimages",
-  });
+  const uid = req.user.uid;
+  try {
+    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+      upload_preset: "flixerimages",
+    });
 
-  await post.create({
-    UID: UID,
-    ImageType: uploadedResponse.format,
-    PostType: uploadedResponse.resource_type,
-    Url: uploadedResponse.url,
-    Title: req.body.Title,
-    Description: req.body.Description,
-    PublicOrPrivate: req.body.PublicOrPrivate,
-    Tags: req.body.Tags,
-  });
+    const postResult = await post.create({
+      uid: uid,
+      imageType: uploadedResponse.format,
+      postType: uploadedResponse.resource_type,
+      url: uploadedResponse.url,
+      title: req.body.title,
+      description: req.body.description,
+      publicOrPrivate: req.body.publicOrPrivate,
+      tags: req.body.tags,
+    });
+
+    await Array.from(tags).forEach(tag => {
+      tagsModel.create({
+        tag: tag,
+      });
+    });
+
+    await tapsModel.create({
+      postId: postResult.id,
+      likes: 0,
+      dislikes: 0,
+      tagsId: 0,
+    })
+  } catch (error) {
+    console.log(error)
+  }
 
   res.json({ message: "Post created!" });
   });

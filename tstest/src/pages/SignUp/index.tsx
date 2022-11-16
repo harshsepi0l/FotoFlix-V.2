@@ -19,7 +19,7 @@ export const SignUp = () => {
 
   // This will navigate to Login Page once user has signed up
   const sendToLogin = () => {
-    navigate("/Login");
+    navigate("/login");
   };
 
   // This will navigate to Landing Page once user has signed up
@@ -32,22 +32,22 @@ export const SignUp = () => {
   };
 
   const submitLog = (data: any) => {
-    Axios.post("https://full-stack-fotoflix.herokuapp.com/SignUp", {
-      Firstname: firstname,
-      Lastname: lastname,
-      Username: username,
-      Email: email,
-      Password: password,
+    Axios.post("http://localhost:3000/signUp", {
+      firstName: firstname,
+      lastName: lastname,
+      userName: username,
+      email: email,
+      password: password,
     });
 
     setUsersList([
       ...usersList,
       {
-        Firstname: firstname,
-        LastName: lastname,
-        Username: username,
-        Email: email,
-        Password: password,
+        firstName: firstname,
+        lastName: lastname,
+        userName: username,
+        email: email,
+        password: password,
       },
     ]);
     console.log(data);
@@ -172,7 +172,7 @@ export const SignUp = () => {
                 </div>
               </div>
               <br />
-              <NavLink onClick={sendToLogin} to={"/Login"}>
+              <NavLink onClick={sendToLogin} to={"/login"}>
                 <p style={{ color: "#C689C6" }}>Already have an account?</p>
               </NavLink>
             </div>
