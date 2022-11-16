@@ -23,12 +23,12 @@ interface CardProps {
   id: number;
 }
 
-export function RowImages(): JSX.Element {
+export function LandImages(): JSX.Element {
   let { UID } = useParams();
   const [values, setValues] = useState<CardProps[]>([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/Cloudinary/byUID/`, {
+      .get(`http://localhost:3000/Cloudinary/`, {
         headers: {
           accessToken: sessionStorage.getItem("accessToken") as string,
         },

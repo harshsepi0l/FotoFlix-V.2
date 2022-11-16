@@ -21,24 +21,25 @@ const db = require("./models");
 
 // Routers
 
-
 const signUpRouter = require("./routes/flixerinfo");
 app.use("/SignUp", signUpRouter);
 
 const cloudinaryRouter = require("./routes/post");
 app.use("/Cloudinary", cloudinaryRouter);
 
-db.sequelize
-  .sync()
-  .then(() => {
-    app.listen(process.env.PORT || 3001, () => {
-      console.log("running on port 3001");
-    });
+const likesRouter = require("./routes/flixertaps");
+app.use("/Likes", likesRouter);
+
+db.sequelize.sync().then(() => {
+  app.listen(process.env.PORT || 3000, () => {
+    console.log("running on port 3000");
   });
+});
+
 try {
 } catch (err) {
   console.log(err);
-};
+}
 
 // app.delete("/api/delete/:Username", (req, res) => {
 //   const username = req.params.Username;
@@ -113,9 +114,4 @@ try {
 //   db.query(sqlSelect, (err, result) => {
 //     res.send(result);
 //   });
-// });
-
-// const PORT = process.env.PORT || 3000;
-// app.listen(3000, () => {
-//   console.log("running on port " + PORT);
 // });

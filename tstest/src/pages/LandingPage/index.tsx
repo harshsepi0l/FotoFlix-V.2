@@ -1,7 +1,7 @@
 import { CustomHeader } from "../../components/Common/CustomHeader";
-import { RowImages } from "../../components/Common/RowImages";
 import Footer from "../../components/Common/footer/Footer";
 import "./index.css";
+import { LandImages } from "../../components/Common/LandImages";
 import { CustomFab } from "../../components/Common/CustomFab";
 import { useMediaQuery } from "react-responsive";
 import CustomCarousel from "../../components/Common/AboutUsPage/CustomCarousel";
@@ -27,7 +27,7 @@ export function LandingPage(): JSX.Element {
   return (
     <div className="LandingContainer">
       <CustomHeader isLoggedIn={true} />
-      <RowImages />
+      <LandImages />
       <Footer />
       <CustomFab />
     </div>

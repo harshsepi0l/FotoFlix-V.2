@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 //import { ChipsArray } from "../../components/Tag";
-import { Box, Button, Chip, Paper, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Card, Input } from 'antd';
 import "./index.css";
+import { Chip, Paper } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
+import { stringify } from "querystring";
+import { useParams } from "react-router-dom";
 import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
 
 export interface ChipData {
@@ -49,7 +52,8 @@ export const UploadForm = () => {
 
   // This will navigate to Landing Page once user has signed up
   const sendToLanding = () => {
-    navigate("/");
+    navigate("/LandingPage");
+    window.location.reload();
   };
 
   const handleImageTitleChange = (e: any) => {
@@ -94,9 +98,10 @@ export const UploadForm = () => {
     uploadImage(previewSource);
     sendToLanding();
   };
+
   const uploadImage = async (base64EncodedImage: any) => {
     try {
-      await fetch("https://full-stack-fotoflix.herokuapp.com/Cloudinary", {
+      await fetch(`http://localhost:3000/Cloudinary/byUID/`, {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
@@ -105,7 +110,10 @@ export const UploadForm = () => {
           PublicOrPrivate: imageVis,
           Tags: chipData,
         }),
-        headers: { "Content-type": "application/json" },
+        headers: {
+          accessToken: sessionStorage.getItem("accessToken") as string,
+          "Content-type": "application/json",
+        },
       });
     } catch (err) {
       console.error(err);
@@ -186,18 +194,25 @@ export const UploadForm = () => {
           />
           <label htmlFor="private">Private</label>
 
-          <br />
-          <h3>Add a hashtag: </h3>
-          <TextField
-            placeholder="tag name"
-            value={input}
-            onChange={(e: { target: { value: React.SetStateAction<string> } }) =>
-              setInput(e.target.value)
-            }
-          />
-          <br />
-          <br />
-          <Button onClick={handleClick} style={{ color: "#937DC2" }} className="buttonTag"> Save tag</Button>
+        <br />
+        <h3>Add a hashtag: </h3>
+        <TextField
+          placeholder="tag name"
+          value={input}
+          onChange={(e: { target: { value: React.SetStateAction<string> } }) =>
+            setInput(e.target.value)
+          }
+        />
+        <br />
+        <br />
+        <Button
+          onClick={handleClick}
+          style={{ color: "#937DC2" }}
+          className="buttonTag"
+        >
+          {" "}
+          Save tag
+        </Button>
 
           <Paper
             sx={{

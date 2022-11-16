@@ -19,7 +19,7 @@ interface CardProps {
   Description: string;
   Dislikes: number;
   isScroll?: boolean;
-  Avatar: string;
+  Avatar?: string;
   Likes: number;
   Tags: string;
   Favorite: number;
@@ -38,7 +38,6 @@ interface IAction {
 }
 
 function CustomAction(props: IAction): JSX.Element {
-
   const Icon: { [text: string]: JSX.Element } = {
     like: <LikeOutlined key="like" />,
     dislike: <DislikeOutlined key="dislike" />,
@@ -60,7 +59,6 @@ function CustomAction(props: IAction): JSX.Element {
   );
 }
 
-
 export function CustomCard(props: CardProps): JSX.Element {
   let isGlobal = false;
   if (props.PublicOrPrivate === 0) {
@@ -71,39 +69,36 @@ export function CustomCard(props: CardProps): JSX.Element {
 
   const handleOnClick = () => {
     navigate("/ImagePage/" + props.id);
-  }
+  };
 
   const buttonHandleOnClick = () => {
     navigate("/like" + props.id);
-  }
+  };
 
   const handleAvatarOnClick = () => {
     navigate("/user/" + props.Avatar);
-  }
+  };
 
   const [likes, setLikes] = useState(props.Likes);
   const [dislikes, setDislikes] = useState(props.Dislikes);
   const [action, setAction] = useState<string | null>(null);
 
-
   const like = () => {
     setLikes(props.Likes + 1);
     setDislikes(props.Dislikes);
-    setAction('liked');
+    setAction("liked");
   };
 
   const dislike = () => {
     setLikes(props.Likes);
     setDislikes(props.Dislikes + 1);
-    setAction('disliked');
+    setAction("disliked");
   };
 
   const deleteCard = () => {
-    if (window.confirm('Are you sure that you want to remove card?')) {
-
+    if (window.confirm("Are you sure that you want to remove card?")) {
     }
-
-  }
+  };
   console.log(props.Likes);
   return (
     <div>
@@ -111,7 +106,9 @@ export function CustomCard(props: CardProps): JSX.Element {
         hoverable
         key={props.key}
         style={{ width: 300 }}
-        cover={<img alt={props.Title} src={props.Url} onClick={handleOnClick} />}
+        cover={
+          <img alt={props.Title} src={props.Url} onClick={handleOnClick} />
+        }
         actions={[
           <CustomAction
             icon="like"
@@ -130,27 +127,12 @@ export function CustomCard(props: CardProps): JSX.Element {
             isPublic={isGlobal}
           />,
           <CustomAction icon="tags" text={props.Tags} isPublic={isGlobal} />,
-          <CustomAction
-            icon="status"
-            isPublic={isGlobal}
-          />,
+          <CustomAction icon="status" isPublic={isGlobal} />,
         ]}
       >
-        {props.isCurrentUser &&
-          (
-            <CloseCircleOutlined
-              className="closeIcon"
-              onClick={deleteCard}
-            />
-          )
-        }
+        {/* <Avatar src={props.Avatar} /> */}
         <Meta
-          avatar={
-            <Avatar
-              src={props.Avatar}
-              onClick={handleAvatarOnClick}
-              style={{ cursor: "pointer" }}
-            />}
+          avatar={<></>}
           title={props.Title}
           description={props.Description}
         />

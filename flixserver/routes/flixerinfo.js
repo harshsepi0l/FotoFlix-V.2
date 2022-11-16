@@ -2,12 +2,14 @@ const express = require("express");
 const router = express.Router();
 const { sequelize } = require("../models");
 const { DataTypes } = require("sequelize");
+require("dotenv").config();
 
 const bcryptjs = require("bcryptjs"); // for hashing passwords
 
-const flixerinfo = require("../models/flixerinfo");
+const flixerinfo = require("../models/flixerinfo")(sequelize, DataTypes);
 
 const { sign } = require("jsonwebtoken");
+const { validateToken } = require("../middlewares/AuthMiddleware");
 
 // GET all flixerinfo
 
@@ -25,15 +27,18 @@ router.post("/", async (req, res) => {
   });
 });
 
-router.get("/byId/:id", async (req, res) => {
-  const id = req.params.id;
-  const flixers = await flixerinfo.findByPk(id);
-  res.json(flixers);
+router.get("/byId", async (req, res) => {
+  const { UID } = req.body;
+  const flixer = await flixerinfo.findOne({
+    where: {
+      UID: UID,
+    },
+  });
+  res.json(flixer);
 });
 
 router.post("/Login", async (req, res) => {
   const { Username, Password } = req.body;
-
   const user = await flixerinfo.findOne({ where: { Username: Username } });
 
   if (!user) {
@@ -44,14 +49,29 @@ router.post("/Login", async (req, res) => {
         res.json({ error: "Wrong Username And Password Combination" });
       } else {
         const accessToken = sign(
-          { Username: user.Username, id: user.id },
-          "flixerinfosecret"
+          { UID: user.UID },
+          `${process.env.ACCESS_TOKEN_SECRET}`
         );
-
         res.json(accessToken);
       }
     });
   }
+});
+
+router.get("/Login/:byUID", async (req, res) => {
+  const { UID } = req.params;
+  const user = await flixerinfo.findOne({ where: { UID: UID } });
+  res.json(user);
+});
+
+router.get("/byUsername", async (req, res) => {
+  const { Username } = req.body;
+  const flixer = await flixerinfo.findOne({
+    where: {
+      Username: Username,
+    },
+  });
+  res.json(flixer);
 });
 
 module.exports = router;
