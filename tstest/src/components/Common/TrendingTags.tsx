@@ -38,7 +38,7 @@ export function TrendingTags(): JSX.Element {
           < ul >
             {
               numbers.map((n) => (
-                <li key={n}><a href="/">number {n}</a></li>
+                <li key={n}><a href="/">#{n}</a></li>
             ))
             }
           </ul>
