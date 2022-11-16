@@ -193,6 +193,7 @@ function RightButtonsSection(): JSX.Element {
               style={{
                 backgroundColor: "var(--darkpurple)",
                 borderColor: "var(--darkpurple)",
+                paddingLeft: "30px"
               }}
               onClick={() => {
                 navigate("/HomePage");
