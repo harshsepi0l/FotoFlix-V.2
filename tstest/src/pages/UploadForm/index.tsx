@@ -145,6 +145,9 @@ export const UploadForm = () => {
           value={fileInputState}
           className="form-input"
         />
+          {previewSource && (
+        <img src={previewSource} alt="chosen" style={{ height: "80px" }} />
+      )}
         <br />
         <br />
         <h3>Image title: </h3>
@@ -234,9 +237,9 @@ export const UploadForm = () => {
           Submit
         </button>
       </form>
-      {previewSource && (
+      {/* {previewSource && (
         <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
-      )}
+      )} */}
     </div>
   );
 };
