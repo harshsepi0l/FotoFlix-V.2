@@ -107,7 +107,7 @@ export function ImageCard(id: any): JSX.Element { // This is the function ultima
   const [imagePost, setImagePost] = useState("");
   useEffect(()=>{
     async function fetchData(){
-    await axios.get(`http://localhost:3000/Cloudinary/byid/${imgId.id}`).then((response) => {
+    await axios.get(`https://full-stack-fotoflix.herokuapp.com/Cloudinary/byid/${imgId.id}`).then((response) => {
       setImagePost(response.data); // response.data: all the image data
     })};
     fetchData();
@@ -115,16 +115,16 @@ export function ImageCard(id: any): JSX.Element { // This is the function ultima
   const imageJson = JSON.parse(JSON.stringify(imagePost));
 
   // Get tags
-  const [imageTags, setImageTags] = useState("");
-  useEffect(()=>{
-    async function fetchData(){
-    await axios.get(`http://localhost:3000/Cloudinary/tagsByid/${imgId.id}`).then((response) => {
-      setImageTags(response.data); // response.data: all the image data
-    })};
-    fetchData();
-  }, []);
-  const tagsJson = JSON.parse(JSON.stringify(imageTags));
-  console.log(tagsJson);
+  // const [imageTags, setImageTags] = useState("");
+  // useEffect(()=>{
+  //   async function fetchData(){
+  //   await axios.get(`https://full-stack-fotoflix.herokuapp.com/Cloudinary/tagsByid/${imgId.id}`).then((response) => {
+  //     setImageTags(response.data); // response.data: all the image data
+  //   })};
+  //   fetchData();
+  // }, []);
+  // const tagsJson = JSON.parse(JSON.stringify(imageTags));
+  // console.log(tagsJson);
 
   return (
     <Row align="stretch">
