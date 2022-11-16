@@ -1,5 +1,5 @@
-import { BellOutlined, SearchOutlined } from "@ant-design/icons";
-import { Avatar, Col, Input, Row, Space } from "antd";
+import { BellOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar, Button, Col, Input, Row, Space, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { CustomButton } from "./CustomButton";
@@ -15,7 +15,7 @@ import Axios from "axios";
 import fotoLogo from "../ImageLogo/fotoLogo.svg";
 import logo from "../ImageLogo/logo.svg";
 import "./index.css";
-import { CustomFab } from "./CustomFab";
+import { border, borderColor } from "@mui/system";
 
 const { Search } = Input;
 
@@ -76,22 +76,14 @@ function CustomSearch(): JSX.Element {
 }
 
 function LeftSection(): JSX.Element {
-  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigateTo = useNavigate();
 
   useEffect(() => {
     if (sessionStorage.getItem("accessToken")) {
       setIsLoggedIn(true);
     }
   }, []);
-
-  const isDesktop = useMediaQuery({
-    query: "(min-width: 1224px)",
-  });
-
-  const isTablet = useMediaQuery({
-    query: "(max-width: 1224px)",
-  });
 
   const isMobile = useMediaQuery({
     query: "(max-width: 786px)",
@@ -104,13 +96,13 @@ function LeftSection(): JSX.Element {
           <Link to="/">
             {isMobile ? (
               <img
-                className="header-logo"
+                style={{ color: "#937DC2", width: 20, height: 20 }}
                 src={logo}
                 alt="logo"
               />
             ) : (
               <img
-                className="header-logo"
+                style={{ color: "#937DC2", width: 100, height: 50 }}
                 src={fotoLogo}
                 alt="logo"
               />
@@ -120,13 +112,17 @@ function LeftSection(): JSX.Element {
       </Space>
 
       <Col span={4} offset={2}>
-        {isLoggedIn && !isMobile && (
+        {isLoggedIn ? (
           <CustomButton
-            onClick={() => navigate(`/UploadForm`)}
+            onClick={() => {
+              navigateTo("/UploadForm");
+            }}
             buttonType={"primary"}
             color={"darkpurple"}
             title={"New Post"}
           />
+        ) : (
+          <></>
         )}
       </Col>
     </Row>
@@ -134,19 +130,25 @@ function LeftSection(): JSX.Element {
 }
 
 function RightButtonsSection(): JSX.Element {
-  const navigate = useNavigate();
+  let navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    if (sessionStorage.getItem("accessToken") !== null) {
-      setIsLoggedIn(true);
-    }
+    Axios.get("http://localhost:3000/Cloudinary/byUID")
+    .then((response) => {
+      if (response.data.error) {
+        setIsLoggedIn(false);
+      } else {
+        setIsLoggedIn(true);
+      }
+    });
   }, []);
 
   const logout = () => {
     sessionStorage.removeItem("accessToken");
     setIsLoggedIn(false);
-    navigate("/");
+    navigate("/LandingPage");
   };
 
   const isDesktop = useMediaQuery({
@@ -162,45 +164,55 @@ function RightButtonsSection(): JSX.Element {
   });
 
   return (
-    <div className="Header-RightButtons">
-      {isLoggedIn ? (
-        <CustomButton
-          buttonType={"primary"}
-          color={"darkpurple"}
-          title={"Logout"}
-          onClick={logout}
-        />
-      ) : (
-        <div>
-          {isDesktop ? (
-            <div className="Header-RightButtons-Desktop">
-              <Link to="/login">
-                <CustomButton
-                  buttonType={"default"}
-                  color={"white"}
-                  title={"Login"}
-                />
-              </Link>
-              <Link to="/signup">
-                <CustomButton
-                  buttonType={"primary"}
-                  color={"lightpurple"}
-                  title={"Sign Up"}
-                />
-              </Link>
-            </div>
-          ) : (
-            <Link to="/login">
+    <Row justify="end" align="bottom">
+      <Col span={4}>
+        {isLoggedIn ? (
+          <CustomButton
+            buttonType={"primary"}
+            color={"darkpurple"}
+            title={"Logout"}
+            onClick={logout}
+          />
+        ) : (
+          <Link to="/login">
+            <CustomButton
+              buttonType={"default"}
+              color={"white"}
+              title={"Login"}
+            />
+          </Link>
+        )}
+      </Col>
+      <Col span={4}>
+        {isLoggedIn ? (
+          <Tooltip title="Homebase">
+            <Button
+              type="primary"
+              shape="circle"
+              size="large"
+              icon={<UserOutlined />}
+              style={{
+                backgroundColor: "var(--darkpurple)",
+                borderColor: "var(--darkpurple)",
+              }}
+              onClick={() => {
+                navigate("/HomePage");
+              }}
+            />
+          </Tooltip>
+        ) : (
+          <Link to="/SignUp">
+            {isDesktop && (
               <CustomButton
-                buttonType={"default"}
-                color={"white"}
-                title={"Login"}
+                buttonType={"primary"}
+                color={"lightpurple"}
+                title={"Sign Up"}
               />
-            </Link>
-          )}
-        </div>
-      )}
-    </div>
+            )}
+          </Link>
+        )}
+      </Col>
+    </Row>
   );
 }
 

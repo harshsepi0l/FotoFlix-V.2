@@ -2,23 +2,25 @@ import { AntDesignOutlined } from "@ant-design/icons";
 import { Avatar, Button, Col, Row, Typography } from "antd";
 import Axios from "axios";
 import React, { useEffect } from "react";
-import "./index.css"
+import BaseModalWrapper from "./ModalPopup/BaseModalWrapper";
+import "./index.css";
 
 export function AccountInfo(): JSX.Element {
   const [user, setUser] = React.useState<any>(null);
 
-  useEffect(() => {
-    Axios.get("https://full-stack-fotoflix.herokuapp.com/api/get").then(
-      (response) => {
-        setUser(response.data);
-      }
-    );
-  }, []);
+  // useEffect(() => {
+  //   Axios.get("http://localhost:3000/SignUp/byUsername", {}).then(
+  //     (response) => {
+  //       console.log(response.data);
+  //       setUser(response.data);
+  //     }
+  //   );
+  // }, []);
 
   const [isModalVisible, setIsModalVisible] = React.useState(false);
 
   const toggleModal = () => {
-    setIsModalVisible(isModalVisible => !isModalVisible);
+    setIsModalVisible((isModalVisible) => !isModalVisible);
   };
 
   return (
@@ -32,18 +34,22 @@ export function AccountInfo(): JSX.Element {
         </Col>
         <Col flex={5}>
           <Typography.Title level={2} className="HomePage-AccountInfo">
-            {user && user[1].Username}
-            username
+            {user?.username}
             {/* {editableStr} */}
           </Typography.Title>
 
           <Button
-            size='large'
+            size="large"
             onClick={toggleModal}
             className="HomePage-EditButton"
           >
             Delete Account
           </Button>
+          <BaseModalWrapper
+            isModalVisible={isModalVisible}
+            onBackdropClick={toggleModal}
+            header={"Deleted"}
+          />
         </Col>
       </Row>
     </div>

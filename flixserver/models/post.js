@@ -1,5 +1,4 @@
 const flixerinfo = require("./FlixerInfo");
-const Comments = require("./Comments");
 
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define(
@@ -9,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+      },
+      UID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
       Title: {
         type: DataTypes.STRING,
@@ -34,14 +37,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      Likes: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      Dislikes: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
+      // Likes: {
+      //   type: DataTypes.INTEGER,
+      //   allowNull: false,
+      // },
+      // Dislikes: {
+      //   type: DataTypes.INTEGER,
+      //   allowNull: false,
+      // },
       // TagsId: {
       //   type: DataTypes.INTEGER,
       //   allowNull: false,
@@ -51,13 +54,5 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: true,
     }
   );
-  Post.associate = (models) => {
-    Post.belongsTo(models.FlixerInfo, {
-      foreignKey: "UserID",
-    });
-    Post.hasMany(models.Comments, {
-      onDelete: "cascade", // Deleting a post deletes all associated comments
-    });
-  };
   return Post;
 };

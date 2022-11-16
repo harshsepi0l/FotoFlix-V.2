@@ -5,13 +5,12 @@ import { CustomHeader } from "../Common/CustomHeader";
 import { RowImages } from "../Common/RowImages";
 import "./index.css";
 
-
 function CardRow(): JSX.Element {
   return (
     <div className="LandingContainer">
       <RowImages />
     </div>
-  )
+  );
 }
 
 export function AccountBar(): JSX.Element {

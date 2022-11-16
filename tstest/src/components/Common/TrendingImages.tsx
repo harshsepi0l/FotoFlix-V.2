@@ -2,6 +2,7 @@ import { Card } from "antd";
 import axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { CustomCard } from "./CustomCard";
 import "./index.css";
 
@@ -12,19 +13,24 @@ interface CardProps {
   Description: string;
   Dislikes: number;
   isScroll?: boolean;
-  Avatar: string;
+  Avatar?: string;
   Likes: number;
   Tags: string;
   Favorite: number;
-  key: any;
-  id: number;
+  UID: any;
+  key?: any;
 }
 
 export function TrendingImages(): JSX.Element {
+  let { UID } = useParams();
   const [values, setValues] = React.useState<CardProps[]>([]);
   useEffect(() => {
     axios
-      .get("https://full-stack-fotoflix.herokuapp.com/Cloudinary")
+      .get("http://localhost:3000/Cloudinary/", {
+        headers: {
+          accessToken: sessionStorage.getItem("accessToken") as string,
+        },
+      })
       .then((response) => {
         setValues(response.data);
       });
@@ -41,19 +47,18 @@ export function TrendingImages(): JSX.Element {
         }}
         className="Trending-Scroll"
       >
-        {values.map((value) => (
+        {Array.from(values).map((value, key) => (
           <CustomCard
-            key={value.key}
             PublicOrPrivate={value.PublicOrPrivate}
             Url={value.Url}
             Title={value.Title}
             Description={value.Description}
             Dislikes={value.Dislikes}
-            Avatar={value.Avatar}
             Likes={value.Likes}
             Tags={value.Tags}
-            id={value.id}
+            id={value.UID}
             Favorite={value.Favorite}
+            key={key}
           />
         ))}
       </div>
