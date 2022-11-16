@@ -58,7 +58,7 @@ function SingleImageCard(props: singleImageProps): JSX.Element {
     <Card
       hoverable
       style={{ background: "var(--darkpurple)", color: "var(--white)", alignItems: "center" }}
-      cover={<img alt="example" src={props.Url} />}
+      cover={<img alt={"image"} src={props.Url} />}
       actions={[
                 
         <CustomAction
