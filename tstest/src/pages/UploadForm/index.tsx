@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Box, Button, Chip, Paper, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
-import "./uploadForm.css";
+import "./UploadForm.css";
 
 export interface ChipData {
   key: number;
