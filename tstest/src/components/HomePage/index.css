@@ -12,20 +12,22 @@
     justify-content: center;
 }
 
-.HomePage-AccountInfo {
-
-}
+.HomePage-AccountInfo {}
 
 .HomePage-EditButton {
-    color: var(--darkpurple);
+    color: var(--white) !important;
+    background-color: var(--midpurple) !important;
     border-color: var(--darkpurple);
     width: fit-content;
 }
 
-.HomePage-EditButton:hover, .HomePage-EditButton:focus {
+.HomePage-EditButton:hover,
+.HomePage-EditButton:focus {
     color: var(--midpurple);
+    background-color: var(--darkpurple);
     border-color: var(--midpurple);
 }
+
 .AccountBar::selection {
     color: var(--darkpurple) !important;
 }
@@ -34,7 +36,7 @@
     color: var(--darkpurple);
 }
 
-.ant-tabs-tab:hover  {
+.ant-tabs-tab:hover {
     color: var(--darkpurple);
 }
 
@@ -52,16 +54,23 @@ html {
     pointer-events: none;
 }
 
-.ant-typography-expand, .ant-typography-edit, .ant-typography-copy {
+.ant-typography-expand,
+.ant-typography-edit,
+.ant-typography-copy {
     color: var(--darkpurple);
 }
 
-.ant-typography-expand:focus-visible, .ant-typography-edit:focus-visible, .ant-typography-copy:focus-visible,
-.ant-typography-expand:hover, .ant-typography-edit:hover, .ant-typography-copy:hover {
+.ant-typography-expand:focus-visible,
+.ant-typography-edit:focus-visible,
+.ant-typography-copy:focus-visible,
+.ant-typography-expand:hover,
+.ant-typography-edit:hover,
+.ant-typography-copy:hover {
     color: var(--lightpurple);
 }
 
-.ant-tabs-tab-btn:focus, .ant-tabs-tab-remove:focus
-.ant-tabs-tab-btn:active, .ant-tabs-tab-remove:active {
+.ant-tabs-tab-btn:focus,
+.ant-tabs-tab-remove:focus .ant-tabs-tab-btn:active,
+.ant-tabs-tab-remove:active {
     color: var(--darkpurple);
 }

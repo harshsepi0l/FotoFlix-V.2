@@ -2,7 +2,6 @@ import { AntDesignOutlined } from "@ant-design/icons";
 import { Avatar, Button, Col, Row, Typography } from "antd";
 import Axios from "axios";
 import React, { useEffect } from "react";
-import BaseModalWrapper from "./ModalPopup/BaseModalWrapper";
 import "./index.css"
 
 export function AccountInfo(): JSX.Element {
@@ -45,10 +44,6 @@ export function AccountInfo(): JSX.Element {
           >
             Delete Account
           </Button>
-          <BaseModalWrapper
-            isModalVisible={isModalVisible}
-            onBackdropClick={toggleModal}
-            header={"Deleted"} />
         </Col>
       </Row>
     </div>

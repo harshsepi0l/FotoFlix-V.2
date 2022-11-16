@@ -4,6 +4,7 @@ import Footer from "../../components/Common/footer/Footer";
 import "./index.css";
 import { CustomFab } from "../../components/Common/CustomFab";
 import { useMediaQuery } from "react-responsive";
+import CustomCarousel from "../../components/Common/AboutUsPage/CustomCarousel";
 
 const gutters: Record<string, number> = {};
 const vgutters: Record<string, number> = {};
