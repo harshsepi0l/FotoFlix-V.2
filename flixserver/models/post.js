@@ -1,5 +1,3 @@
-const flixerinfo = require("./FlixerInfo");
-
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define(
     "flixerimages",
@@ -36,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
       url: {
         type: DataTypes.STRING,
         allowNull: false,
-      }
+      },
     },
     {
       timestamps: true,

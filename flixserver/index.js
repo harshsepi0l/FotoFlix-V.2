@@ -14,9 +14,6 @@ app.use(
 app.use(bodyParser.json());
 app.use(cors());
 
-const bcryptjs = require("bcryptjs"); // for hashing passwords
-const saltRounds = 10; // for hashing passwords
-
 const db = require("./models");
 
 // Routers
