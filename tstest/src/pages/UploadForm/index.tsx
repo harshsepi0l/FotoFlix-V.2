@@ -9,6 +9,7 @@ import { Box, Button, TextField } from "@mui/material";
 import { stringify } from "querystring";
 import { useParams } from "react-router-dom";
 import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
+import { LandingPage } from "../LandingPage";
 
 export interface ChipData {
   key: number;
@@ -53,7 +54,6 @@ export const UploadForm = () => {
   // This will navigate to Landing Page once user has signed up
   const sendToLanding = () => {
     navigate("/LandingPage");
-    window.location.reload();
   };
 
   const handleImageTitleChange = (e: any) => {
