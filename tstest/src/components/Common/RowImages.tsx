@@ -14,7 +14,7 @@ export function RowImages(): JSX.Element {
   const [values, setValues] = useState<CardProps[]>([]);
   useEffect(() => {
     axios
-      .get("http://fotoflix.herokuapp.com/Cloudinary/byUID/", {
+      .get("https://fotoflix.herokuapp.com/Cloudinary/byUID/", {
         headers: {
           accessToken: sessionStorage.getItem("accessToken") as string,
         },
@@ -45,6 +45,8 @@ export function RowImages(): JSX.Element {
       );
     });
   }
+
+  //Teting comment
   return (
     <div className="RowImages">
       <div className="CardsContainer">
