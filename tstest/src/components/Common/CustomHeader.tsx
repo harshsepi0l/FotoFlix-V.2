@@ -134,14 +134,15 @@ function RightButtonsSection(): JSX.Element {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    Axios.get("http://full-stack-fotoflix.herokuapp.com//Cloudinary/byUID")
-    .then((response) => {
-      if (response.data.error) {
-        setIsLoggedIn(false);
-      } else {
-        setIsLoggedIn(true);
+    Axios.get("https://fotoflix.herokuapp.com/Cloudinary/byUID").then(
+      (response) => {
+        if (response.data.error) {
+          setIsLoggedIn(false);
+        } else {
+          setIsLoggedIn(true);
+        }
       }
-    });
+    );
   }, []);
 
   const logout = () => {
@@ -193,7 +194,7 @@ function RightButtonsSection(): JSX.Element {
               style={{
                 backgroundColor: "var(--darkpurple)",
                 borderColor: "var(--darkpurple)",
-                paddingLeft: "30px"
+                paddingLeft: "30px",
               }}
               onClick={() => {
                 navigate("/HomePage");

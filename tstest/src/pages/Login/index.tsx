@@ -26,7 +26,7 @@ export const Login = () => {
     };
 
     const loginCheck = () => {
-      Axios.post("http://localhost:3000/login", {
+      Axios.post("https://fotoflix.herokuapp.com/login", {
         userName: username,
         password: password,
       }).then((response) => {

@@ -12,7 +12,7 @@ export function TrendingImages(): JSX.Element {
   const [values, setValues] = React.useState<CardProps[]>([]);
   useEffect(() => {
     axios
-      .get("http://full-stack-fotoflix.herokuapp.com//Cloudinary/", {
+      .get("http://https://fotoflix.herokuapp.com/Cloudinary/", {
         headers: {
           accessToken: sessionStorage.getItem("accessToken") as string,
         },
@@ -46,7 +46,8 @@ export function TrendingImages(): JSX.Element {
             favorite={value.favorite}
             key={key}
             avatar={""}
-            uid={value.uid} />
+            uid={value.uid}
+          />
         ))}
       </div>
     </Card>
