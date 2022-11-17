@@ -2,7 +2,7 @@ const express = require("express");
 const { sequelize } = require("../models");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 // const router = express.Router();
-let router = express.Router({ mergeParams : true });
+let router = express.Router({ mergeParams: true });
 const { DataTypes } = require("sequelize");
 const post = require("../models/post")(sequelize, DataTypes);
 
@@ -24,7 +24,8 @@ router.get("/byUID", validateToken, async (req, res) => {
 
 router.get("/", async (req, res) => {
   const posts = await post.findAll();
-  res.json(posts);});
+  res.json(posts);
+});
 
 router.get("/byId/:id", async (req, res) => {
   let id = req.params.id; // Get the id
@@ -35,11 +36,9 @@ router.get("/byId/:id", async (req, res) => {
 
 router.get("/tagsByid/:id", async (req, res) => {
   let id = req.params.id; // Get the id
-  const t = await tags.findAll(
-    {
-      where: {ImageId: id},
-    }
-  );
+  const t = await tags.findAll({
+    where: { ImageId: id },
+  });
   console.log(`Backend tags: ${t}`);
   res.json(t);
 });
@@ -63,7 +62,7 @@ router.post("/byUID", validateToken, async (req, res) => {
       tags: req.body.tags,
     });
 
-    await Array.from(tags).forEach(tag => {
+    await Array.from(tags).forEach((tag) => {
       tagsModel.create({
         tag: tag,
       });
@@ -74,11 +73,11 @@ router.post("/byUID", validateToken, async (req, res) => {
       likes: 0,
       dislikes: 0,
       tagsId: 0,
-    })
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 
   res.json({ message: "Post created!" });
-  });
+});
 module.exports = router;

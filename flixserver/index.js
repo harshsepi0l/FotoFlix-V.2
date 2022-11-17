@@ -11,11 +11,8 @@ app.use(
     limit: "500mb",
   })
 );
-app.use(bodyParser.json());
 app.use(cors());
-
-const bcryptjs = require("bcryptjs"); // for hashing passwords
-const saltRounds = 10; // for hashing passwords
+app.use(bodyParser.json());
 
 const db = require("./models");
 
