@@ -12,7 +12,7 @@ export function TrendingImages(): JSX.Element {
   const [values, setValues] = React.useState<CardProps[]>([]);
   useEffect(() => {
     axios
-      .get("http://https://fotoflix.herokuapp.com/Cloudinary/", {
+      .get("https://fotoflix.herokuapp.com/Cloudinary/", {
         headers: {
           accessToken: sessionStorage.getItem("accessToken") as string,
         },
