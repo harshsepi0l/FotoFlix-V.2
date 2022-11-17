@@ -52,7 +52,7 @@ export const UploadForm = () => {
 
   // This will navigate to Landing Page once user has signed up
   const sendToLanding = () => {
-    navigate("/LandingPage");
+    navigate("/");
     window.location.reload();
   };
 
