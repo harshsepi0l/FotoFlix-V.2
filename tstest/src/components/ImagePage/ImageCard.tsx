@@ -96,7 +96,7 @@ export function ImageCard(id: any): JSX.Element { // This is the function ultima
   const [imagePost, setImagePost] = useState("");
   useEffect(() => {
     async function fetchData() {
-      await axios.get(`https://full-stack-fotoflix.herokuapp.com/Cloudinary/byid/${imgId.id}`).then((response) => {
+      await axios.get(`https://localhost:3000/Cloudinary/byid/${imgId.id}`).then((response) => {
         setImagePost(response.data); // response.data: all the image data
       })
     };
