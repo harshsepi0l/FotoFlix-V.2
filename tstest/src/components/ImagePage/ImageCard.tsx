@@ -84,6 +84,7 @@ function CardInfo(props: CardProps): JSX.Element {
       <Card title={props.title} bordered={false} className="Card-Info">
 
         <p>{props.description}</p>
+        <p>Uploaded by {props.uid}</p>
         <p>{props.tags}</p>
       </Card>
     </div>
@@ -96,7 +97,7 @@ export function ImageCard(id: any): JSX.Element { // This is the function ultima
   const [imagePost, setImagePost] = useState("");
   useEffect(() => {
     async function fetchData() {
-      await axios.get(`https://localhost:3000/Cloudinary/byid/${imgId.id}`).then((response) => {
+      await axios.get(`http://localhost:3000/Cloudinary/byId/${imgId.id}`).then((response) => {
         setImagePost(response.data); // response.data: all the image data
       })
     };
@@ -119,14 +120,14 @@ export function ImageCard(id: any): JSX.Element { // This is the function ultima
   return (
     <Row align="stretch">
       <Col span={10}>
-        <SingleImageCard Url={imageJson.Url} Likes={imageJson.Likes} Dislikes={imageJson.Dislikes} />
+        <SingleImageCard Url={imageJson.url} Likes={imageJson.likes} Dislikes={imageJson.dislikes} />
         {/* <CustomCard/> */}
       </Col>
       <Col span={14}>
         <CardInfo
-          publicOrPrivate={imageJson.publicOrPrivate}
+          publicOrPrivate={imageJson.publicOrPrivate} uid={imageJson.uid}
           id={imgId.id} url={imageJson.url} title={imageJson.title}
-          description={imageJson.description} key={undefined} dislikes={0} avatar={""} likes={0} tags={""} favorite={0} />
+          description={imageJson.description} keyprop={undefined} dislikes={imageJson.dislikes} avatar={""} likes={imageJson.likes} tags={""} favorite={0} />
       </Col>
     </Row>
   )

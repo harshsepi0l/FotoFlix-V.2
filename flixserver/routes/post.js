@@ -27,6 +27,12 @@ router.get("/", async (req, res) => {
   res.json(posts);
 });
 
+router.get("/byId/:id", async (req, res) => { // Display an image on the image page
+  let id = req.params.id; // Get the id
+  const img = await post.findByPk(id);
+  res.json(img);
+});
+
 router.post("/byUID", validateToken, async (req, res) => {
   const fileStr = req.body.data;
   const uid = req.user.uid;
@@ -44,6 +50,8 @@ router.post("/byUID", validateToken, async (req, res) => {
       description: req.body.description,
       publicOrPrivate: req.body.publicOrPrivate,
       tags: req.body.tags,
+      likes: 0,
+      dislikes: 0
     });
 
     await Array.from(tags).forEach(tag => {

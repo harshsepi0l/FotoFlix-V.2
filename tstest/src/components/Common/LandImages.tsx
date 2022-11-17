@@ -29,7 +29,7 @@ export function LandImages(): JSX.Element {
     Array.from(values).map((value, key) => {
       newCards.push(
         <CustomCard
-          key={key}
+          keyprop={key}
           publicOrPrivate={value.publicOrPrivate}
           url={value.url}
           title={value.title}

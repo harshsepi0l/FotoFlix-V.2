@@ -89,7 +89,7 @@ export function CustomCard(props: CardProps): JSX.Element {
     <div>
       <Card
         hoverable
-        key={props.key}
+        key={props.keyprop}
         style={{ width: 300 }}
         cover={
           <img alt={props.title} src={props.url} onClick={handleOnClick} />
