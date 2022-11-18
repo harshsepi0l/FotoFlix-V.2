@@ -60,14 +60,11 @@ export const SignUp = () => {
       {" "}
       <Card className="SignUp-Card">
         <div className="SignUp-Logo-Container">
-          <img
-            className="SignUp-Logo"
-            src={fotoLogo}
-            alt="error"
-          />
-
+          <img className="SignUp-Logo" src={fotoLogo} alt="error" />
         </div>
-        <h1 className="SignUp-Logo-Container SignUp-Text">Sign up for a free account</h1>
+        <h1 className="SignUp-Logo-Container SignUp-Text">
+          Sign up for a free account
+        </h1>
 
         <div className="Inputs">
           <Input
@@ -153,7 +150,6 @@ export const SignUp = () => {
             />
           </NavLink>
         </div>
-
       </Card>
     </div>
   );
