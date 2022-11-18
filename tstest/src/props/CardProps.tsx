@@ -9,7 +9,7 @@ export interface CardProps {
     likes: number;
     tags: string;
     favorite: number;
-    key: any;
+    keyprop: any;
     id: number;
     uid?: number;
   }

@@ -14,7 +14,7 @@ export function LandImages(): JSX.Element {
   const [values, setValues] = useState<CardProps[]>([]);
   useEffect(() => {
     axios
-      .get("https://fotoflix.herokuapp.com/Cloudinary/", {
+      .get(`http://localhost:3000/Cloudinary/`, {
         headers: {
           accessToken: sessionStorage.getItem("accessToken") as string,
         },
@@ -29,7 +29,7 @@ export function LandImages(): JSX.Element {
     Array.from(values).map((value, key) => {
       newCards.push(
         <CustomCard
-          key={key}
+          keyprop={key}
           publicOrPrivate={value.publicOrPrivate}
           url={value.url}
           title={value.title}
@@ -40,8 +40,7 @@ export function LandImages(): JSX.Element {
           tags={value.tags}
           favorite={value.favorite}
           id={value.id}
-          uid={value.uid}
-        />
+          uid={value.uid} />
       );
     });
   }
