@@ -68,9 +68,7 @@ export function CustomCard(props: CardProps): JSX.Element {
   const [dislikes, setDislikes] = useState(props.dislikes);
   const [action, setAction] = useState<string | null>(null);
 
-  useEffect(() => {
-
-  }, [])
+  useEffect(() => {}, []);
 
   const like = () => {
     setLikes(props.likes + 1);
@@ -115,7 +113,7 @@ export function CustomCard(props: CardProps): JSX.Element {
             text={props.likes - props.dislikes}
             isPublic={isGlobal}
           />,
-          <CustomAction icon="tags" text={props.tag} isPublic={isGlobal} />,
+          <CustomAction icon="tags" text={props.tags} isPublic={isGlobal} />,
           <CustomAction icon="status" isPublic={isGlobal} />,
         ]}
       >

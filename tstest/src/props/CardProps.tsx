@@ -12,4 +12,5 @@ export interface CardProps {
   keyprop: any;
   id: number;
   uid?: number;
+  tags?: any;
 }
