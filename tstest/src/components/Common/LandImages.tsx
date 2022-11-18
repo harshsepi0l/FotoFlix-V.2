@@ -58,7 +58,6 @@ export function LandImages(): JSX.Element {
           avatar={value.avatar}
           likes={value.likes}
           tag={value.tag}
-          tags={tags}
           id={value.id}
           uid={value.uid}
         />
