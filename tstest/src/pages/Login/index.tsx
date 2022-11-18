@@ -102,7 +102,7 @@ export const Login = () => {
           </NavLink>
 
           <div className="LogIn-Button">
-            <NavLink onClick={sendToLanding} to={"/"}>
+            <NavLink onClick={sendToLanding} to={"/LandingPage"}>
               <CustomButton
                 buttonType={"primary"}
                 color={"darkpurple"}
