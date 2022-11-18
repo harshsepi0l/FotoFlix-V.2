@@ -1,5 +1,5 @@
 import { Space } from "antd";
-import axios from "axios";
+import Axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -13,15 +13,13 @@ export function RowImages(): JSX.Element {
   let { UID } = useParams();
   const [values, setValues] = useState<CardProps[]>([]);
   useEffect(() => {
-    axios
-      .get("https://fotoflix.herokuapp.com/Cloudinary/byUID", {
-        headers: {
-          accessToken: sessionStorage.getItem("accessToken") as string,
-        },
-      })
-      .then((response) => {
-        setValues(response.data);
-      });
+    Axios.get("https://fotoflix.herokuapp.com/Cloudinary/byUID", {
+      headers: {
+        accessToken: sessionStorage.getItem("accessToken") as string,
+      },
+    }).then((response) => {
+      setValues(response.data);
+    });
   }, []);
 
   let newCards: JSX.Element[] = [];
