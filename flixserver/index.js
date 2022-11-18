@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 // Cors reqs (Thank you Aleksandr!)
 
 var whiteList = [
-  "http://localhost:3000",
+  "https://fotoflix.herokuapp.com/",
   "https://fotoflix.herokuapp.com/login",
   "https://fotoflix.herokuapp.com/Cloudinary",
   "https://fotoflix.herokuapp.com/Cloudinary",
