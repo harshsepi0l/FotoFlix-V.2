@@ -58,6 +58,7 @@ export const UploadForm = () => {
     Axios.post(
       `https://fotoflix.herokuapp.com/Tags`,
       {
+        //tags: `#${input}`,
         tag: `#${input}`,
       },
       config
