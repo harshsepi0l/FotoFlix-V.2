@@ -95,6 +95,15 @@ export const Login = () => {
                   <p style={{ color: "#C689C6" }}>Don't have an account?</p>
                 </NavLink>
               </div>
+
+              <NavLink onClick={sendToLanding} to={"/"}>
+                <CustomButton
+                  title={"Continue as Guest"}
+                  buttonType={"default"}
+                  color={"white"}
+                />
+              </NavLink>
+
               <div className="login">
                 <div className="Button-SignUp">
                   <CustomButton

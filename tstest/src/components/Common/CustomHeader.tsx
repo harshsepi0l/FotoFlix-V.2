@@ -27,7 +27,7 @@ const suffix = (
   />
 );
 
-const onSearch = (value: string) => console.log(value);
+// const onSearch = (value: string) => console.log(value);
 
 function CustomSearch(): JSX.Element {
   const [filteredData, setFilteredData] = useState(data);
@@ -129,8 +129,7 @@ function LeftSection(): JSX.Element {
 }
 
 function RightButtonsSection(): JSX.Element {
-  let navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  let navigate = useNavigate();const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -144,6 +143,7 @@ function RightButtonsSection(): JSX.Element {
       }
     );
   }, []);
+  
 
   const logout = () => {
     sessionStorage.removeItem("accessToken");
@@ -173,6 +173,7 @@ function RightButtonsSection(): JSX.Element {
             title={"Logout"}
             onClick={logout}
           />
+          // <></>
         ) : (
           <Link to="/login">
             <CustomButton
@@ -199,6 +200,7 @@ function RightButtonsSection(): JSX.Element {
                 navigate("/HomePage");
               }}
             />
+            {/* <RightUserSection /> */}
           </Tooltip>
         ) : (
           <Link to="/signUp">
@@ -210,6 +212,7 @@ function RightButtonsSection(): JSX.Element {
               />
             )}
           </Link>
+          
         )}
       </Col>
     </Row>
@@ -219,8 +222,7 @@ function RightButtonsSection(): JSX.Element {
 function RightUserSection(): JSX.Element {
   return (
     <div>
-      <BellOutlined />
-      <Avatar src="https://joeschmoe.io/api/v1/random" />
+      
     </div>
   );
 }

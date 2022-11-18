@@ -4,6 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import Axios from "axios";
 
 const fabStyle = {
     position: 'fixed',
@@ -15,15 +16,21 @@ const fabStyle = {
 export const CustomFab = (): JSX.Element => {
     const navigate = useNavigate();
     const isMobile = useMediaQuery({
-        query: "(max-width: 1000px)"
-    });
-
+        query: "(max-width: 786px)",
+      });
+      
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        if (sessionStorage.getItem("accessToken")) {
-            setIsLoggedIn(true);
-        }
+        Axios.get("https://fotoflix.herokuapp.com/Cloudinary/byUID").then(
+            (response) => {
+                if (response.data.error) {
+                    setIsLoggedIn(false);
+                } else {
+                    setIsLoggedIn(true);
+                }
+            }
+        );
     }, []);
 
     const fab =
