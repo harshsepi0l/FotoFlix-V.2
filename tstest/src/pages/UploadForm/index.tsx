@@ -50,10 +50,10 @@ export const UploadForm = () => {
     setInput("");
 
     Axios.post("https://fotoflix.herokuapp.com/Tags", {
-      headers: {
-        accessToken: sessionStorage.getItem("accessToken"),
-      },
       tag: chipData,
+      headers: {
+        accessToken: sessionStorage.getItem("accessToken") as string,
+      },
     }).then((response) => {
       console.log(response);
     });
