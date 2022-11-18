@@ -34,15 +34,6 @@ router.get("/byId/:id", async (req, res) => {
   console.log(json(img));
 });
 
-router.get("/tagsByid/:id", async (req, res) => {
-  let id = req.params.id; // Get the id
-  const t = await tags.findAll({
-    where: { ImageId: id },
-  });
-  console.log(`Backend tags: ${t}`);
-  res.json(t);
-});
-
 router.post("/byUID", validateToken, async (req, res) => {
   const fileStr = req.body.data;
   const uid = req.user.uid;

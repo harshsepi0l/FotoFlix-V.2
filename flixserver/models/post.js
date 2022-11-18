@@ -35,10 +35,15 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      tags: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
     {
       timestamps: true,
     }
   );
+  //updated
   return Post;
 };
