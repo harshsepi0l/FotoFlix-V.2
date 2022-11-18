@@ -69,7 +69,7 @@ export function CustomCard(props: CardProps): JSX.Element {
   const [action, setAction] = useState<string | null>(null);
 
   useEffect(() => {
-    
+
   }, [])
 
   const like = () => {
@@ -119,9 +119,8 @@ export function CustomCard(props: CardProps): JSX.Element {
           <CustomAction icon="status" isPublic={isGlobal} />,
         ]}
       >
-        {/* <Avatar src={props.Avatar} /> */}
         <Meta
-          avatar={<></>}
+          avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
           title={props.title}
           description={props.description}
         />
