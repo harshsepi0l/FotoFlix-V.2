@@ -10,7 +10,7 @@ import { Box, Button, TextField } from "@mui/material";
 import { stringify } from "querystring";
 import { useParams } from "react-router-dom";
 import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
-import axios from "axios";
+import Axios from "axios";
 
 export interface ChipData {
   key: number;
@@ -48,6 +48,16 @@ export const UploadForm = () => {
       { key: chipData.length + 1, label: `#${input}` },
     ]);
     setInput("");
+    useEffect(() => {
+      Axios.post("https://fotoflix.herokuapp.com/Tags/createdTag", {
+        headers: {
+          accessToken: sessionStorage.getItem("accessToken"),
+        },
+        body: {
+          tags: chipData,
+        },
+      });
+    }, []);
   };
 
   const navigate = useNavigate();
@@ -96,17 +106,6 @@ export const UploadForm = () => {
     };
   };
   const handleSubmitFile = (e: any) => {
-    useEffect(() => {
-      axios.post("https://fotoflix.herokuapp.com/Tags/createdTag", {
-        headers: {
-          accessToken: sessionStorage.getItem("accessToken"),
-        },
-        body: {
-          tags: chipData,
-        },
-      });
-    }, []);
-
     e.preventDefault();
     if (!previewSource) return;
 
