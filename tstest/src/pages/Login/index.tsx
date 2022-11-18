@@ -5,7 +5,7 @@ import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { InitOptions, IntegerDataType } from "sequelize";
 import { CustomButton } from "../../components/Common/CustomButton";
 import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
-import "./index.css"
+import "./index.css";
 
 export const Login = () => {
   const [username, checkUsername] = useState("");
@@ -18,7 +18,7 @@ export const Login = () => {
   const LoginCheck = () => {
     // This will navigate to Landing Page once user has logged in
     const sendToLanding = () => {
-      navigate("/");
+      navigate("/LandingPage");
     };
 
     // This will navigate to SignUp Page once user has signed up
@@ -51,16 +51,11 @@ export const Login = () => {
     //   }
     // }, []);
     return (
-      <div className="LogIn-Page" style={{height: ""}}>
+      <div className="LogIn-Page" style={{ height: "" }}>
         {" "}
         <Card className="LogIn-Card">
           <div className="LogIn-Logo-Container">
-            <img
-              className="LogIn-Logo"
-              src={fotoLogo}
-              alt="error"
-            />
-
+            <img className="LogIn-Logo" src={fotoLogo} alt="error" />
           </div>
           <h1 className="LogIn-Logo-Container LogIn-Text">Login Form</h1>
 
@@ -88,7 +83,6 @@ export const Login = () => {
             <NavLink onClick={sendToSignUp} to={"/signUp"}>
               <p style={{ color: "#C689C6" }}>Don't have an account?</p>
             </NavLink>
-
           </div>
 
           <NavLink onClick={sendToLanding} to={"/"} className="Button-Guest">
@@ -116,17 +110,9 @@ export const Login = () => {
                 onClick={loginCheck}
               />
             </NavLink>
-            <NavLink onClick={sendToLanding} to={"/"}>
-              <CustomButton
-                buttonType={"primary"}
-                color={"red"}
-                title={"Cancel"}
-              />
-            </NavLink>
           </div>
-        </Card >
-      </div >
-
+        </Card>
+      </div>
     );
   };
   return <div>{LoginCheck()}</div>;
