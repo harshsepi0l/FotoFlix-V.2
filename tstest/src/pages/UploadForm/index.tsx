@@ -96,7 +96,9 @@ export const UploadForm = () => {
     e.preventDefault();
     if (!previewSource) return;
     uploadImage(previewSource);
-    sendToLanding();
+    setTimeout(() => {
+      sendToLanding();
+    }, 2000);
   };
 
   const uploadImage = async (base64EncodedImage: any) => {
