@@ -85,31 +85,28 @@ export const Login = () => {
             </NavLink>
           </div>
 
-          <NavLink onClick={loginCheck} to={"/LandingPage"}>
-            <CustomButton
-              buttonType={"default"}
-              color={"white"}
-              title={"Continue as a guest"}
-              style={{
-                marginBottom: "20px",
-                display: "flex",
-                alignItems: "center",
-                width: "100%",
-                height: "100%",
-                justifyContent: "center",
-              }}
-            />
-          </NavLink>
+          <CustomButton
+            buttonType={"default"}
+            color={"white"}
+            title={"Continue as a guest"}
+            style={{
+              marginBottom: "20px",
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+              height: "100%",
+              justifyContent: "center",
+            }}
+            onClick={sendToLanding}
+          />
 
           <div className="LogIn-Button">
-            <NavLink onClick={sendToLanding} to={"/LandingPage"}>
-              <CustomButton
-                buttonType={"primary"}
-                color={"darkpurple"}
-                title={"Login"}
-                onClick={loginCheck}
-              />
-            </NavLink>
+            <CustomButton
+              buttonType={"primary"}
+              color={"darkpurple"}
+              title={"Login"}
+              onClick={loginCheck}
+            />
           </div>
         </Card>
       </div>
