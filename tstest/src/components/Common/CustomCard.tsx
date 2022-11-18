@@ -84,7 +84,7 @@ export function CustomCard(props: CardProps): JSX.Element {
     if (window.confirm("Are you sure that you want to remove card?")) {
     }
   };
-  console.log(props.likes);
+
   return (
     <div>
       <Card
