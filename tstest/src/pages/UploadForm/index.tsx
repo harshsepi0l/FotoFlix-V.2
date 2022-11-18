@@ -53,7 +53,7 @@ export const UploadForm = () => {
   // This will navigate to Landing Page once user has signed up
   const sendToLanding = () => {
     setTimeout(() => {
-      navigate("/");
+      navigate("/LandingPage");
     }, 2000);
   };
 
