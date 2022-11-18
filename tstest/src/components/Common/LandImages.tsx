@@ -46,7 +46,7 @@ export function LandImages(): JSX.Element {
     //     />
     //   );
     // });
-    PublicOrPrivate === "1"
+    PublicOrPrivate == "1"
       ? values.map((value, key) => {
           newCards.push(
             <CustomCard
@@ -65,7 +65,7 @@ export function LandImages(): JSX.Element {
             />
           );
         })
-      : PublicOrPrivate === "0";
+      : PublicOrPrivate == "0";
     values.map((value, key) => {
       <> </>;
     });
