@@ -105,9 +105,9 @@ export const UploadForm = () => {
 
   const uploadImage = async (base64EncodedImage: any) => {
     useEffect(() => {
-      axios.post("https://fotoflix.herokuapp.com/Tags/createTags", {
+      axios.post("https://fotoflix.herokuapp.com/Tags/createdTag", {
         headers: {
-          access_token: sessionStorage.getItem("accessToken"),
+          accessToken: sessionStorage.getItem("accessToken"),
         },
         body: {
           tags: chipData,
