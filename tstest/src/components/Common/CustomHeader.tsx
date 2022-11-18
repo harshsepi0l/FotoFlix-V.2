@@ -35,8 +35,8 @@ function CustomSearch(): JSX.Element {
 
   useEffect(() => {
     const getData = async () => {
-      const userData = await Axios.get("http://localhost:3000/");
-      const postData = await Axios.get("http://localhost:3000/Cloudinary");
+      const userData = await Axios.get("https://fotoflix.herokuapp.com/");
+      const postData = await Axios.get("https://fotoflix.herokuapp.com/Cloudinary");
       setAllData([...postData.data, ...userData.data]);
     }
 
