@@ -96,14 +96,6 @@ export const UploadForm = () => {
     };
   };
   const handleSubmitFile = (e: any) => {
-    e.preventDefault();
-    if (!previewSource) return;
-
-    uploadImage(previewSource);
-    sendToLanding();
-  };
-
-  const uploadImage = async (base64EncodedImage: any) => {
     useEffect(() => {
       axios.post("https://fotoflix.herokuapp.com/Tags/createdTag", {
         headers: {
@@ -114,23 +106,32 @@ export const UploadForm = () => {
         },
       });
     }, []);
-    // try {
-    //   await fetch(`https://fotoflix.herokuapp.com/Cloudinary/byUID/`, {
-    //     method: "POST",
-    //     body: JSON.stringify({
-    //       data: base64EncodedImage,
-    //       title: imageTitle,
-    //       description: imageDesc,
-    //       publicOrPrivate: imageVis,
-    //     }),
-    //     headers: {
-    //       accessToken: sessionStorage.getItem("accessToken") as string,
-    //       "Content-type": "application/json",
-    //     },
-    //   });
-    // } catch (err) {
-    //   console.error(err);
-    // }
+
+    e.preventDefault();
+    if (!previewSource) return;
+
+    uploadImage(previewSource);
+    sendToLanding();
+  };
+
+  const uploadImage = async (base64EncodedImage: any) => {
+    try {
+      await fetch(`https://fotoflix.herokuapp.com/Cloudinary/byUID/`, {
+        method: "POST",
+        body: JSON.stringify({
+          data: base64EncodedImage,
+          title: imageTitle,
+          description: imageDesc,
+          publicOrPrivate: imageVis,
+        }),
+        headers: {
+          accessToken: sessionStorage.getItem("accessToken") as string,
+          "Content-type": "application/json",
+        },
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   // const uploadData =async (data:any) => {
