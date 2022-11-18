@@ -186,7 +186,7 @@ function RightButtonsSection(): JSX.Element {
   });
 
   return (
-    <Row justify="end" align="bottom">
+    <Row justify="space-between" style={{width: "100px", marginLeft: "auto"}} align="bottom">
       <Col span={4}>
         {isLoggedIn ? (
           <CustomButton
