@@ -1,7 +1,7 @@
+const cors = require("cors");
+
 const express = require("express");
 const app = express();
-
-const cors = require("cors");
 app.use(cors());
 
 require("dotenv").config();
@@ -16,12 +16,6 @@ app.use(
 );
 
 app.use(bodyParser.json());
-// const corsOptions = {
-//   origin: "https://fotoflix.org",
-//   credentials: true, //access-control-allow-credentials:true
-//   optionSuccessStatus: 200,
-// };
-// app.use(cors(corsOptions));
 
 const db = require("./models");
 
