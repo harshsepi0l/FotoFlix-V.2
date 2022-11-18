@@ -14,7 +14,7 @@ export function RowImages(): JSX.Element {
   const [values, setValues] = useState<CardProps[]>([]);
   useEffect(() => {
     axios
-      .get(`https://fotoflix.herokuapp.com/byUID/`, {
+      .get(`http://fotoflix.herokuapp.com/byUID/`, {
         headers: {
           accessToken: sessionStorage.getItem("accessToken") as string,
         },

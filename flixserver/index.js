@@ -6,24 +6,6 @@ const bodyParser = require("body-parser");
 
 // Cors reqs (Thank you Aleksandr!)
 
-var whiteList = [
-  "https://fotoflix.herokuapp.com/",
-  "https://fotoflix.herokuapp.com/login",
-  "https://fotoflix.herokuapp.com/Cloudinary",
-  "https://fotoflix.herokuapp.com/Cloudinary",
-]; // Allowed domains (add heroku later!!)
-
-var corsOptions = {
-  credentials: true,
-
-  origin: function (origin, callback) {
-    if (whiteList.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-};
 app.use(express.json({ limit: "500mb" }));
 app.use(
   express.urlencoded({
@@ -33,9 +15,12 @@ app.use(
 );
 
 app.use(bodyParser.json());
-
+const corsOptions = {
+  origin: "http://fotoflix.herokuapp.com/",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
 app.use(cors(corsOptions));
-
 const db = require("./models");
 
 // Routers

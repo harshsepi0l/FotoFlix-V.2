@@ -96,7 +96,7 @@ export function ImageCard(id: any): JSX.Element {
   useEffect(() => {
     async function fetchData() {
       await axios
-        .get(`https://fotoflix.herokuapp.com/Cloudinary/byId/${imgId.id}`)
+        .get(`http://fotoflix.herokuapp.com/Cloudinary/byId/${imgId.id}`)
         .then((response) => {
           setImagePost(response.data); // response.data: all the image data
         });

@@ -14,7 +14,7 @@ export function LandImages(): JSX.Element {
   const [values, setValues] = useState<CardProps[]>([]);
   useEffect(() => {
     axios
-      .get(`https://fotoflix.herokuapp.com/Cloudinary/`, {
+      .get(`http://fotoflix.herokuapp.com/Cloudinary/`, {
         headers: {
           accessToken: sessionStorage.getItem("accessToken") as string,
         },
