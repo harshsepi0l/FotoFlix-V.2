@@ -27,7 +27,7 @@ router.post("/signUp", async (req, res) => {
   });
 });
 
-router.get("/byId", async (req, res) => {
+router.get("/byUID", async (req, res) => {
   const { uid } = req.body;
   const flixer = await flixerinfo.findOne({
     where: {
