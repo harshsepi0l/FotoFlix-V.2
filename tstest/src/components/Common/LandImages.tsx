@@ -29,47 +29,47 @@ export function LandImages(): JSX.Element {
 
   let newCards: JSX.Element[] = [];
   {
-    //  ? Array.from(values).map((value, key) => {
-    //   newCards.push(
-    //     <CustomCard
-    //       keyprop={key}
-    //       publicOrPrivate={value.publicOrPrivate}
-    //       url={value.url}
-    //       title={value.title}
-    //       description={value.description}
-    //       dislikes={value.dislikes}
-    //       avatar={value.avatar}
-    //       likes={value.likes}
-    //       tags={value.tags}
-    //       favorite={value.favorite}
-    //       id={value.id}
-    //       uid={value.uid}
-    //     />
-    //   );
-    // });
-    PublicOrPrivate == "1"
-      ? values.map((value, key) => {
-          newCards.push(
-            <CustomCard
-              keyprop={key}
-              publicOrPrivate={value.publicOrPrivate}
-              url={value.url}
-              title={value.title}
-              description={value.description}
-              dislikes={value.dislikes}
-              avatar={value.avatar}
-              likes={value.likes}
-              tags={value.tags}
-              favorite={value.favorite}
-              id={value.id}
-              uid={value.uid}
-            />
-          );
-        })
-      : PublicOrPrivate == "0";
-    values.map((value, key) => {
-      <> </>;
+    Array.from(values).map((value, key) => {
+      newCards.push(
+        <CustomCard
+          keyprop={key}
+          publicOrPrivate={value.publicOrPrivate}
+          url={value.url}
+          title={value.title}
+          description={value.description}
+          dislikes={value.dislikes}
+          avatar={value.avatar}
+          likes={value.likes}
+          tags={value.tags}
+          favorite={value.favorite}
+          id={value.id}
+          uid={value.uid}
+        />
+      );
     });
+    // PublicOrPrivate == "1"
+    //   ? values.map((value, key) => {
+    //       newCards.push(
+    //         <CustomCard
+    //           keyprop={key}
+    //           publicOrPrivate={value.publicOrPrivate}
+    //           url={value.url}
+    //           title={value.title}
+    //           description={value.description}
+    //           dislikes={value.dislikes}
+    //           avatar={value.avatar}
+    //           likes={value.likes}
+    //           tags={value.tags}
+    //           favorite={value.favorite}
+    //           id={value.id}
+    //           uid={value.uid}
+    //         />
+    //       );
+    //     })
+    //   : PublicOrPrivate == "0";
+    // values.map((value, key) => {
+    //   <> </>;
+    // });
   }
 
   return (
