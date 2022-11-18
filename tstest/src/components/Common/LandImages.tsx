@@ -36,8 +36,8 @@ export function LandImages(): JSX.Element {
           accessToken: sessionStorage.getItem("accessToken") as string,
         },
       })
-      .then((props) => {
-        setTags(props.data);
+      .then((response) => {
+        setTags(response.data);
       })
       .catch((error: AxiosError) => {
         console.log(error.response?.data);
