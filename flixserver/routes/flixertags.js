@@ -12,4 +12,10 @@ router.post("/", validateToken, async (req, res) => {
   });
   res.json({ message: "Tag created!" });
 });
+// updated
+router.get("/byUID", async (req, res) => {
+  const tags = await flixertags.findAll();
+  res.json(tags);
+});
+
 module.exports = router;

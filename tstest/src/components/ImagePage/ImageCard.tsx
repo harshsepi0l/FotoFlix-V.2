@@ -35,7 +35,7 @@ function CustomAction(props: IAction): JSX.Element {
     like: <LikeOutlined key="like" />,
     dislike: <DislikeOutlined key="dislike" />,
     popularity: <StarOutlined key="popularity" />,
-    tags: <TagsOutlined key="tags" />,
+    tag: <TagsOutlined key="tag" />,
   };
 
   {
@@ -82,7 +82,7 @@ function CardInfo(props: CardProps): JSX.Element {
       <Card title={props.title} bordered={false} className="Card-Info">
         <p>{props.description}</p>
         <p>Uploaded by {props.uid}</p>
-        <p>{props.tags}</p>
+        <p>{props.tag}</p>
       </Card>
     </div>
   );
@@ -139,8 +139,8 @@ export function ImageCard(id: any): JSX.Element {
           dislikes={imageJson.dislikes}
           avatar={""}
           likes={imageJson.likes}
-          tags={""}
-          favorite={0}
+          tag={""}
+          // favorite={0}
         />
       </Col>
     </Row>

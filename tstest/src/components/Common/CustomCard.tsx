@@ -27,7 +27,7 @@ function CustomAction(props: IAction): JSX.Element {
     like: <LikeOutlined key="like" />,
     dislike: <DislikeOutlined key="dislike" />,
     popularity: <StarOutlined key="popularity" />,
-    tags: <TagsOutlined key="tags" />,
+    tag: <TagsOutlined key="tag" />,
   };
 
   {
@@ -111,7 +111,7 @@ export function CustomCard(props: CardProps): JSX.Element {
             text={props.likes - props.dislikes}
             isPublic={isGlobal}
           />,
-          <CustomAction icon="tags" text={props.tags} isPublic={isGlobal} />,
+          <CustomAction icon="tags" text={props.tag} isPublic={isGlobal} />,
           <CustomAction icon="status" isPublic={isGlobal} />,
         ]}
       >

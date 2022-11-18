@@ -1,5 +1,5 @@
 import { Space } from "antd";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -8,11 +8,14 @@ import { Motion } from "./Motion";
 import { PaginationApplicator } from "./pagination/PaginationApplicator";
 import data from "./rowData.json";
 import { CardProps } from "../../props/CardProps";
+import { TagProps } from "../../props/TagProps";
 
 export function LandImages(): JSX.Element {
   let { UID } = useParams();
   const [values, setValues] = useState<CardProps[]>([]);
+  const [tags, setTags] = useState<TagProps[]>([]);
   const [PublicOrPrivate, setPublicOrPrivate] = useState("");
+
   useEffect(() => {
     axios
       .get(`https://fotoflix.herokuapp.com/Cloudinary/`, {
@@ -24,6 +27,22 @@ export function LandImages(): JSX.Element {
         setValues(response.data);
         setPublicOrPrivate(response.data.publicOrPrivate);
         console.log(response.data);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`https://fotoflix.herokuapp.com/Tags/ByUID`, {
+        headers: {
+          accessToken: sessionStorage.getItem("accessToken") as string,
+        },
+      })
+      .then((props) => {
+        setTags(props.data);
+        console.log(props.data);
+      })
+      .catch((error: AxiosError) => {
+        console.log(error.response?.data);
       });
   }, []);
 
@@ -40,8 +59,8 @@ export function LandImages(): JSX.Element {
           dislikes={value.dislikes}
           avatar={value.avatar}
           likes={value.likes}
-          tags={value.tags}
-          favorite={value.favorite}
+          tag={value.tag}
+          // favorite={value.favorite}
           id={value.id}
           uid={value.uid}
         />
@@ -84,4 +103,7 @@ export function LandImages(): JSX.Element {
       </div>
     </div>
   );
+}
+function setTags(data: any) {
+  throw new Error("Function not implemented.");
 }
