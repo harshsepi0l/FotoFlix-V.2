@@ -4,6 +4,24 @@ const cors = require("cors");
 require("dotenv").config();
 const bodyParser = require("body-parser");
 
+
+// Cors reqs (Thank you Aleksandr!)
+var whiteList = ['http://localhost:3000', 
+  'http://localhost:3001', 'http://localhost:3001/Cloudinary',
+  'http://localhost:3000/Cloudinary']; // Allowed domains (add heroku later!!)
+var corsOptions = {
+  credentials: true,
+  origin: function (origin, callback) {
+    if (whiteList.indexOf(origin) !== -1){
+      callback(null, true)
+    }
+    else {
+      callback(new Error ('Not allowed by CORS'))
+    }
+  }
+}
+
+
 app.use(express.json({ limit: "500mb" }));
 app.use(
   express.urlencoded({
@@ -11,8 +29,11 @@ app.use(
     limit: "500mb",
   })
 );
-app.use(cors());
 app.use(bodyParser.json());
+app.use(cors(corsOptions));
+
+const bcryptjs = require("bcryptjs"); // for hashing passwords
+const saltRounds = 10; // for hashing passwords
 
 const db = require("./models");
 

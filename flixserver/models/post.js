@@ -1,3 +1,5 @@
+const flixerinfo = require("./FlixerInfo");
+
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define(
     "flixerimages",
@@ -35,6 +37,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      likes: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      dislikes: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      }
     },
     {
       timestamps: true,

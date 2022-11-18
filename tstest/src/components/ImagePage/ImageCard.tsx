@@ -3,15 +3,8 @@ import Meta from "antd/lib/card/Meta";
 import { Content } from "antd/lib/layout/layout";
 import { useEffect, useState } from "react";
 import { CustomCard } from "../Common/CustomCard";
-import {
-  LikeOutlined,
-  DislikeOutlined,
-  StarOutlined,
-  TagsOutlined,
-  GlobalOutlined,
-  LockOutlined,
-} from "@ant-design/icons";
-import "./index.css";
+import { LikeOutlined, DislikeOutlined, StarOutlined, TagsOutlined, GlobalOutlined, LockOutlined } from '@ant-design/icons';
+import "./index.css"
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import React from "react";
@@ -24,32 +17,28 @@ interface singleImageProps {
 }
 
 interface IAction {
-  text?: any;
-  icon: string;
-  onClick?: () => {};
-  isPublic?: boolean;
+  text?: any,
+  icon: string,
+  onClick?: () => {},
+  isPublic?: boolean,
 }
 
 function CustomAction(props: IAction): JSX.Element {
   const Icon: { [text: string]: JSX.Element } = {
-    like: <LikeOutlined key="like" />,
-    dislike: <DislikeOutlined key="dislike" />,
-    popularity: <StarOutlined key="popularity" />,
-    tags: <TagsOutlined key="tags" />,
-  };
-
-  {
-    props.isPublic
-      ? (Icon["status"] = <GlobalOutlined key="global" />)
-      : (Icon["status"] = <LockOutlined key="lock" />);
+    "like": <LikeOutlined key="like" />,
+    "dislike": <DislikeOutlined key="dislike" />,
+    "popularity": <StarOutlined key="popularity" />,
+    "tags": <TagsOutlined key="tags" />
   }
+
+  { props.isPublic ? Icon["status"] = <GlobalOutlined key="global" /> : Icon["status"] = <LockOutlined key="lock" /> }
 
   return (
     <Space>
       {Icon[props.icon]}
       <div>{props.text}</div>
     </Space>
-  );
+  )
 }
 
 function SingleImageCard(props: singleImageProps): JSX.Element {
@@ -57,18 +46,31 @@ function SingleImageCard(props: singleImageProps): JSX.Element {
   return (
     <Card
       hoverable
-      style={{
-        background: "var(--darkpurple)",
-        color: "var(--white)",
-        alignItems: "center",
-      }}
+      style={{ background: "var(--darkpurple)", color: "var(--white)", alignItems: "center" }}
       cover={<img alt={"image"} src={props.Url} />}
       actions={[
-        <CustomAction icon="like" text={props.Likes} />,
-        <CustomAction icon="dislike" text={props.Dislikes} />,
-        <CustomAction icon="popularity" text={imgPopularity} />,
-        <CustomAction icon="tags" text="Tags" />,
-        <CustomAction icon="status" />,
+
+        <CustomAction
+          icon="like"
+          text={props.Likes}
+        />,
+        <CustomAction
+          icon="dislike"
+          text={props.Dislikes}
+        />,
+        <CustomAction
+          icon="popularity"
+          text={imgPopularity}
+        />,
+        <CustomAction
+          icon="tags"
+          text="Tags"
+
+        />,
+        <CustomAction
+          icon="status"
+        />
+
       ]}
     >
       {/* <Meta title="Europe Street beat" description="www.instagram.com" /> */}
@@ -80,28 +82,25 @@ function CardInfo(props: CardProps): JSX.Element {
   return (
     <div className="Card-Info">
       <Card title={props.title} bordered={false} className="Card-Info">
+
         <p>{props.description}</p>
+        <p>Uploaded by {props.uid}</p>
         <p>{props.tags}</p>
       </Card>
     </div>
   );
 }
 
-export function ImageCard(id: any): JSX.Element {
-  // This is the function ultimately sent to the image page
+export function ImageCard(id: any): JSX.Element { // This is the function ultimately sent to the image page
   // Get image data based off the id passed in parameters
   const [imgId, setImgId] = useState(id); // imgId.id returns the id itself!!
   const [imagePost, setImagePost] = useState("");
   useEffect(() => {
     async function fetchData() {
-      await axios
-        .get(
-          `https://https://fotoflix.herokuapp.com/Cloudinary/byid/${imgId.id}`
-        )
-        .then((response) => {
-          setImagePost(response.data); // response.data: all the image data
-        });
-    }
+      await axios.get(`http://localhost:3000/Cloudinary/byId/${imgId.id}`).then((response) => {
+        setImagePost(response.data); // response.data: all the image data
+      })
+    };
     fetchData();
   }, []);
   const imageJson = JSON.parse(JSON.stringify(imagePost));
@@ -121,28 +120,16 @@ export function ImageCard(id: any): JSX.Element {
   return (
     <Row align="stretch">
       <Col span={10}>
-        <SingleImageCard
-          Url={imageJson.Url}
-          Likes={imageJson.Likes}
-          Dislikes={imageJson.Dislikes}
-        />
+        <SingleImageCard Url={imageJson.url} Likes={imageJson.likes} Dislikes={imageJson.dislikes} />
         {/* <CustomCard/> */}
       </Col>
       <Col span={14}>
         <CardInfo
-          publicOrPrivate={imageJson.publicOrPrivate}
-          id={imgId.id}
-          url={imageJson.url}
-          title={imageJson.title}
-          description={imageJson.description}
-          key={undefined}
-          dislikes={0}
-          avatar={""}
-          likes={0}
-          tags={""}
-          favorite={0}
-        />
+          publicOrPrivate={imageJson.publicOrPrivate} uid={imageJson.uid}
+          id={imgId.id} url={imageJson.url} title={imageJson.title}
+          description={imageJson.description} keyprop={undefined} dislikes={imageJson.dislikes} avatar={""} likes={imageJson.likes} tags={""} favorite={0} />
       </Col>
     </Row>
-  );
+  )
 }
+

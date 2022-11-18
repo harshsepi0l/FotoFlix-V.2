@@ -5,10 +5,6 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    uid: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     postId: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -20,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
     dislikes: {
       type: DataTypes.INTEGER,
       allowNull: false,
+    },
+    tagsId: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   });
   return FlixerTaps;

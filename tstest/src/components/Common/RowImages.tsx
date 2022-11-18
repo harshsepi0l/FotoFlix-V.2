@@ -14,7 +14,7 @@ export function RowImages(): JSX.Element {
   const [values, setValues] = useState<CardProps[]>([]);
   useEffect(() => {
     axios
-      .get("https://fotoflix.herokuapp.com/Cloudinary/byUID/", {
+      .get(`http://localhost:3000/Cloudinary/byUID/`, {
         headers: {
           accessToken: sessionStorage.getItem("accessToken") as string,
         },
@@ -29,7 +29,7 @@ export function RowImages(): JSX.Element {
     Array.from(values).map((value, key) => {
       newCards.push(
         <CustomCard
-          key={key}
+          keyprop={key}
           publicOrPrivate={value.publicOrPrivate}
           url={value.url}
           title={value.title}
@@ -39,14 +39,10 @@ export function RowImages(): JSX.Element {
           likes={value.likes}
           tags={value.tags}
           favorite={value.favorite}
-          id={value.id}
-          uid={value.uid}
-        />
+          id={value.id} uid={value.uid} />
       );
     });
   }
-
-  //Teting comment
   return (
     <div className="RowImages">
       <div className="CardsContainer">
