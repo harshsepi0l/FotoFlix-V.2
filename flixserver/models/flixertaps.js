@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    uid: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     likes: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -16,10 +20,6 @@ module.exports = (sequelize, DataTypes) => {
     dislikes: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    tagsId: {
-      type: DataTypes.STRING,
-      allowNull: true,
     },
   });
   return FlixerTaps;
