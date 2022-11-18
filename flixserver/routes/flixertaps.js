@@ -7,13 +7,14 @@ const flixertaps = require("../models/post")(sequelize, DataTypes);
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
 router.get("/", async (req, res) => {
-  await flixertaps.create({
-    postId: post.id,
-    uid: post.uid,
-    likes: 0,
-    dislikes: 0,
+  const { postID, id } = req.body;
+  const posted = await post.findOne({
+    where: {
+      postId: postID,
+      uid: id,
+    },
   });
-  res.json({ message: "Likes and Dislikes created!" });
+  res.json(posted);
 });
 
 // router.post("/like".async(req, res)) => {
