@@ -74,4 +74,9 @@ router.get("/byUsername", async (req, res) => {
   res.json(flixer);
 });
 
+router.get("/", async (req, res) => {
+  const flixers = await flixerinfo.findAll();
+  res.json(flixers);
+})
+
 module.exports = router;

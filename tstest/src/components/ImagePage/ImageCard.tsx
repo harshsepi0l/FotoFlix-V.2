@@ -118,7 +118,7 @@ export function ImageCard(id: any): JSX.Element {
   // console.log(tagsJson);
 
   return (
-    <Row align="stretch">
+    <Row align="stretch" style={{ height: "auto" }}>
       <Col span={10}>
         <SingleImageCard
           Url={imageJson.url}
@@ -140,7 +140,7 @@ export function ImageCard(id: any): JSX.Element {
           avatar={""}
           likes={imageJson.likes}
           tag={""}
-          // favorite={0}
+        // favorite={0}
         />
       </Col>
     </Row>

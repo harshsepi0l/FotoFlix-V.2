@@ -26,7 +26,6 @@ export function LandImages(): JSX.Element {
       .then((response) => {
         setValues(response.data);
         setPublicOrPrivate(response.data.publicOrPrivate);
-        console.log(response.data);
       });
   }, []);
 
@@ -39,7 +38,6 @@ export function LandImages(): JSX.Element {
       })
       .then((props) => {
         setTags(props.data);
-        console.log(props.data);
       })
       .catch((error: AxiosError) => {
         console.log(error.response?.data);

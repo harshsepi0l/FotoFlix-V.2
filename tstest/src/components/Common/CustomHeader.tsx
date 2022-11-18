@@ -1,12 +1,10 @@
-import { BellOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
+import { BellOutlined, SearchOutlined, UserOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Avatar, Button, Col, Input, Row, Space, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { CustomButton } from "./CustomButton";
-import data from "./Data.json";
 import { useMediaQuery } from "react-responsive";
-
-import "./index.css";
+import { border, borderColor } from "@mui/system";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "../../pages/Login";
 import { SignUp } from "../../pages/SignUp";
@@ -14,7 +12,7 @@ import { HeaderDropdown } from "./HeaderDropdown";
 import Axios from "axios";
 import fotoLogo from "../ImageLogo/fotoLogo.svg";
 import logo from "../ImageLogo/logo.svg";
-import { border, borderColor } from "@mui/system";
+import "./index.css";
 
 const { Search } = Input;
 
@@ -30,21 +28,43 @@ const suffix = (
 // const onSearch = (value: string) => console.log(value);
 
 function CustomSearch(): JSX.Element {
-  const [filteredData, setFilteredData] = useState(data);
+  const [allData, setAllData] = useState<any>([]);
+  const [filteredData, setFilteredData] = useState<Array<any>>([]);
   const [wordEntered, setWordEntered] = useState("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const getData = async () => {
+      const userData = await Axios.get("http://localhost:3000/");
+      const postData = await Axios.get("http://localhost:3000/Cloudinary");
+      setAllData([...postData.data, ...userData.data]);
+    }
+
+    getData();
+    setFilteredData(allData.slice(15));
+    setIsLoading(false);
+  }, [])
 
   const handleFilter = (event: { target: { value: any } }) => {
-    const searchWord = event.target.value;
+    setIsLoading(true);
+    const searchWord = event.target.value.toLowerCase();
     setWordEntered(searchWord);
-    const newFilter = data.filter((value: { title: string }) => {
-      return value.title.toLowerCase().includes(searchWord.toLowerCase());
-    });
+
+    const newFilter = Array(allData).filter((value) => {
+      return value?.title?.toLowerCase()?.includes(searchWord) ||
+        value?.firstName?.includes(searchWord) ||
+        value?.lastName?.includes(searchWord);
+    }
+    );
+
+    console.log(newFilter);
 
     if (searchWord === "") {
-      setFilteredData(data);
+      setFilteredData(allData.slice(15));
     } else {
       setFilteredData(newFilter);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -57,19 +77,21 @@ function CustomSearch(): JSX.Element {
         className="Border-15 CustomSearch"
         onChange={handleFilter}
       />
-      <div className="Border-15 DataResult">
-        {filteredData.slice(0, 15).map((value, key) => {
-          return (
-            <a className="DataItem" href={value.link} target="_blank">
-              {filteredData.length !== 0 ? (
-                <p> {value.title} </p>
-              ) : (
-                <p> No Value </p>
-              )}
-            </a>
-          );
-        })}
-      </div>
+      {isLoading ? <LoadingOutlined /> :
+        <div className="Border-15 DataResult">
+          {filteredData.slice(0, 15).map((value, key) => {
+            return (
+              <a className="DataItem" href={value.link} target="_blank">
+                {filteredData.length !== 0 ? (
+                  <p> {value?.title || value?.firstName} </p>
+                ) : (
+                  <p> No Value </p>
+                )}
+              </a>
+            );
+          })}
+        </div>
+      }
     </div>
   );
 }
@@ -129,7 +151,7 @@ function LeftSection(): JSX.Element {
 }
 
 function RightButtonsSection(): JSX.Element {
-  let navigate = useNavigate();const [isLoggedIn, setIsLoggedIn] = useState(false);
+  let navigate = useNavigate(); const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -143,7 +165,7 @@ function RightButtonsSection(): JSX.Element {
       }
     );
   }, []);
-  
+
 
   const logout = () => {
     sessionStorage.removeItem("accessToken");
@@ -212,7 +234,7 @@ function RightButtonsSection(): JSX.Element {
               />
             )}
           </Link>
-          
+
         )}
       </Col>
     </Row>
@@ -222,7 +244,7 @@ function RightButtonsSection(): JSX.Element {
 function RightUserSection(): JSX.Element {
   return (
     <div>
-      
+
     </div>
   );
 }
