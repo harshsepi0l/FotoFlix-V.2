@@ -44,6 +44,7 @@ export const UploadForm = () => {
   };
   const config = {
     headers: {
+      "Content-Type": "application/json",
       accessToken: sessionStorage.getItem("accessToken") as string,
     },
   };
@@ -54,12 +55,19 @@ export const UploadForm = () => {
     ]);
     setInput("");
 
-    Axios.post(`https://fotoflix.herokuapp.com/Tags`, {
-      tag: chipData,
-      config,
-    }).then((response) => {
-      console.log(response);
-    });
+    Axios.post(
+      `https://fotoflix.herokuapp.com/Tags`,
+      {
+        tag: chipData,
+      },
+      config
+    )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const navigate = useNavigate();
