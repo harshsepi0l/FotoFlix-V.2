@@ -12,6 +12,7 @@ import { CardProps } from "../../props/CardProps";
 export function LandImages(): JSX.Element {
   let { UID } = useParams();
   const [values, setValues] = useState<CardProps[]>([]);
+  const [PublicOrPrivate, setPublicOrPrivate] = useState("");
   useEffect(() => {
     axios
       .get(`https://fotoflix.herokuapp.com/Cloudinary/`, {
@@ -21,30 +22,56 @@ export function LandImages(): JSX.Element {
       })
       .then((response) => {
         setValues(response.data);
+        setPublicOrPrivate(response.data.publicOrPrivate);
+        console.log(response.data);
       });
   }, []);
 
   let newCards: JSX.Element[] = [];
   {
-    Array.from(values).map((value, key) => {
-      newCards.push(
-        <CustomCard
-          keyprop={key}
-          publicOrPrivate={value.publicOrPrivate}
-          url={value.url}
-          title={value.title}
-          description={value.description}
-          dislikes={value.dislikes}
-          avatar={value.avatar}
-          likes={value.likes}
-          tags={value.tags}
-          favorite={value.favorite}
-          id={value.id}
-          uid={value.uid}
-        />
-      );
+    //  ? Array.from(values).map((value, key) => {
+    //   newCards.push(
+    //     <CustomCard
+    //       keyprop={key}
+    //       publicOrPrivate={value.publicOrPrivate}
+    //       url={value.url}
+    //       title={value.title}
+    //       description={value.description}
+    //       dislikes={value.dislikes}
+    //       avatar={value.avatar}
+    //       likes={value.likes}
+    //       tags={value.tags}
+    //       favorite={value.favorite}
+    //       id={value.id}
+    //       uid={value.uid}
+    //     />
+    //   );
+    // });
+    PublicOrPrivate == "1"
+      ? values.map((value, key) => {
+          newCards.push(
+            <CustomCard
+              keyprop={key}
+              publicOrPrivate={value.publicOrPrivate}
+              url={value.url}
+              title={value.title}
+              description={value.description}
+              dislikes={value.dislikes}
+              avatar={value.avatar}
+              likes={value.likes}
+              tags={value.tags}
+              favorite={value.favorite}
+              id={value.id}
+              uid={value.uid}
+            />
+          );
+        })
+      : PublicOrPrivate == "0";
+    values.map((value, key) => {
+      <> </>;
     });
   }
+
   return (
     <div className="RowImages">
       <div className="CardsContainer">

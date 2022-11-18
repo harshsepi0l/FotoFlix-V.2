@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 //import { ChipsArray } from "../../components/Tag";
 import { styled } from "@mui/material/styles";
+
 import { Card, Input } from "antd";
 import "./index.css";
 import { Chip, Paper } from "@mui/material";
@@ -52,8 +53,9 @@ export const UploadForm = () => {
 
   // This will navigate to Landing Page once user has signed up
   const sendToLanding = () => {
-    navigate("/LandingPage");
-    window.location.reload();
+    setTimeout(() => {
+      navigate("/LandingPage");
+    }, 2000);
   };
 
   const handleImageTitleChange = (e: any) => {
@@ -95,6 +97,7 @@ export const UploadForm = () => {
   const handleSubmitFile = (e: any) => {
     e.preventDefault();
     if (!previewSource) return;
+
     uploadImage(previewSource);
     sendToLanding();
   };
@@ -255,3 +258,6 @@ export const UploadForm = () => {
     </div>
   );
 };
+function sessionTimeout() {
+  throw new Error("Function not implemented.");
+}
