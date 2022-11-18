@@ -4,9 +4,26 @@ const cors = require("cors");
 require("dotenv").config();
 const bodyParser = require("body-parser");
 
-
 // Cors reqs (Thank you Aleksandr!)
 
+var whiteList = [
+  "http://localhost:3000",
+  "https://fotoflix.herokuapp.com/login",
+  "https://fotoflix.herokuapp.com/Cloudinary",
+  "https://fotoflix.herokuapp.com/Cloudinary",
+]; // Allowed domains (add heroku later!!)
+
+var corsOptions = {
+  credentials: true,
+
+  origin: function (origin, callback) {
+    if (whiteList.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
 app.use(express.json({ limit: "500mb" }));
 app.use(
   express.urlencoded({
@@ -14,11 +31,10 @@ app.use(
     limit: "500mb",
   })
 );
-app.use(bodyParser.json());
-app.use(cors());
 
-const bcryptjs = require("bcryptjs"); // for hashing passwords
-const saltRounds = 10; // for hashing passwords
+app.use(bodyParser.json());
+
+app.use(cors(corsOptions));
 
 const db = require("./models");
 
@@ -58,62 +74,5 @@ try {
 //   const sqlUpdate = "UPDATE flixerinfo SET Username = ? WHERE Firstname = ?";
 //   db.query(sqlUpdate, [username, firstname], (err, result) => {
 //     if (err) console.log(err);
-//   });
-// });
-
-// app.post("/api/login", (req, res) => {
-//   const username = req.body.Username;
-//   const password = req.body.Password;
-
-//   const sqlSelect = "SELECT * FROM flixerinfo WHERE Username = ?";
-//   db.query(sqlSelect, [username], (err, result) => {
-//     if (err) {
-//       res.send({ err: err });
-//     }
-
-//     if (result.length > 0) {
-//       bcryptjs.compare(password, result[0].Password, (error, response) => {
-//         if (response) {
-//           res.send(result);
-//         } else {
-//           res.send({ message: "Wrong username/password combination!" });
-//         }
-//       });
-//     } else {
-//       res.send({ message: "User doesn't exist" });
-//     }
-//   });
-// });
-
-// app.get("/api/images", async (req, res) => {
-//   const { resources } = await cloudinary.search
-//     .expression("folder:flixerimages")
-//     .sort_by("public_id", "desc")
-//     .max_results(30)
-//     .execute();
-//   const publicIds = resources.map((file) => file.public_id);
-//   res.send(publicIds);
-// });
-
-// app.post("/api/upload", async (req, res) => {
-//   try {
-//     const fileStr = req.body.data;
-
-//     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
-//       upload_preset: "flixerimages",
-//     });
-//     console.log(uploadedResponse);
-//     res.json({ msg: "YAYAYAY" });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ err: "something went wrong" });
-//   }
-// });
-
-// app.get("/api/getimages", (req, res) => {
-//   const sqlSelect = "SELECT * FROM flixerimages";
-
-//   db.query(sqlSelect, (err, result) => {
-//     res.send(result);
 //   });
 // });

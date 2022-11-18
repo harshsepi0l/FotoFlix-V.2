@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 //import { ChipsArray } from "../../components/Tag";
 import { styled } from "@mui/material/styles";
-import { Card, Input } from 'antd';
+import { Card, Input } from "antd";
 import "./index.css";
 import { Chip, Paper } from "@mui/material";
 import { Box, Button, TextField } from "@mui/material";
@@ -101,7 +101,7 @@ export const UploadForm = () => {
 
   const uploadImage = async (base64EncodedImage: any) => {
     try {
-      await fetch(`http://localhost:3000/Cloudinary/byUID/`, {
+      await fetch(`https://fotoflix.herokuapp.com/Cloudinary/byUID/`, {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
@@ -199,9 +199,9 @@ export const UploadForm = () => {
           <TextField
             placeholder="tag name"
             value={input}
-            onChange={(e: { target: { value: React.SetStateAction<string> } }) =>
-              setInput(e.target.value)
-            }
+            onChange={(e: {
+              target: { value: React.SetStateAction<string> };
+            }) => setInput(e.target.value)}
           />
           <br />
           <br />
