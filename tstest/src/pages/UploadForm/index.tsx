@@ -49,13 +49,13 @@ export const UploadForm = () => {
     ]);
     setInput("");
 
-    Axios.post("https://fotoflix.herokuapp.com/Tags/createdTag", {
+    Axios.post("https://fotoflix.herokuapp.com/Tags/", {
       headers: {
         accessToken: sessionStorage.getItem("accessToken"),
       },
-      body: {
-        tags: chipData,
-      },
+      tag: chipData,
+    }).then((response) => {
+      console.log(response);
     });
   };
 
