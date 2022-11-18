@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import { Card, Input } from "antd";
 import "./index.css";
 import { Chip, Paper } from "@mui/material";
-import { Box, Button, TextField } from "@mui/material";}
+import { Box, Button, TextField } from "@mui/material";
 import { stringify } from "querystring";
 import { useParams } from "react-router-dom";
 import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
@@ -260,4 +260,3 @@ export const UploadForm = () => {
 function sessionTimeout() {
   throw new Error("Function not implemented.");
 }
-
