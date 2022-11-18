@@ -104,29 +104,33 @@ export const UploadForm = () => {
   };
 
   const uploadImage = async (base64EncodedImage: any) => {
-    axios.get("https://fotoflix.herokuapp.com/Tags/createTags", {
-      params: {
-        tags: chipData,
-      },
-    });
-
-    try {
-      await fetch(`https://fotoflix.herokuapp.com/Cloudinary/byUID/`, {
-        method: "POST",
-        body: JSON.stringify({
-          data: base64EncodedImage,
-          title: imageTitle,
-          description: imageDesc,
-          publicOrPrivate: imageVis,
-        }),
+    useEffect(() => {
+      axios.post("https://fotoflix.herokuapp.com/Tags/createTags", {
         headers: {
-          accessToken: sessionStorage.getItem("accessToken") as string,
-          "Content-type": "application/json",
+          access_token: sessionStorage.getItem("accessToken"),
+        },
+        body: {
+          tags: chipData,
         },
       });
-    } catch (err) {
-      console.error(err);
-    }
+    }, []);
+    // try {
+    //   await fetch(`https://fotoflix.herokuapp.com/Cloudinary/byUID/`, {
+    //     method: "POST",
+    //     body: JSON.stringify({
+    //       data: base64EncodedImage,
+    //       title: imageTitle,
+    //       description: imageDesc,
+    //       publicOrPrivate: imageVis,
+    //     }),
+    //     headers: {
+    //       accessToken: sessionStorage.getItem("accessToken") as string,
+    //       "Content-type": "application/json",
+    //     },
+    //   });
+    // } catch (err) {
+    //   console.error(err);
+    // }
   };
 
   // const uploadData =async (data:any) => {
