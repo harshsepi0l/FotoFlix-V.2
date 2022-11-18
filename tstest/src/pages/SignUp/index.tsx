@@ -32,7 +32,7 @@ export const SignUp = () => {
   };
 
   const submitLog = (data: any) => {
-    Axios.post("http://fotoflix.herokuapp.com/signUp", {
+    Axios.post("https://fotoflix.herokuapp.com/signUp", {
       firstName: firstname,
       lastName: lastname,
       userName: username,

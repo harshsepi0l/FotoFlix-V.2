@@ -16,7 +16,7 @@ app.use(
 
 app.use(bodyParser.json());
 const corsOptions = {
-  origin: "http://fotoflix.herokuapp.com/",
+  origin: "https://fotoflix.herokuapp.com/",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
