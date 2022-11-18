@@ -23,6 +23,7 @@ export function LandImages(): JSX.Element {
       .then((response) => {
         setValues(response.data);
         setPublicOrPrivate(response.data.publicOrPrivate);
+        console.log(response.data);
       });
   }, []);
 
