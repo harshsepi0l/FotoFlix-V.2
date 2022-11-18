@@ -148,7 +148,7 @@ function RightButtonsSection(): JSX.Element {
   const logout = () => {
     sessionStorage.removeItem("accessToken");
     setIsLoggedIn(false);
-    navigate("/LandingPage");
+    navigate("/");
   };
 
   const isDesktop = useMediaQuery({
