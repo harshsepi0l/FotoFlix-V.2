@@ -48,16 +48,15 @@ export const UploadForm = () => {
       { key: chipData.length + 1, label: `#${input}` },
     ]);
     setInput("");
-    useEffect(() => {
-      Axios.post("https://fotoflix.herokuapp.com/Tags/createdTag", {
-        headers: {
-          accessToken: sessionStorage.getItem("accessToken"),
-        },
-        body: {
-          tags: chipData,
-        },
-      });
-    }, []);
+
+    Axios.post("https://fotoflix.herokuapp.com/Tags/createdTag", {
+      headers: {
+        accessToken: sessionStorage.getItem("accessToken"),
+      },
+      body: {
+        tags: chipData,
+      },
+    });
   };
 
   const navigate = useNavigate();
