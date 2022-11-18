@@ -44,7 +44,6 @@ export const UploadForm = () => {
   };
   const config = {
     headers: {
-      "Content-Type": "application/json",
       accessToken: sessionStorage.getItem("accessToken") as string,
     },
   };
@@ -58,7 +57,6 @@ export const UploadForm = () => {
     Axios.post(
       `https://fotoflix.herokuapp.com/Tags`,
       {
-        //tags: `#${input}`,
         tag: `#${input}`,
       },
       config
