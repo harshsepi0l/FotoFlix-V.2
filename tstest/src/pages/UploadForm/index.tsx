@@ -42,6 +42,11 @@ export const UploadForm = () => {
       chips.filter((chip) => chip.key !== chipToDelete.key)
     );
   };
+  const config = {
+    headers: {
+      accessToken: sessionStorage.getItem("accessToken") as string,
+    },
+  };
   const handleClick = () => {
     setChipData([
       ...chipData,
@@ -49,11 +54,9 @@ export const UploadForm = () => {
     ]);
     setInput("");
 
-    Axios.post("https://fotoflix.herokuapp.com/Tags", {
+    Axios.post(`https://fotoflix.herokuapp.com/Tags`, {
       tag: chipData,
-      headers: {
-        accessToken: sessionStorage.getItem("accessToken") as string,
-      },
+      config,
     }).then((response) => {
       console.log(response);
     });
