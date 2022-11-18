@@ -49,7 +49,7 @@ export const UploadForm = () => {
     ]);
     setInput("");
 
-    Axios.post("https://fotoflix.herokuapp.com/Tags/", {
+    Axios.post("https://fotoflix.herokuapp.com/Tags", {
       headers: {
         accessToken: sessionStorage.getItem("accessToken"),
       },
