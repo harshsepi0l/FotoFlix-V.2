@@ -1,10 +1,11 @@
-import { Input, Space } from "antd";
+import { Card, Input, Space } from "antd";
 import Axios from "axios";
 import { useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { InitOptions, IntegerDataType } from "sequelize";
 import { CustomButton } from "../../components/Common/CustomButton";
 import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
+import "./index.css"
 
 export const Login = () => {
   const [username, checkUsername] = useState("");
@@ -50,86 +51,82 @@ export const Login = () => {
     //   }
     // }, []);
     return (
-      <div>
-        <div style={{ marginTop: 50 }}>
-          <div className="Container">
-            <div className="App">
-              <img
-                style={{ color: "#937DC2", width: 200, height: 90 }}
-                src={fotoLogo}
-                alt="error"
-              />
-              <p style={{ color: "#937DC2", fontSize: 24 }}>Login Form</p>
+      <div className="LogIn-Page" style={{height: ""}}>
+        {" "}
+        <Card className="LogIn-Card">
+          <div className="LogIn-Logo-Container">
+            <img
+              className="LogIn-Logo"
+              src={fotoLogo}
+              alt="error"
+            />
 
-              <div className="content">
-                <div className="image"></div>
-                <div className="form">
-                  <div className="login">
-                    <Input
-                      style={{ borderRadius: "25px", height: "82.64px" }}
-                      type="text"
-                      name="username"
-                      placeholder="Username"
-                      onChange={(e) => {
-                        checkUsername(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <br />
-                  <div className="login">
-                    <Space direction="vertical">
-                      <Input.Password
-                        style={{ borderRadius: "25px", height: "82.64px" }}
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        onChange={(e) => {
-                          checkPassword(e.target.value);
-                        }}
-                      />
-                    </Space>
-                  </div>
-                </div>
-                <br />
-                <NavLink onClick={sendToSignUp} to={"/signUp"}>
-                  <p style={{ color: "#C689C6" }}>Don't have an account?</p>
-                </NavLink>
-              </div>
+          </div>
+          <h1 className="LogIn-Logo-Container LogIn-Text">Login Form</h1>
 
-              <NavLink onClick={sendToLanding} to={"/"}>
-                <CustomButton
-                  title={"Continue as Guest"}
-                  buttonType={"default"}
-                  color={"white"}
-                />
-              </NavLink>
+          <div className="Inputs">
+            <Input
+              className="LogIn-Input"
+              type="text"
+              name="username"
+              placeholder="Username"
+              onChange={(e) => {
+                checkUsername(e.target.value);
+              }}
+            />
 
-              <div className="login">
-                <div className="Button-SignUp">
-                  <CustomButton
-                    buttonType={"primary"}
-                    color={"darkpurple"}
-                    title={"Login"}
-                    onClick={loginCheck}
-                  />
+            <Input.Password
+              className="LogIn-Input"
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={(e) => {
+                checkPassword(e.target.value);
+              }}
+            />
 
-                  <div className="margin-Register-signup">
-                    <NavLink onClick={sendToLanding} to={"/"}>
-                      <CustomButton
-                        buttonType={"primary"}
-                        color={"red"}
-                        title={"Cancel"}
-                      />
-                    </NavLink>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <NavLink onClick={sendToSignUp} to={"/signUp"}>
+              <p style={{ color: "#C689C6" }}>Don't have an account?</p>
+            </NavLink>
+
           </div>
 
-          <h1>{loginStatus}</h1>
-        </div>
-      </div>
+          <NavLink onClick={sendToLanding} to={"/"} className="Button-Guest">
+            <CustomButton
+              buttonType={"default"}
+              color={"white"}
+              title={"Continue as a guest"}
+              style={{
+                marginBottom: "20px",
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                height: "100%",
+                justifyContent: "center",
+              }}
+            />
+          </NavLink>
+
+          <div className="LogIn-Button">
+            <NavLink onClick={sendToLanding} to={"/"}>
+              <CustomButton
+                buttonType={"primary"}
+                color={"darkpurple"}
+                title={"Login"}
+                onClick={loginCheck}
+              />
+            </NavLink>
+            <NavLink onClick={sendToLanding} to={"/"}>
+              <CustomButton
+                buttonType={"primary"}
+                color={"red"}
+                title={"Cancel"}
+              />
+            </NavLink>
+          </div>
+        </Card >
+      </div >
+
     );
   };
   return <div>{LoginCheck()}</div>;
