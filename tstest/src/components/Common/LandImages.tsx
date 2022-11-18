@@ -12,7 +12,7 @@ import { CardProps } from "../../props/CardProps";
 export function LandImages(): JSX.Element {
   let { UID } = useParams();
   const [values, setValues] = useState<CardProps[]>([]);
-  const [PublicOrPrivate, setPublicOrPrivate] = useState("Public");
+  const [PublicOrPrivate, setPublicOrPrivate] = useState("");
   useEffect(() => {
     axios
       .get(`https://fotoflix.herokuapp.com/Cloudinary/`, {
@@ -65,9 +65,10 @@ export function LandImages(): JSX.Element {
             />
           );
         })
-      : values.map((value, key) => {
-          <> </>;
-        });
+      : PublicOrPrivate === "0";
+    values.map((value, key) => {
+      <> </>;
+    });
   }
 
   return (
