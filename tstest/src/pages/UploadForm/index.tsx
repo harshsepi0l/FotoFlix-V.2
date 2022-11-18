@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 //import { ChipsArray } from "../../components/Tag";
 import { styled } from "@mui/material/styles";
@@ -10,6 +10,7 @@ import { Box, Button, TextField } from "@mui/material";
 import { stringify } from "querystring";
 import { useParams } from "react-router-dom";
 import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
+import axios from "axios";
 
 export interface ChipData {
   key: number;
@@ -103,6 +104,12 @@ export const UploadForm = () => {
   };
 
   const uploadImage = async (base64EncodedImage: any) => {
+    axios.get("https://fotoflix.herokuapp.com/Tags/createTags", {
+      params: {
+        tags: chipData,
+      },
+    });
+
     try {
       await fetch(`https://fotoflix.herokuapp.com/Cloudinary/byUID/`, {
         method: "POST",
@@ -111,7 +118,6 @@ export const UploadForm = () => {
           title: imageTitle,
           description: imageDesc,
           publicOrPrivate: imageVis,
-          tags: chipData,
         }),
         headers: {
           accessToken: sessionStorage.getItem("accessToken") as string,
@@ -122,6 +128,7 @@ export const UploadForm = () => {
       console.error(err);
     }
   };
+
   // const uploadData =async (data:any) => {
   //   try {
   //     await fetch("", {

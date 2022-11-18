@@ -27,7 +27,8 @@ router.get("/", async (req, res) => {
   res.json(posts);
 });
 
-router.get("/byId/:id", async (req, res) => { // Display an image on the image page
+router.get("/byId/:id", async (req, res) => {
+  // Display an image on the image page
   let id = req.params.id; // Get the id
   const img = await post.findByPk(id);
   res.json(img);
@@ -51,23 +52,10 @@ router.post("/byUID", validateToken, async (req, res) => {
       publicOrPrivate: req.body.publicOrPrivate,
       tags: req.body.tags,
       likes: 0,
-      dislikes: 0
-    });
-
-    await Array.from(tags).forEach(tag => {
-      tagsModel.create({
-        tag: tag,
-      });
-    });
-
-    await tapsModel.create({
-      postId: postResult.id,
-      likes: 0,
       dislikes: 0,
-      tagsId: 0,
-    })
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 
   res.json({ message: "Post created!" });

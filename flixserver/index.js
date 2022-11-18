@@ -36,6 +36,9 @@ app.use("/Cloudinary", cloudinaryRouter);
 const likesRouter = require("./routes/flixertaps");
 app.use("/Likes", likesRouter);
 
+const tagsRouter = require("./routes/flixertags");
+app.use("/Tags", tagsRouter);
+
 try {
   db.sequelize.sync().then(() => {
     app.listen(process.env.PORT || 3000, () => {
