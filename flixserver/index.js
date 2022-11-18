@@ -14,13 +14,15 @@ app.use(
   })
 );
 
+app.use(cors());
 app.use(bodyParser.json());
-const corsOptions = {
-  origin: "https://fotoflix.herokuapp.com/",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: "https://fotoflix.org",
+//   credentials: true, //access-control-allow-credentials:true
+//   optionSuccessStatus: 200,
+// };
+// app.use(cors(corsOptions));
+
 const db = require("./models");
 
 // Routers

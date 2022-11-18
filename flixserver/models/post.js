@@ -1,5 +1,3 @@
-const flixerinfo = require("./FlixerInfo");
-
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define(
     "flixerimages",
