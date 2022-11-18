@@ -5,6 +5,7 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 
 // Cors reqs (Thank you Aleksandr!)
+app.use(cors());
 
 app.use(express.json({ limit: "500mb" }));
 app.use(
@@ -14,7 +15,6 @@ app.use(
   })
 );
 
-app.use(cors());
 app.use(bodyParser.json());
 // const corsOptions = {
 //   origin: "https://fotoflix.org",
