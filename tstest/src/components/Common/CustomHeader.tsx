@@ -1,4 +1,9 @@
-import { BellOutlined, SearchOutlined, UserOutlined, LoadingOutlined } from "@ant-design/icons";
+import {
+  BellOutlined,
+  SearchOutlined,
+  UserOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 import { Avatar, Button, Col, Input, Row, Space, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -36,14 +41,16 @@ function CustomSearch(): JSX.Element {
   useEffect(() => {
     const getData = async () => {
       const userData = await Axios.get("https://fotoflix.herokuapp.com/");
-      const postData = await Axios.get("https://fotoflix.herokuapp.com/Cloudinary");
+      const postData = await Axios.get(
+        "https://fotoflix.herokuapp.com/Cloudinary/"
+      );
       setAllData([...postData.data, ...userData.data]);
-    }
+    };
 
     getData();
     setFilteredData(allData.slice(15));
     setIsLoading(false);
-  }, [])
+  }, []);
 
   const handleFilter = (event: { target: { value: any } }) => {
     setIsLoading(true);
@@ -51,11 +58,12 @@ function CustomSearch(): JSX.Element {
     setWordEntered(searchWord);
 
     const newFilter = Array(allData).filter((value) => {
-      return value?.title?.toLowerCase()?.includes(searchWord) ||
+      return (
+        value?.title?.toLowerCase().includes(searchWord) ||
         value?.firstName?.includes(searchWord) ||
-        value?.lastName?.includes(searchWord);
-    }
-    );
+        value?.lastName?.includes(searchWord)
+      );
+    });
 
     console.log(newFilter);
 
@@ -77,7 +85,9 @@ function CustomSearch(): JSX.Element {
         className="Border-15 CustomSearch"
         onChange={handleFilter}
       />
-      {isLoading ? <LoadingOutlined /> :
+      {isLoading ? (
+        <LoadingOutlined />
+      ) : (
         <div className="Border-15 DataResult">
           {filteredData.slice(0, 15).map((value, key) => {
             return (
@@ -91,7 +101,7 @@ function CustomSearch(): JSX.Element {
             );
           })}
         </div>
-      }
+      )}
     </div>
   );
 }
@@ -114,7 +124,7 @@ function LeftSection(): JSX.Element {
     <Row justify="start">
       <Space align="center">
         <Col span={4}>
-          <Link to="/">
+          <Link to="/LandingPage">
             {isMobile ? (
               <img
                 style={{ color: "#937DC2", width: 20, height: 20 }}
@@ -151,7 +161,8 @@ function LeftSection(): JSX.Element {
 }
 
 function RightButtonsSection(): JSX.Element {
-  let navigate = useNavigate(); const [isLoggedIn, setIsLoggedIn] = useState(false);
+  let navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -165,7 +176,6 @@ function RightButtonsSection(): JSX.Element {
       }
     );
   }, []);
-
 
   const logout = () => {
     sessionStorage.removeItem("accessToken");
@@ -186,7 +196,11 @@ function RightButtonsSection(): JSX.Element {
   });
 
   return (
-    <Row justify="space-between" style={{width: "100px", marginLeft: "auto"}} align="bottom">
+    <Row
+      justify="space-between"
+      style={{ width: "100px", marginLeft: "auto" }}
+      align="bottom"
+    >
       <Col span={4}>
         {isLoggedIn ? (
           <CustomButton
@@ -195,8 +209,8 @@ function RightButtonsSection(): JSX.Element {
             title={"Logout"}
             onClick={logout}
           />
-          // <></>
         ) : (
+          // <></>
           <Link to="/login">
             <CustomButton
               buttonType={"default"}
@@ -234,7 +248,6 @@ function RightButtonsSection(): JSX.Element {
               />
             )}
           </Link>
-
         )}
       </Col>
     </Row>
@@ -242,11 +255,7 @@ function RightButtonsSection(): JSX.Element {
 }
 
 function RightUserSection(): JSX.Element {
-  return (
-    <div>
-
-    </div>
-  );
+  return <div></div>;
 }
 
 interface isLoggedIn {
