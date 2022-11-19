@@ -20,7 +20,7 @@ export const Login = () => {
     const sendToLanding = () => {
       setTimeout(() => {
         navigate("/LandingPage");
-      }, 3000);
+      }, 2000);
     };
 
     // This will navigate to SignUp Page once user has signed up
