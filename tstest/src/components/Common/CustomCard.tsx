@@ -113,7 +113,7 @@ export function CustomCard(props: CardProps): JSX.Element {
             text={props.likes - props.dislikes}
             isPublic={isGlobal}
           />,
-          // <CustomAction icon="tags" text={props.tags} isPublic={isGlobal} />,
+          <CustomAction icon="tags" text={props.tags} isPublic={isGlobal} />,
           <CustomAction icon="status" isPublic={isGlobal} />,
         ]}
       >

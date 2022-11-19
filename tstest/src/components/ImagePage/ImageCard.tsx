@@ -139,8 +139,8 @@ export function ImageCard(id: any): JSX.Element {
           dislikes={imageJson.dislikes}
           avatar={""}
           likes={imageJson.likes}
-          tag={""}
-        // favorite={0}
+          tag={imageJson.tag}
+          // favorite={0}
         />
       </Col>
     </Row>
