@@ -82,7 +82,7 @@ function CardInfo(props: CardProps): JSX.Element {
       <Card title={props.title} bordered={false} className="Card-Info">
         <p>{props.description}</p>
         <p>Uploaded by {props.uid}</p>
-        <p>{props.tag}</p>
+        <p>{props.tags}</p>
       </Card>
     </div>
   );
@@ -139,7 +139,7 @@ export function ImageCard(id: any): JSX.Element {
           dislikes={imageJson.dislikes}
           avatar={""}
           likes={imageJson.likes}
-          tag={imageJson.tag}
+          tags={imageJson.tags}
           // favorite={0}
         />
       </Col>

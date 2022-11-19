@@ -47,27 +47,27 @@ export const UploadForm = () => {
       accessToken: sessionStorage.getItem("accessToken") as string,
     },
   };
-  const handleClick = () => {
-    setChipData([
-      ...chipData,
-      { key: chipData.length + 1, label: `#${input}` },
-    ]);
-    setInput("");
+  // const handleClick = () => {
+  //   setChipData([
+  //     ...chipData,
+  //     { key: chipData.length + 1, label: `#${input}` },
+  //   ]);
+  //   setInput("");
 
-    // Axios.post(
-    //   `https://fotoflix.herokuapp.com/Cloudinary/`,
-    //   {
-    //     tag: `#${input}`,
-    //   },
-    //   config
-    // )
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-  };
+  //   // Axios.post(
+  //   //   `https://fotoflix.herokuapp.com/Cloudinary/`,
+  //   //   {
+  //   //     tag: `#${input}`,
+  //   //   },
+  //   //   config
+  //   // )
+  //   //   .then((response) => {
+  //   //     console.log(response);
+  //   //   })
+  //   //   .catch((error) => {
+  //   //     console.log(error);
+  //   //   });
+  // };
 
   const navigate = useNavigate();
 
@@ -123,6 +123,8 @@ export const UploadForm = () => {
   };
 
   const uploadImage = async (base64EncodedImage: any) => {
+    setChipData([...chipData, { key: chipData.length + 1, label: `${input}` }]);
+    setInput("");
     try {
       await fetch(`https://fotoflix.herokuapp.com/Cloudinary/byUID/`, {
         method: "POST",
@@ -131,7 +133,7 @@ export const UploadForm = () => {
           title: imageTitle,
           description: imageDesc,
           publicOrPrivate: imageVis,
-          tags: `#${input}`,
+          tags: `${input}`,
         }),
         headers: {
           accessToken: sessionStorage.getItem("accessToken") as string,
@@ -229,14 +231,14 @@ export const UploadForm = () => {
           />
           <br />
           <br />
-          <Button
+          {/* <Button
             onClick={handleClick}
             style={{ color: "#937DC2" }}
             className="buttonTag"
           >
             {" "}
             Save tag
-          </Button>
+          </Button> */}
 
           <Paper
             sx={{

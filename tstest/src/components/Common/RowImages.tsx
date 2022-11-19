@@ -35,7 +35,7 @@ export function RowImages(): JSX.Element {
           dislikes={value.dislikes}
           avatar={value.avatar}
           likes={value.likes}
-          tag={value.tag}
+          tags={value.tags}
           // favorite={value.favorite}
           id={value.id}
           uid={value.uid}

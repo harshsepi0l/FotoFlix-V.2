@@ -18,7 +18,9 @@ export const Login = () => {
   const LoginCheck = () => {
     // This will navigate to Landing Page once user has logged in
     const sendToLanding = () => {
-      navigate("/LandingPage");
+      setTimeout(() => {
+        navigate("/LandingPage");
+      }, 3000);
     };
 
     // This will navigate to SignUp Page once user has signed up
@@ -35,7 +37,7 @@ export const Login = () => {
           alert(response.data.error);
         } else {
           sessionStorage.setItem("accessToken", response.data);
-          navigate("/LandingPage");
+          sendToLanding();
         }
       });
     };
@@ -115,5 +117,8 @@ export const Login = () => {
   return <div>{LoginCheck()}</div>;
 };
 function useEffect(arg0: () => void, arg1: never[]) {
+  throw new Error("Function not implemented.");
+}
+function sessionTimeout() {
   throw new Error("Function not implemented.");
 }

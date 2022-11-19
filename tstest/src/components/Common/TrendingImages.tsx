@@ -41,7 +41,7 @@ export function TrendingImages(): JSX.Element {
             description={value.description}
             dislikes={value.dislikes}
             likes={value.likes}
-            tag={value.tag}
+            tags={value.tags}
             id={value.id}
             // favorite={value.favorite}
             keyprop={key}
