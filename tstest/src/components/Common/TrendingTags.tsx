@@ -1,12 +1,12 @@
+import { List, ListItem, ListItemText } from "@mui/material";
 import { Card } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { CardProps } from "../../props/CardProps";
+import { CustomCard } from "./CustomCard";
 import { InfiniteScroll } from "./InfiniteScroll";
 
 export function TrendingTags(): JSX.Element {
-
-
   const [values, setValues] = useState<CardProps[]>([]);
   useEffect(() => {
     axios
@@ -33,8 +33,13 @@ export function TrendingTags(): JSX.Element {
           scrollBehavior: "smooth",
         }}
       >
-
-
+        <List>
+          {values.map((item) => (
+            <ListItem button key={item.tags}>
+              <ListItemText primary={item.tags} />
+            </ListItem>
+          ))}
+        </List>
       </div>
     </Card>
   );
