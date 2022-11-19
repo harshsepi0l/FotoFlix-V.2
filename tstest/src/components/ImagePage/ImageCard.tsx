@@ -52,8 +52,21 @@ function CustomAction(props: IAction): JSX.Element {
   );
 }
 
-function SingleImageCard(props: singleImageProps): JSX.Element {
-  const imgPopularity = props.Likes - props.Dislikes;
+function SingleImageCard(props: CardProps): JSX.Element {
+  const [values, setValues] = useState<CardProps[]>([]);
+
+  useEffect(() => {
+    axios
+      .get("https://fotoflix.herokuapp.com/Cloudinary/", {
+        headers: {
+          accessToken: sessionStorage.getItem("accessToken") as string,
+        },
+      })
+      .then((response) => {
+        setValues(response.data);
+      });
+  }, []);
+  let cards: JSX.Element[] = [];
 
   return (
     <Card
@@ -63,18 +76,16 @@ function SingleImageCard(props: singleImageProps): JSX.Element {
         color: "var(--white)",
         alignItems: "center",
       }}
-      cover={<img alt={"image"} src={props.Url} />}
+      cover={<img alt={"image"} src={props.url} />}
       actions={[
-        <CustomAction icon="like" text={props.Likes} />,
-        <CustomAction icon="dislike" text={props.Dislikes} />,
-        <CustomAction icon="popularity" text={imgPopularity} />,
+        <CustomAction icon="like" text={props.likes} />,
+        <CustomAction icon="dislike" text={props.dislikes} />,
+        // <CustomAction icon="popularity" text={imgPopularity} />,
 
-        <CustomAction icon="tags" text="Tags" />,
+        <CustomAction icon="tags" text={props.tags} />,
         <CustomAction icon="status" />,
       ]}
-    >
-      {/* <Meta title="Europe Street beat" description="www.instagram.com" /> */}
-    </Card>
+    ></Card>
   );
 }
 
@@ -107,28 +118,20 @@ export function ImageCard(id: any): JSX.Element {
   }, []);
   const imageJson = JSON.parse(JSON.stringify(imagePost));
 
-  const [values, setValues] = useState("");
-
-  const valueJson = JSON.parse(JSON.stringify(values));
-  useEffect(() => {
-    axios
-      .get("https://fotoflix.herokuapp.com/Cloudinary/", {
-        headers: {
-          accessToken: sessionStorage.getItem("accessToken") as string,
-        },
-      })
-      .then((response) => {
-        setValues(response.data);
-      });
-  }, []);
-
   return (
     <Row align="stretch" style={{ height: "auto" }}>
       <Col span={10}>
         <SingleImageCard
-          Url={imageJson.url}
-          Likes={imageJson.likes}
-          Dislikes={imageJson.dislikes}
+          url={imageJson.url}
+          likes={imageJson.likes}
+          dislikes={imageJson.dislikes}
+          publicOrPrivate={0}
+          title={""}
+          description={""}
+          avatar={""}
+          tags={""}
+          keyprop={undefined}
+          id={0}
         />
         {/* <CustomCard/> */}
       </Col>
@@ -144,7 +147,7 @@ export function ImageCard(id: any): JSX.Element {
           dislikes={imageJson.dislikes}
           avatar={""}
           likes={imageJson.likes}
-          tags={valueJson.tags}
+          tags={imageJson.tags}
           // favorite={0}
         />
       </Col>
