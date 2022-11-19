@@ -54,19 +54,19 @@ export const UploadForm = () => {
     ]);
     setInput("");
 
-    Axios.post(
-      `https://fotoflix.herokuapp.com/Tags`,
-      {
-        tag: `#${input}`,
-      },
-      config
-    )
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // Axios.post(
+    //   `https://fotoflix.herokuapp.com/Cloudinary/`,
+    //   {
+    //     tag: `#${input}`,
+    //   },
+    //   config
+    // )
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   const navigate = useNavigate();
@@ -131,6 +131,7 @@ export const UploadForm = () => {
           title: imageTitle,
           description: imageDesc,
           publicOrPrivate: imageVis,
+          tags: `#${input}`,
         }),
         headers: {
           accessToken: sessionStorage.getItem("accessToken") as string,

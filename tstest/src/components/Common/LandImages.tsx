@@ -29,21 +29,6 @@ export function LandImages(): JSX.Element {
       });
   }, []);
 
-  useEffect(() => {
-    axios
-      .get(`https://fotoflix.herokuapp.com/Tags/ByUID`, {
-        headers: {
-          accessToken: sessionStorage.getItem("accessToken") as string,
-        },
-      })
-      .then((response) => {
-        setTags(response.data);
-      })
-      .catch((error: AxiosError) => {
-        console.log(error.response?.data);
-      });
-  }, []);
-
   let newCards: JSX.Element[] = [];
   {
     Array.from(values).map((value, key) => {
