@@ -54,6 +54,7 @@ function CustomAction(props: IAction): JSX.Element {
 
 function SingleImageCard(props: singleImageProps): JSX.Element {
   const imgPopularity = props.Likes - props.Dislikes;
+
   return (
     <Card
       hoverable
@@ -67,6 +68,7 @@ function SingleImageCard(props: singleImageProps): JSX.Element {
         <CustomAction icon="like" text={props.Likes} />,
         <CustomAction icon="dislike" text={props.Dislikes} />,
         <CustomAction icon="popularity" text={imgPopularity} />,
+
         <CustomAction icon="tags" text="Tags" />,
         <CustomAction icon="status" />,
       ]}
@@ -105,17 +107,20 @@ export function ImageCard(id: any): JSX.Element {
   }, []);
   const imageJson = JSON.parse(JSON.stringify(imagePost));
 
-  // Get tags
-  // const [imageTags, setImageTags] = useState("");
-  // useEffect(()=>{
-  //   async function fetchData(){
-  //   await axios.get(`https://full-stack-fotoflix.herokuapp.com/Cloudinary/tagsByid/${imgId.id}`).then((response) => {
-  //     setImageTags(response.data); // response.data: all the image data
-  //   })};
-  //   fetchData();
-  // }, []);
-  // const tagsJson = JSON.parse(JSON.stringify(imageTags));
-  // console.log(tagsJson);
+  const [values, setValues] = useState("");
+
+  const valueJson = JSON.parse(JSON.stringify(values));
+  useEffect(() => {
+    axios
+      .get("https://fotoflix.herokuapp.com/Cloudinary/", {
+        headers: {
+          accessToken: sessionStorage.getItem("accessToken") as string,
+        },
+      })
+      .then((response) => {
+        setValues(response.data);
+      });
+  }, []);
 
   return (
     <Row align="stretch" style={{ height: "auto" }}>
@@ -139,7 +144,7 @@ export function ImageCard(id: any): JSX.Element {
           dislikes={imageJson.dislikes}
           avatar={""}
           likes={imageJson.likes}
-          tags={imageJson.tags}
+          tags={valueJson.tags}
           // favorite={0}
         />
       </Col>

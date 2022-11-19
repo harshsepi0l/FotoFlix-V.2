@@ -8,7 +8,7 @@ export interface CardProps {
   avatar: string;
   likes: number;
   // favorite: number;
-  tags?: any;
+  tags: string;
   keyprop: any;
   id: number;
   uid?: number;
