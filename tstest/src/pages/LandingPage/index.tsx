@@ -1,10 +1,10 @@
-import { Card, Col, Row } from "antd";
-import { useState } from "react";
-import { CustomCard } from "../../components/Common/CustomCard";
 import { CustomHeader } from "../../components/Common/CustomHeader";
-import { InfiniteScroll } from "../../components/Common/InfiniteScroll";
-import { RowImages } from "../../components/Common/RowImages";
+import Footer from "../../components/Common/footer/Footer";
 import "./index.css";
+import { LandImages } from "../../components/Common/LandImages";
+import { CustomFab } from "../../components/Common/CustomFab";
+import { useMediaQuery } from "react-responsive";
+import CustomCarousel from "../../components/Common/AboutUsPage/CustomCarousel";
 
 const gutters: Record<string, number> = {};
 const vgutters: Record<string, number> = {};
@@ -21,23 +21,15 @@ const colCounts: Record<string, number> = {};
 });
 
 export function LandingPage(): JSX.Element {
+  const isMobile = useMediaQuery({
+    query: "(max-width: 786px)",
+  });
   return (
     <div className="LandingContainer">
       <CustomHeader isLoggedIn={true} />
-      <Row>
-        <Col span={6} order={4}>
-          <RowImages />
-        </Col>
-        <Col span={6} order={3}>
-          <RowImages />
-        </Col>
-        <Col span={6} order={2}>
-          <RowImages />
-        </Col>
-        <Col span={6} order={1}>
-          <RowImages />
-        </Col>
-      </Row>
+      <LandImages />
+      <Footer />
+      <CustomFab />
     </div>
   );
 }

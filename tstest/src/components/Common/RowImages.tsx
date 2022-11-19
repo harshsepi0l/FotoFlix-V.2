@@ -1,45 +1,58 @@
 import { Space } from "antd";
+import Axios from "axios";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { CustomCard } from "./CustomCard";
-import { InfiniteScroll } from "./InfiniteScroll";
+import { Motion } from "./Motion";
+import { PaginationApplicator } from "./pagination/PaginationApplicator";
+import data from "./rowData.json";
+import { CardProps } from "../../props/CardProps";
 
 export function RowImages(): JSX.Element {
-  const NUMBERS_PER_PAGE = 100;
+  let { UID } = useParams();
+  const [values, setValues] = useState<CardProps[]>([]);
+  useEffect(() => {
+    Axios.get("https://fotoflix.herokuapp.com/Cloudinary/byUID", {
+      headers: {
+        accessToken: sessionStorage.getItem("accessToken") as string,
+      },
+    }).then((response) => {
+      setValues(response.data);
+    });
+  }, []);
 
-  const [numbers, setNumbers] = useState<number[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(0);
-
-  const hasMoreData = numbers.length < 1000;
-
-  const loadMoreNumbers = () => {
-    setPage((page) => page + 1);
-    setLoading(true);
-    setTimeout(() => {
-      const newNumbers = new Array(NUMBERS_PER_PAGE)
-        .fill(1)
-        .map((_, i) => page * NUMBERS_PER_PAGE + i);
-      setNumbers((nums) => [...nums, ...newNumbers]);
-      setLoading(false);
-    }, 300);
-  };
-
+  let newCards: JSX.Element[] = [];
+  {
+    Array.from(values).map((value, key) => {
+      newCards.push(
+        <CustomCard
+          keyprop={key}
+          publicOrPrivate={value.publicOrPrivate}
+          url={value.url}
+          title={value.title}
+          description={value.description}
+          dislikes={value.dislikes}
+          avatar={value.avatar}
+          likes={value.likes}
+          tags={value.tags}
+          // favorite={value.favorite}
+          id={value.id}
+          uid={value.uid}
+        />
+      );
+    });
+  }
   return (
-    <div >
-      <InfiniteScroll
-        hasMoreData={hasMoreData}
-        isLoading={loading}
-        onBottomHit={loadMoreNumbers}
-        loadOnMount={true}
-      >
-        < ul >
-          {
-            numbers.map(() => (
-              <CustomCard />
-            ))
-          }
-        </ul>
-      </InfiniteScroll >
-    </div >
-  )
+    <div className="RowImages">
+      <div className="CardsContainer">
+        <PaginationApplicator
+          key={Math.random()} //DON'T TOUCH. This is needed to actually re-render while sorting.
+          data={newCards}
+          class="RowImages-Cards"
+          pageSize={6}
+        />
+      </div>
+    </div>
+  );
 }

@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import "./signUp.css";
+import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
+import "./index.css";
 import Axios from "axios";
+import { CustomButton } from "../../components/Common/CustomButton";
+import { Input, Space } from "antd";
+import { Card } from "antd";
 
 export const SignUp = () => {
   const [firstname, setFirstname] = useState("");
@@ -16,209 +20,137 @@ export const SignUp = () => {
 
   // This will navigate to Login Page once user has signed up
   const sendToLogin = () => {
-    navigate("/Login");
+    navigate("/login");
+  };
+
+  // This will navigate to Landing Page once user has signed up
+  const sendToLanding = () => {
+    navigate("/");
   };
 
   const refreshPage = () => {
     window.location.reload();
   };
 
-  useEffect(() => {
-    Axios.get("http://localhost:3000/api/get").then((response) => {
-      setUsersList(response.data);
-    });
-  }, []);
-
-  const submitLog = () => {
-    Axios.post("http://localhost:3000/api/registration", {
-      Firstname: firstname,
-      Lastname: lastname,
-      Username: username,
-      Email: email,
-      Password: password,
+  const submitLog = (data: any) => {
+    Axios.post("https://fotoflix.herokuapp.com/signUp", {
+      firstName: firstname,
+      lastName: lastname,
+      userName: username,
+      email: email,
+      password: password,
     });
 
     setUsersList([
       ...usersList,
       {
-        Firstname: firstname,
-        LastName: lastname,
-        Username: username,
-        Email: email,
-        Password: password,
+        firstName: firstname,
+        lastName: lastname,
+        userName: username,
+        email: email,
+        password: password,
       },
     ]);
-  };
-
-  const deleteAccount = (
-    Username:
-      | string
-      | number
-      | boolean
-      | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-      | React.ReactFragment
-      | React.ReactPortal
-      | null
-      | undefined
-  ) => {
-    Axios.delete(`http://localhost:3000/api/delete/${Username}`);
-    refreshPage();
-  };
-
-  const updateUserName = (
-    firstname:
-      | string
-      | number
-      | boolean
-      | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-      | React.ReactFragment
-      | React.ReactPortal
-      | null
-      | undefined
-  ) => {
-    Axios.put(`http://localhost:3000/api/update/`, {
-      Firstname: firstname,
-      Username: newUsername,
-    });
-    setNewUsername("");
+    console.log(data);
+    sendToLogin();
   };
 
   return (
-    <div className="Container">
-      <div className="App">
-        <h1 style={{ color: "#937DC2" }}>Sign up for a free account</h1>
-        <div className="SignUpContainer">
-          {/* This is a row */}
-          <div className="Column">
-            <div className="Row">
-              <div className="form">
-                <label>First name: </label>
-                <input
-                  type="text"
-                  name="firstname"
-                  onChange={(e) => {
-                    setFirstname(e.target.value);
-                  }}
-                />
+    <div className="SignUp-Page">
+      {" "}
+      <Card className="SignUp-Card">
+        <div className="SignUp-Logo-Container">
+          <img className="SignUp-Logo" src={fotoLogo} alt="error" />
+        </div>
+        <h1 className="SignUp-Logo-Container SignUp-Text">
+          Sign up for a free account
+        </h1>
 
-                <label> Last name: </label>
-                <input
-                  type="text"
-                  name="lastname"
-                  onChange={(e) => {
-                    setLastname(e.target.value);
-                  }}
-                />
-              </div>
-              {/* This is a column */}
-              <div className="Row">
-                <label>Username: </label>
-                <input
-                  type="text"
-                  name="username"
-                  onChange={(e) => {
-                    setUserName(e.target.value);
-                  }}
-                />
+        <div className="Inputs">
+          <Input
+            className="SignUp-Input"
+            placeholder="Username"
+            type="text"
+            name="username"
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
+          />
+          <Input
+            className="SignUp-Input"
+            placeholder="Email Address"
+            type="text"
+            name="email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <Input
+            className="SignUp-Input"
+            placeholder="First Name"
+            type="text"
+            name="firstname"
+            onChange={(e) => {
+              setFirstname(e.target.value);
+            }}
+          />
 
-                <label> Email: </label>
-                <input
-                  type="text"
-                  name="email"
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                />
-              </div>
-              <label>Password: </label>
-              <input
-                type="text"
-                name="password"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
-            </div>
+          <Input
+            className="SignUp-Input"
+            placeholder="Last Name"
+            type="text"
+            name="lastname"
+            onChange={(e) => {
+              setLastname(e.target.value);
+            }}
+          />
 
-            <NavLink onClick={sendToLogin} to={"/Login"}>
-              <p style={{ color: "#C689C6" }}>Already have an account?</p>
-            </NavLink>
-          </div>
+          <Input.Password
+            className="SignUp-Input"
+            placeholder="Create Password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
 
-          <button onClick={submitLog}>Register</button>
+          <NavLink onClick={sendToLogin} to={"/login"}>
+            <p style={{ color: "#C689C6" }}>Already have an account?</p>
+          </NavLink>
         </div>
 
-        {usersList.map(
-          (key: {
-            Firstname:
-              | string
-              | number
-              | boolean
-              | React.ReactElement<
-                  any,
-                  string | React.JSXElementConstructor<any>
-                >
-              | React.ReactFragment
-              | React.ReactPortal
-              | null
-              | undefined;
-            Username:
-              | string
-              | number
-              | boolean
-              | React.ReactElement<
-                  any,
-                  string | React.JSXElementConstructor<any>
-                >
-              | React.ReactFragment
-              | React.ReactPortal
-              | null
-              | undefined;
-            Email:
-              | string
-              | number
-              | boolean
-              | React.ReactElement<
-                  any,
-                  string | React.JSXElementConstructor<any>
-                >
-              | React.ReactFragment
-              | React.ReactPortal
-              | null
-              | undefined;
-          }) => {
-            return (
-              <div className="users">
-                <h1>Hey! {key.Firstname} </h1>
-                <p>
-                  UserName: {key.Username} | Email: {key.Email}{" "}
-                </p>
-                <button
-                  onClick={() => {
-                    deleteAccount(key.Username);
-                  }}
-                >
-                  Delete Account
-                </button>
-                <input
-                  type="text"
-                  id="updateInput"
-                  onChange={(e) => {
-                    setNewUsername(e.target.value);
-                  }}
-                />
-                <button
-                  onClick={() => {
-                    updateUserName(key.Firstname);
-                  }}
-                >
-                  Update Username
-                </button>
-              </div>
-            );
-          }
-        )}
-      </div>
+        <NavLink onClick={sendToLanding} to={"/"} className="Button-Guest">
+          <CustomButton
+            buttonType={"default"}
+            color={"white"}
+            title={"Continue as a guest"}
+            style={{
+              marginBottom: "20px",
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+              height: "100%",
+              justifyContent: "center",
+            }}
+          />
+        </NavLink>
+
+        <div className="SignUp-Button">
+          <CustomButton
+            onClick={submitLog}
+            buttonType={"primary"}
+            color={"darkpurple"}
+            title={"Register"}
+          />
+
+          <NavLink onClick={sendToLanding} to={"/"}>
+            <CustomButton
+              buttonType={"primary"}
+              color={"red"}
+              title={"Cancel"}
+            />
+          </NavLink>
+        </div>
+      </Card>
     </div>
   );
 };

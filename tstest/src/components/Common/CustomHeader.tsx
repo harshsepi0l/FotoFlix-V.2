@@ -1,9 +1,22 @@
-import { BellOutlined, SearchOutlined } from "@ant-design/icons";
-import { Avatar, Col, Input, Row, Space } from "antd";
+import {
+  BellOutlined,
+  SearchOutlined,
+  UserOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
+import { Avatar, Button, Col, Input, Row, Space, Tooltip } from "antd";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { CustomButton } from "./CustomButton";
-import data from "./Data.json";
+import { useMediaQuery } from "react-responsive";
+import { border, borderColor } from "@mui/system";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Login } from "../../pages/Login";
+import { SignUp } from "../../pages/SignUp";
+import { HeaderDropdown } from "./HeaderDropdown";
+import Axios from "axios";
+import fotoLogo from "../ImageLogo/fotoLogo.svg";
+import logo from "../ImageLogo/logo.svg";
 import "./index.css";
 
 const { Search } = Input;
@@ -17,24 +30,49 @@ const suffix = (
   />
 );
 
-const onSearch = (value: string) => console.log(value);
+// const onSearch = (value: string) => console.log(value);
 
 function CustomSearch(): JSX.Element {
-  const [filteredData, setFilteredData] = useState(data);
+  const [allData, setAllData] = useState<any>([]);
+  const [filteredData, setFilteredData] = useState<Array<any>>([]);
   const [wordEntered, setWordEntered] = useState("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const getData = async () => {
+      const userData = await Axios.get("https://fotoflix.herokuapp.com/");
+      const postData = await Axios.get(
+        "https://fotoflix.herokuapp.com/Cloudinary/"
+      );
+      setAllData([...postData.data, ...userData.data]);
+    };
+
+    getData();
+    setFilteredData(allData.slice(15));
+    setIsLoading(false);
+  }, []);
 
   const handleFilter = (event: { target: { value: any } }) => {
-    const searchWord = event.target.value;
+    setIsLoading(true);
+    const searchWord = event.target.value.toLowerCase();
     setWordEntered(searchWord);
-    const newFilter = data.filter((value: { title: string }) => {
-      return value.title.toLowerCase().includes(searchWord.toLowerCase());
+
+    const newFilter = Array(allData).filter((value) => {
+      return (
+        value?.title?.toLowerCase().includes(searchWord) ||
+        value?.firstName?.includes(searchWord) ||
+        value?.lastName?.includes(searchWord)
+      );
     });
 
+    console.log(newFilter);
+
     if (searchWord === "") {
-      setFilteredData(data);
+      setFilteredData(allData.slice(15));
     } else {
       setFilteredData(newFilter);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -47,85 +85,122 @@ function CustomSearch(): JSX.Element {
         className="Border-15 CustomSearch"
         onChange={handleFilter}
       />
-      <div className="Border-15 DataResult">
-        {filteredData.slice(0, 15).map((value, key) => {
-          return (
-            <a className="DataItem" href={value.link} target="_blank">
-              {filteredData.length !== 0 ? (
-                <p> {value.title} </p>
-              ) : (
-                <p> No Value </p>
-              )}
-            </a>
-          );
-        })}
-      </div>
+      {isLoading ? (
+        <LoadingOutlined />
+      ) : (
+        <div className="Border-15 DataResult">
+          {filteredData.slice(0, 15).map((value, key) => {
+            return (
+              <a className="DataItem" href={value.link} target="_blank">
+                {filteredData.length !== 0 ? (
+                  <p> {value?.title || value?.firstName} </p>
+                ) : (
+                  <p> No Value </p>
+                )}
+              </a>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
 
 function LeftSection(): JSX.Element {
-  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigateTo = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (sessionStorage.getItem("accessToken")) {
       setIsLoggedIn(true);
     }
   }, []);
 
+  const isMobile = useMediaQuery({
+    query: "(max-width: 786px)",
+  });
+
   return (
     <Row justify="start">
       <Space align="center">
-        <Col span={4}>Fotoflix</Col>
+        <Col span={4}>
+          <Link to="/LandingPage">
+            {isMobile ? (
+              <img
+                style={{ color: "#937DC2", width: 20, height: 20 }}
+                src={logo}
+                alt="logo"
+              />
+            ) : (
+              <img
+                style={{ color: "#937DC2", width: 100, height: 50 }}
+                src={fotoLogo}
+                alt="logo"
+              />
+            )}
+          </Link>
+        </Col>
       </Space>
 
       <Col span={4} offset={2}>
-        <CustomButton
-          onClick={() => navigate("/ImagesFolder")}
-          buttonType={"primary"}
-          color={"darkpurple"}
-          title={"New Post"}
-        />
+        {isLoggedIn ? (
+          <CustomButton
+            onClick={() => {
+              navigateTo("/UploadForm");
+            }}
+            buttonType={"primary"}
+            color={"darkpurple"}
+            title={"New Post"}
+          />
+        ) : (
+          <></>
+        )}
       </Col>
     </Row>
   );
 }
 
 function RightButtonsSection(): JSX.Element {
-  const navigate = useNavigate();
+  let navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    if (localStorage.getItem("token") !== null) {
-      setIsLoggedIn(true);
-    }
+    Axios.get("https://fotoflix.herokuapp.com/Cloudinary/byUID").then(
+      (response) => {
+        if (response.data.error) {
+          setIsLoggedIn(false);
+        } else {
+          setIsLoggedIn(true);
+        }
+      }
+    );
   }, []);
 
   const logout = () => {
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("accessToken");
     setIsLoggedIn(false);
-    navigate("/");
+    navigate("/LandingPage");
   };
 
+  const isDesktop = useMediaQuery({
+    query: "(min-width: 1224px)",
+  });
+
+  const isTablet = useMediaQuery({
+    query: "(max-width: 1224px)",
+  });
+
+  const isMobile = useMediaQuery({
+    query: "(max-width: 786px)",
+  });
+
   return (
-    <Row justify="end">
-      <Col span={4}>
-        {isLoggedIn ? (
-          <Avatar
-            className="Avatar"
-            src="https://www.publicdomainpictures.net/pictures/30000/velka/plain-white-background.jpg"
-          />
-        ) : (
-          <Link to="/login">
-            <CustomButton
-              buttonType={"primary"}
-              color={"darkpurple"}
-              title={"Login"}
-            />
-          </Link>
-        )}
-      </Col>
+    <Row
+      justify="space-between"
+      style={{ width: "100px", marginLeft: "auto" }}
+      align="bottom"
+    >
       <Col span={4}>
         {isLoggedIn ? (
           <CustomButton
@@ -135,12 +210,43 @@ function RightButtonsSection(): JSX.Element {
             onClick={logout}
           />
         ) : (
-          <Link to="/signup">
+          // <></>
+          <Link to="/login">
             <CustomButton
-              buttonType={"primary"}
-              color={"darkpurple"}
-              title={"Sign Up"}
+              buttonType={"default"}
+              color={"white"}
+              title={"Login"}
             />
+          </Link>
+        )}
+      </Col>
+      <Col span={4}>
+        {isLoggedIn ? (
+          <Tooltip title="Homebase">
+            <Button
+              type="primary"
+              shape="circle"
+              size="large"
+              icon={<UserOutlined />}
+              style={{
+                backgroundColor: "var(--darkpurple)",
+                borderColor: "var(--darkpurple)",
+              }}
+              onClick={() => {
+                navigate("/HomePage");
+              }}
+            />
+            {/* <RightUserSection /> */}
+          </Tooltip>
+        ) : (
+          <Link to="/signUp">
+            {isDesktop && (
+              <CustomButton
+                buttonType={"primary"}
+                color={"lightpurple"}
+                title={"Sign Up"}
+              />
+            )}
           </Link>
         )}
       </Col>
@@ -149,12 +255,7 @@ function RightButtonsSection(): JSX.Element {
 }
 
 function RightUserSection(): JSX.Element {
-  return (
-    <div>
-      <BellOutlined />
-      <Avatar src="https://joeschmoe.io/api/v1/random" />
-    </div>
-  );
+  return <div></div>;
 }
 
 interface isLoggedIn {
@@ -176,4 +277,7 @@ export function CustomHeader(props: isLoggedIn): JSX.Element {
       </Row>
     </div>
   );
+}
+function setIsLoggedIn(arg0: boolean) {
+  throw new Error("Function not implemented.");
 }

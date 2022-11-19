@@ -1,91 +1,124 @@
+import { Card, Input, Space } from "antd";
 import Axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { InitOptions, IntegerDataType } from "sequelize";
+import { CustomButton } from "../../components/Common/CustomButton";
+import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
+import "./index.css";
 
 export const Login = () => {
   const [username, checkUsername] = useState("");
   const [password, checkPassword] = useState("");
-  const [loginStatus, setLoginStatus] = useState(false);
-  const [user_name, setUsername] = useState("");
-
+  const [UID, setUID] = useState("");
+  const [loginStatus, setLoginStatus] = useState("");
   const navigate = useNavigate();
 
   // This will navigate to Login Page once user has logged in
-  const sendToHomePage = () => {
-    navigate("/HomePage");
-  };
-  Axios.defaults.withCredentials = true;
+  const LoginCheck = () => {
+    // This will navigate to Landing Page once user has logged in
+    const sendToLanding = () => {
+      setTimeout(() => {
+        navigate("/LandingPage");
+      }, 2000);
+    };
 
-  const loginCheck = () => {
-    Axios.post("http://localhost:3000/api/login", {
-      Username: username,
-      Password: password,
-    }).then((response) => {
-      if (!response.data.auth) {
-        setLoginStatus(false);
-      } else {
-        setUsername(response?.data?.result[0]?.Username);
-        localStorage.setItem("token", response.data.token);
-        setLoginStatus(true);
-        sendToHomePage();
-      }
-    });
-  };
-  /*
-  useEffect(() => {
-    Axios.get("http://localhost:3000/api/Login").then((response) => {
-      if (response.data.loggedIn == true) {
-        setLoginStatus(response.data.user[0].Username);
-      }
-    });
-  }, []);
-  
-  */
-  // Deleteable functions
-  const userAuthenticated = () => {
-    Axios.get("http://localhost:3000/isUserAuth", {
-      headers: { "x-access-token": localStorage.getItem("token") },
-    }).then((response) => {
-      // console.log(response);
-    });
-  };
+    // This will navigate to SignUp Page once user has signed up
+    const sendToSignUp = () => {
+      navigate("/signUp");
+    };
 
-  return (
-    <div>
-      <p>This is the Login page</p>
-      {user_name && <h1>{user_name}</h1>}
+    const loginCheck = () => {
+      Axios.post("https://fotoflix.herokuapp.com/login", {
+        userName: username,
+        password: password,
+      }).then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          sessionStorage.setItem("accessToken", response.data);
+          sendToLanding();
+        }
+      });
+    };
 
-      <div className="header">Login</div>
-      <div className="content">
-        <div className="image"></div>
-        <div className="form">
-          <div className="login">
-            <label htmlFor="username">Username: </label>
-            <input
+    // let { id } = useParams();
+    // useEffect(() => {
+    //   {
+    //     Axios.get(`https://full-stack-fotoflix.herokuapp.com /SignUp/Login/ById/${id}`).then(
+    //       (response) => {
+    //         setLoginStatus(response.data);
+    //       }
+    //     );
+    //   }
+    // }, []);
+    return (
+      <div className="LogIn-Page" style={{ height: "" }}>
+        {" "}
+        <Card className="LogIn-Card">
+          <div className="LogIn-Logo-Container">
+            <img className="LogIn-Logo" src={fotoLogo} alt="error" />
+          </div>
+          <h1 className="LogIn-Logo-Container LogIn-Text">Login Form</h1>
+
+          <div className="Inputs">
+            <Input
+              className="LogIn-Input"
               type="text"
               name="username"
-              placeholder="username"
+              placeholder="Username"
               onChange={(e) => {
                 checkUsername(e.target.value);
               }}
             />
-          </div>
-          <div className="login">
-            <label htmlFor="password">Password: </label>
-            <input
+
+            <Input.Password
+              className="LogIn-Input"
               type="password"
               name="password"
-              placeholder="password"
+              placeholder="Password"
               onChange={(e) => {
                 checkPassword(e.target.value);
               }}
             />
+
+            <NavLink onClick={sendToSignUp} to={"/signUp"}>
+              <p style={{ color: "#C689C6" }}>Don't have an account?</p>
+            </NavLink>
           </div>
-        </div>
+
+          <CustomButton
+            buttonType={"default"}
+            color={"white"}
+            title={"Continue as a guest"}
+            style={{
+              marginBottom: "20px",
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+              height: "100%",
+              justifyContent: "center",
+            }}
+            onClick={sendToLanding}
+          />
+
+          <div className="LogIn-Button">
+            <CustomButton
+              buttonType={"primary"}
+              color={"darkpurple"}
+              title={"Login"}
+              onClick={loginCheck}
+            />
+          </div>
+        </Card>
       </div>
-      <div className="login">
-        <button type="button" className="btn" onClick={loginCheck} />
-      </div>
-    </div>
-  );
+    );
+  };
+  return <div>{LoginCheck()}</div>;
 };
+function useEffect(arg0: () => void, arg1: never[]) {
+  throw new Error("Function not implemented.");
+}
+function sessionTimeout() {
+  throw new Error("Function not implemented.");
+}

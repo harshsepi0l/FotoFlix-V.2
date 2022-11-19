@@ -1,0 +1,18 @@
+.pagination-align {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    transform: scale(0.8);
+    padding-top: 40px;
+}
+
+.pagination-align button {
+    background-color: var(--lightpurple);
+}
+
+@media screen and (max-width: 1080px) {
+    .pagination-align {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
