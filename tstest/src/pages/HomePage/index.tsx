@@ -16,8 +16,6 @@ export function HomePage(): JSX.Element {
     query: "(max-width: 1000px)",
   });
 
-  let { UID } = useParams();
-
   return (
     <div>
       <CustomHeader isLoggedIn={true} />

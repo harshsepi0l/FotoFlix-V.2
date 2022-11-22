@@ -50,6 +50,7 @@
 .Default-red {
     background-color: rgb(211, 18, 18);
     border-color: rgb(211, 18, 18);
+    width: fit-content;
 }
 
 .Default-red:hover,

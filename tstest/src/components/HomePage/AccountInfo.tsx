@@ -7,15 +7,6 @@ import "./index.css";
 export function AccountInfo(): JSX.Element {
   const [user, setUser] = React.useState<any>(null);
 
-  // useEffect(() => {
-  //   Axios.get("http://full-stack-fotoflix.herokuapp.com//SignUp/byUsername", {}).then(
-  //     (response) => {
-  //       console.log(response.data);
-  //       setUser(response.data);
-  //     }
-  //   );
-  // }, []);
-
   const [isModalVisible, setIsModalVisible] = React.useState(false);
 
   const toggleModal = () => {
@@ -33,9 +24,17 @@ export function AccountInfo(): JSX.Element {
         </Col>
         <Col flex={5}>
           <Typography.Title level={2} className="HomePage-AccountInfo">
-            {/* {user?.username} */}
+            {user?.username}
             {/* {editableStr} */}
           </Typography.Title>
+
+          <Button
+            size="large"
+            onClick={toggleModal}
+            className="HomePage-EditButton"
+          >
+            Delete Account
+          </Button>
         </Col>
       </Row>
     </div>

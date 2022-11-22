@@ -26,9 +26,9 @@ function App() {
         <Route path="/UploadForm" element={<UploadForm />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/LandingPage" element={<LandingPage />} />
-        <Route path="/" element={<LandingPage />} />
         <Route path="/ImagePage/:id" element={<ImagePage />} />
         <Route path="/AboutUsPage" element={<AboutUsPage />} />
+        <Route path="/" element={<Login />} />
       </Routes>
     </Router>
   );

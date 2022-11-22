@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 //import { ChipsArray } from "../../components/Tag";
 import { styled } from "@mui/material/styles";
+
 import { Card, Input } from "antd";
 import "./index.css";
 import { Chip, Paper } from "@mui/material";
@@ -9,6 +10,7 @@ import { Box, Button, TextField } from "@mui/material";
 import { stringify } from "querystring";
 import { useParams } from "react-router-dom";
 import fotoLogo from "../../components/ImageLogo/fotoLogo.svg";
+import Axios from "axios";
 
 export interface ChipData {
   key: number;
@@ -40,20 +42,40 @@ export const UploadForm = () => {
       chips.filter((chip) => chip.key !== chipToDelete.key)
     );
   };
-  const handleClick = () => {
-    setChipData([
-      ...chipData,
-      { key: chipData.length + 1, label: `#${input}` },
-    ]);
-    setInput("");
+  const config = {
+    headers: {
+      accessToken: sessionStorage.getItem("accessToken") as string,
+    },
   };
+  // const handleClick = () => {
+  //   setChipData([
+  //     ...chipData,
+  //     { key: chipData.length + 1, label: `#${input}` },
+  //   ]);
+  //   setInput("");
+
+  //   // Axios.post(
+  //   //   `https://fotoflix.herokuapp.com/Cloudinary/`,
+  //   //   {
+  //   //     tag: `#${input}`,
+  //   //   },
+  //   //   config
+  //   // )
+  //   //   .then((response) => {
+  //   //     console.log(response);
+  //   //   })
+  //   //   .catch((error) => {
+  //   //     console.log(error);
+  //   //   });
+  // };
 
   const navigate = useNavigate();
 
   // This will navigate to Landing Page once user has signed up
   const sendToLanding = () => {
-    navigate("/LandingPage");
-    window.location.reload();
+    setTimeout(() => {
+      navigate("/LandingPage");
+    }, 2000);
   };
 
   const handleImageTitleChange = (e: any) => {
@@ -95,11 +117,14 @@ export const UploadForm = () => {
   const handleSubmitFile = (e: any) => {
     e.preventDefault();
     if (!previewSource) return;
+
     uploadImage(previewSource);
     sendToLanding();
   };
 
   const uploadImage = async (base64EncodedImage: any) => {
+    setChipData([...chipData, { key: chipData.length + 1, label: `${input}` }]);
+    setInput("");
     try {
       await fetch(`https://fotoflix.herokuapp.com/Cloudinary/byUID/`, {
         method: "POST",
@@ -108,7 +133,7 @@ export const UploadForm = () => {
           title: imageTitle,
           description: imageDesc,
           publicOrPrivate: imageVis,
-          tags: chipData,
+          tags: `${input}`,
         }),
         headers: {
           accessToken: sessionStorage.getItem("accessToken") as string,
@@ -119,6 +144,7 @@ export const UploadForm = () => {
       console.error(err);
     }
   };
+
   // const uploadData =async (data:any) => {
   //   try {
   //     await fetch("", {
@@ -205,14 +231,14 @@ export const UploadForm = () => {
           />
           <br />
           <br />
-          <Button
+          {/* <Button
             onClick={handleClick}
             style={{ color: "#937DC2" }}
             className="buttonTag"
           >
             {" "}
             Save tag
-          </Button>
+          </Button> */}
 
           <Paper
             sx={{
@@ -255,3 +281,6 @@ export const UploadForm = () => {
     </div>
   );
 };
+function sessionTimeout() {
+  throw new Error("Function not implemented.");
+}

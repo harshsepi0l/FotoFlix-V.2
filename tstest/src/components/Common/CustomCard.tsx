@@ -27,7 +27,7 @@ function CustomAction(props: IAction): JSX.Element {
     like: <LikeOutlined key="like" />,
     dislike: <DislikeOutlined key="dislike" />,
     popularity: <StarOutlined key="popularity" />,
-    tags: <TagsOutlined key="tags" />,
+    tag: <TagsOutlined key="tag" />,
   };
 
   {
@@ -68,6 +68,8 @@ export function CustomCard(props: CardProps): JSX.Element {
   const [dislikes, setDislikes] = useState(props.dislikes);
   const [action, setAction] = useState<string | null>(null);
 
+  useEffect(() => {}, []);
+
   const like = () => {
     setLikes(props.likes + 1);
     setDislikes(props.dislikes);
@@ -84,11 +86,12 @@ export function CustomCard(props: CardProps): JSX.Element {
     if (window.confirm("Are you sure that you want to remove card?")) {
     }
   };
+
   return (
     <div>
       <Card
         hoverable
-        key={props.key}
+        key={props.keyprop}
         style={{ width: 300 }}
         cover={
           <img alt={props.title} src={props.url} onClick={handleOnClick} />
@@ -105,18 +108,17 @@ export function CustomCard(props: CardProps): JSX.Element {
             text={props.dislikes}
             isPublic={isGlobal}
           />,
-          <CustomAction
-            icon="popularity"
-            text={props.likes - props.dislikes}
-            isPublic={isGlobal}
-          />,
+          // <CustomAction
+          //   icon="popularity"
+          //   text={props.likes - props.dislikes}
+          //   isPublic={isGlobal}
+          // />,
           <CustomAction icon="tags" text={props.tags} isPublic={isGlobal} />,
           <CustomAction icon="status" isPublic={isGlobal} />,
         ]}
       >
-        {/* <Avatar src={props.Avatar} /> */}
         <Meta
-          avatar={<></>}
+          avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
           title={props.title}
           description={props.description}
         />

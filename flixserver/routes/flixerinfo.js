@@ -27,7 +27,7 @@ router.post("/signUp", async (req, res) => {
   });
 });
 
-router.get("/byId", async (req, res) => {
+router.get("/byUID", async (req, res) => {
   const { uid } = req.body;
   const flixer = await flixerinfo.findOne({
     where: {
@@ -73,5 +73,10 @@ router.get("/byUsername", async (req, res) => {
   });
   res.json(flixer);
 });
+
+router.get("/", async (req, res) => {
+  const flixers = await flixerinfo.findAll();
+  res.json(flixers);
+})
 
 module.exports = router;

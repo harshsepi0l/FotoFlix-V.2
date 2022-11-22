@@ -39,11 +39,12 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      //changed
     },
+
     {
       timestamps: true,
     }
   );
-  //updated
   return Post;
 };

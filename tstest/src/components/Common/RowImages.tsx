@@ -1,5 +1,5 @@
 import { Space } from "antd";
-import axios from "axios";
+import Axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -13,15 +13,13 @@ export function RowImages(): JSX.Element {
   let { UID } = useParams();
   const [values, setValues] = useState<CardProps[]>([]);
   useEffect(() => {
-    axios
-      .get("https://fotoflix.herokuapp.com/Cloudinary/byUID/", {
-        headers: {
-          accessToken: sessionStorage.getItem("accessToken") as string,
-        },
-      })
-      .then((response) => {
-        setValues(response.data);
-      });
+    Axios.get("https://fotoflix.herokuapp.com/Cloudinary/byUID", {
+      headers: {
+        accessToken: sessionStorage.getItem("accessToken") as string,
+      },
+    }).then((response) => {
+      setValues(response.data);
+    });
   }, []);
 
   let newCards: JSX.Element[] = [];
@@ -29,7 +27,7 @@ export function RowImages(): JSX.Element {
     Array.from(values).map((value, key) => {
       newCards.push(
         <CustomCard
-          key={key}
+          keyprop={key}
           publicOrPrivate={value.publicOrPrivate}
           url={value.url}
           title={value.title}
@@ -38,15 +36,13 @@ export function RowImages(): JSX.Element {
           avatar={value.avatar}
           likes={value.likes}
           tags={value.tags}
-          favorite={value.favorite}
+          // favorite={value.favorite}
           id={value.id}
           uid={value.uid}
         />
       );
     });
   }
-
-  //Teting comment
   return (
     <div className="RowImages">
       <div className="CardsContainer">
