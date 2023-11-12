@@ -1,19 +1,6 @@
 node_modules
 package-lock.json
-<<<<<<< HEAD
-flixserver/node_modules/bcrypt/lib/binding/napi-v3/bcrypt_lib.node
-flixserver/config/config.json
-flixserver/node_modules
-=======
-flixserver/node_modules/bcryptjs/lib/binding/napi-v3/bcrypt_lib.node
->>>>>>> main
-flixserver/node_modules/.package-lock.json
-flixserver/node_modules/are-we-there-yet/node_modules/readable-stream/lib/internal/streams/destroy.js
-flixserver/node_modules/are-we-there-yet/node_modules/readable-stream/package.json
-flixserver/node_modules/are-we-there-yet/node_modules/readable-stream/README.md
-flixserver/node_modules/wide-align/align.js
-flixserver/node_modules/wide-align/LICENSE
-flixserver/package-lock.json
-flixserver/package.json
-tstest/package-lock.json
-tstest/package.json
+.env
+.env.example
+.env.local
+.env.staging
